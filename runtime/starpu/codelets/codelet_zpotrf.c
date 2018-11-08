@@ -11,22 +11,18 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 #include "coreblas/lapacke.h"
 #include "morse.h"
 #include "runtime/starpu/chameleon_starpu.h"
 //#include "runtime/starpu/include/runtime_codelet_z.h"
+#include "auxdescutil.h"
 
 #include <sys/time.h>
 
 #include "runtime/starpu/runtime_codelets.h"
 ZCODELETS_HEADER(potrf_hcore)
-
-extern int print_index;
-extern int print_index_end;
-extern int print_mat;
-extern void _printmat(double * A, int m, int n, int ld);
 
 void HICMA_TASK_zpotrf(const MORSE_option_t *options,
                        MORSE_enum uplo, int n, int nb,
@@ -80,10 +76,10 @@ static void cl_zpotrf_hcore_cpu_func(void *descr[], void *cl_arg)
     A = (double *)STARPU_MATRIX_GET_PTR(descr[0]);
 
     starpu_codelet_unpack_args(cl_arg, &uplo, &n, &lda, &iinfo, &Am, &An);
-    if(print_index){
+    if(HICMA_get_print_index() == 1){
         printf("%d+POTRF\t|AD(%d,%d)\n",MORSE_My_Mpi_Rank(), Am,An);
     }
-    if(print_mat){
+    if(HICMA_get_print_mat() == 1){
         printf("%d\tpotrf-input\n", __LINE__);
         _printmat(A, n, n, lda);
     }
@@ -92,7 +88,7 @@ static void cl_zpotrf_hcore_cpu_func(void *descr[], void *cl_arg)
         LAPACK_COL_MAJOR,
         morse_lapack_const(uplo),
         n, A, lda);
-    if(print_mat){
+    if(HICMA_get_print_mat() == 1){
         printf("%d\tpotrf-output\n", __LINE__);
         _printmat(A, n, n, lda);
     }
@@ -110,7 +106,7 @@ static void cl_zpotrf_hcore_cpu_func(void *descr[], void *cl_arg)
         }
         exit(1);
     }
-    if(print_index || print_index_end){
+    if(HICMA_get_print_index() == 1 || HICMA_get_print_index_end() == 1){
         gettimeofday (&tvalAfter, NULL);
         printf("%d-POTRF\t|AD(%d,%d) N:%d LD:%d\t\t\t\t\tPOTRF:%.4f\n",MORSE_My_Mpi_Rank(), Am, An,
                 n, lda,
@@ -118,6 +114,18 @@ static void cl_zpotrf_hcore_cpu_func(void *descr[], void *cl_arg)
                  +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
               );
     }
+    {
+        char datebuf_start[128];
+        time_t timer;
+        struct tm* tm_info;
+        struct tvalAfter;  
+        gettimeofday (&tvalAfter, NULL);
+        time(&timer); 
+        tm_info = localtime(&timer); 
+        //strftime(datebuf_start, 26, "%Y-%m-%d %H:%M:%S",tm_info); 
+        //fprintf(stderr, "%s::%d\t", datebuf_start, Am);
+    }
+
 }
 
 #ifdef CHAMELEON_USE_MAGMA

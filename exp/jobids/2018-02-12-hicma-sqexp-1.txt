@@ -1,0 +1,620 @@
+#Number of nodes: 16 =============================
+#Mon Feb 12 14:56:35 AST 2018 on 16 nodes. Hicma beta=0.01 --ss -  -  - 02:00:00 - 25  - hic - exp/cases/sqexp.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84" 84 (0-83-1)
+#case ids:  1
+4993356
+#case ids:  2
+4993357
+#case ids:  3
+4993358
+#case ids:  4
+4993359
+#case ids:  5
+4993360
+#case ids:  6
+4993361
+#case ids:  7
+4993362
+#case ids:  8
+4993363
+#case ids:  9
+4993364
+#case ids:  10
+4993365
+#case ids:  11
+4993366
+#case ids:  12
+4993367
+#case ids:  13
+4993368
+#case ids:  14
+4993369
+#case ids:  15
+4993370
+#case ids:  16
+4993371
+#case ids:  17
+4993372
+#case ids:  18
+4993373
+#case ids:  19
+4993374
+#case ids:  20
+4993375
+#case ids:  21
+4993376
+#case ids:  22
+4993377
+#case ids:  23
+4993378
+#case ids:  24
+4993379
+#case ids:  25
+4993380
+#case ids:  26
+4993381
+#case ids:  27
+4993382
+#case ids:  28
+4993383
+#case ids:  29
+4993384
+#case ids:  30
+4993385
+#case ids:  31
+4993386
+#case ids:  32
+4993387
+#case ids:  33
+4993388
+#case ids:  34
+4993389
+#case ids:  35
+4993390
+#case ids:  36
+4993391
+#case ids:  37
+4993392
+#case ids:  38
+4993393
+#case ids:  39
+4993394
+#case ids:  40
+4993395
+#case ids:  41
+4993396
+#case ids:  42
+4993397
+#case ids:  43
+4993398
+#case ids:  44
+4993399
+#case ids:  45
+4993400
+#case ids:  46
+4993401
+#case ids:  47
+4993402
+#case ids:  48
+4993403
+#case ids:  49
+4993404
+#case ids:  50
+4993405
+#case ids:  51
+4993406
+#case ids:  52
+4993407
+#case ids:  53
+4993408
+#case ids:  54
+4993409
+#case ids:  55
+4993410
+#case ids:  56
+4993411
+#case ids:  57
+4993412
+#case ids:  58
+4993413
+#case ids:  59
+4993414
+#case ids:  60
+4993415
+#case ids:  61
+4993416
+#case ids:  62
+4993417
+#case ids:  63
+4993418
+#case ids:  64
+4993419
+#case ids:  65
+4993420
+#case ids:  66
+4993421
+#case ids:  67
+4993422
+#case ids:  68
+4993423
+#case ids:  69
+4993424
+#case ids:  70
+4993425
+#case ids:  71
+4993426
+#case ids:  72
+4993427
+#case ids:  73
+4993428
+#case ids:  74
+4993429
+#case ids:  75
+4993430
+#case ids:  76
+4993431
+#case ids:  77
+4993432
+#case ids:  78
+4993433
+#case ids:  79
+4993434
+#case ids:  80
+4993435
+#case ids:  81
+4993436
+#case ids:  82
+4993437
+#case ids:  83
+4993438
+#case ids:  84
+4993439
+#Number of nodes: 16 =============================
+#Mon Feb 12 15:51:55 AST 2018 on 16 nodes. Hicma beta=0.01 --ss - small -  - 02:00:00 - 50  - hic - exp/cases/sqexp.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84" 84 (0-83-1)
+#case ids:  1
+4994337
+#case ids:  2
+4994338
+#case ids:  3
+4994339
+#case ids:  4
+4994340
+#case ids:  5
+4994341
+#case ids:  6
+4994342
+#case ids:  7
+4994343
+#case ids:  8
+4994344
+#case ids:  9
+4994345
+#case ids:  10
+4994346
+#case ids:  11
+4994347
+#case ids:  12
+4994348
+#case ids:  13
+4994349
+#case ids:  14
+4994350
+#case ids:  15
+4994351
+#case ids:  16
+4994352
+#case ids:  17
+4994353
+#case ids:  18
+4994354
+#case ids:  19
+4994355
+#case ids:  20
+4994356
+#case ids:  21
+4994357
+#case ids:  22
+4994358
+#case ids:  23
+4994359
+#case ids:  24
+4994360
+#case ids:  25
+4994361
+#case ids:  26
+4994362
+#case ids:  27
+4994363
+#case ids:  28
+4994364
+#case ids:  29
+4994365
+#case ids:  30
+4994366
+#case ids:  31
+4994367
+#case ids:  32
+4994368
+#case ids:  33
+4994369
+#case ids:  34
+4994370
+#case ids:  35
+4994371
+#case ids:  36
+4994372
+#case ids:  37
+4994373
+#case ids:  38
+4994374
+#case ids:  39
+4994375
+#case ids:  40
+4994376
+#case ids:  41
+4994377
+#case ids:  42
+4994378
+#case ids:  43
+4994379
+#case ids:  44
+4994380
+#case ids:  45
+4994381
+#case ids:  46
+4994382
+#case ids:  47
+4994383
+#case ids:  48
+4994384
+#case ids:  49
+4994385
+#case ids:  50
+4994386
+#case ids:  51
+4994387
+#case ids:  52
+4994388
+#case ids:  53
+4994389
+#case ids:  54
+4994390
+#case ids:  55
+4994391
+#case ids:  56
+4994392
+#case ids:  57
+4994393
+#case ids:  58
+4994394
+#case ids:  59
+4994395
+#case ids:  60
+4994396
+#case ids:  61
+4994397
+#case ids:  62
+4994398
+#case ids:  63
+4994399
+#case ids:  64
+4994400
+#case ids:  65
+4994401
+#case ids:  66
+4994402
+#case ids:  67
+4994403
+#case ids:  68
+4994404
+#case ids:  69
+4994405
+#case ids:  70
+4994406
+#case ids:  71
+4994407
+#case ids:  72
+4994408
+#case ids:  73
+4994409
+#case ids:  74
+4994410
+#case ids:  75
+4994411
+#case ids:  76
+4994412
+#case ids:  77
+4994413
+#case ids:  78
+4994414
+#case ids:  79
+4994415
+#case ids:  80
+4994416
+#case ids:  81
+4994417
+#case ids:  82
+4994418
+#case ids:  83
+4994419
+#case ids:  84
+4994420
+#Number of nodes: 16 =============================
+#Tue Feb 13 14:58:20 AST 2018 on 16 nodes. Hicma beta=0.01 --ss - small -  - 02:00:00 - 70  - hic - exp/cases/sqexp.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84" 84 (0-83-1)
+#case ids:  1
+4996355
+#case ids:  2
+4996356
+#case ids:  3
+4996357
+#case ids:  4
+4996358
+#case ids:  5
+4996359
+#case ids:  6
+4996360
+#case ids:  7
+4996361
+#case ids:  8
+4996362
+#case ids:  9
+4996363
+#case ids:  10
+4996364
+#case ids:  11
+4996365
+#case ids:  12
+4996366
+#case ids:  13
+4996367
+#case ids:  14
+4996368
+#case ids:  15
+4996369
+#case ids:  16
+4996370
+#case ids:  17
+4996371
+#case ids:  18
+4996372
+#case ids:  19
+4996373
+#case ids:  20
+4996374
+#case ids:  21
+4996375
+#case ids:  22
+4996376
+#case ids:  23
+4996377
+#case ids:  24
+4996378
+#case ids:  25
+4996379
+#case ids:  26
+4996380
+#case ids:  27
+4996381
+#case ids:  28
+4996382
+#case ids:  29
+4996383
+#case ids:  30
+4996384
+#case ids:  31
+4996385
+#case ids:  32
+4996386
+#case ids:  33
+4996387
+#case ids:  34
+4996388
+#case ids:  35
+4996389
+#case ids:  36
+4996390
+#case ids:  37
+4996391
+#case ids:  38
+4996392
+#case ids:  39
+4996393
+#case ids:  40
+4996394
+#case ids:  41
+4996395
+#case ids:  42
+4996396
+#case ids:  43
+4996397
+#case ids:  44
+4996398
+#case ids:  45
+4996399
+#case ids:  46
+4996400
+#case ids:  47
+4996401
+#case ids:  48
+4996402
+#case ids:  49
+4996403
+#case ids:  50
+4996404
+#case ids:  51
+4996405
+#case ids:  52
+4996406
+#case ids:  53
+4996407
+#case ids:  54
+4996408
+#case ids:  55
+4996409
+#case ids:  56
+4996410
+#case ids:  57
+4996411
+#case ids:  58
+4996412
+#case ids:  59
+4996413
+#case ids:  60
+4996414
+#case ids:  61
+4996415
+#case ids:  62
+4996416
+#case ids:  63
+4996417
+#case ids:  64
+4996418
+#case ids:  65
+4996419
+#case ids:  66
+4996420
+#case ids:  67
+4996421
+#case ids:  68
+4996422
+#case ids:  69
+4996423
+#case ids:  70
+4996424
+#case ids:  71
+4996425
+#case ids:  72
+4996426
+#case ids:  73
+4996427
+#case ids:  74
+4996428
+#case ids:  75
+4996429
+#case ids:  76
+4996430
+#case ids:  77
+4996431
+#case ids:  78
+4996432
+#case ids:  79
+4996433
+#case ids:  80
+4996434
+#case ids:  81
+4996435
+#case ids:  82
+4996436
+#case ids:  83
+4996437
+#case ids:  84
+4996438
+#Number of nodes: 16 =============================
+#Wed Feb 14 14:20:01 AST 2018 on 16 nodes. Hicma beta=0.01 --ss - small -  - 02:00:00 - 100  - hic - exp/cases/sqexp.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24" 24 (0-23-1)
+#case ids:  1
+5007968
+#case ids:  2
+5007972
+#case ids:  3
+5007992
+#case ids:  4
+5008006
+#case ids:  5
+5008032
+#case ids:  6
+5008054
+#case ids:  7
+5008076
+#case ids:  8
+5008086
+#case ids:  9
+5008097
+#case ids:  10
+5008113
+#case ids:  11
+5008128
+#case ids:  12
+5008154
+#case ids:  13
+5008167
+#case ids:  14
+5008177
+#case ids:  15
+5008209
+#case ids:  16
+5008213
+#case ids:  17
+5008219
+#case ids:  18
+5008224
+#case ids:  19
+5008228
+#case ids:  20
+5008230
+#case ids:  21
+5008232
+#case ids:  22
+5008234
+#case ids:  23
+5008236
+#case ids:  24
+5008238
+#Number of nodes: 16 =============================
+#Wed Feb 14 14:36:30 AST 2018 on 16 nodes. Hicma beta=0.01 --ss - small -  - 02:00:00 - 100  - hic - exp/cases/sqexp.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24" 24 (0-23-1)
+#case ids:  1
+5009984
+#case ids:  2
+5009996
+#case ids:  3
+5010011
+#case ids:  4
+5010025
+#case ids:  5
+5010032
+#case ids:  6
+5010043
+#case ids:  7
+5010078
+#case ids:  8
+5010085
+#case ids:  9
+5010090
+#case ids:  10
+5010100
+#case ids:  11
+5010128
+#case ids:  12
+5010135
+#case ids:  13
+5010170
+#case ids:  14
+5010178
+#case ids:  15
+5010183
+#case ids:  16
+5010185
+#case ids:  17
+5010190
+#case ids:  18
+5010207
+#case ids:  19
+5010223
+#case ids:  20
+5010229
+#case ids:  21
+5010259
+#case ids:  22
+5010282
+#case ids:  23
+5010288
+#case ids:  24
+5010303
+#Number of nodes: 16 =============================
+#Wed Feb 14 14:44:43 AST 2018 on 16 nodes. Hicma beta=0.01 --ss - small -  - 02:00:00 - 150  - hic - exp/cases/sqexp.sh "1 2 3 4" 4 (0-3-1)
+#case ids:  1
+5011183
+#case ids:  2
+5011220
+#case ids:  3
+5011246
+#case ids:  4
+5011265

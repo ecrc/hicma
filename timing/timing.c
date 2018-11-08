@@ -10,7 +10,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -84,7 +84,10 @@ void* morse_getaddr_null(const MORSE_desc_t *A, int m, int n)
 int ISEED[4] = {0,0,0,1};   /* initial seed for zlarnv() */
 
 static int
-Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
+Test(int64_t n, int *iparam, 
+        double fixed_rank_decay, 
+        double wave_k, 
+        char* rankfile) {
     int      i, j, iter;
     int      thrdnbr, niter;
     int64_t  M, N, K, NRHS;
@@ -174,6 +177,7 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
     gflops = 0.0;
 
     dparam[IPARAM_HICMA_STARSH_DECAY] = fixed_rank_decay;
+    dparam[IPARAM_HICMA_STARSH_WAVE_K] = wave_k;
     if ( iparam[IPARAM_WARMUP] ) {
         int status = RunTest( iparam, dparam, &(t[0]), rankfile);
         if (status != MORSE_SUCCESS) return status;
@@ -428,7 +432,8 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
 
 
     static void
-        print_header(char *prog_name, int * iparam, double fixed_rank_decay) {
+        print_header(char *prog_name, int * iparam,
+                double fixed_rank_decay, double wave_k) {
             const char *bound_header   = iparam[IPARAM_BOUND]   ? "   thGflop/s" : "";
             //const char *check_header   = iparam[IPARAM_CHECK]   ? "     ||Ax-b||       ||A||       ||x||       ||b|| ||Ax-b||/N/eps/(||A||||x||+||b||)  RETURN" : "";
             const char *check_header   = iparam[IPARAM_CHECK]   ? "     ||DC-TLR||       ||init DC||       ||DC||       ||TLR|| ||DC-TLR||/||DC||  RETURN" : "";
@@ -455,6 +460,7 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
                     "# fixed rank:  %d\n"
                     "# fixed acc:   %.1e\n"
                     "# alwaysfixedrank:      %d\n"
+                    "# wave_k:     %g\n"
                     "# shmaxrk:     %d\n"
                     "# shprob:      %d\n"
                     "# shdecay:     %e\n"
@@ -474,6 +480,7 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
                     //iparam[IPARAM_ACC],
                     pow(10, -1.0*iparam[IPARAM_ACC]),
                     iparam[IPARAM_HICMA_ALWAYS_FIXED_RANK],
+                    wave_k,
                     iparam[IPARAM_HICMA_STARSH_MAXRANK],
                     //iparam[IPARAM_HICMA_MAXRANK],
                     iparam[IPARAM_HICMA_STARSH_PROB],
@@ -507,6 +514,7 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
             int success = 0;
 
             double fixed_rank_decay = 0.0;
+            double wave_k = 0.0;
             char* rankfile = calloc(2048, sizeof(char));
             rankfile[0] = '\0';
 
@@ -593,6 +601,8 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
                     iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_GEOSTAT;
                 } else if (startswith( argv[i], "--edsin" )) {
                     iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_EDSIN;
+                } else if (startswith( argv[i], "--starshwavek=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(wave_k) );
                 } else if (startswith( argv[i], "--starshdecay=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(fixed_rank_decay) );
                 } else if (startswith( argv[i], "--starshmaxrank=" )) {
@@ -769,7 +779,7 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
                 MORSE_Enable(MORSE_GEMM3M);
 
 #if defined(CHAMELEON_USE_MPI)
-            MORSE_Comm_size( &nbnode );
+            nbnode = MORSE_Comm_size( );
             iparam[IPARAM_NMPI] = nbnode;
             /* Check P */
             if ( (iparam[IPARAM_P] > 1) &&
@@ -785,11 +795,11 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
             MORSE_Set(MORSE_TRANSLATION_MODE, iparam[IPARAM_INPLACE]);
 
             if ( MORSE_My_Mpi_Rank() == 0 )
-                print_header( argv[0], iparam, fixed_rank_decay);
+                print_header( argv[0], iparam, fixed_rank_decay, wave_k);
 
             if (step < 1) step = 1;
 
-            int status = Test( -1, iparam, fixed_rank_decay, rankfile ); /* print header */
+            int status = Test( -1, iparam, fixed_rank_decay, wave_k, rankfile ); /* print header */
             if (status != MORSE_SUCCESS) return status;
             for (i = start; i <= stop; i += step)
             {
@@ -804,7 +814,7 @@ Test(int64_t n, int *iparam, double fixed_rank_decay, char* rankfile) {
                         iparam[IPARAM_M] = i;
                     iparam[IPARAM_N] = i;
                 }
-                int status = Test( iparam[IPARAM_N], iparam, fixed_rank_decay, rankfile );
+                int status = Test( iparam[IPARAM_N], iparam, fixed_rank_decay, wave_k, rankfile );
                 if (status != MORSE_SUCCESS) return status;
                 success += status;
             }

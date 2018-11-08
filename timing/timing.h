@@ -12,7 +12,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -117,6 +117,7 @@ enum dparam_timing {
   /* Begin section for hydra integration tool */
   IPARAM_THRESHOLD_CHECK, /* Maximum value accepted for: |Ax-b||/N/eps/(||A||||x||+||b||) */
   IPARAM_HICMA_STARSH_DECAY,
+  IPARAM_HICMA_STARSH_WAVE_K,
   /* End section for hydra integration tool  */
   IPARAM_DNBPARAM
 };

@@ -11,7 +11,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -76,8 +76,14 @@ void hicma_pzgytlr(
         int ldamUV = BLKLDD(AUV, m);
         int ldamD = BLKLDD(AD, m);
 
-        for (n = 0; n < A->mt; n++) {
-            tempnn = n == A->mt-1 ? A->m-n*A->mb : A->mb;
+        //for (n = 0; n < A->mt; n++) {
+        //    tempnn = n == A->mt-1 ? A->m-n*A->mb : A->mb;
+        for (n = 0; n < A->nt; n++) { //I hope this change does not break anything
+            if(0 && A->nt == 1) { //FIXME for B in TRSM
+                tempnn = A->nb;
+            } else {
+                tempnn = n == A->mt-1 ? A->m-n*A->mb : A->mb;
+            }
 
             // if(m<n)
             //     continue;
@@ -100,7 +106,11 @@ void hicma_pzgytlr(
                 call_diag = 0; //FIXME call_diag must 1 when AD is full matrix and used
                 AD_icol = n;
             }
+            if(0 && AUV->nt == 1){
+                call_diag = 0; //FIXME added for B in TRSM
+            }
             if(call_diag == 1) {
+                //printf("diag %d,%d\n", m, n);
                 HICMA_TASK_zgytlr_diag(
                         &options,
                         tempmmD, tempmmD,
@@ -115,6 +125,7 @@ void hicma_pzgytlr(
                         Dense
                         );
             } else {
+                //printf("off  %d,%d\n", m, n);
                 HICMA_TASK_zgytlr(
                         &options,
                         tempmmD, tempnn,
@@ -131,5 +142,7 @@ void hicma_pzgytlr(
         }
     }
     RUNTIME_options_finalize(&options, morse);
-    MORSE_TASK_dataflush_all();
+    //MORSE_TASK_dataflush_all(); removed in newer chameleon
+
+
 }

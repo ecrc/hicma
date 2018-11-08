@@ -1,0 +1,128 @@
+#Number of nodes: 256 =============================
+#Sat Feb 10 21:15:39 AST 2018 on 256 nodes. Chameleon potrf runs - cham - exp/cases/cham.txt "1..63" 63 (0-62-1)
+#case ids:  1
+4970383
+#case ids:  2
+4970384
+#case ids:  3
+4970385
+#case ids:  4
+4970386
+#case ids:  5
+4970387
+#case ids:  6
+4970388
+#case ids:  7
+4970389
+#case ids:  8
+4970390
+#case ids:  9
+4970391
+#case ids:  10
+4970392
+#case ids:  11
+4970393
+#case ids:  12
+4970394
+#case ids:  13
+4970395
+#case ids:  14
+4970396
+#case ids:  15
+4970397
+#case ids:  16
+4970398
+#case ids:  17
+4970399
+#case ids:  18
+4970400
+#case ids:  19
+4970401
+#case ids:  20
+4970402
+#case ids:  21
+4970403
+#case ids:  22
+4970404
+#case ids:  23
+4970405
+#case ids:  24
+4970406
+#case ids:  25
+4970407
+#case ids:  26
+4970408
+#case ids:  27
+4970409
+#case ids:  28
+4970410
+#case ids:  29
+4970411
+#case ids:  30
+4970412
+#case ids:  31
+4970413
+#case ids:  32
+4970414
+#case ids:  33
+4970415
+#case ids:  34
+4970416
+#case ids:  35
+4970417
+#case ids:  36
+4970418
+#case ids:  37
+4970419
+#case ids:  38
+4970420
+#case ids:  39
+4970421
+#case ids:  40
+4970422
+#case ids:  41
+4970423
+#case ids:  42
+4970424
+#case ids:  43
+4970425
+#case ids:  44
+4970426
+#case ids:  45
+4970427
+#case ids:  46
+4970428
+#case ids:  47
+4970429
+#case ids:  48
+4970430
+#case ids:  49
+4970431
+#case ids:  50
+4970432
+#case ids:  51
+4970433
+#case ids:  52
+4970434
+#case ids:  53
+4970435
+#case ids:  54
+4970436
+#case ids:  55
+4970437
+#case ids:  56
+4970438
+#case ids:  57
+4970439
+#case ids:  58
+4970440
+#case ids:  59
+4970441
+#case ids:  60
+4970442
+#case ids:  61
+4970443
+#case ids:  62
+4970444
+#case ids:  63
+4970445

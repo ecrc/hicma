@@ -1,0 +1,37 @@
+nrows[1]=1080000;   nb[1]=2700; acc[1]=1;  maxrank[1]=40;
+nrows[2]=1080000;   nb[2]=2700; acc[2]=2;  maxrank[2]=48;
+nrows[3]=1080000;   nb[3]=2700; acc[3]=3;  maxrank[3]=56;
+nrows[4]=1080000;   nb[4]=2700; acc[4]=4;  maxrank[4]=67; #66
+nrows[5]=1080000;   nb[5]=2700; acc[5]=5;  maxrank[5]=76;
+nrows[6]=1080000;   nb[6]=2700; acc[6]=6;  maxrank[6]=86; #85
+nrows[7]=1080000;   nb[7]=2700; acc[7]=7;  maxrank[7]=96;
+nrows[8]=1080000;   nb[8]=2700; acc[8]=8;  maxrank[8]=106;
+nrows[9]=1080000;   nb[9]=2700; acc[9]=9;  maxrank[9]=117; #116
+nrows[10]=1080000;  nb[10]=2700;    acc[10]=10;    maxrank[10]=127;
+nrows[11]=1080000;  nb[11]=2700;    acc[11]=11;    maxrank[11]=141;
+nrows[12]=1080000;  nb[12]=2700;    acc[12]=12;    maxrank[12]=152;
+nrows[13]=1080000;  nb[13]=2700;    acc[13]=13;    maxrank[13]=166;  #165
+
+nrows[1]=1080000;   nb[1]=2700; acc[1]=7;   maxrank[1]=25;
+nrows[2]=1080000;   nb[2]=2700; acc[2]=8;   maxrank[2]=29;
+nrows[3]=1080000;   nb[3]=2700; acc[3]=9;   maxrank[3]=33;
+nrows[4]=1080000;   nb[4]=2700; acc[4]=10;  maxrank[4]=37;
+nrows[5]=1080000;   nb[5]=2700; acc[5]=11;  maxrank[5]=41;
+nrows[6]=1080000;   nb[6]=2700; acc[6]=12;  maxrank[6]=46;
+nrows[7]=1080000;   nb[7]=2700; acc[7]=13;  maxrank[7]=51;
+
+note="Hicma - accuracy - SS - custom maxrank"
+_appdata="--ss"
+allcaseids[64]="`seq 1 7`"
+allcaseids[64]="3 4 5 6 7"
+
+#note="Hicma - accuracy - EDSIN - 1e-4missing"
+#_appdata="--edsin"; _wavek=200
+#allcaseids[64]="4 6 9 13"
+
+_compmaxrank=300
+timelimit="06:00:00"
+step=10
+nprocs="64"
+
+

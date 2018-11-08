@@ -11,7 +11,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 /*
  * @copyright (c) 2009-2014 The University of Tennessee and The University
@@ -42,6 +42,10 @@
 #include "control/hicma_common.h"
 
 /**
+ *  HICMA_zgytlr_Tile - Generate a random matrix by tiles.
+ *  Operates on matrices stored by tiles.
+ *  All matrices are passed through descriptors.
+ *  All dimensions are taken from the descriptors.
  *
  *  HICMA_zgytlr_Tile - Generate matrix by tiles.
  *
@@ -85,6 +89,7 @@
  *
  *
  ******************************************************************************/
+#include <stdio.h>
 int HICMA_zgytlr_Tile(
         MORSE_enum   uplo,
         MORSE_desc_t *AUV,
@@ -117,10 +122,16 @@ int HICMA_zgytlr_Tile(
             compress_diag,
             Dense,
             sequence, &request );
+    MORSE_Desc_Flush( AD, sequence );
+    MORSE_Desc_Flush( AUV, sequence ); //added due to stall when parsec is used
+    MORSE_Desc_Flush( Ark, sequence ); //added due to stall when parsec is used
+    MORSE_Desc_Flush( Dense, sequence ); //added due to stall when parsec is used
     morse_sequence_wait(morse, sequence);
-    RUNTIME_desc_getoncpu(AD);
+    //RUNTIME_desc_getoncpu(AD);
+
     status = sequence->status;
     morse_sequence_destroy(morse, sequence);
+
     return status;
 }
 

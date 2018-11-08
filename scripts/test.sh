@@ -1,12 +1,14 @@
 #!/bin/bash -le
-module load libs-extra
-module load mkl/2018-initial
-module load gcc/5.3.0
-module load cmake/3.7.2
-module load hwloc/1.11.6-gcc-5.3.0
-module load mpi-openmpi/2.1.0-gcc-5.3.0
-module load starpu/1.2.1-gcc-5.3.0-openmpi
+module purge
+if [ "$HOSTNAME" == "thana" ]; then
+	. ./scripts/power8.modules
+else
+	. ./scripts/intel.modules
+fi
 
+module list
+
+set -x
 
 # TEST
 PRE=""
@@ -73,6 +75,7 @@ for nt in $nta;do
             --acc=$acc \
             $check \
             $problem \
+            --starshwavek=40 \
             --starshdecay=2 \
             --starshmaxrank=$maxrank"
         echo "Executing: $CMD $run"

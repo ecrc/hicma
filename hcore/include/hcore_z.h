@@ -10,7 +10,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 #ifndef _HICMA_HCORE_Z_H_
 #define _HICMA_HCORE_Z_H_
@@ -66,6 +66,20 @@ extern "C" {
             double acc,
             double* work
             );
+    void HCORE_zgemmbdcd(MORSE_enum transA, MORSE_enum transB,
+            int M, int N,
+            double alpha, 
+            double *AU, 
+            double *AV, 
+            double *Ark, 
+            int LDA,
+            double *BD, 
+            int LDB,
+            double beta, 
+            double *CD, 
+            int LDC,
+            double *work 
+            );
     void HCORE_zgytlr(int m, int n,
             double *AU,
             double *AV,
@@ -79,6 +93,23 @@ extern "C" {
             int compress_diag,
             double *Dense
             );
+    void HCORE_zhagdm( 
+            int nrows_Dense,
+            int ncols_Dense,
+            double *Dense,
+            int ld_Dense,
+            int tile_row_index,
+            int tile_col_index
+            );
+    void HCORE_zhagcm( int m, int n, 
+            double *AU,
+            double *AV,
+            double *Ark,
+            int ldu,
+            int ldv,
+            int tile_row_index, 
+            int tile_column_index, 
+            int maxrank, double tol);
     void HCORE_zsyrk(MORSE_enum uplo, MORSE_enum trans,
             int N, int K,
             double alpha,
@@ -88,7 +119,7 @@ extern "C" {
             double *CD, int LDCD,
             double* work
             );
-    void HCORE_zuncompress(MORSE_enum transA, int transB,
+    void HCORE_zuncompress(MORSE_enum transA, MORSE_enum transB,
             int M, int N,
             double alpha, 
             double *AU, 

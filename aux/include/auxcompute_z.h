@@ -11,7 +11,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 #ifndef __AUXCOMPUTE_Z__
 #define __AUXCOMPUTE_Z__
@@ -39,6 +39,13 @@
 #include "starsh.h"
 int HICMA_zuncompress(
         MORSE_enum uplo, MORSE_desc_t *AUV, MORSE_desc_t *AD, MORSE_desc_t *Ark);
+int HICMA_zuncompress_custom_size(MORSE_enum uplo,
+        MORSE_desc_t *AUV, MORSE_desc_t *AD, MORSE_desc_t *Ark,
+        int numrows_matrix,
+        int numcolumns_matrix,
+        int numrows_block,
+        int numcolumns_block
+        );
 int HICMA_zdiag_vec2mat(
         MORSE_desc_t *vec, MORSE_desc_t *mat);
 void HICMA_znormest( int M, int N, double *A, double *e, double *work);

@@ -10,7 +10,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  * @precisions normal z -> c d s
  **/
 //#include "hcore/include/hcore.h"
@@ -23,45 +23,6 @@
 
 #define COMPLEX
 #undef REAL
-
-/*
- Rnd64seed is a global variable but it doesn't spoil thread safety. All matrix
- generating threads only read Rnd64seed. It is safe to set Rnd64seed before
- and after any calls to create_tile(). The only problem can be caused if
- Rnd64seed is changed during the matrix generation time.
- */
-
-//static unsigned long long int Rnd64seed = 100;
-#define Rnd64_A 6364136223846793005ULL
-#define Rnd64_C 1ULL
-#define RndF_Mul 5.4210108624275222e-20f
-#define RndD_Mul 5.4210108624275222e-20
-
-#ifdef COMPLEX
-#define NBELEM   2
-#else
-#define NBELEM   1
-#endif
-
-static unsigned long long int
-Rnd64_jump(unsigned long long int n, unsigned long long int seed ) {
-  unsigned long long int a_k, c_k, ran;
-  int i;
-
-  a_k = Rnd64_A;
-  c_k = Rnd64_C;
-
-  ran = seed;
-  for (i = 0; n; n >>= 1, ++i) {
-    if (n & 1)
-      ran = a_k * ran + c_k;
-    c_k *= (a_k + 1);
-    a_k *= a_k;
-  }
-
-  return ran;
-}
-
 //  HCORE_zgytlr - Generate a tile for random matrix.
 
 #include "starsh.h"
@@ -84,6 +45,8 @@ extern void _printmat(double * A, int m, int n, int ld);
 //extern int global_fixed_rank;
 int global_always_fixed_rank;
 int global_fixed_rank;
+int gytlr_tile_ii = -1;
+int gytlr_tile_jj = -1;
 
 void HCORE_zgytlr( int m, int n, /*dimension of squareAD*/
         double *AU,
@@ -98,6 +61,14 @@ void HCORE_zgytlr( int m, int n, /*dimension of squareAD*/
         double *Dense
         )
 {
+    if(gytlr_tile_ii >= 0) {
+        ii = gytlr_tile_ii;
+        printf("%s %d: Using fixed i:%d\n", __FILE__, __LINE__, ii);
+    }
+    if(gytlr_tile_jj >= 0) {
+        jj = gytlr_tile_jj;
+        printf("%s %d: Using fixed j:%d\n", __FILE__, __LINE__, jj);
+    }
     int64_t i, j;
     //printf("m:%d n:%d bigM:%d m0:%d n0:%d\n", m, n, bigM, m0, n0);
     struct timeval tvalBefore, tvalAfter;  // removed comma
@@ -130,9 +101,20 @@ void HCORE_zgytlr( int m, int n, /*dimension of squareAD*/
 
     mpiF->problem->kernel(m, n, RC->pivot+RC->start[ii], CC->pivot+CC->start[jj],
             RD, CD, AD, lda);
+
+/*    {*/
+        /*if (ii != jj || compress_diag == 1) { */
+            /*if(store_only_diagonal_tiles == 1) {*/
+                /*assert(AD != saveAD);*/
+                /*free(AD);*/
+            /*}*/
+        /*}*/
+        /*return; //TODO*/
+    /*}*/
     if(global_check == 1){
        char chall = 'A';
        LAPACK_dlacpy(&chall, &m, &n, AD, &lda, Dense, &lda);
+       //printf("Original problem is copied :%d,%d\n", ii,jj);
     }
     int mn = m;
     int mn2 = maxrank+oversample;

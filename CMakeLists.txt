@@ -21,7 +21,8 @@
 #  @author Mathieu Faverge
 #  @author Florent Pruvost
 #  @author Eduardo Gonzalez
-#  @date 13-07-2012
+#  @author Kadir Akbudak
+#  @date 2018-11-08
 #
 ## disables all rank descriptors and runs in fixed rank mode
 #add_definitions(-DHICMA_ALWAYS_FIX_RANK)
@@ -33,7 +34,7 @@
 #add_definitions(-DHICMA_DISABLE_HCORE_COMPUTATIONS)
 
 #LAPACKE_dge_trans() is used in HiCMA. Appropriate header file must be included
-add_definitions(-DMKL)
+#add_definitions(-DMKL)
 #add_definitions(-DLAPACKE_UTILS)
 
 cmake_minimum_required(VERSION 3.2.3)
@@ -128,7 +129,8 @@ include(RulesPrecisions)
 # -----------------------------
 
 # Create a list of possible runtime
-set(HICMA_SCHED_list "PARSEC" "STARPU" "QUARK")
+#set(HICMA_SCHED_list "PARSEC" "STARPU" "QUARK")
+set(HICMA_SCHED_list "STARPU")
 
 # Initially PaRSEC runtime is enabled
 option(HICMA_SCHED_PARSEC
@@ -263,6 +265,10 @@ option(HICMA_ENABLE_TIMING   "Enable timings build"        ON)
 if (HICMA_ENABLE_TIMING)
     message("-- ${BoldGreen}HICMA_ENABLE_TIMING is set to ON, turn it OFF to avoid building timing${ColourReset}")
 endif()
+option(HICMA_ENABLE_TESTING   "Enable testings build"        ON)
+if (HICMA_ENABLE_TESTING)
+    message("-- ${BoldGreen}HICMA_ENABLE_TESTING is set to ON, turn it OFF to avoid building testing${ColourReset}")
+endif()
 
 # Option to activate or not simulation mode (use Simgrid through StarPU)
 # ----------------------------------------------------------------------
@@ -382,6 +388,9 @@ if(NOT HICMA_SIMULATION)
         endif()
         message(FATAL_ERROR "A CBLAS library is required but has not been found")
     endif()
+
+    list(REMOVE_DUPLICATES CMAKE_EXE_LINKER_FLAGS)
+    string(REPLACE ";" " " CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 
     # HICMA depends on LAPACKE
     #-----------------------------
@@ -581,14 +590,7 @@ if(NOT HICMA_SIMULATION)
 else (NOT HICMA_SIMULATION)
 
     message("-- ${BoldBlue}Simulation mode of HICMA is activated (HICMA_SIMULATION=ON)."
-    "\n   This mode allows you to simulate execution of algorithms with StarPU compiled with SimGrid."
-    "\n   To do so, we provide some perfmodels in the simucore/perfmodels/ directory of HICMA sources."
-    "\n   The resulting directory where to find perfmodels is: ${CMAKE_CURRENT_SOURCE_DIR}/simucore/perfmodels."
-    "\n   To use these perfmodels, please set your STARPU_HOME environment variable to ${CMAKE_CURRENT_SOURCE_DIR}/simucore/perfmodels."
-    "\n   Finally, you need to set your STARPU_HOSTNAME environment variable to the name of the machine to simulate."
-    "\n   For example: STARPU_HOSTNAME=mirage."
-    "\n   Note that only POTRF kernels with block sizes of 320 or 960 (simple and double precision) on mirage machine are available for now."
-    "\n   Database of models is subject to change, it should be enrich in a near future.${ColourReset}")
+    "\n   This mode allows you to simulate execution of algorithms with StarPU compiled with SimGrid.${ColourReset}")
 
     message("-- ${Blue}Add definition HICMA_SIMULATION"
     " - Activate simulation mode in HiCMA (to use with StarPU+SimGrid)${ColourReset}")
@@ -715,21 +717,22 @@ if( STARSH_FOUND )
         # look for gsl
         find_library( _STARSH_LIB NAME starsh PATHS ${STARSH_LIBRARY_DIRS} )
         if( _STARSH_LIB AND NOT "${STARSH_LIBRARIES_DEP}" MATCHES "gsl" )
-            execute_process( COMMAND nm ${_STARSH_LIB} COMMAND grep gsl RESULT_VARIABLE GSL_IN_STARSH )
+            execute_process( COMMAND nm ${_STARSH_LIB} COMMAND grep -q gsl RESULT_VARIABLE GSL_IN_STARSH )
             if ( ${GSL_IN_STARSH} EQUAL 0)
                 message( STATUS "STARSH depends on gsl. Adding it to dependency list")
+                find_package(GSL REQUIRED)
                 if (STARSH_LIBRARIES_DEP)
-                    list( APPEND STARSH_LIBRARIES_DEP "gsl")
+                    list( APPEND STARSH_LIBRARIES_DEP ${GSL_LIBRARIES})
                 else()
-                    list( APPEND STARSH_LIBRARIES "gsl")
+                    list( APPEND STARSH_LIBRARIES ${GSL_LIBRARIES})
                 endif()
             endif()
 	endif()
 	# insert to dependencies
         if (STARSH_LIBRARIES_DEP)
-            list(INSERT HICMA_DEP 0 ${STARSH_LIBRARIES_DEP})
+            list(APPEND HICMA_DEP ${STARSH_LIBRARIES_DEP})
         else()
-            list(INSERT HICMA_DEP 0 ${STARSH_LIBRARIES})
+            list(APPEND HICMA_DEP ${STARSH_LIBRARIES})
         endif()
     endif()
 endif()
@@ -737,7 +740,6 @@ endif()
 
 # HICMA depends on a runtime
 # -------------------------------
-
 if( HICMA_SCHED_STARPU )
 
   #set(HICMA_STARPU_VERSION "1.1" CACHE STRING "oldest STARPU version desired")
@@ -1224,10 +1226,20 @@ include(CTest)
 #  add_subdirectory(testing)
 #endif(HICMA_ENABLE_TESTING AND NOT HICMA_SIMULATION)
 
+# Enable MKL compilation flag
+if(BLAS_VENDOR_FOUND MATCHES "Intel*")
+    add_definitions(-DMKL)
+endif()
+
+
 # Timing executables
 if(HICMA_ENABLE_TIMING)
   add_subdirectory(timing)
 endif(HICMA_ENABLE_TIMING)
+# Testing executables
+if(HICMA_ENABLE_TESTING)
+  add_subdirectory(testing)
+endif(HICMA_ENABLE_TESTING)
 #------------------------------------------------------------------------------
 
 ##################################################################
@@ -1241,8 +1253,11 @@ if(OPENMP_FOUND)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 else()
     ## In shaheen openmp is not detected, so i force it.
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fopenmp")
+    #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fopenmp")
+    ## It is not good to force on MAC.
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 endif()
 
 
@@ -1250,21 +1265,33 @@ endif()
 include_directories( ${CMAKE_SOURCE_DIR}/include )
 
 SET( HICMA_HCORE_SRC
+    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zhagcm.c
+    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zhagdm.c
     ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgytlr.c
     ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zsyrk.c
     ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgemm_fast.c
     ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgemm.c
+    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgemmbdcd.c
     ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zuncompress.c
   )
 include_directories( ${CMAKE_SOURCE_DIR}/hcore/include )
 
+set( HICMA_CONTROL_SRC
+    ${CMAKE_SOURCE_DIR}/control/hicma_init.c
+    )
 set( HICMA_COMPUTE_SRC
+    ${CMAKE_SOURCE_DIR}/compute/pzhagcm.c
+    ${CMAKE_SOURCE_DIR}/compute/zhagcm.c
+    ${CMAKE_SOURCE_DIR}/compute/pzhagdm.c
+    ${CMAKE_SOURCE_DIR}/compute/zhagdm.c
     ${CMAKE_SOURCE_DIR}/compute/pzgytlr.c
     ${CMAKE_SOURCE_DIR}/compute/zgytlr.c
     ${CMAKE_SOURCE_DIR}/compute/pzpotrf.c
     ${CMAKE_SOURCE_DIR}/compute/zpotrf.c
     ${CMAKE_SOURCE_DIR}/compute/pzgemm.c
     ${CMAKE_SOURCE_DIR}/compute/zgemm.c
+    ${CMAKE_SOURCE_DIR}/compute/pztrsm.c
+    ${CMAKE_SOURCE_DIR}/compute/ztrsm.c
   )
 
 #set( HICMA_TIMING_SRC
@@ -1272,10 +1299,14 @@ set( HICMA_COMPUTE_SRC
     #${CMAKE_SOURCE_DIR}/timing/timing.c
   #)
 include_directories( ${CMAKE_SOURCE_DIR}/timing )
+include_directories( ${CMAKE_SOURCE_DIR}/testing)
 
 set( HICMA_RUNTIME_SRC
+    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zhagcm.c
+    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zhagdm.c
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zuncompress.c
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgemm.c
+    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgemm_bdcd.c
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgytlr.c
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zpotrf.c
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_ztrsm.c
@@ -1289,6 +1320,7 @@ set( HICMA_AUX_SRC
     ${CMAKE_SOURCE_DIR}/aux/compute/zproblem.c
     ${CMAKE_SOURCE_DIR}/aux/compute/znormest.c
     ${CMAKE_SOURCE_DIR}/aux/descutil/descprint.c
+    ${CMAKE_SOURCE_DIR}/aux/descutil/descsame.c
     ${CMAKE_SOURCE_DIR}/aux/compute/zstat.c
   )
 include_directories( ${CMAKE_SOURCE_DIR}/aux/include )
@@ -1297,7 +1329,7 @@ link_directories(${STARSH_LIBRARY_DIRS})
 link_directories(${STARPU_LIBRARY_DIRS})
 link_directories(${CHAMELEON_LIBRARY_DIRS})
 
-add_library( hicma ${HICMA_RUNTIME_SRC} ${HICMA_HCORE_SRC} ${HICMA_COMPUTE_SRC} ${HICMA_AUX_SRC} )
+add_library( hicma ${HICMA_RUNTIME_SRC} ${HICMA_HCORE_SRC} ${HICMA_COMPUTE_SRC} ${HICMA_AUX_SRC} ${HICMA_CONTROL_SRC} )
 target_link_libraries(hicma ${STARSH_LIBRARIES_DEP})
 #add_executable( main ${HICMA_TIMING_SRC} )
 #target_link_libraries( main

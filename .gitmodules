@@ -6,4 +6,5 @@
 	url = https://github.com/ecrc/stars-h.git
 [submodule "chameleon"]
 	path = chameleon
-	url = https://gitlab.inria.fr/solverstack/chameleon.git
+        url = https://gitlab.inria.fr/solverstack/chameleon.git
+	#url = git@github.com:ecrc/chameleon.git

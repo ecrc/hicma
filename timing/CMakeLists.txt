@@ -41,5 +41,30 @@ foreach(_timing ${TIMINGS_SRC})
         )
     install(TARGETS ${_name_exe}
         DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/hicma/timing)
+
+    # Test
+    if( _name_exe MATCHES "zpotrf")
+        if( MPI_FOUND )
+            add_test( NAME ${_name_exe}-ss
+                      COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${_name_exe} --m=3600 --n_range=3600:3600 --k=3600 --mb=400 --nb=400 --nowarmup --threads=4 --rk=0 --acc=8 --check --ss --starshdecay=2 --starshmaxrank=400 )
+            set_tests_properties( ${_name_exe}-ss PROPERTIES LABELS "mpi;timing" )
+
+            add_test( NAME ${_name_exe}-edsin
+                      COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${_name_exe} --m=3600 --n_range=3600:3600 --k=3600 --mb=400 --nb=400 --nowarmup --threads=4 --rk=0 --acc=8 --check --edsin --starshwavek=40 --starshdecay=2 --starshmaxrank=400 )
+            set_tests_properties( ${_name_exe}-edsin PROPERTIES LABELS "mpi;timing" )
+        else()
+            add_test( NAME ${_name_exe}-ss
+                      COMMAND ${_name_exe} --m=3600 --n_range=3600:3600 --k=3600 --mb=400 --nb=400 --nowarmup --threads=4 --rk=0 --acc=8 --check --ss --starshdecay=2 --starshmaxrank=400 )
+            set_tests_properties( ${_name_exe}-ss PROPERTIES LABELS "timing" )
+
+            add_test( NAME ${_name_exe}-edsin
+                      COMMAND ${_name_exe} --m=3600 --n_range=3600:3600 --k=3600 --mb=400 --nb=400 --nowarmup --threads=4 --rk=0 --acc=8 --check --edsin --starshdecay=2 --starshmaxrank=400 --starshwavek=40 )
+            set_tests_properties( ${_name_exe}-edsin PROPERTIES LABELS "timing" )
+        endif()
+        set_tests_properties( ${_name_exe}-ss PROPERTIES ENVIRONMENT "STARPU_SILENT=1" )
+        set_tests_properties( ${_name_exe}-edsin PROPERTIES ENVIRONMENT "STARPU_SILENT=1" )
+    endif()
+
+
 endforeach()
 

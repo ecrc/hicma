@@ -12,7 +12,7 @@
  * @version 0.1.0
  * @author Ali Charara
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  *
  **/
 
@@ -39,12 +39,11 @@
  * @author Mathieu Faverge
  * @author Emmanuel Agullo
  * @author Cedric Castagnede
- * @date 2017-11-16
+ * @date 2018-11-08
  * @precisions normal z -> s d c
  *
  **/
-
-
+#include "hicma_common.h"
 #include "morse.h"
 #include "control/common.h"
 #include "hicma_runtime_z.h"
@@ -62,7 +61,7 @@
 #define BUV(m, n) BUV, Brk,  m,  n
 #define CUV(m, n) CUV, Crk,  m,  n
 
-extern int use_fast_hcore_zgemm;
+#include "hicma.h"
 
 /**
  *  Parallel tile matrix-matrix multiplication - dynamic scheduling
@@ -110,7 +109,7 @@ void hicma_pzgemm(MORSE_enum transA, MORSE_enum transB,
         + CUV->mb * 2*maxrk // newUV gemms
         #endif
         ;
-    if(use_fast_hcore_zgemm){
+    if(HICMA_get_use_fast_hcore_zgemm() == 1){
         double work_query;
         int lwork = -1;
         int info = LAPACKE_dgesvd_work( LAPACK_COL_MAJOR, 'A', 'A',
@@ -224,21 +223,24 @@ void hicma_pzgemm(MORSE_enum transA, MORSE_enum transB,
                     }
                 }
             }
+            RUNTIME_data_flush( sequence, C(m, n) );
         }
         if (transA == MorseNoTrans) {
             for (k = 0; k < AUV->nt; k++) {
-                MORSE_TASK_dataflush( &options, A(m, k) );
+                //MORSE_TASK_dataflush( &options, A(m, k) );
+                RUNTIME_data_flush( sequence, A(m, k) );
             }
         } else {
             for (k = 0; k < AUV->mt; k++) {
-                MORSE_TASK_dataflush( &options, A(k, m) );
+                /*MORSE_TASK_dataflush( &options, A(k, m) );*/
+                RUNTIME_data_flush( sequence, A(k, m) );
             }
         }
-        for (n = 0; n < CUV->nt; n++) {
-            MORSE_TASK_dataflush( &options, C(m, n) );
-        }
+        /*for (n = 0; n < CUV->nt; n++) {*/
+            /*MORSE_TASK_dataflush( &options, C(m, n) );*/
+        /*}*/
     }
     RUNTIME_options_ws_free(&options);
     RUNTIME_options_finalize(&options, morse);
-    MORSE_TASK_dataflush_all();
+    //MORSE_TASK_dataflush_all(); removed in newer chameleon 
 }

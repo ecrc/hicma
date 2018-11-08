@@ -10,7 +10,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -41,6 +41,8 @@
  *
  **/
 #include "morse.h"
+#include "hicma.h"
+#include "hicma_common.h"
 #include "control/common.h"
 #include "hicma_runtime_z.h"
 #include "coreblas/lapacke.h"
@@ -48,116 +50,12 @@
 #include "control/hicma_config.h"
 #include <stdio.h>
 
-extern int use_fast_hcore_zgemm;
 extern int store_only_diagonal_tiles;
 extern int print_index;
 int pzpotrf_print_index = 0;
 extern int print_mat;
 extern int run_org;
 int extra_barrier = 0;
-#define tld(d) (d->mb)
-#define tsa(d,i,j) (((j)*(d->mt)+(i))*(d->mb)*(d->nb))
-#define A(m,n) A,  m,  n
-int64_t _nelm_limit = 900;
-int64_t _ndim_limit = 30;
-#include <stdio.h>
-void _printmat(double * A, int64_t m, int64_t n, int64_t ld){
-    printf("M:%d N:%d LD:%d %p [\n", m, n, ld, A);
-    int64_t i, j, nelm = 0;
-    for(i=0;i<m;i++){
-        printf("[");
-        for(j=0;j<n;j++){
-            printf("%+.4e", A[j*ld+i]);
-            //printf("%g ", A[j*tld(descZ)+i]);
-            //printf("%g\t", A[j*descZ->n+i]);
-            //printf("(%d,%d,%d) %g\t", i,j,descZ->mb,A[j*descZ->mb+i]);
-            //printf("(%d,%d,%d) %g\t", i,j,descZ->n,A[j*descZ->n+i]);
-            //printf("(%d,%d,%d) %g [%d %d %d]\t", i,j,descZ->n,A[j*descZ->n+i], descZ->m, descZ->lm, descZ->ln);
-            if(j!=n-1){
-                printf(",");
-            }
-            nelm++;
-            if(nelm >= _nelm_limit){
-                printf("\n");
-                return;
-            }
-            if(j==_ndim_limit)
-                break;
-        }
-        printf("]");
-        if(i!=m-1){
-            printf(",");
-            printf("\n");
-        }
-        //printf("\n");
-        if(i==_ndim_limit)
-            break;
-    }
-    printf("]\n");
-}
-void _printdescs(MORSE_desc_t *descD,MORSE_desc_t *descU, MORSE_desc_t *descV,  MORSE_desc_t *descRk){
-    int64_t i, j, imt, jnt;
-    printf("\n");
-    for(imt=0;imt<descD->mt;imt++){
-        for(jnt=0;jnt<descD->nt;jnt++){
-            if(imt < jnt) continue;
-            double *MAT = descD->mat;
-            double *D = &MAT[tsa(descD, imt, jnt)];
-            MAT = descU->mat;
-            double *U = &MAT[tsa(descU, imt, jnt)];
-            MAT = descV->mat;
-            double *V = &MAT[tsa(descV, imt, jnt)];
-            MAT = descRk->mat;
-            double *Rk = &MAT[tsa(descRk, imt, jnt)];
-            int rk = Rk[0];
-            printf("%d Tile %d,%d  rk:%d D:%p U:%p V:%p Rk:%p\n", MORSE_My_Mpi_Rank(), imt, jnt, rk, D, U, V, Rk);
-            if(imt == jnt){
-                _printmat(D, descD->nb, descD->nb, tld(descD));
-            }
-            else {
-                _printmat(U, descD->nb, rk, tld(descU));
-                _printmat(V, descD->nb, rk, tld(descV));
-            }
-        }
-    }
-}
-void _printdescrk(MORSE_desc_t *descZ, int64_t rank){
-    double *MAT = descZ->mat;
-    int64_t i, j, imt, jnt, nelm = 0;
-    printf("\n");
-    for(imt=0;imt<descZ->mt;imt++){
-        for(jnt=0;jnt<descZ->nt;jnt++){
-            //double *A = &MAT[(jnt*descZ->mt+imt)*descZ->mb*descZ->nb];
-            double *A = &MAT[tsa(descZ, imt, jnt)];
-            //double *A =(double*) RTBLKADDR(descZ, double, imt, jnt); // does not work
-            printf("%d Tile %d,%d  %p\n", MORSE_My_Mpi_Rank(), imt, jnt, A);
-            nelm=0;
-            for(i=0;i<descZ->nb;i++){
-                for(j=0;j<rank;j++){
-                    printf("%+.2e ", A[j*tld(descZ)+i]);
-                    //printf("%g ", A[j*tld(descZ)+i]);
-                    //printf("%g\t", A[j*descZ->n+i]);
-                    //printf("(%d,%d,%d) %g\t", i,j,descZ->mb,A[j*descZ->mb+i]);
-                    //printf("(%d,%d,%d) %g\t", i,j,descZ->n,A[j*descZ->n+i]);
-                    //printf("(%d,%d,%d) %g [%d %d %d]\t", i,j,descZ->n,A[j*descZ->n+i], descZ->m, descZ->lm, descZ->ln);
-                    nelm++;
-                    if(nelm >= _nelm_limit){
-                        break;
-                    }
-                    if(j==_ndim_limit)
-                        break;
-                }
-                if(nelm >= _nelm_limit){
-                    printf("\n");
-                    break;
-                }
-                printf("\n");
-                if(i==_ndim_limit)
-                    break;
-            }
-        }
-    }
-}
 /***************************************************************************//**
  *  Parallel tile Cholesky factorization - dynamic scheduling
  **/
@@ -209,7 +107,7 @@ void hicma_pzpotrf(MORSE_enum uplo,
         + CUV->mb * 2*maxrk // newUV gemms
         #endif
         ;
-    if(use_fast_hcore_zgemm){
+    if(HICMA_get_use_fast_hcore_zgemm() == 1){
         double work_query;
         int lwork = -1;
         int info = LAPACKE_dgesvd_work( LAPACK_COL_MAJOR, 'A', 'A',
@@ -282,7 +180,8 @@ void hicma_pzpotrf(MORSE_enum uplo,
                         Ark);
             }
             //MORSE_TASK_dataflush( &options, AV, k, k );
-            MORSE_TASK_dataflush( &options, AUV, k, k );
+            //MORSE_TASK_dataflush( &options, AUV, k, k );
+            RUNTIME_data_flush( sequence, AUV, k, k); 
 
             for (n = k+1; n < AD->mt; n++) {
                 int tempnnd = n == AD->mt-1 ? AD->m-n*AD->mb : AD->mb;
@@ -330,7 +229,8 @@ void hicma_pzpotrf(MORSE_enum uplo,
                             zone,  AUV, Ark, m, n, ldamuv,
                             rk, maxrk, acc);
                 }
-                MORSE_TASK_dataflush( &options, AUV, n, k );
+                //MORSE_TASK_dataflush( &options, AUV, n, k );
+                RUNTIME_data_flush( sequence, AUV, n, k); 
             }
             RUNTIME_iteration_pop(morse);
 

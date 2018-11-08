@@ -1,0 +1,468 @@
+#Number of nodes: 16 =============================
+#Mon Feb 12 15:00:36 AST 2018 on 16 nodes. Hicma --geostat -  -  - 02:00:00 - 100  - hic - exp/cases/matern.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68" 68 (0-67-1)
+#case ids:  1
+4993495
+#case ids:  2
+4993496
+#case ids:  3
+4993497
+#case ids:  4
+4993498
+#case ids:  5
+4993499
+#case ids:  6
+4993500
+#case ids:  7
+4993501
+#case ids:  8
+4993502
+#case ids:  9
+4993503
+#case ids:  10
+4993504
+#case ids:  11
+4993505
+#case ids:  12
+4993506
+#case ids:  13
+4993507
+#case ids:  14
+4993508
+#case ids:  15
+4993509
+#case ids:  16
+4993510
+#case ids:  17
+4993511
+#case ids:  18
+4993512
+#case ids:  19
+4993513
+#case ids:  20
+4993514
+#case ids:  21
+4993515
+#case ids:  22
+4993516
+#case ids:  23
+4993517
+#case ids:  24
+4993518
+#case ids:  25
+4993519
+#case ids:  26
+4993520
+#case ids:  27
+4993521
+#case ids:  28
+4993522
+#case ids:  29
+4993523
+#case ids:  30
+4993524
+#case ids:  31
+4993525
+#case ids:  32
+4993526
+#case ids:  33
+4993527
+#case ids:  34
+4993528
+#case ids:  35
+4993529
+#case ids:  36
+4993530
+#case ids:  37
+4993531
+#case ids:  38
+4993532
+#case ids:  39
+4993533
+#case ids:  40
+4993534
+#case ids:  41
+4993535
+#case ids:  42
+4993536
+#case ids:  43
+4993537
+#case ids:  44
+4993538
+#case ids:  45
+4993539
+#case ids:  46
+4993540
+#case ids:  47
+4993541
+#case ids:  48
+4993542
+#case ids:  49
+4993543
+#case ids:  50
+4993544
+#case ids:  51
+4993545
+#case ids:  52
+4993546
+#case ids:  53
+4993547
+#case ids:  54
+4993548
+#case ids:  55
+4993549
+#case ids:  56
+4993550
+#case ids:  57
+4993551
+#case ids:  58
+4993552
+#case ids:  59
+4993553
+#case ids:  60
+4993554
+#case ids:  61
+4993555
+#case ids:  62
+4993556
+#case ids:  63
+4993557
+#case ids:  64
+4993558
+#case ids:  65
+4993559
+#case ids:  66
+4993560
+#case ids:  67
+4993561
+#case ids:  68
+4993562
+#Number of nodes: 16 =============================
+#Mon Feb 12 15:56:46 AST 2018 on 16 nodes. Hicma --geostat -  -  - 02:00:00 - 150  - hic - exp/cases/matern.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68" 68 (0-67-1)
+#case ids:  1
+4994468
+#case ids:  2
+4994469
+#case ids:  3
+4994470
+#case ids:  4
+4994471
+#case ids:  5
+4994472
+#case ids:  6
+4994473
+#case ids:  7
+4994474
+#case ids:  8
+4994475
+#case ids:  9
+4994476
+#case ids:  10
+4994477
+#case ids:  11
+4994478
+#case ids:  12
+4994479
+#case ids:  13
+4994480
+#case ids:  14
+4994481
+#case ids:  15
+4994482
+#case ids:  16
+4994483
+#case ids:  17
+4994484
+#case ids:  18
+4994485
+#case ids:  19
+4994486
+#case ids:  20
+4994487
+#case ids:  21
+4994488
+#case ids:  22
+4994489
+#case ids:  23
+4994490
+#case ids:  24
+4994491
+#case ids:  25
+4994492
+#case ids:  26
+4994493
+#case ids:  27
+4994494
+#case ids:  28
+4994495
+#case ids:  29
+4994496
+#case ids:  30
+4994497
+#case ids:  31
+4994498
+#case ids:  32
+4994499
+#case ids:  33
+4994500
+#case ids:  34
+4994501
+#case ids:  35
+4994502
+#case ids:  36
+4994503
+#case ids:  37
+4994504
+#case ids:  38
+4994505
+#case ids:  39
+4994507
+#case ids:  40
+4994508
+#case ids:  41
+4994509
+#case ids:  42
+4994510
+#case ids:  43
+4994511
+#case ids:  44
+4994512
+#case ids:  45
+4994513
+#case ids:  46
+4994514
+#case ids:  47
+4994515
+#case ids:  48
+4994516
+#case ids:  49
+4994517
+#case ids:  50
+4994518
+#case ids:  51
+4994519
+#case ids:  52
+4994520
+#case ids:  53
+4994521
+#case ids:  54
+4994522
+#case ids:  55
+4994523
+#case ids:  56
+4994524
+#case ids:  57
+4994525
+#case ids:  58
+4994526
+#case ids:  59
+4994527
+#case ids:  60
+4994528
+#case ids:  61
+4994529
+#case ids:  62
+4994530
+#case ids:  63
+4994531
+#case ids:  64
+4994532
+#case ids:  65
+4994533
+#case ids:  66
+4994534
+#case ids:  67
+4994535
+#case ids:  68
+4994536
+#Number of nodes: 16 =============================
+#Tue Feb 13 10:41:24 AST 2018 on 16 nodes. Hicma --geostat -  -  - 02:00:00 - 150  - hic - exp/cases/matern.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68" 68 (0-67-1)
+#case ids:  1
+4995552
+#case ids:  2
+4995553
+#case ids:  3
+4995554
+#case ids:  4
+4995555
+#case ids:  5
+4995556
+#case ids:  6
+4995557
+#case ids:  7
+4995558
+#case ids:  8
+4995559
+#case ids:  9
+4995560
+#case ids:  10
+4995561
+#case ids:  11
+4995562
+#case ids:  12
+4995563
+#case ids:  13
+4995564
+#case ids:  14
+4995565
+#case ids:  15
+4995566
+#case ids:  16
+4995567
+#case ids:  17
+4995568
+#case ids:  18
+4995569
+#case ids:  19
+4995570
+#case ids:  20
+4995571
+#case ids:  21
+4995572
+#case ids:  22
+4995573
+#case ids:  23
+4995574
+#case ids:  24
+4995575
+#case ids:  25
+4995576
+#case ids:  26
+4995577
+#case ids:  27
+4995578
+#case ids:  28
+4995579
+#case ids:  29
+4995580
+#case ids:  30
+4995581
+#case ids:  31
+4995582
+#case ids:  32
+4995583
+#case ids:  33
+4995584
+#case ids:  34
+4995585
+#case ids:  35
+4995586
+#case ids:  36
+4995587
+#case ids:  37
+4995588
+#case ids:  38
+4995589
+#case ids:  39
+4995590
+#case ids:  40
+4995591
+#case ids:  41
+4995592
+#case ids:  42
+4995593
+#case ids:  43
+4995594
+#case ids:  44
+4995595
+#case ids:  45
+4995596
+#case ids:  46
+4995597
+#case ids:  47
+4995598
+#case ids:  48
+4995599
+#case ids:  49
+4995600
+#case ids:  50
+4995601
+#case ids:  51
+4995602
+#case ids:  52
+4995603
+#case ids:  53
+4995604
+#case ids:  54
+4995605
+#case ids:  55
+4995606
+#case ids:  56
+4995607
+#case ids:  57
+4995608
+#case ids:  58
+4995609
+#case ids:  59
+4995610
+#case ids:  60
+4995611
+#case ids:  61
+4995612
+#case ids:  62
+4995613
+#case ids:  63
+4995614
+#case ids:  64
+4995615
+#case ids:  65
+4995616
+#case ids:  66
+4995617
+#case ids:  67
+4995618
+#case ids:  68
+4995619
+#Number of nodes: 16 =============================
+#Tue Feb 13 14:44:45 AST 2018 on 16 nodes. Hicma --geostat -  -  - 02:00:00 - 200  - hic - exp/cases/matern.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26" 26 (0-25-1)
+#case ids:  1
+4996282
+#case ids:  2
+4996283
+#case ids:  3
+4996284
+#case ids:  4
+4996285
+#case ids:  5
+4996286
+#case ids:  6
+4996287
+#case ids:  7
+4996288
+#case ids:  8
+4996289
+#case ids:  9
+4996290
+#case ids:  10
+4996291
+#case ids:  11
+4996292
+#case ids:  12
+4996293
+#case ids:  13
+4996294
+#case ids:  14
+4996295
+#case ids:  15
+4996296
+#case ids:  16
+4996297
+#case ids:  17
+4996298
+#case ids:  18
+4996299
+#case ids:  19
+4996300
+#case ids:  20
+4996301
+#case ids:  21
+4996302
+#case ids:  22
+4996303
+#case ids:  23
+4996304
+#case ids:  24
+4996305
+#case ids:  25
+4996306
+#case ids:  26
+4996307

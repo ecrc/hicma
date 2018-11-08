@@ -1,0 +1,370 @@
+#Number of nodes: 16 =============================
+#Mon Feb 12 14:41:23 AST 2018 on 16 nodes. Hicma --edsin -  - 100 - 02:00:00 - 200  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84" 84 (0-83-1)
+#case ids:  1
+4993042
+#case ids:  2
+4993043
+#case ids:  3
+4993044
+#case ids:  4
+4993045
+#case ids:  5
+4993046
+#case ids:  6
+4993047
+#case ids:  7
+4993048
+#case ids:  8
+4993049
+#case ids:  9
+4993050
+#case ids:  10
+4993051
+#case ids:  11
+4993052
+#case ids:  12
+4993053
+#case ids:  13
+4993054
+#case ids:  14
+4993055
+#case ids:  15
+4993056
+#case ids:  16
+4993057
+#case ids:  17
+4993058
+#case ids:  18
+4993059
+#case ids:  19
+4993060
+#case ids:  20
+4993061
+#case ids:  21
+4993062
+#case ids:  22
+4993063
+#case ids:  23
+4993064
+#case ids:  24
+4993065
+#case ids:  25
+4993066
+#case ids:  26
+4993067
+#case ids:  27
+4993068
+#case ids:  28
+4993069
+#case ids:  29
+4993070
+#case ids:  30
+4993071
+#case ids:  31
+4993072
+#case ids:  32
+4993073
+#case ids:  33
+4993074
+#case ids:  34
+4993075
+#case ids:  35
+4993076
+#case ids:  36
+4993077
+#case ids:  37
+4993078
+#case ids:  38
+4993079
+#case ids:  39
+4993080
+#case ids:  40
+4993081
+#case ids:  41
+4993082
+#case ids:  42
+4993083
+#case ids:  43
+4993084
+#case ids:  44
+4993085
+#case ids:  45
+4993086
+#case ids:  46
+4993087
+#case ids:  47
+4993088
+#case ids:  48
+4993089
+#case ids:  49
+4993090
+#case ids:  50
+4993091
+#case ids:  51
+4993092
+#case ids:  52
+4993093
+#case ids:  53
+4993094
+#case ids:  54
+4993095
+#case ids:  55
+4993096
+#case ids:  56
+4993097
+#case ids:  57
+4993098
+#case ids:  58
+4993099
+#case ids:  59
+4993100
+#case ids:  60
+4993101
+#case ids:  61
+4993102
+#case ids:  62
+4993103
+#case ids:  63
+4993104
+#case ids:  64
+4993105
+#case ids:  65
+4993106
+#case ids:  66
+4993107
+#case ids:  67
+4993109
+#case ids:  68
+4993110
+#case ids:  69
+4993111
+#case ids:  70
+4993112
+#case ids:  71
+4993113
+#case ids:  72
+4993114
+#case ids:  73
+4993115
+#case ids:  74
+4993116
+#case ids:  75
+4993117
+#case ids:  76
+4993118
+#case ids:  77
+4993119
+#case ids:  78
+4993120
+#case ids:  79
+4993121
+#case ids:  80
+4993122
+#case ids:  81
+4993123
+#case ids:  82
+4993124
+#case ids:  83
+4993125
+#case ids:  84
+4993126
+#Number of nodes: 16 =============================
+#Mon Feb 12 15:23:37 AST 2018 on 16 nodes. Hicma --edsin - small - 100 - 02:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84" 84 (0-83-1)
+#case ids:  1
+4993766
+#case ids:  2
+4993767
+#case ids:  3
+4993768
+#case ids:  4
+4993769
+#case ids:  5
+4993770
+#case ids:  6
+4993771
+#case ids:  7
+4993772
+#case ids:  8
+4993773
+#case ids:  9
+4993774
+#case ids:  10
+4993775
+#case ids:  11
+4993776
+#case ids:  12
+4993777
+#case ids:  13
+4993778
+#case ids:  14
+4993779
+#case ids:  15
+4993780
+#case ids:  16
+4993781
+#case ids:  17
+4993782
+#case ids:  18
+4993783
+#case ids:  19
+4993784
+#case ids:  20
+4993785
+#case ids:  21
+4993786
+#case ids:  22
+4993787
+#case ids:  23
+4993788
+#case ids:  24
+4993789
+#case ids:  25
+4993790
+#case ids:  26
+4993791
+#case ids:  27
+4993792
+#case ids:  28
+4993793
+#case ids:  29
+4993794
+#case ids:  30
+4993795
+#case ids:  31
+4993796
+#case ids:  32
+4993797
+#case ids:  33
+4993798
+#case ids:  34
+4993799
+#case ids:  35
+4993800
+#case ids:  36
+4993801
+#case ids:  37
+4993802
+#case ids:  38
+4993803
+#case ids:  39
+4993804
+#case ids:  40
+4993805
+#case ids:  41
+4993806
+#case ids:  42
+4993807
+#case ids:  43
+4993808
+#case ids:  44
+4993809
+#case ids:  45
+4993810
+#case ids:  46
+4993811
+#case ids:  47
+4993812
+#case ids:  48
+4993813
+#case ids:  49
+4993814
+#case ids:  50
+4993815
+#case ids:  51
+4993816
+#case ids:  52
+4993817
+#case ids:  53
+4993818
+#case ids:  54
+4993819
+#case ids:  55
+4993820
+#case ids:  56
+4993821
+#case ids:  57
+4993822
+#case ids:  58
+4993823
+#case ids:  59
+4993824
+#case ids:  60
+4993825
+#case ids:  61
+4993826
+#case ids:  62
+4993827
+#case ids:  63
+4993828
+#case ids:  64
+4993829
+#case ids:  65
+4993830
+#case ids:  66
+4993831
+#case ids:  67
+4993832
+#case ids:  68
+4993833
+#case ids:  69
+4993834
+#case ids:  70
+4993835
+#case ids:  71
+4993836
+#case ids:  72
+4993837
+#case ids:  73
+4993838
+#case ids:  74
+4993839
+#case ids:  75
+4993840
+#case ids:  76
+4993841
+#case ids:  77
+4993842
+#case ids:  78
+4993843
+#case ids:  79
+4993844
+#case ids:  80
+4993845
+#case ids:  81
+4993846
+#case ids:  82
+4993847
+#case ids:  83
+4993848
+#case ids:  84
+4993849
+#Number of nodes: 16 =============================
+#Tue Feb 13 10:36:31 AST 2018 on 16 nodes. Hicma --edsin - small - 100 - 02:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4" 4 (0-3-1)
+#case ids:  1
+4995547
+#case ids:  2
+4995548
+#case ids:  3
+4995549
+#case ids:  4
+4995550
+#Number of nodes: 16 =============================
+#Tue Feb 13 14:11:47 AST 2018 on 16 nodes. Hicma --edsin - small - 100 - 02:00:00 - 300  - hic - exp/cases/edsin.sh "1 2 3 4" 4 (0-3-1)
+#case ids:  1
+4996211
+#case ids:  2
+4996212
+#case ids:  3
+4996213
+#case ids:  4
+4996214
+#Number of nodes: 16 =============================
+#Wed Feb 14 14:14:20 AST 2018 on 16 nodes. Hicma --edsin - small - 100 - 02:00:00 - 300  - hic - exp/cases/edsin.sh "1 2 3 4" 4 (0-3-1)
+#case ids:  1
+5007250
+#case ids:  2
+5007284
+#case ids:  3
+5007296
+#case ids:  4
+5007311

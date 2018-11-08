@@ -11,7 +11,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -43,13 +43,13 @@
 
 #include "starpu.h"
 
-#include <omp.h>
 
 #include <assert.h>
 #include "hicma_z.h"
 #include "auxcompute_z.h"
 #include "auxdescutil.h"
 
+#include "hicma.h"
 #include "timing_zauxiliary.h"
 
 #include <math.h>
@@ -77,7 +77,6 @@ struct tm* tm_info;
 #undef PROGRESS
 #define PROGRESS(str)
 
-extern int use_fast_hcore_zgemm;
 int store_only_diagonal_tiles = 0;
 int global_check = 0;
 int global_always_fixed_rank = 0;
@@ -162,7 +161,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     // this paramater enables storing only diagonal tiles in a tall and skinny matrix
     store_only_diagonal_tiles = 0;
 
-    use_fast_hcore_zgemm = 1;
+    HICMA_set_use_fast_hcore_zgemm();
 
     // Gemm requires more descriptors
     //chameleon/runtime/starpu/control/runtime_descriptor.c

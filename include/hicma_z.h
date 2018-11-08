@@ -10,7 +10,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 #ifndef _HICMA_Z_H_
 #define _HICMA_Z_H_
@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 
-//not implemented
+//FIXME Naive interfaces taking only arrays are not implemented yet
 int HICMA_zpotrf(MORSE_enum uplo, int N, double *A, int LDA);
 int HICMA_zpotrf_Tile(MORSE_enum uplo,
         MORSE_desc_t *AUV, MORSE_desc_t *AD, MORSE_desc_t *Ark,
@@ -84,6 +84,87 @@ int HICMA_zgytlr_Tile_Async(
         int compress_diag,
         MORSE_desc_t *Dense,
         MORSE_sequence_t *sequence, MORSE_request_t *request );
+int HICMA_zhagcm_Tile(
+        MORSE_enum   uplo,
+        MORSE_desc_t *AUV,
+        MORSE_desc_t *Ark,
+        int numrows_matrix,
+        int numcols_matrix,
+        int numrows_block,
+        int numcols_block,
+        int maxrank,
+        double tol
+        );
+int HICMA_zhagcm_Tile_Async(
+        MORSE_enum   uplo,
+        MORSE_desc_t *AUV,
+        MORSE_desc_t *Ark,
+        int numrows_matrix,
+        int numcols_matrix,
+        int numrows_block,
+        int numcols_block,
+        int maxrank, double tol,
+        MORSE_sequence_t *sequence, MORSE_request_t *request );
+int HICMA_zhagdm_Tile(
+        MORSE_enum   uplo,
+        MORSE_desc_t *Dense
+        );
+int HICMA_zhagdm_Tile_Async(
+        MORSE_enum       uplo,
+        MORSE_desc_t *Dense,
+        MORSE_sequence_t *sequence,
+        MORSE_request_t  *request);
+int HICMA_zhagdmdiag_Tile(
+        MORSE_enum   uplo,
+        MORSE_desc_t *Dense
+        );
+int HICMA_zhagdmdiag_Tile_Async(
+        MORSE_enum       uplo,
+        MORSE_desc_t *Dense,
+        MORSE_sequence_t *sequence,
+        MORSE_request_t  *request);
+int HICMA_ztrsm_Tile(MORSE_enum side, MORSE_enum uplo,
+        MORSE_enum transA, MORSE_enum diag,
+        double alpha, 
+        MORSE_desc_t *AUV, 
+        MORSE_desc_t *AD, 
+        MORSE_desc_t *Ark, 
+        MORSE_desc_t *BUV,
+        MORSE_desc_t *Brk,
+        int rk,
+        int maxrk,
+        double acc
+        );
+int HICMA_ztrsm_Tile_Async(MORSE_enum side, MORSE_enum uplo,
+        MORSE_enum transA, MORSE_enum diag,
+        double alpha, 
+        MORSE_desc_t *AUV, 
+        MORSE_desc_t *AD, 
+        MORSE_desc_t *Ark, 
+        MORSE_desc_t *BUV,
+        MORSE_desc_t *Brk,
+        int rk,
+        int maxrk,
+        double acc,
+        MORSE_sequence_t *sequence, MORSE_request_t *request);
+int HICMA_ztrsmd_Tile(MORSE_enum side, MORSE_enum uplo,
+        MORSE_enum transA, MORSE_enum diag,
+        double alpha, 
+        MORSE_desc_t *AUV, 
+        MORSE_desc_t *AD, 
+        MORSE_desc_t *Ark, 
+        MORSE_desc_t *Bdense,
+        int maxrk
+        );
+int HICMA_ztrsmd_Tile_Async(MORSE_enum side, MORSE_enum uplo,
+        MORSE_enum transA, MORSE_enum diag,
+        double alpha, 
+        MORSE_desc_t *AUV, 
+        MORSE_desc_t *AD, 
+        MORSE_desc_t *Ark, 
+        MORSE_desc_t *Bdense,
+        int maxrk,
+        MORSE_sequence_t *sequence, MORSE_request_t *request);
 #ifdef __cplusplus
 }
 #endif

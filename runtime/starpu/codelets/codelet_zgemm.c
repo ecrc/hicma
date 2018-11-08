@@ -11,10 +11,12 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  * @precisions normal z -> c d s
  **/
 #include "morse.h"
+#include "hicma.h"
+#include "hicma_common.h"
 #include "runtime/starpu/chameleon_starpu.h"
 //#include "runtime/starpu/include/runtime_codelet_z.h"
 
@@ -28,10 +30,10 @@ ZCODELETS_HEADER(gemm_hcore)
 
 #include "hcore_z.h"
 
-int use_fast_hcore_zgemm = 1;
 extern int global_always_fixed_rank;
 extern int global_fixed_rank;
 extern int print_index;
+extern int print_index_end;
 extern int print_mat;
 extern void _printmat(double * A, int64_t m, int64_t n, int64_t ld);
 /**
@@ -231,6 +233,7 @@ static void cl_zgemm_hcore_cpu_func(void *descr[], void *cl_arg)
 
     double old_Crk = Crk[0];
     char datebuf_start[128];
+    datebuf_start[0] = '\0';
     if(print_index){
         time_t timer;
         struct tm* tm_info;
@@ -244,7 +247,7 @@ static void cl_zgemm_hcore_cpu_func(void *descr[], void *cl_arg)
     int isTransA = transA == MorseTrans;
     int isTransB = transB == MorseTrans;
 
-    if(use_fast_hcore_zgemm){
+    if(HICMA_get_use_fast_hcore_zgemm() == 1){
         HCORE_zgemm_fast(transA, transB,
                     m, n, 
                     alpha, (isTransA ? AV : AU), (isTransA ? AU : AV), Ark, lda,
@@ -257,7 +260,7 @@ static void cl_zgemm_hcore_cpu_func(void *descr[], void *cl_arg)
                            (isTransB ? BU : BV), (isTransB ? BV : BU), Brk, ldb,
                     beta, CU, CV, Crk, ldc, rk, maxrk, acc, work);
     }
-    if(print_index){
+    if(print_index || print_index_end){
         char datebuf[128];
         time_t timer;
         struct tm* tm_info;
@@ -265,7 +268,8 @@ static void cl_zgemm_hcore_cpu_func(void *descr[], void *cl_arg)
         time(&timer); \
         tm_info = localtime(&timer); \
         strftime(datebuf, 26, "%Y-%m-%d %H:%M:%S",tm_info); \
-        printf("%d-GEMM\t|CUV(%d,%d)%g->%g AUV(%d,%d)%g BUV(%d,%d)%g\t\t\t\t\tGEMM: %.4f\t%s---%s\n",MORSE_My_Mpi_Rank(),Cm, Cn, old_Crk, Crk[0],  Am, An, Ark[0], Bm, Bn, Brk[0],
+        printf("%d-GEMM\t|CUV(%d,%d)%g->%g AUV(%d,%d)%g BUV(%d,%d)%g acc:%e rk:%d maxrk:%d\t\t\tGEMM: %.4f\t%s---%s\n",MORSE_My_Mpi_Rank(),Cm, Cn, old_Crk, Crk[0],  Am, An, Ark[0], Bm, Bn, Brk[0],
+                acc, rk, maxrk,
                 (tvalAfter.tv_sec - tvalBefore.tv_sec)
                  +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0,
                  datebuf_start, datebuf

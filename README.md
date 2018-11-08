@@ -13,7 +13,7 @@ numerical accuracy and leveraging performance from massively parallel hardware a
 Features of HiCMA 0.1.0
 -----------------------------
 * Matrix-Matrix Multiplication
-* Cholesky Factorization (**Solve soon!**)
+* Cholesky Factorization/Solve
 * Double Precision
 * Task-based Programming Models
 * Shared and Distributed-Memory Environments

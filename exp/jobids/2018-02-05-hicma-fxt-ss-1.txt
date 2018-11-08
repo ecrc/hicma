@@ -1,0 +1,20 @@
+#Number of nodes: 16 =============================
+#Tue Feb  6 09:20:15 AST 2018 on 16 nodes. Hicma runs - EDSIN - FXT - ./exp/cases/fxt-100K-16nodes.txt "1" 1 (0-0-10)
+#case ids:  1
+4873079
+#Number of nodes: 16 =============================
+#Wed Feb  7 12:16:32 AST 2018 on 16 nodes. Hicma runs - EDSIN - FXT - cham - ./exp/cases/fxt-100K-16nodes.txt "1" 1 (0-0-10)
+#case ids:  1
+4909095
+#Number of nodes: 4 =============================
+#Wed Feb  7 13:47:45 AST 2018 on 4 nodes. Hicma runs - EDSIN - FXT - cham - ./exp/cases/fxt-100K-16nodes.txt "1" 1 (0-0-10)
+#case ids:  1
+4914175
+#Number of nodes: 4 =============================
+#Wed Feb  7 14:49:09 AST 2018 on 4 nodes. Hicma runs - SS - FXT - hic - ./exp/cases/fxt-100K-16nodes.txt "1" 1 (0-0-10)
+#case ids:  1
+4915619
+#Number of nodes: 4 =============================
+#Wed Feb  7 15:37:18 AST 2018 on 4 nodes. Hicma runs - SS - FXT - hic - ./exp/cases/fxt-100K-16nodes.txt "1" 1 (0-0-10)
+#case ids:  1
+4916494

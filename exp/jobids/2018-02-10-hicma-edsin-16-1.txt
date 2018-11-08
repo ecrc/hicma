@@ -1,0 +1,214 @@
+#Number of nodes: 16 =============================
+#Sat Feb 10 22:48:30 AST 2018 on 16 nodes. Hicma edsin - hic - exp/cases/50K500K.txt "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+4971315
+#case ids:  2
+4971316
+#case ids:  3
+4971317
+#case ids:  4
+4971318
+#case ids:  5
+4971319
+#case ids:  6
+4971320
+#case ids:  7
+4971321
+#case ids:  8
+4971322
+#case ids:  9
+4971323
+#case ids:  10
+4971324
+#case ids:  11
+4971325
+#case ids:  12
+4971326
+#case ids:  13
+4971327
+#case ids:  14
+4971328
+#case ids:  15
+4971329
+#case ids:  16
+4971330
+#case ids:  17
+4971331
+#case ids:  18
+4971332
+#case ids:  19
+4971333
+#case ids:  20
+4971334
+#case ids:  21
+4971335
+#Number of nodes: 16 =============================
+#Sat Feb 10 23:05:09 AST 2018 on 16 nodes. Hicma edsin - hic - exp/cases/50K500K.txt "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84" 84 (0-83-1)
+#case ids:  1
+4971497
+#case ids:  2
+4971498
+#case ids:  3
+4971499
+#case ids:  4
+4971500
+#case ids:  5
+4971501
+#case ids:  6
+4971502
+#case ids:  7
+4971503
+#case ids:  8
+4971504
+#case ids:  9
+4971505
+#case ids:  10
+4971506
+#case ids:  11
+4971507
+#case ids:  12
+4971508
+#case ids:  13
+4971509
+#case ids:  14
+4971510
+#case ids:  15
+4971511
+#case ids:  16
+4971512
+#case ids:  17
+4971513
+#case ids:  18
+4971514
+#case ids:  19
+4971515
+#case ids:  20
+4971516
+#case ids:  21
+4971517
+#case ids:  22
+4971518
+#case ids:  23
+4971519
+#case ids:  24
+4971520
+#case ids:  25
+4971521
+#case ids:  26
+4971522
+#case ids:  27
+4971523
+#case ids:  28
+4971524
+#case ids:  29
+4971525
+#case ids:  30
+4971526
+#case ids:  31
+4971527
+#case ids:  32
+4971528
+#case ids:  33
+4971529
+#case ids:  34
+4971530
+#case ids:  35
+4971531
+#case ids:  36
+4971532
+#case ids:  37
+4971533
+#case ids:  38
+4971534
+#case ids:  39
+4971535
+#case ids:  40
+4971536
+#case ids:  41
+4971537
+#case ids:  42
+4971538
+#case ids:  43
+4971539
+#case ids:  44
+4971540
+#case ids:  45
+4971541
+#case ids:  46
+4971542
+#case ids:  47
+4971543
+#case ids:  48
+4971544
+#case ids:  49
+4971545
+#case ids:  50
+4971546
+#case ids:  51
+4971547
+#case ids:  52
+4971548
+#case ids:  53
+4971549
+#case ids:  54
+4971550
+#case ids:  55
+4971551
+#case ids:  56
+4971552
+#case ids:  57
+4971553
+#case ids:  58
+4971554
+#case ids:  59
+4971555
+#case ids:  60
+4971556
+#case ids:  61
+4971557
+#case ids:  62
+4971558
+#case ids:  63
+4971559
+#case ids:  64
+4971560
+#case ids:  65
+4971561
+#case ids:  66
+4971562
+#case ids:  67
+4971563
+#case ids:  68
+4971564
+#case ids:  69
+4971565
+#case ids:  70
+4971566
+#case ids:  71
+4971567
+#case ids:  72
+4971568
+#case ids:  73
+4971569
+#case ids:  74
+4971570
+#case ids:  75
+4971571
+#case ids:  76
+4971572
+#case ids:  77
+4971573
+#case ids:  78
+4971574
+#case ids:  79
+4971575
+#case ids:  80
+4971576
+#case ids:  81
+4971577
+#case ids:  82
+4971578
+#case ids:  83
+4971579
+#case ids:  84
+4971580

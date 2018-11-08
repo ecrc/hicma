@@ -11,7 +11,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -39,7 +39,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <sys/time.h>
-#include <mpi.h> //MPI_Wtime()
+//#include <mpi.h> //MPI_Wtime()
 
 #include "starpu.h"
 #ifdef MKL
@@ -54,13 +54,13 @@
 //#pragma message("MKL is NOT used")
 #endif
 
-#include <omp.h>
+#include "starsh-spatial.h"
 
 #include <assert.h>
 #include "hicma_z.h"
 #include "auxcompute_z.h"
 #include "auxdescutil.h"
-
+#include "hicma.h"
 #include <math.h>
 #include <time.h>
 
@@ -86,7 +86,6 @@ struct tm* tm_info;
 //#undef PROGRESS
 //#define PROGRESS(str)
 
-extern int use_fast_hcore_zgemm;
 int store_only_diagonal_tiles = 0;
 int global_check = 0;
 int global_always_fixed_rank = 0;
@@ -101,7 +100,7 @@ int print_index_end = 0;
 int main_print_mat = 0;
 int print_mat = 0;
 int use_scratch = 1; // Use scratch memory provided by starpu
-int calc_rank_stat = 1;
+int calc_rank_stat = 1; 
 
 void fwrite_array(int m, int n, int ld, double* arr, char* file){
         FILE* fp = fopen(file, "w");
@@ -125,59 +124,6 @@ double timediff(struct timeval begin, struct timeval end){
         ((end.tv_usec - begin.tv_usec)/1000000.0);
     return elapsed;
 }
-// This function isused to compare to descriptors in terms of size and numerical values.
-// Do not use this function with MPI
-// FIXME: This function will be moved to aux/ folder
-void check_same(MORSE_desc_t *descL, MORSE_desc_t *descR, char diag, char lower_triangle){
-    double *MATL = descL->mat;
-    double *MATR = descR->mat;
-    if(descL->mb != descR->mb){
-        printf("mb: %d %d\n", descL->mb, descR->mb);
-    }
-    assert(descL->mb == descR->mb);
-    if(descL->nb != descR->nb){
-        printf("nb: %d %d\n", descL->nb, descR->nb);
-    }
-    assert(descL->nb == descR->nb);
-    if(descL->mt != descR->mt){
-        printf("mt: %d %d\n", descL->mt, descR->mt);
-    }
-    assert(descL->mt == descR->mt);
-    if(descL->nt != descR->nt){
-        printf("nt: %d %d\n", descL->nt, descR->nt);
-    }
-    assert(descL->nt == descR->nt);
-    int64_t i, j, imt, jnt;
-    for(imt=0;imt<descL->mt;imt++){
-        for(jnt=0;jnt<descL->nt;jnt++){
-            if(diag == 'D' && imt != jnt){
-                continue;
-            }
-            if(lower_triangle == 'L' && imt < jnt){
-                continue;
-            }
-            double *L = &MATL[tsa(descL, imt, jnt)];
-            double *R = &MATR[tsa(descR, imt, jnt)];
-            for(i=0;i<descL->nb;i++){
-                for(j=0;j<descL->nb;j++){
-                    double valL = L[j*tld(descL)+i];
-                    double valR = R[j*tld(descR)+i];
-                    double diff = fabs(valL - valR);
-                    double thresh = 1e-14;
-                    if(diff > thresh ){
-                        printf("Tile:%d,%d. Elm:%d,%d val:%.2e %.2e\n", imt, jnt, i, j, valL, valR);
-                        exit(1);
-                    }
-                    //printf("%g ", A[j*tld(descZ)+i]);
-                    //printf("%g\t", A[j*descZ->n+i]);
-                    //printf("(%d,%d,%d) %g\t", i,j,descZ->mb,A[j*descZ->mb+i]);
-                    //printf("(%d,%d,%d) %g\t", i,j,descZ->n,A[j*descZ->n+i]);
-                    //printf("(%d,%d,%d) %g [%d %d %d]\t", i,j,descZ->n,A[j*descZ->n+i], descZ->m, descZ->lm, descZ->ln);
-                }
-            }
-        }
-    }
-}
 
 
 
@@ -189,7 +135,6 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
         print_progress = 0;
     PROGRESS("RunTest started");
 
-    use_fast_hcore_zgemm = 0;
     // this paramater enables storing only diagonal tiles in a tall and skinny matrix
     store_only_diagonal_tiles = 1;
     //chameleon/runtime/starpu/control/runtime_descriptor.c
@@ -303,15 +248,23 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     //END:   rndtiled
 
     //BEGIN: geostat
-    double theta[3] = {1, 0.1, 0.5};
+    //double theta[3] = {1, 0.1, 0.5}; //initially
+    double theta[3] = {
+        1.0, //sigma 
+        0.01, //beta
+        10.0 //nu Aleks used 10.0 in his paper
+    };
     if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_GEOSTAT) {
         hicma_problem.theta = theta;
         hicma_problem.noise = 0.0;
+        hicma_problem.noise = 1.e-2;
+        hicma_problem.kernel_type = STARSH_SPATIAL_MATERN2_SIMD;
     }
     //END: geostat
 
     //BEGIN: ss
     if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_SS) {
+        //sigma=1.0 default value line 193 of stars-h/src/applications/spatial.c 
         // Correlation length
         hicma_problem.beta  = 0.1;
         //If fixed rank is required set beta=1 and a sample case will be like this nb=25 maxrank=10 m=2500 So ranks will decrease.
@@ -324,13 +277,26 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
         hicma_problem.noise = 1.e-2; //
     }
     //END: ss
+    
+    //BEGIN: edsin
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_EDSIN) {
+        // Wave number, >= 0
+        hicma_problem.wave_k = dparam[IPARAM_HICMA_STARSH_WAVE_K];
+        hicma_problem.diag = M; 
+    //printf("%s %d: %g\n", __FILE__, __LINE__, hicma_problem.wave_k);
+    }
+    //END: edsin
 
     PROGRESS("generating coordinates started");
-    double tstart_problem = MPI_Wtime();
+    struct timeval tvalBefore, tvalAfter;  // removed comma
+    gettimeofday (&tvalBefore, NULL);
     HICMA_zgenerate_problem(probtype, sym, ddecay, M, MB, MT, NT, &hicma_problem);
-    double tend_problem = MPI_Wtime();
+    gettimeofday (&tvalAfter, NULL);
     if(MORSE_My_Mpi_Rank()==0){
-        printf("Tproblem:%g\n", tend_problem-tstart_problem);
+        printf("Tproblem:%g\n",
+                (tvalAfter.tv_sec - tvalBefore.tv_sec)
+                 +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
+              );
         fflush(stderr);
         fflush(stdout);
     }
@@ -341,34 +307,37 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
 	int compress_diag = 0;
     PROGRESS("nompi zgytlr starting");
     //descDense original problem
-    double tstart_compress = MPI_Wtime();
+    gettimeofday (&tvalBefore, NULL);
     HICMA_zgytlr_Tile(MorseLower, descAUV, descAD, descArk, 0, maxrank, fixedacc, compress_diag, descDense);
-    double tend_compress = MPI_Wtime();
+    gettimeofday (&tvalAfter, NULL);
     if(MORSE_My_Mpi_Rank()==0){
-        printf("Tcompress:%g\n", tend_compress-tstart_compress);
+        printf("Tcompress:%g\n", 
+                (tvalAfter.tv_sec - tvalBefore.tv_sec)
+                 +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
+                );
         fflush(stderr);
         fflush(stdout);
     }
     PROGRESS("nompi zgytlr finished");
     fflush(stderr);
     fflush(stdout);
+    /*return 0; //TODO*/
 
     if(calc_rank_stat == 1) {
         PASTE_TILE_TO_LAPACK( descArk, Ark_initial, 1, double, MT, NT );
-
-        sprintf(rankfile, "%s-1", rankfile);
-        fwrite_array(descArk->m, descArk->n, descArk->m, Ark_initial, rankfile);
-
-        HICMA_stat_t hicma_statrk_initial;
-        zget_stat(MorseLower, Ark_initial, MT, NT, MT,  &hicma_statrk_initial);
         if(MORSE_My_Mpi_Rank()==0){
+
+            sprintf(rankfile, "%s-1", rankfile);
+            fwrite_array(descArk->m, descArk->n, descArk->m, Ark_initial, rankfile);
+
+            HICMA_stat_t hicma_statrk_initial;
+            zget_stat(MorseLower, Ark_initial, MT, NT, MT,  &hicma_statrk_initial);
             printf("initial_ranks:");
             zprint_stat(hicma_statrk_initial);
+            fflush(stderr);
+            fflush(stdout);
         }
-        fflush(stderr);
-        fflush(stdout);
     }
-    //printf("hicma_statrk_initial.max: %d\n", hicma_statrk_initial.max);
 
     if (global_always_fixed_rank == 1) {
         fprintf(stderr, "%s %d Fixed rank: %d\n", __FILE__, __LINE__, global_fixed_rank);
@@ -401,7 +370,8 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
                     'L',
                     M, orgAdense, LDA);
             if(0 && info != 0){ //FIXME
-                fprintf(stderr, "%s\t|%d\t|Error in LAPACK potrf. info:%d, This errors means that the matrix generated is not positive definite\n", __FILE__, __LINE__, info);
+                fprintf(stderr, "%s\t|%d\t|Error in LAPACK potrf. info:%d, This errors means "
+                        "that the matrix generated is not positive definite\n", __FILE__, __LINE__, info);
             }
             for(j = 0; j < M; j++){
                 for(i = 0; i < j; i++){
@@ -439,13 +409,15 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     }
     if(calc_rank_stat == 1) {
         PASTE_TILE_TO_LAPACK( descArk, Ark_final, 1, double, MT, NT );
-        sprintf(rankfile, "%s-2", rankfile);
-        fwrite_array(descArk->m, descArk->n, descArk->m, Ark_final, rankfile);
-        HICMA_stat_t hicma_statrk_final;
-        zget_stat(MorseLower, Ark_final, MT, NT, MT,  &hicma_statrk_final);
         if(MORSE_My_Mpi_Rank()==0){
+            sprintf(rankfile, "%s-2", rankfile);
+            fwrite_array(descArk->m, descArk->n, descArk->m, Ark_final, rankfile);
+            HICMA_stat_t hicma_statrk_final;
+            zget_stat(MorseLower, Ark_final, MT, NT, MT,  &hicma_statrk_final);
             printf("final_ranks:");
             zprint_stat(hicma_statrk_final);
+            fflush(stderr);
+            fflush(stdout);
         }
     }
 

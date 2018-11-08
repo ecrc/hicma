@@ -1,0 +1,1 @@
+mpilib=-lmpi

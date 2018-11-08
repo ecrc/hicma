@@ -10,9 +10,12 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  * @precisions normal z -> c d s
  **/
+#include "hicma.h"
+#include "hicma_common.h"
+#include "auxdescutil.h"
 #include "coreblas.h"
 #include "coreblas/lapacke.h"
 #include "morse.h"
@@ -30,17 +33,7 @@ ZCODELETS_HEADER(trsm_hcore)
 #undef  CBLAS_SADDR
 #define CBLAS_SADDR(_val) (_val)
 
-extern int global_always_fixed_rank;
-extern int global_fixed_rank;
-extern int print_index;
-extern int print_index_end;
-extern int print_mat;
-extern void _printmat(double * A, int64_t m, int64_t n, int64_t ld);
-/**
- *
- * @ingroup CORE_double
- *
- **/
+int trsm_print_index_end = 0;
 
 void HICMA_TASK_ztrsm(const MORSE_option_t *options,
                       MORSE_enum side, MORSE_enum uplo, MORSE_enum transA, MORSE_enum diag,
@@ -143,19 +136,19 @@ static void cl_ztrsm_hcore_cpu_func(void *descr[], void *cl_arg)
     BUV = (double *)STARPU_MATRIX_GET_PTR(descr[1]);
 #if !defined(HICMA_ALWAYS_FIX_RANK)
     Brk = (double *)STARPU_MATRIX_GET_PTR(descr[2]);
-    if(global_always_fixed_rank == 1){
+    if(HICMA_get_always_fixed_rank() == 1){
         fprintf(stderr, "global_always_fixed_rank is one. But HICMA_ALWAYS_FIX_RANK is not defined. Exiting...\n");
         exit(1);
     }
 #else
-    if(global_always_fixed_rank != 1){
-        fprintf(stderr, "global_always_fixed_rank must be one. But it is %d. Exiting...\n", global_always_fixed_rank);
+    if(HICMA_get_always_fixed_rank() != 1){
+        fprintf(stderr, "global_always_fixed_rank must be one. But it is %d. Exiting...\n", HICMA_get_always_fixed_rank());
         exit(1);
     }
 #endif
     int _Brk;
-    if(global_always_fixed_rank == 1){
-        _Brk = global_fixed_rank;
+    if(HICMA_get_always_fixed_rank() == 1){
+        _Brk = HICMA_get_fixed_rank();
     } else {
         _Brk = Brk[0];
     }
@@ -171,10 +164,10 @@ static void cl_ztrsm_hcore_cpu_func(void *descr[], void *cl_arg)
         /*m, n,*/
         /*alpha, A, lda,*/
         /*B, ldb);*/
-    if(print_index){
-        printf("%d+TRSM\t|AD(%d,%d) BV(%d,%d)%d m:%d\n",MORSE_My_Mpi_Rank(),Am,An, Bm, Bn, _Brk, m);
+    if(HICMA_get_print_index() == 1){
+        printf("%d+TRSM\t|AD(%d,%d) BV(%d,%d)%d m:%d lda(11):%d ldb(12):%d\n",MORSE_My_Mpi_Rank(),Am,An, Bm, Bn, _Brk, m, lda, ldb);
     }
-    if(print_mat){
+    if(HICMA_get_print_mat() == 1){
         printf("%d\ttrsm-input A\n", __LINE__);
         _printmat(A, m, m, lda);
         printf("%d\ttrsm-input B\n", __LINE__);
@@ -188,14 +181,14 @@ static void cl_ztrsm_hcore_cpu_func(void *descr[], void *cl_arg)
         _Brk,
         CBLAS_SADDR(alpha), A, lda,
         B, ldb);
-    if(print_index || print_index_end){
+    if(HICMA_get_print_index() == 1 || HICMA_get_print_index_end() == 1 || trsm_print_index_end){
         gettimeofday (&tvalAfter, NULL);
         printf("%d-TRSM\t|AD(%d,%d)%dx%d-%d BV(%d,%d)%dx%d-%d m:%d\t\t\t\tTRSM: %.4f\n",MORSE_My_Mpi_Rank(),Am,An, m, m, lda,Bm, Bn, m, _Brk, ldb, m,
                 (tvalAfter.tv_sec - tvalBefore.tv_sec)
                  +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
                 );
     }
-    if(print_mat){
+    if(HICMA_get_print_mat() == 1){
         printf("%d\ttrsm-output\n", __LINE__);
         _printmat(B, m, _Brk, ldb);
     }

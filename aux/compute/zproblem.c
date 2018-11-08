@@ -13,9 +13,10 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 #include "morse.h"
+#include "hicma.h"
 #include "auxcompute_z.h"
 #include "starsh.h"
 #include "starsh-spatial.h"
@@ -23,12 +24,13 @@
 #include "starsh-randtlr.h"
 #include "hicma_constants.h"
 #include "hicma_struct.h"
+#include "hicma_common.h"
 #include <assert.h>
 #include "auxdescutil.h"
 #include <math.h>
 #include <sys/time.h>
-int print_starsh_info = 0;
-void fill_val(
+int print_starsh_info = 1;
+void __generate(
         int probtype,
         char sym,
         double decay,
@@ -47,7 +49,9 @@ void fill_val(
         int diag_dense,
         STARSH_blrf **mpiF,
         double *initial_theta,
-        int ndim, double beta, double nu, double noise
+        int ndim, double beta, double nu, double noise,
+        int kernel_type, double *point,
+        HICMA_problem_t *hicma_problem
         ){
     int idesc;
     int print_prep_time = 0; /// 1:print timing info preprocessing, 0: no print
@@ -95,8 +99,11 @@ void fill_val(
             STARSH_cluster *C = NULL;
             STARSH_problem *P = NULL;
 
+            if(print_starsh_info) {
+                printf("M:%d block_size:%d decay:%g diag:%g\n", _M, block_size, decay, noise);
+            }
+
             STARSH_randtlr *data;
-            //starsh_rndtiled_gen(&data, &kernel, _mt, _nb, decay, 0.0);
 			// STARSH_RANDTLR for random tile low-rank matrix
 			// STARSH_RANDTLR_NB to indicate next parameter shows size of tile
 			// STARSH_RANDTLR_DECAY to indicate next parameter is decay of singular
@@ -145,6 +152,10 @@ void fill_val(
             *mpiF = F;
         }
         else if(probtype == HICMA_STARSH_PROB_SS){
+            fprintf(stderr, "%s %d Spatial Statistics Application with SqExp Kernel: beta:%g nu:%g noise:%g\n", __FILE__, __LINE__, 
+                    beta,
+                    nu, 
+                    noise);
             // Correlation length
             // double beta;
             // Smoothing parameter for Matern kernel
@@ -202,6 +213,9 @@ void fill_val(
                 printf("Error in starsh problem\n");
                 exit(info);
             }
+            if(print_starsh_info) {
+                starsh_problem_info(problem);
+            }
             //printf("STARSH problem was succesfully generated\n");
             //starsh_problem_info(problem);
             // Set up clusterization (divide rows and columns into blocks)
@@ -212,12 +226,18 @@ void fill_val(
                 printf("Error in creation of cluster\n");
                 exit(info);
             }
+            if(print_starsh_info) {
+                starsh_cluster_info(cluster);
+            }
             STARSH_blrf *F;
             info = starsh_blrf_new_tlr(&F, problem, sym, cluster, cluster);
             if(info != 0)
             {
                 printf("Error in creation of format\n");
                 exit(info);
+            }
+            if(print_starsh_info) {
+                starsh_blrf_info(F);
             }
 
             *mpiF = F;
@@ -228,9 +248,13 @@ void fill_val(
             enum STARSH_PARTICLES_PLACEMENT place = STARSH_PARTICLES_UNIFORM;
             //you have grid and move particles
             //enum STARSH_PARTICLES_PLACEMENT place = STARSH_PARTICLES_OBSOLETE1;
-            double wave_k = 40.0;
             // Wave number, >= 0
-            double diag = _M;
+            double wave_k = hicma_problem->wave_k;
+            double diag = hicma_problem->diag;
+            fprintf(stderr, "%s %d Electro Dynamics Application with Sinus Kernel wave_k:%g diag:%g\n", __FILE__, __LINE__, 
+                    hicma_problem->wave_k,
+                    hicma_problem->diag
+                    );
             STARSH_eddata *data;
             int info;
             // STARSH_ELECTRODYNAMICS for electrodynamics problem
@@ -240,6 +264,9 @@ void fill_val(
             // STARSH_ELECTRODYNAMICS_K to indicate next parameter is wave number
             // STARSH_ELECTRODYNAMICS_DIAG to indicate next parameter is diagonal values
             // 0 at the end to indicate end of arguments
+            if(print_starsh_info) {
+                printf("\n_M:%d wave_k=%g\n", _M, wave_k); 
+            }
             info = starsh_application((void **)&data, &kernel, _M, dtype,
                     STARSH_ELECTRODYNAMICS, kernel_type, STARSH_ELECTRODYNAMICS_NDIM, ndim,
                     STARSH_ELECTRODYNAMICS_K, wave_k, STARSH_ELECTRODYNAMICS_DIAG, diag,
@@ -259,6 +286,9 @@ void fill_val(
             {
                 printf("Error in starsh problem\n");
                 exit(info);
+            }
+            if(print_starsh_info) {
+                printf("\nDecay:%e\n", decay); starsh_problem_info(problem);
             }
             //printf("STARSH problem was succesfully generated\n");
             //starsh_problem_info(problem);
@@ -312,13 +342,19 @@ void fill_val(
             /*starsh_cluster_info(C);*/
         }
         else if(probtype == HICMA_STARSH_PROB_GEOSTAT){
-         //   printf("Geostat");
+            /*fprintf(stderr, "%s %d Geostat Application sigma:%g beta:%g nu:%g noise:%g\n", __FILE__, __LINE__, 
+                    initial_theta[0],
+                    initial_theta[1],
+                    initial_theta[2],
+                    noise
+                    );
+	    */
             //double initial_theta[3] = {1, 0.1, 0.5};
             char symm = 'S', dtype = 'd';
             STARSH_int shape[2] = {_M, _M};
             int info;
             srand(0);
-            int kernel_type = STARSH_SPATIAL_MATERN2_SIMD;
+            //int kernel_type = STARSH_SPATIAL_MATERN2_SIMD;
             //double noise = 0;
             STARSH_ssdata *ssdata;
             info = starsh_application((void **)&ssdata, &kernel, _M, dtype,
@@ -326,11 +362,71 @@ void fill_val(
                     STARSH_SPATIAL_BETA, initial_theta[1], STARSH_SPATIAL_NU, initial_theta[2],
                     STARSH_SPATIAL_NOISE, noise,
                     STARSH_SPATIAL_PLACE, STARSH_PARTICLES_OBSOLETE1, //1,
-                    STARSH_SPATIAL_SIGMA, sigma,
+                    STARSH_SPATIAL_SIGMA, initial_theta[0],
                     0);
             if(info != 0)
             {
                 printf("wrong parameters for spatial statistics problem\n");
+            }
+
+
+            STARSH_problem *problem;
+            info = starsh_problem_new(&problem, ndim, shape, symm, dtype, ssdata, ssdata, kernel, "Spatial Statistics example");
+            if(info != 0)
+            {
+                printf("Error in starsh problem\n");
+                exit(info);
+            }
+        //    printf("STARSH problem was succesfully generated\n");
+        //    starsh_problem_info(problem);
+            STARSH_cluster *cluster;
+            info = starsh_cluster_new_plain(&cluster, ssdata, _M, block_size);
+            if(info != 0)
+            {
+                printf("Error in creation of cluster\n");
+                exit(info);
+            }
+            STARSH_blrf *F;
+            info = starsh_blrf_new_tlr(&F, problem, sym, cluster, cluster);
+            if(info != 0)
+            {
+                printf("Error in creation of format\n");
+                exit(info);
+            }
+
+            *mpiF = F;
+        }
+        else if(probtype == HICMA_STARSH_PROB_GEOSTAT_POINT){
+         //   printf("Geostat");
+            //double initial_theta[3] = {1, 0.1, 0.5};
+            char symm = 'S', dtype = 'd';
+            STARSH_int shape[2] = {_M, _M};
+            int info;
+            //srand(0);  //no need in case og real dataset
+            int kernel_type = STARSH_SPATIAL_MATERN2_SIMD;
+            //double noise = 0;
+            STARSH_ssdata *ssdata;
+//int starsh_ssdata_init(STARSH_ssdata **data, STARSH_int count, int ndim,
+        /*double *point, double beta, double nu, double noise, double sigma)*/
+            info = starsh_ssdata_init(&ssdata, _M, ndim, point, initial_theta[1],
+                    initial_theta[2], noise, initial_theta[0]);
+            /*info = starsh_application((void **)&ssdata, &kernel, _M, dtype,*/
+                    /*STARSH_SPATIAL, kernel_type, STARSH_SPATIAL_NDIM, ndim,*/
+                    /*STARSH_SPATIAL_BETA, initial_theta[1], STARSH_SPATIAL_NU, initial_theta[2],*/
+                    /*STARSH_SPATIAL_NOISE, noise,*/
+                    /*STARSH_SPATIAL_PLACE, STARSH_PARTICLES_OBSOLETE1, //1,*/
+                    /*STARSH_SPATIAL_SIGMA, initial_theta[0],*/
+                    /*0);*/
+            if(info != 0)
+            {
+                printf("wrong parameters for starsh_ssdata_init\n");
+            }
+            /*int starsh_ssdata_get_kernel(STARSH_kernel **kernel, STARSH_ssdata *data,*/
+                    /*enum STARSH_SPATIAL_KERNEL type)*/
+            info = starsh_ssdata_get_kernel(&kernel, ssdata, kernel_type);
+            if(info != 0)
+            {
+                printf("wrong parameters for starsh_ssdata_get_kernel\n");
             }
 
 
@@ -367,42 +463,7 @@ void fill_val(
         //starsh_cluster_info(C);
     }
 }
-void fill_val_syn(
-        int M,
-        int _nb,
-        int _mt,
-        int _nt,
-        int _k,
-        double _acc,
-        int ndescs,
-        MORSE_desc_t **descs,
-        MORSE_desc_t **descsU,
-        MORSE_desc_t **descsV,
-        MORSE_desc_t **descsD,
-        MORSE_desc_t **descsrk,
-        double** lrarrays
-        ){
-    int idesc;
-    for(idesc=0;idesc<ndescs;idesc++){ //foreachMatrix
-        MORSE_desc_t *descX   = descs  [idesc];
-        MORSE_desc_t *descXU  = descsU [idesc];
-        MORSE_desc_t *descXV  = descsV [idesc];
-        MORSE_desc_t *descXD  = descsD [idesc];
-        MORSE_desc_t *descXrk = descsrk[idesc];
-        int i, j;
-        for(i = 0; i < _mt; i++){
-            for(j = 0; j < _nt; j++){
-                double* _MAT;
-                _MAT = descXD->mat; double* _XD  = &_MAT[tsa(descXD,  i, j)];
-                _MAT = descX ->mat; double* _X   = &_MAT[tsa(descX ,  i, j)];
-                _MAT = descXU->mat; double* _XU  = &_MAT[tsa(descXU,  i, j)];
-                _MAT = descXV->mat; double* _XV  = &_MAT[tsa(descXV,  i, j)];
-                _MAT = descXrk->mat;double* _Xrk = &_MAT[tsa(descXrk, i, j)];
-                *_Xrk = 5;
-            }
-        }
-    }
-}
+
 void HICMA_zgenerate_problem(
         int probtype,
         char sym,
@@ -425,6 +486,7 @@ void HICMA_zgenerate_problem(
     MORSE_desc_t *descsD [ndescs] = {NULL ,NULL,NULL };
     MORSE_desc_t *descsrk[ndescs] = {NULL ,NULL,NULL };
 
-    fill_val(probtype, sym, decay, _M, _nb, _mt, _nt, num_descs, descs, descsU, descsV, descsD, descsrk, lrarrays, &initial_maxrank, &initial_avgrank, diag_dense, &(hicma_problem->starsh_format), hicma_problem->theta, hicma_problem->ndim, hicma_problem->beta, hicma_problem->nu, hicma_problem->noise);
+    __generate(probtype, sym, decay, _M, _nb, _mt, _nt, num_descs, descs, descsU, descsV, descsD, descsrk, lrarrays, &initial_maxrank, &initial_avgrank, diag_dense, &(hicma_problem->starsh_format), hicma_problem->theta, hicma_problem->ndim, hicma_problem->beta, hicma_problem->nu, hicma_problem->noise, hicma_problem->kernel_type, hicma_problem->point, hicma_problem);
+    HICMA_set_starsh_format(hicma_problem->starsh_format);
 
 }

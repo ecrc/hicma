@@ -14,7 +14,7 @@
  * @version 0.1.0
  * @author Ali Charara
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -39,7 +39,7 @@
  * @author Mathieu Faverge
  * @author Emmanuel Agullo
  * @author Cedric Castagnede
- * @date 2017-11-16
+ * @date 2018-11-08
  * @precisions normal z -> s d c
  *
  **/
@@ -137,13 +137,19 @@ int HICMA_zgemm_Tile(MORSE_enum transA, MORSE_enum transB,
                             sequence, &request
                             );
 
+    MORSE_Desc_Flush( AUV, sequence );
+    MORSE_Desc_Flush( BUV, sequence );
+    MORSE_Desc_Flush( CUV, sequence );
+    MORSE_Desc_Flush( Ark, sequence );
+    MORSE_Desc_Flush( Brk, sequence );
+    MORSE_Desc_Flush( Crk, sequence );
     morse_sequence_wait(morse, sequence);
-    RUNTIME_desc_getoncpu(AUV);
-    RUNTIME_desc_getoncpu(BUV);
-    RUNTIME_desc_getoncpu(CUV);
-    RUNTIME_desc_getoncpu(Ark);
-    RUNTIME_desc_getoncpu(Brk);
-    RUNTIME_desc_getoncpu(Crk);
+    /*RUNTIME_desc_getoncpu(AUV);*/
+    /*RUNTIME_desc_getoncpu(BUV);*/
+    /*RUNTIME_desc_getoncpu(CUV);*/
+    /*RUNTIME_desc_getoncpu(Ark);*/
+    /*RUNTIME_desc_getoncpu(Brk);*/
+    /*RUNTIME_desc_getoncpu(Crk);*/
 
     status = sequence->status;
     morse_sequence_destroy(morse, sequence);

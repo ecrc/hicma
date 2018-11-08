@@ -11,7 +11,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 
 /*
@@ -99,10 +99,13 @@ int HICMA_zpotrf_Tile(MORSE_enum uplo,
             rk, maxrk, acc,
             sequence, &request
             );
+    MORSE_Desc_Flush( AD, sequence );
+    MORSE_Desc_Flush( AUV, sequence );
+    MORSE_Desc_Flush( Ark, sequence );
     morse_sequence_wait(morse, sequence);
-    RUNTIME_desc_getoncpu(AD);
-    RUNTIME_desc_getoncpu(AUV);
-    RUNTIME_desc_getoncpu(Ark);
+    /*RUNTIME_desc_getoncpu(AD);*/
+    /*RUNTIME_desc_getoncpu(AUV);*/
+    /*RUNTIME_desc_getoncpu(Ark);*/
 
     status = sequence->status;
     morse_sequence_destroy(morse, sequence);

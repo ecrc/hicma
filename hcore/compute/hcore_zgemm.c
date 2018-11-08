@@ -10,7 +10,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  * @precisions normal z -> c d s
  **/
 #include "coreblas/coreblas.h"
@@ -20,7 +20,7 @@
 #include <lapacke_utils.h>
 #endif
 
-//FIXME PREVIOUS DECLARION OF CBLAS_SADDR ~/hicma-dev/chameleon/build/include/chameleon/coreblas/include/coreblas.h
+//FIXME PREVIOUS DECLARION OF CBLAS_SADDR ~/hicma/chameleon/build/include/chameleon/coreblas/include/coreblas.h
 #undef CBLAS_SADDR
 #define CBLAS_SADDR(_val) (_val)
 
@@ -106,8 +106,8 @@ void __qra(int _M,
     /*hc_printmat(qrtauA, 1, _M, 1); */
     if(info != 0){
         fprintf(stderr,
-                "%s %d ERROR in LAPACKE_dgeqrf() info=%d\n",
-                __FILE__, __LINE__, info);
+                "%s %d ERROR in LAPACKE_dgeqrf(1:CU_nrows:%d 2:CU_ncols:%d 3:_CU:%p 4:ld_CU:%d 5:qrtauA:%p) info=%d maxrank:%d\n",
+                __FILE__, __LINE__, CU_nrows, CU_ncols, _CU, ld_CU, qrtauA, info, maxrank);
         exit(-1);
     }
     //hc_printmat(_AU, _M, _M, ld_AU);
@@ -187,8 +187,8 @@ void __qrb(
             _CV, ld_CV, qrtauB);
     if(info != 0){
         fprintf(stderr,
-                "%s %d ERROR in LAPACKE_dgeqrf() info=%d\n",
-                __FILE__, __LINE__, info);
+                "%s %d ERROR in LAPACKE_dgeqrf(1:CV_nrows:%d 2:CV_ncols:%d 3:_CV:%p 4:ld_CV:%d 5:qrtauB:%p) info=%d maxrank:%d\n",
+                __FILE__, __LINE__, CV_nrows, CV_ncols, _CV, ld_CV, qrtauB,info,  maxrank);
         exit(-1);
     }
 }
@@ -217,7 +217,7 @@ void __svd(
     int ld_rA     = rA_nrows;
 
     if(rA_nrows != rA_ncols){
-        printf("TRMM cannot be used\n");
+        printf("TRMM cannot be used because R coming from QR factorization of A is not square nrows: %d ncols:%d \n", rA_nrows, rA_ncols);
         exit(1);
     }
     assert(_rA != NULL);
@@ -292,12 +292,12 @@ void __svd(
     if(gemm_print_mat){
         hc_printmat(_T,  T_nrows, T_ncols, ld_T);
     }
-    // Singular values are double
+    // Singular values are ALWAYS floating point numbers.
     assert(sigma != NULL);
     int size_sigma = T_nrows;
     assert(svdsuperb != NULL);
     if(gemm_print_index){
-        printf(" SVD\t|%d\t| svd(T)     T_nrows:%d T_ncols:%d ld_T:%d ld_U:%d ld_V:%d _T:%p\n",
+        printf(" SVD\t|%d\t| svd(T)    (3.m)T_nrows:%d (4.n)T_ncols:%d ld_T:%d ld_U:%d (11.ldvt)ld_V:%d _T:%p (zero based parameter indices)\n",
               __LINE__, T_nrows, T_ncols,  ld_T, ld_U, ld_V, _T);
     }
     info = LAPACKE_dgesvd(LAPACK_COL_MAJOR, 'A', 'A',
@@ -306,8 +306,15 @@ void __svd(
             svdsuperb);
     if(info != 0){
         fprintf(stderr,
-                "%s %d ERROR in LAPACKE_dgesvd() info=%d\n",
-                __FILE__, __LINE__, info);
+                "%s %d ERROR in LAPACKE_dgesvd() info=%d"
+                "1:T_nrows=%d, 2:T_ncols=%d, 3:_T=%p, 4:ld_T=:%d, 5:sigma=%p,"
+                "6:_U=%p, 7:ld_U=%d, 8:_V=%p, 9:ld_V:%d,"
+                "10:svdsuperb:%p"
+                "\n",
+                __FILE__, __LINE__, info,
+                T_nrows, T_ncols, _T, ld_T, sigma,
+                _U, ld_U, _V, ld_V,
+                svdsuperb);
         exit(-1);
     }
     int U_nrows, U_ncols, V_nrows, V_ncols;
@@ -346,8 +353,8 @@ void __svd(
     }
 
     if(gemm_print_index){int i;
-        printf("acc:%.2e   relac:%.2e size_sigma:%d final_rank:%d:  ",
-                acc, relacc, size_sigma, finalrank);
+        printf("rank:%d acc:%.2e   relac:%.2e size_sigma:%d final_rank:%d:  ",
+                rank,   acc, relacc, size_sigma, finalrank);
         for(i=0;i<size_sigma;i++){
             printf("%d:%.2e ", i,sigma[i]);
         }
@@ -580,9 +587,11 @@ void HCORE_zgemm(MORSE_enum transA, int transB,
         double* work
 )
 {
-    /*printf("%d GEMM %p\n", MORSE_My_Mpi_Rank(), work);*/
-    /*printf("%d|M:%d N:%d K:%d LDA:%d LDB:%d LDC:%d rk:%d acc:%e a:%e b:%e\n",*/
-            /*__LINE__, M, N, K, LDA, LDB, LDC, rk, acc, alpha, beta);*/
+    if(gemm_print_index){
+		printf("%d:%s work:%p ", __LINE__, __func__, work);
+		printf("M:%d N:%d  LDA:%d LDB:%d LDC:%d rk:%d maxrk:%d acc:%e a:%e b:%e\n",
+				M, N, LDA, LDB, LDC, rk, maxrk, acc, alpha, beta);
+	}
 
     int new_Crk = 0;
     /*
@@ -596,6 +605,11 @@ void HCORE_zgemm(MORSE_enum transA, int transB,
     int _Ark = (int)(Ark[0]);
     int _Brk = (int)(Brk[0]);
     int _Crk = (int)(Crk[0]);
+    if(_Ark == 0 || _Brk == 0 || _Crk == 0){
+        fprintf(stderr, "%s %d: _Ark=%d _Brk=%d _Crk=%d. These rank values should not be zero.\n", __FILE__, __LINE__, _Ark, _Brk, _Crk);
+        exit(-1);
+        //return MORSE_ERR_ILLEGAL_VALUE; 
+    }
 
     int _M = M; int _N = N;
     double* _CU = CU; int ld_CU = LDC;
@@ -688,6 +702,11 @@ void HCORE_zgemm(MORSE_enum transA, int transB,
     }
     __qrb(_M, maxrk, _CV, ld_CV, _Crk, &CV_ncols,
             _AV, ld_AV, _Ark, _BU, ld_BU, _BV, ld_BV, _Brk, qrtauB, qrb_aubut);
+    if(CU_ncols == 0 || CV_ncols == 0){
+        fprintf(stderr, "%s %d: CU_ncols=%d CV_ncols=%d. These values should not be zero.\n", __FILE__, __LINE__, CU_ncols, CV_ncols);
+        exit(-1);
+        //return MORSE_ERR_ILLEGAL_VALUE; 
+    }
     if(use_scratch == 0) {
         free(qrb_aubut);
     }
@@ -767,6 +786,11 @@ void HCORE_zgemm(MORSE_enum transA, int transB,
     } else {
         svd_sigma  = malloc(svd_sigma_nelm  * sizeof(double));
         svd_superb = malloc(svd_superb_nelm * sizeof(double));
+    }
+    if(ld_newV < CU_ncols){
+        fprintf(stderr, "%s %d: Increase maxrank. %d is not enough ld_newV:%d CU_ncols:%d\n", __FILE__, __LINE__, maxrk, ld_newV, CU_ncols);
+        exit(-1);
+        //return MORSE_ERR_ILLEGAL_VALUE; 
     }
     __svd(
             _M,

@@ -23,7 +23,7 @@
 #  @author Emmanuel Agullo
 #  @author Mathieu Faverge
 #  @author Florent Pruvost
-#  @date 10-11-2014
+#  @date 2018-11-08
 #
 ###
 
@@ -105,12 +105,14 @@ MACRO(GENERATE_PKGCONFIG_FILE)
   endif()
 
   if(STARPU_FOUND)
-      list(APPEND HICMA_PKGCONFIG_REQUIRED libstarpu)
-      list(APPEND HICMA_PKGCONFIG_LIBS -lstarpu)
 	if ( HICMA_USE_MPI )
-	  list(APPEND HICMA_PKGCONFIG_REQUIRED_PRIVATE libstarpumpi)
+      list(APPEND HICMA_PKGCONFIG_REQUIRED libstarpumpi)
+      list(APPEND HICMA_PKGCONFIG_REQUIRED_PRIVATE libstarpumpi)
+      list(APPEND HICMA_PKGCONFIG_LIBS -lstarpumpi-${STARPU_VERSION_MAJOR}.${STARPU_VERSION_MINOR})
 	else()
-	  list(APPEND HICMA_PKGCONFIG_REQUIRED_PRIVATE libstarpu)
+      list(APPEND HICMA_PKGCONFIG_REQUIRED libstarpu)
+      list(APPEND HICMA_PKGCONFIG_REQUIRED_PRIVATE libstarpu)
+      list(APPEND HICMA_PKGCONFIG_LIBS -lstarpu-${STARPU_VERSION_MAJOR}.${STARPU_VERSION_MINOR})
 	endif()
   endif()
 

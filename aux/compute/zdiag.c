@@ -11,7 +11,7 @@
  *
  * @version 0.1.0
  * @author Kadir Akbudak
- * @date 2017-11-16
+ * @date 2018-11-08
  **/
 #include "morse.h"
 #include "control/common.h"
@@ -70,16 +70,18 @@ int HICMA_zdiag_vec2mat(
     }
     RUNTIME_sequence_wait( morse, sequence );
     RUNTIME_options_finalize( &options, morse );
-    MORSE_TASK_dataflush_all();
+    //MORSE_TASK_dataflush_all(); removed in newer chameleon
+
     //RUNTIME_desc_getoncpu( &AD ); accuracy checking works without this line on shared memory and with 4 mpi ranks on shared memory
-    RUNTIME_options_finalize(&options, morse);
+    //RUNTIME_options_finalize(&options, morse);
 
 
-
+    MORSE_Desc_Flush( vec, sequence );
+    MORSE_Desc_Flush( mat, sequence );
 
     morse_sequence_wait(morse, sequence);
-    RUNTIME_desc_getoncpu(vec);
-    RUNTIME_desc_getoncpu(mat);
+    /*RUNTIME_desc_getoncpu(vec);*/
+    /*RUNTIME_desc_getoncpu(mat);*/
 
     status = sequence->status;
     morse_sequence_destroy(morse, sequence);

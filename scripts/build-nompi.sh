@@ -1,12 +1,11 @@
 #!/bin/bash -le
-module load libs-extra
 module load mkl/2018-initial
-module load gcc/5.3.0
-module load cmake/3.7.2
-module load hwloc/1.11.6-gcc-5.3.0
-#module load mpi-openmpi/2.1.0-gcc-5.3.0
-#module load starpu/1.2.1-gcc-5.3.0-openmpi
-module load starpu/1.2.1-gcc-5.3.0
+module load gcc/5.5.0
+module load cmake/3.9.6
+module load hwloc/1.11.8-gcc-5.5.0
+module load starpu/1.2.3-gcc-5.5.0-mkl-openmpi-3.0.0
+module load gsl/2.4-gcc-5.5.0
+
 
 module list
 git config --global credential.helper 'cache --timeout=36000'
@@ -39,7 +38,7 @@ cd stars-h
 rm -rf build
 mkdir -p build/installdir
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF
+cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF
 make clean
 make -j
 make install

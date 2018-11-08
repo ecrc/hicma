@@ -1,0 +1,8 @@
+#Job for max/min sub:640 480 on 16 nodes
+4313698
+#Job for max/min sub:1280 960 on 32 nodes
+4313699
+#Job for max/min sub:640 480 on 16 nodes
+4314024
+#Job for max/min sub:1280 960 on 32 nodes
+4314025
