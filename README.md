@@ -10,7 +10,7 @@ computations operating on the underlying tile low-rank data format, while satisf
 numerical accuracy and leveraging performance from massively parallel hardware architectures. 
 
 
-Features of HiCMA 0.1.0
+Features of HiCMA 0.1.1
 -----------------------------
 * Matrix-Matrix Multiplication
 * Cholesky Factorization/Solve

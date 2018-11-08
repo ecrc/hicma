@@ -6,7 +6,7 @@
 /**
  * This file contains data structures used in HiCMA.
  *
- * @version 0.1.0
+ * @version 0.1.1
  * @author Kadir Akbudak
  * @date 2018-11-08
  **/

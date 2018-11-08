@@ -11,7 +11,7 @@
  *
  * HiCMA is a software package provided by King Abdullah University of Science and Technology (KAUST)
  *
- * @version 0.1.0
+ * @version 0.1.1
  * @author Ali Charara
  * @author Kadir Akbudak
  * @date 2018-11-08

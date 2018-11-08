@@ -15,7 +15,7 @@
 #  HiCMA is a software package provided by:
 #     King Abdullah University of Science and Technology
 #
-#  @version 0.1.0
+#  @version 0.1.1
 #  @author Cedric Castagnede
 #  @author Emmanuel Agullo
 #  @author Mathieu Faverge
@@ -51,7 +51,7 @@ project(HICMA C )
 # set project version number
 set(HICMA_VERSION_MAJOR 0)
 set(HICMA_VERSION_MINOR 1)
-set(HICMA_VERSION_PATCH 0)
+set(HICMA_VERSION_PATCH 1)
 
 set(MORSE_CMAKE_DIR "" CACHE PATH "Directory of MORSE CMake modules, can be external to the project")
 

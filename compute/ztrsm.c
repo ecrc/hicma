@@ -14,7 +14,7 @@
  *  HICMA computational routines
  *  HiCMA is a software package provided by King Abdullah University of Science and Technology (KAUST)
  *
- * @version 0.1.0
+ * @version 0.1.1
  * @author Jakub Kurzak
  * @author Mathieu Faverge
  * @author Emmanuel Agullo
