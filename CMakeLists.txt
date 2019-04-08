@@ -1315,15 +1315,15 @@ set( HICMA_RUNTIME_SRC
   )
 
 set( HICMA_AUX_SRC
-    ${CMAKE_SOURCE_DIR}/aux/compute/zuncompress.c
-    ${CMAKE_SOURCE_DIR}/aux/compute/zdiag.c
-    ${CMAKE_SOURCE_DIR}/aux/compute/zproblem.c
-    ${CMAKE_SOURCE_DIR}/aux/compute/znormest.c
-    ${CMAKE_SOURCE_DIR}/aux/descutil/descprint.c
-    ${CMAKE_SOURCE_DIR}/aux/descutil/descsame.c
-    ${CMAKE_SOURCE_DIR}/aux/compute/zstat.c
+    ${CMAKE_SOURCE_DIR}/misc/compute/zuncompress.c
+    ${CMAKE_SOURCE_DIR}/misc/compute/zdiag.c
+    ${CMAKE_SOURCE_DIR}/misc/compute/zproblem.c
+    ${CMAKE_SOURCE_DIR}/misc/compute/znormest.c
+    ${CMAKE_SOURCE_DIR}/misc/descutil/descprint.c
+    ${CMAKE_SOURCE_DIR}/misc/descutil/descsame.c
+    ${CMAKE_SOURCE_DIR}/misc/compute/zstat.c
   )
-include_directories( ${CMAKE_SOURCE_DIR}/aux/include )
+include_directories( ${CMAKE_SOURCE_DIR}/misc/include )
 
 link_directories(${STARSH_LIBRARY_DIRS})
 link_directories(${STARPU_LIBRARY_DIRS})
@@ -1353,10 +1353,10 @@ install( FILES include/hicma_struct.h
          DESTINATION include )
 install( FILES include/hicma_z.h
          DESTINATION include )
-install( FILES aux/include/auxcompute_z.h
-         DESTINATION include/aux )
-install( FILES aux/include/auxdescutil.h
-         DESTINATION include/aux )
+install( FILES misc/include/auxcompute_z.h
+         DESTINATION include/misc )
+install( FILES misc/include/auxdescutil.h
+         DESTINATION include/misc )
 
 ###############################################################################
 # Documentation #

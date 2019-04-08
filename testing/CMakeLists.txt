@@ -23,7 +23,7 @@ set(libs_for_testings)
 list(APPEND libs_for_testings hicma chameleon)
 
 add_custom_target(testing_include ALL SOURCES ${TESTING_AUX_HDRS})
-include_directories( ${CMAKE_SOURCE_DIR}/aux/include )
+include_directories( ${CMAKE_SOURCE_DIR}/misc/include )
 include_directories( ${CMAKE_SOURCE_DIR}/chameleon/ )
 include_directories(BEFORE ${CMAKE_SOURCE_DIR}/timing )
 foreach(_timing ${TESTINGS_SRC})

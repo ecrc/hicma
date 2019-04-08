@@ -24,7 +24,7 @@ set(libs_for_timings)
 list(APPEND libs_for_timings hicma chameleon)
 
 add_custom_target(timing_include ALL SOURCES ${TIMING_AUX_HDRS})
-include_directories( ${CMAKE_SOURCE_DIR}/aux/include )
+include_directories( ${CMAKE_SOURCE_DIR}/misc/include )
 include_directories( ${CMAKE_SOURCE_DIR}/chameleon/ )
 foreach(_timing ${TIMINGS_SRC})
     get_filename_component(_name_exe ${_timing} NAME_WE)
