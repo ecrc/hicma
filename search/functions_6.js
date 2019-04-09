@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['testing_5fdposv',['testing_dposv',['../testing__zauxiliary_8h.html#a28d31db4990daf0197cb0ac24c95ccd5',1,'testing_dposv(int argc, char **argv):&#160;testing_zposv.c'],['../testing__zposv_8c.html#a28d31db4990daf0197cb0ac24c95ccd5',1,'testing_dposv(int argc, char **argv):&#160;testing_zposv.c'],['../testing__ztrsmd_8c.html#a28d31db4990daf0197cb0ac24c95ccd5',1,'testing_dposv(int argc, char **argv):&#160;testing_ztrsmd.c']]],
+  ['testing_5fdtrsmd',['testing_dtrsmd',['../testing__zauxiliary_8h.html#a8425a9dfb0b29dd7a3b1ec27bb670b7b',1,'testing_dtrsmd(int argc, char **argv):&#160;testing_zposv.c'],['../testing__zposv_8c.html#a8425a9dfb0b29dd7a3b1ec27bb670b7b',1,'testing_dtrsmd(int argc, char **argv):&#160;testing_zposv.c'],['../testing__ztrsmd_8c.html#a8425a9dfb0b29dd7a3b1ec27bb670b7b',1,'testing_dtrsmd(int argc, char **argv):&#160;testing_ztrsmd.c']]],
+  ['timediff',['timediff',['../time__zgemm__tile_8c.html#ae538eb279916748f9410708ef5f941d9',1,'timediff(struct timeval begin, struct timeval end):&#160;time_zgemm_tile.c'],['../time__zpotrf__tile_8c.html#ae538eb279916748f9410708ef5f941d9',1,'timediff(struct timeval begin, struct timeval end):&#160;time_zpotrf_tile.c']]]
+];

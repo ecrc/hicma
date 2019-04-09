@@ -1,0 +1,2 @@
+\form#0:\[ C = \alpha [op( A )\times op( B )] + \beta C \]
+\form#1:$ceil(NRHS*1.0/NB)$
