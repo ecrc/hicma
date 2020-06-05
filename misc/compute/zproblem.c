@@ -456,6 +456,188 @@ void __generate(
 
             *mpiF = F;
         }
+        else if(probtype == HICMA_STARSH_PROB_GEOSTAT_PARSIMONIOUS_BIVARIATE){
+        char symm = 'S', dtype = 'd';
+        STARSH_int shape[2] = {_M, _M};
+        int info;
+        srand(0);
+        STARSH_ssdata *ssdata;
+        info = starsh_application((void **)&ssdata, &kernel, _M, dtype,
+                    STARSH_SPATIAL, kernel_type, STARSH_SPATIAL_NDIM, ndim,
+                    STARSH_SPATIAL_BETA, initial_theta[2], STARSH_SPATIAL_NU, initial_theta[3],
+                    STARSH_SPATIAL_NOISE, noise,
+                    STARSH_SPATIAL_PLACE, STARSH_PARTICLES_OBSOLETE3, //1,
+                    STARSH_SPATIAL_SIGMA, initial_theta[0],
+                    STARSH_SPATIAL_SIGMA2, initial_theta[1],
+                    STARSH_SPATIAL_NU2, initial_theta[4],
+                    STARSH_SPATIAL_CORR, initial_theta[5],
+                     0);
+         if(info != 0)
+                 printf("wrong parameters for spatial statistics problem\n");
+         STARSH_problem *problem;
+         info = starsh_problem_new(&problem, ndim, shape, symm, dtype, ssdata, ssdata, kernel, "Spatial Statistics example");
+         if(info != 0)
+         {
+                printf("Error in starsh problem\n");
+                exit(info);
+         }
+         STARSH_cluster *cluster;
+         info = starsh_cluster_new_plain(&cluster, ssdata, _M, block_size);
+         if(info != 0)
+         {
+               printf("Error in creation of cluster\n");
+               exit(info);
+         }
+         STARSH_blrf *F;
+         info = starsh_blrf_new_tlr(&F, problem, sym, cluster, cluster);
+         if(info != 0)
+         {
+               printf("Error in creation of format\n");
+               exit(info);
+         }
+             *mpiF = F;
+       }
+
+        else if(probtype == HICMA_STARSH_PROB_GEOSTAT_PARSIMONIOUS2_BIVARIATE){
+             char symm = 'S', dtype = 'd';
+             STARSH_int shape[2] = {_M, _M};
+             int info;
+             srand(0);
+
+             STARSH_ssdata *ssdata;
+             info = starsh_application((void **)&ssdata, &kernel, _M, dtype,
+                            STARSH_SPATIAL, kernel_type, STARSH_SPATIAL_NDIM, ndim,
+                            STARSH_SPATIAL_BETA, initial_theta[2], STARSH_SPATIAL_NU, initial_theta[3],
+                            STARSH_SPATIAL_NOISE, noise,
+                            STARSH_SPATIAL_PLACE, STARSH_PARTICLES_OBSOLETE4, //1,
+                            STARSH_SPATIAL_SIGMA, initial_theta[0],
+                            STARSH_SPATIAL_SIGMA2, initial_theta[1],
+                            STARSH_SPATIAL_NU2, initial_theta[4],
+                            STARSH_SPATIAL_CORR, initial_theta[5],
+                                                                                                                                              0);
+                           if(info != 0)
+                                printf("wrong parameters for spatial statistics problem\n");
+
+                           STARSH_problem *problem;
+                           info = starsh_problem_new(&problem, ndim, shape, symm, dtype, ssdata, ssdata, kernel, "Spatial Statistics example");
+
+                           if(info != 0)
+                           {
+                                 printf("Error in starsh problem\n");
+                                 exit(info);
+                          }
+                          STARSH_cluster *cluster;
+                          info = starsh_cluster_new_plain(&cluster, ssdata, _M, block_size);
+                          if(info != 0)
+                          {
+                                 printf("Error in creation of cluster\n");
+                                 exit(info);
+                          }
+                          STARSH_blrf *F;
+                          info = starsh_blrf_new_tlr(&F, problem, sym, cluster, cluster);
+                          if(info != 0)
+                          {
+                                printf("Error in creation of format\n");
+                                exit(info);
+                          }
+            *mpiF = F;
+        }
+
+        else if(probtype == HICMA_STARSH_PROB_GEOSTAT_PARSIMONIOUS_BIVARIATE_POINT){
+                    //   printf("Geostat");
+                    //double initial_theta[3] = {1, 0.1, 0.5};
+
+              char symm = 'S', dtype = 'd';
+              STARSH_int shape[2] = {_M, _M};
+              int info;
+              //srand(0);  //no need in case og real dataset
+              int kernel_type = STARSH_SPATIAL_PARSIMONIOUS_SIMD;
+                   //double noise = 0;
+              STARSH_ssdata *ssdata;
+              info = starsh_ssdata_init_parsimonious(&ssdata, _M, ndim, point, initial_theta[0],
+                        initial_theta[1], initial_theta[2], initial_theta[3],
+                        initial_theta[4], initial_theta[5] , noise);
+               if(info != 0)
+               {
+                     printf("wrong parameters for starsh_ssdata_init\n");
+               }
+               info = starsh_ssdata_get_kernel(&kernel, ssdata, kernel_type);
+               if(info != 0)
+               {
+                    printf("wrong parameters for starsh_ssdata_get_kernel\n");
+               }
+               STARSH_problem *problem;
+               info = starsh_problem_new(&problem, ndim, shape, symm, dtype, ssdata, ssdata, kernel, "Spatial Statistics example");
+               if(info != 0)
+               {
+                    printf("Error in starsh problem\n");
+                    exit(info);
+               }
+               STARSH_cluster *cluster;
+               info = starsh_cluster_new_plain(&cluster, ssdata, _M, block_size);
+               if(info != 0)
+               {
+                     printf("Error in creation of cluster\n");
+                     exit(info);
+               }
+               STARSH_blrf *F;
+               info = starsh_blrf_new_tlr(&F, problem, sym, cluster, cluster);
+               if(info != 0)
+               {
+                     printf("Error in creation of format\n");
+                     exit(info);
+               }
+               *mpiF = F;
+       }
+
+                else if(probtype == HICMA_STARSH_PROB_GEOSTAT_PARSIMONIOUS2_BIVARIATE_POINT){
+                    //   printf("Geostat");
+                    //double initial_theta[3] = {1, 0.1, 0.5};
+
+                    char symm = 'S', dtype = 'd';
+                    STARSH_int shape[2] = {_M, _M};
+                    int info;
+                    //srand(0);  //no need in case og real dataset
+                    int kernel_type = STARSH_SPATIAL_PARSIMONIOUS2_SIMD;
+                    //double noise = 0;
+                    STARSH_ssdata *ssdata;
+                    info = starsh_ssdata_init_parsimonious(&ssdata, _M, ndim, point, initial_theta[0],
+                            initial_theta[1], initial_theta[2], initial_theta[3],
+                            initial_theta[4], initial_theta[5] , noise);
+                    if(info != 0)
+                    {
+                        printf("wrong parameters for starsh_ssdata_init\n");
+                    }
+                    info = starsh_ssdata_get_kernel(&kernel, ssdata, kernel_type);
+                    if(info != 0)
+                    {
+                        printf("wrong parameters for starsh_ssdata_get_kernel\n");
+                    }
+
+                    STARSH_problem *problem;
+                    info = starsh_problem_new(&problem, ndim, shape, symm, dtype, ssdata, ssdata, kernel, "Spatial Statistics example");
+                    if(info != 0)
+                    {
+                        printf("Error in starsh problem\n");
+                        exit(info);
+                    }
+                    STARSH_cluster *cluster;
+                    info = starsh_cluster_new_plain(&cluster, ssdata, _M, block_size);
+                    if(info != 0)
+                    {
+                        printf("Error in creation of cluster\n");
+                        exit(info);
+                    }
+                    STARSH_blrf *F;
+                    info = starsh_blrf_new_tlr(&F, problem, sym, cluster, cluster);
+                    if(info != 0)
+                    {
+                        printf("Error in creation of format\n");
+                        exit(info);
+                    }
+                    *mpiF = F;
+                }
+
         else {
             fprintf(stderr, "Unknown type of STARS-H problem:%d. Exiting...\n", probtype);
         }
