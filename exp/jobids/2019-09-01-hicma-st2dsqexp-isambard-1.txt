@@ -1,0 +1,58 @@
+#Number of nodes: 16 =============================
+#Sun Sep  1 12:24:42 UTC 2019 on 16 nodes. Hicma beta=0.01 --ss - big -  - 10:00:00 - 150  - hic - exp/cases/sqexp.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+23984.xci00
+#case ids:  2
+23985.xci00
+#case ids:  3
+23986.xci00
+#case ids:  4
+23987.xci00
+#case ids:  5
+23988.xci00
+#case ids:  6
+23989.xci00
+#case ids:  7
+23990.xci00
+#case ids:  8
+23991.xci00
+##case ids:  9
+#23992.xci00
+##case ids:  10
+#23993.xci00
+##case ids:  11
+#23994.xci00
+##case ids:  12
+#23995.xci00
+##case ids:  13
+#23996.xci00
+##case ids:  14
+#23997.xci00
+##case ids:  15
+#23998.xci00
+##case ids:  16
+#23999.xci00
+##case ids:  17
+#24000.xci00
+##case ids:  18
+#24001.xci00
+##case ids:  19
+#24002.xci00
+##case ids:  20
+#24003.xci00
+##case ids:  21
+#24004.xci00
+##case ids:  22
+#24005.xci00
+##case ids:  23
+#24006.xci00
+##case ids:  24
+#24007.xci00
+##case ids:  25
+#24008.xci00
+##case ids:  26
+#24009.xci00
+##case ids:  27
+#24010.xci00
+##case ids:  28
+#24011.xci00

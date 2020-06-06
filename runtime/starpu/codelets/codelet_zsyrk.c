@@ -27,6 +27,7 @@ ZCODELETS_HEADER(syrk_hcore)
 
 
 #include "hcore_z.h"
+extern flop_counter counters[FLOP_NUMTHREADS];
 
 extern int global_always_fixed_rank;
 extern int global_fixed_rank;
@@ -160,14 +161,20 @@ static void cl_zsyrk_hcore_cpu_func(void *descr[], void *cl_arg)
         _printmat(AV, ldau, _Ark, ldau);
         _printmat(CD, n, n, ldcd);
     }
+    flop_counter flops;
+    flops.syrk = 0;
     HCORE_zsyrk(uplo, trans,
         n, _Ark,
         alpha,
         AU, ldau,
         AV, ldav,
         beta,
-        CD, ldcd, work
+        CD, ldcd, work,
+        &flops
         );
+    int myid = RUNTIME_thread_rank(NULL);
+    counters[myid].syrk += flops.syrk; 
+
     /*cblas_zsyrk(*/
         /*CblasColMajor,*/
         /*(CBLAS_UPLO)uplo, (CBLAS_TRANSPOSE)trans,*/

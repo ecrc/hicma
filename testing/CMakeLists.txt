@@ -52,3 +52,15 @@ foreach(_timing ${TESTINGS_SRC})
 
 endforeach()
 
+#set(examples_files
+    #"electrodynamics.c"
+    #)
+#foreach(example_src ${examples_files})
+    #get_filename_component(_name_exe ${example_src} NAME_WE)
+    #add_executable(${_name_exe} ${example_src})
+    #target_link_libraries(${_name_exe} ${STARSHCORE_LIBRARIES_DEP} starsh_core stdc++ 
+        #${CBLAS_LIBRARIES} ${LAPACKE_LIBRARIES}
+        #)
+
+#endforeach()
+

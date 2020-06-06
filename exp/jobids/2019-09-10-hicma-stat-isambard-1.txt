@@ -1,0 +1,180 @@
+#Number of nodes: 8 =============================
+# qsub -q arm -l select=8 -l walltime=02:00:00 -j oe -N hicma-8 
+#Tue Sep 10 19:02:29 UTC 2019 on 8 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "1 2 3 4 5 6 7 8" 8 (0-7-1)
+#case ids:  1
+26136.xci00
+26137.xci00
+#case ids:  2
+26138.xci00
+26139.xci00
+#case ids:  3
+26140.xci00
+26141.xci00
+#case ids:  4
+26142.xci00
+26143.xci00
+#case ids:  5
+26144.xci00
+26145.xci00
+#case ids:  6
+26146.xci00
+26147.xci00
+#case ids:  7
+26148.xci00
+26149.xci00
+#case ids:  8
+26150.xci00
+26151.xci00
+#Number of nodes: 16 =============================
+# qsub -q arm -l select=16 -l walltime=02:00:00 -j oe -N hicma-16 
+#Tue Sep 10 19:02:29 UTC 2019 on 16 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "1 2 3 4 5 6 7 8 9 10 11 12" 12 (0-11-1)
+#case ids:  1
+26152.xci00
+26153.xci00
+#case ids:  2
+26154.xci00
+26155.xci00
+#case ids:  3
+26156.xci00
+26157.xci00
+#case ids:  4
+26158.xci00
+26159.xci00
+#case ids:  5
+26160.xci00
+26161.xci00
+#case ids:  6
+26162.xci00
+26163.xci00
+#case ids:  7
+26164.xci00
+26165.xci00
+#case ids:  8
+26166.xci00
+26167.xci00
+#case ids:  9
+26168.xci00
+26169.xci00
+#case ids:  10
+26170.xci00
+26171.xci00
+#case ids:  11
+26172.xci00
+26173.xci00
+#case ids:  12
+26174.xci00
+26175.xci00
+#Number of nodes: 32 =============================
+# qsub -q arm -l select=32 -l walltime=02:00:00 -j oe -N hicma-32 
+#Tue Sep 10 19:02:30 UTC 2019 on 32 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16" 16 (0-15-1)
+#case ids:  1
+26176.xci00
+26177.xci00
+#case ids:  2
+26178.xci00
+26179.xci00
+#case ids:  3
+26180.xci00
+26181.xci00
+#case ids:  4
+26182.xci00
+26183.xci00
+#case ids:  5
+26184.xci00
+26185.xci00
+#case ids:  6
+26186.xci00
+26187.xci00
+#case ids:  7
+26188.xci00
+26189.xci00
+#case ids:  8
+26190.xci00
+26191.xci00
+#case ids:  9
+26192.xci00
+26193.xci00
+#case ids:  10
+26194.xci00
+26195.xci00
+#case ids:  11
+26196.xci00
+26197.xci00
+#case ids:  12
+26198.xci00
+26199.xci00
+#case ids:  13
+26200.xci00
+26201.xci00
+#case ids:  14
+26202.xci00
+26203.xci00
+#case ids:  15
+26204.xci00
+26205.xci00
+#case ids:  16
+26206.xci00
+26207.xci00
+#Number of nodes: 2 =============================
+# qsub -q arm -l select=2 -l walltime=02:00:00 -j oe -N hicma-2 
+#Wed Sep 11 04:31:56 UTC 2019 on 2 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "1 2 5 6" 4 (0-3-1)
+#case ids:  1
+26228.xci00
+26229.xci00
+#case ids:  2
+26230.xci00
+26231.xci00
+#case ids:  5
+26232.xci00
+26233.xci00
+#case ids:  6
+26234.xci00
+26235.xci00
+#Number of nodes: 4 =============================
+# qsub -q arm -l select=4 -l walltime=02:00:00 -j oe -N hicma-4 
+#Wed Sep 11 04:31:57 UTC 2019 on 4 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "1 2 5 6" 4 (0-3-1)
+#case ids:  1
+26236.xci00
+26237.xci00
+#case ids:  2
+26238.xci00
+26239.xci00
+#case ids:  5
+26240.xci00
+26241.xci00
+#case ids:  6
+26242.xci00
+26243.xci00
+#Number of nodes: 8 =============================
+# qsub -q arm -l select=8 -l walltime=02:00:00 -j oe -N hicma-8 
+#Wed Sep 11 04:31:57 UTC 2019 on 8 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "1 2 5 6" 4 (0-3-1)
+#case ids:  1
+26244.xci00
+26245.xci00
+#case ids:  2
+26246.xci00
+26247.xci00
+#case ids:  5
+26248.xci00
+26249.xci00
+#case ids:  6
+26250.xci00
+26251.xci00
+#Number of nodes: 4 =============================
+# qsub -q arm -l select=4 -l walltime=02:00:00 -j oe -N hicma-4 
+#Fri Sep 13 08:30:28 UTC 2019 on 4 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "1 2" 2 (0-1-1)
+#case ids:  1
+26459.xci00
+26460.xci00
+#case ids:  2
+26461.xci00
+26462.xci00
+#Number of nodes: 16 =============================
+# qsub -q arm -l select=16 -l walltime=02:00:00 -j oe -N hicma-16 
+#Fri Sep 13 08:30:28 UTC 2019 on 16 nodes. Hicma beta=0.01  - big -  - 02:00:00 -   - hic - exp/cases/statistics.sh "5 6" 2 (0-1-1)
+#case ids:  5
+26463.xci00
+26464.xci00
+#case ids:  6
+26465.xci00
+26466.xci00

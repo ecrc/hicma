@@ -11,7 +11,7 @@
  *
  * @version 0.1.1
  * @author Kadir Akbudak
- * @date 2018-11-08
+ * @date 2019-11-21
  **/
 
 /*
@@ -55,12 +55,25 @@
 #endif
 
 #include "starsh-spatial.h"
+#include "starsh-rbf.h"
 
 #include <assert.h>
 #include "hicma_z.h"
-#include "auxcompute_z.h"
-#include "auxdescutil.h"
+#include "hicma_common.h"
+#include "misc/auxcompute_z.h"
+#include "misc/auxdescutil.h"
 #include "hicma.h"
+
+#include "flop_util_structs.h"
+extern flop_counter counters[FLOP_NUMTHREADS];
+#include "flop_util.h"
+
+//#if __has_include("starpu_mpi.h")
+#ifdef CHAMELEON_USE_MPI
+#define __ENABLE_MPI
+#include "starpu_mpi.h"
+#endif
+
 #include <math.h>
 #include <time.h>
 
@@ -70,7 +83,7 @@
 // zgytlr uses starsh in MPI mode.
 STARSH_blrf *mpiF;
 
-int print_progress = 1;   // Print progress about the execution
+int print_progress = 0;   // Print progress about the execution
 char datebuf[128];
 time_t timer;
 struct tm* tm_info;
@@ -102,22 +115,6 @@ int print_mat = 0;
 int use_scratch = 1; // Use scratch memory provided by starpu
 int calc_rank_stat = 1; 
 
-void fwrite_array(int m, int n, int ld, double* arr, char* file){
-        FILE* fp = fopen(file, "w");
-        if(fp == NULL){
-            fprintf(stderr, "File %s cannot be opened to write\n", file);
-            exit(1);
-        }
-        int i, j;
-        fprintf(fp, "%d %d\n", m, n);
-        for(i = 0; i < m; i++){
-            for(j = 0; j < n; j++){
-                fprintf(fp, "%d\t", (int)arr[ld*j+i] );
-            }
-            fprintf(fp, "\n" );
-        }
-        fclose(fp);
-}
 
 double timediff(struct timeval begin, struct timeval end){
     double elapsed = (end.tv_sec - begin.tv_sec) +
@@ -127,7 +124,7 @@ double timediff(struct timeval begin, struct timeval end){
 
 
 
-    int
+ int
 RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
 {
     // print progress info only on ROOT process
@@ -206,6 +203,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     NB = NB * 2;
     //printf("N:%d NB:%d\n", N, NB);
     PASTE_CODE_ALLOCATE_MATRIX_TILE( descAUV, 1, double, MorseRealDouble, ld_AUV, nrows_AUV, N );
+
     N = saveN;
     NB = saveNB;
     PROGRESS("descAUV is allocated");
@@ -222,7 +220,8 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
 
     int diag_dense = 1;
     int fixedrank = iparam[IPARAM_RK]; //genargs->k
-    double fixedacc = pow(10, -1.0*iparam[IPARAM_ACC]);
+    //double fixedacc = pow(10, -1.0*iparam[IPARAM_ACC]);
+    double fixedacc = dparam[IPARAM_HICMA_ACCURACY_THRESHOLD];
 
     char sym;
     if (run_potrf)
@@ -271,21 +270,82 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
 
         // Smoothing parameter for Matern kernel
         hicma_problem.nu    = 0.5;
+
         // Shift added to diagonal elements
         hicma_problem.noise = 1.e-4; //not enough for matrices larger than 600K
         hicma_problem.noise = 5.e-4; //works for 640K but does not work for 10M
         hicma_problem.noise = 1.e-2; //
     }
     //END: ss
-    
+    //BEGIN: st-3D-exp
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_ST_3D_EXP) {
+        /*
+        // from lorapo
+        enum STARSH_PARTICLES_PLACEMENT place = STARSH_PARTICLES_UNIFORM;
+        double sigma = 1.0;
+        int ndim = 3;
+        kernel = starsh_ssdata_block_exp_kernel_3d; 
+        info = starsh_ssdata_generate((STARSH_ssdata **)&data, N, ndim,
+        beta, nu, noise,
+        place, sigma);
+        */
+        // Correlation length
+        hicma_problem.beta  = 0.1;
+        //If fixed rank is required set beta=1 and a sample case will be like this nb=25 maxrank=10 m=2500 So ranks will decrease.
+
+        // Smoothing parameter for Matern kernel
+        hicma_problem.nu    = 0.5;
+        // Shift added to diagonal elements
+        hicma_problem.noise = 1.e-4; //not enough for matrices larger than 600K
+        hicma_problem.noise = 5.e-4; //works for 640K
+        hicma_problem.noise = 1.e-2; //
+    }
+    //END: st-3D-exp
+    //BEGIN: st-3D-sqexp
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_ST_3D_SQEXP) {
+        /*
+        // from lorapo
+        enum STARSH_PARTICLES_PLACEMENT place = STARSH_PARTICLES_UNIFORM;
+        double sigma = 1.0;
+        int ndim = 3;
+        kernel = starsh_ssdata_block_exp_kernel_3d; 
+        info = starsh_ssdata_generate((STARSH_ssdata **)&data, N, ndim,
+        beta, nu, noise,
+        place, sigma);
+        */
+        // Correlation length
+        hicma_problem.beta  = 0.1;
+        //If fixed rank is required set beta=1 and a sample case will be like this nb=25 maxrank=10 m=2500 So ranks will decrease.
+
+        // Smoothing parameter for Matern kernel
+        hicma_problem.nu    = 0.5;
+        // Shift added to diagonal elements
+        hicma_problem.noise = 1.e-4; //not enough for matrices larger than 600K
+        hicma_problem.noise = 5.e-4; //works for 640K
+        hicma_problem.noise = 1.e-2; //
+    }
+    //END: st-3D-exp
     //BEGIN: edsin
     if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_EDSIN) {
         // Wave number, >= 0
         hicma_problem.wave_k = dparam[IPARAM_HICMA_STARSH_WAVE_K];
         hicma_problem.diag = M; 
-    //printf("%s %d: %g\n", __FILE__, __LINE__, hicma_problem.wave_k);
+        //printf("%s %d: %g\n", __FILE__, __LINE__, hicma_problem.wave_k);
+    } //END: edsin
+
+    //RBF Unstructured Mesh Deformation for 3D problems
+
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_3D_RBF) {
+        hicma_problem.kernel_type = iparam[IPARAM_RBFKERNEL]; // RBF kernel_type
+        hicma_problem.reg = 1 + fixedacc*10;  //RBF regularization value
+        hicma_problem.isreg = 1;
+        hicma_problem.rad = rad;  // RBF scaling factor
+        hicma_problem.mesh_points = M; 
+        hicma_problem.mordering = iparam[IPARAM_ORDER]; 
+        hicma_problem.numobj = iparam[IPARAM_NUMOBJ];  // how many objects (e.g. number of viruses)
+        hicma_problem.mesh_file = meshfile;   // path to mesh file
+
     }
-    //END: edsin
 
     PROGRESS("generating coordinates started");
     struct timeval tvalBefore, tvalAfter;  // removed comma
@@ -295,7 +355,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     if(MORSE_My_Mpi_Rank()==0){
         printf("Tproblem:%g\n",
                 (tvalAfter.tv_sec - tvalBefore.tv_sec)
-                 +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
+                +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
               );
         fflush(stderr);
         fflush(stdout);
@@ -303,8 +363,8 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     PROGRESS("generating coordinates ended");
     mpiF = hicma_problem.starsh_format; // This is assignment will be hidden from user in release
 
-	// DO NOT enforce compression of diagonal tiles
-	int compress_diag = 0;
+    // DO NOT enforce compression of diagonal tiles
+    int compress_diag = 0;
     PROGRESS("nompi zgytlr starting");
     //descDense original problem
     gettimeofday (&tvalBefore, NULL);
@@ -313,8 +373,8 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     if(MORSE_My_Mpi_Rank()==0){
         printf("Tcompress:%g\n", 
                 (tvalAfter.tv_sec - tvalBefore.tv_sec)
-                 +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
-                );
+                +(tvalAfter.tv_usec - tvalBefore.tv_usec)/1000000.0
+              );
         fflush(stderr);
         fflush(stdout);
     }
@@ -327,8 +387,9 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
         PASTE_TILE_TO_LAPACK( descArk, Ark_initial, 1, double, MT, NT );
         if(MORSE_My_Mpi_Rank()==0){
 
-            sprintf(rankfile, "%s-1", rankfile);
+            sprintf(rankfile, "%s_initialranks", rankfile);
             fwrite_array(descArk->m, descArk->n, descArk->m, Ark_initial, rankfile);
+            print_array(descArk->m, descArk->n, descArk->m, Ark_initial, stdout);
 
             HICMA_stat_t hicma_statrk_initial;
             zget_stat(MorseLower, Ark_initial, MT, NT, MT,  &hicma_statrk_initial);
@@ -379,9 +440,9 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
                 }
             }
             /*for(j = 0; j < M; j++) {                */
-                /*for(i = 0; i < M; i++){*/
-                    /*cp_L_Adense[j*LDA+i] = orgAdense[j*LDA+i];*/
-                /*}*/
+            /*for(i = 0; i < M; i++){*/
+            /*cp_L_Adense[j*LDA+i] = orgAdense[j*LDA+i];*/
+            /*}*/
             /*}*/
             if(main_print_mat ){printf("L of Adense\n");printmat(orgAdense,M,M,LDA,MB, MB);}
             double normOrgAdense = 0.0;
@@ -392,6 +453,12 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     }
     PASTE_TILE_TO_LAPACK( descDense, Adense2, check, double, LDA, M );
     PROGRESS("pasting original dense descAD into Adense and Adense2 finished");
+
+    unsigned long*    opcounters  = NULL; // count all operations performed by a core
+    int nelm_opcounters = num_mpi_ranks*thrdnbr;
+    opcounters     = calloc(nelm_opcounters,     sizeof(unsigned long)); //TODO free
+    flop_util_init_counters(thrdnbr);
+
     PROGRESS("potrf started");
     START_TIMING();
     HICMA_zpotrf_Tile(MorseLower, descAUV, descAD, descArk, fixedrank, maxrank, fixedacc );
@@ -399,6 +466,93 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     fflush(stderr);
     fflush(stdout);
     PROGRESS("potrf finished");
+
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_3D_RBF) {
+        if(solve){
+            // problem is 3D
+
+            NB=3;
+            PASTE_CODE_ALLOCATE_MATRIX_TILE( descB, solve, double, MorseRealDouble, M, M, 3 );
+            PASTE_CODE_ALLOCATE_MATRIX_TILE( descBcpy, check_solve, double, MorseRealDouble, M, M, 3 );
+            NB = bigNB;
+
+            HICMA_zgenrhs_Tile(descB);
+            if(check_solve){
+                MORSE_dlacpy_Tile(MorseUpperLower, descB, descBcpy);
+            }
+
+            HICMA_ztrsmd_Tile(MorseLeft, MorseLower, MorseNoTrans, MorseNonUnit, 1, descAUV, descAD, descArk,  descB, maxrank);
+            HICMA_ztrsmd_Tile(MorseLeft, MorseLower, MorseTrans, MorseNonUnit, 1, descAUV, descAD, descArk,  descB, maxrank);
+
+            if(check_solve){
+                saveNB = NB;
+                NB = MB;
+                PASTE_CODE_ALLOCATE_MATRIX_TILE( descmat, check_solve, double, MorseRealDouble, M, M, M );
+                NB = bigNB;
+
+                HICMA_zgenmat_Tile(descmat);
+                dparam[IPARAM_IANORM]  = MORSE_dlange_Tile(MorseInfNorm, descmat);
+                dparam[IPARAM_IBNORM]  = MORSE_dlange_Tile(MorseInfNorm, descBcpy);    
+                dparam[IPARAM_IXNORM]  = MORSE_dlange_Tile(MorseInfNorm, descB);
+                double alpha=1.0, beta = -1.0;
+
+                MORSE_dgemm_Tile( MorseNoTrans, MorseNoTrans, alpha, descmat, descB, beta, descBcpy);
+
+                dparam[IPARAM_IRNORM]  = MORSE_dlange_Tile(MorseInfNorm, descBcpy);
+                dparam[IPARAM_IRES] = dparam[IPARAM_IRNORM] /( dparam[IPARAM_IANORM] * dparam[IPARAM_IXNORM] + dparam[IPARAM_IBNORM]);
+
+                PASTE_CODE_FREE_MATRIX(descBcpy);
+                PASTE_CODE_FREE_MATRIX(descmat);
+            }
+            PASTE_CODE_FREE_MATRIX(descB);
+
+        }
+    }
+    assert(thrdnbr < FLOP_NUMTHREADS);
+    int myrank = MORSE_My_Mpi_Rank();
+    for(int i = 0; i < thrdnbr; i++){
+        flop_counter res = counters[i];
+        unsigned long totflop = res.potrf+res.trsm+res.syrk+res.update;
+        //printf("myrank:%d thread:%d %lu\n", myrank, i, totflop);
+        if(0) printf("myrank:%d thread:%d po:%lu tr:%lu sy:%lu gm:%lu\n", myrank, i, res.potrf, res.trsm, res.syrk, res.update);
+        opcounters[myrank * thrdnbr + i] = totflop;
+    }
+
+    unsigned long* allopcounters = opcounters;
+#ifdef __ENABLE_MPI
+    allopcounters     = calloc(nelm_opcounters,     sizeof(unsigned long)); //TODO free
+    MPI_Reduce(opcounters, allopcounters, nelm_opcounters, MPI_UNSIGNED_LONG, MPI_MAX, 0, MPI_COMM_WORLD);  
+#endif
+    unsigned long totflop = 0;
+    if(MORSE_My_Mpi_Rank() == 0) {
+        unsigned long sum_thread = 0;
+        if(0) printf("nop_thread %d %d\n", num_mpi_ranks, thrdnbr);
+        for(int i = 0; i < num_mpi_ranks; i++){
+            for(int j = 0; j < thrdnbr; j++){
+                if(0) printf("%lu ", allopcounters[i*thrdnbr+j]);
+                sum_thread += allopcounters[i*thrdnbr+j];
+            }
+            if(0)printf("\n");
+        }
+        totflop += sum_thread;
+    }
+    if(MORSE_My_Mpi_Rank() == 0)
+    {
+        /** prints number of flops */
+        char str[1024];
+        str[1023] = '\0';
+        //printf("\t\tPOTRF\tTRSM \tSYRK\tGEMM\t\tTOTFLOP\t\tTOTGFLOP\tGFLOP/S\t\tTIME(s)\n");
+        printf("\t\tTOTFLOP\t\tTOTGFLOP\tGFLOP/S\t\tTIME(s)\n");
+        printf("ReShg\t");
+        printf("%lu\t", totflop);
+        double totgflop = totflop/(1024.0*1024*1024);
+        printf("%g\t", totgflop);
+        double totgflops = totgflop/t;
+        printf("%g\t", totgflops);
+        printf("%g", t);
+        printf("\n");
+    }
+
     if(check){
         HICMA_zuncompress(MorseLower, descAUV, descDense, descArk);
         HICMA_zdiag_vec2mat(descAD, descDense);
@@ -410,8 +564,9 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     if(calc_rank_stat == 1) {
         PASTE_TILE_TO_LAPACK( descArk, Ark_final, 1, double, MT, NT );
         if(MORSE_My_Mpi_Rank()==0){
-            sprintf(rankfile, "%s-2", rankfile);
+            sprintf(rankfile, "%s_finalranks", rankfile);
             fwrite_array(descArk->m, descArk->n, descArk->m, Ark_final, rankfile);
+            print_array(descArk->m, descArk->n, descArk->m, Ark_final, stdout);
             HICMA_stat_t hicma_statrk_final;
             zget_stat(MorseLower, Ark_final, MT, NT, MT,  &hicma_statrk_final);
             printf("final_ranks:");
@@ -440,15 +595,15 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
                 }
             }
             PROGRESS("normaA started");
-            HICMA_znormest(M, M, Adense2, &normA, swork);
+            HCORE_znormest(M, M, Adense2, &normA, swork);
             // Ahicma: result of TLR potrf
             PASTE_TILE_TO_LAPACK( descAD, Ahicma, check, double, LDA, M );
             /*if(0){size_t i,j;*/
-                /*for(j = 0; j < M; j++) {                */
-                    /*for(i = 0; i < M; i++){*/
-                        /*Ahicma[j*LDA+i] = cp_L_Adense[j*LDA+i];*/
-                    /*}*/
-                /*}*/
+            /*for(j = 0; j < M; j++) {                */
+            /*for(i = 0; i < M; i++){*/
+            /*Ahicma[j*LDA+i] = cp_L_Adense[j*LDA+i];*/
+            /*}*/
+            /*}*/
             /*}*/
             double normAhicma = 0.0;
             {size_t i, j;
@@ -463,7 +618,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
                         orgAhicma[j*LDA+i] = Ahicma[j*LDA+i];
                     }
                 }
-                HICMA_znormest(M, M, orgAhicma, &normAhicma, swork);
+                HCORE_znormest(M, M, orgAhicma, &normAhicma, swork);
                 free(orgAhicma);
             }
             if(set_diag){size_t j; for(j = 0; j < M; j++){ Ahicma[j*LDA+j] = diagVal; } }
@@ -505,7 +660,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
 
             double normDenseAppDiff;
             PROGRESS("Norm of difference started");
-            HICMA_znormest(M, M, Adense, &normDenseAppDiff, swork);
+            HCORE_znormest(M, M, Adense, &normDenseAppDiff, swork);
             double accuracyDenseAppDiff = normDenseAppDiff/normA;
             //printf("normA:%.2e normDenseAppdiff:%.2e Accuracy: %.2e\n", normA, normDenseAppDiff,  accuracyDenseAppDiff);
             dparam[IPARAM_RES] = normDenseAppDiff;
@@ -518,6 +673,15 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
             PASTE_TILE_TO_LAPACK( descAD,  AhicmaT, check, double, LDA, M );
         }
         PROGRESS("checking accuracy is finished");
+    }
+
+    //free the starsh data structure 
+
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_3D_RBF)
+    {
+        STARSH_cluster *RC = mpiF->row_cluster;
+        void *RD = RC->data;
+        starsh_mddata_free((STARSH_mddata *)RD);
     }
 
     PASTE_CODE_FREE_MATRIX( descAUV );

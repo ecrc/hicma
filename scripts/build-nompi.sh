@@ -1,20 +1,11 @@
 #!/bin/bash -le
-module load mkl/2018-initial
-module load gcc/5.5.0
-module load cmake/3.9.6
-module load hwloc/1.11.8-gcc-5.5.0
-module load starpu/1.2.3-gcc-5.5.0-mkl-openmpi-3.0.0
-module load gsl/2.4-gcc-5.5.0
 
 
-module list
-git config --global credential.helper 'cache --timeout=36000'
 
 # BASH verbose mode
 set -x 
-
-
-reponame=hicma
+currdir=$PWD
+reponame=hicma-dev
 # Check if we are already in hicma repo dir or not.
 if git -C $PWD remote -v | grep -q "https://github.com/ecrc/$reponame"
 then
@@ -28,6 +19,17 @@ else
 	git clone https://github.com/ecrc/$reponame.git
 	cd $reponame
 fi
+module purge
+if [ "$HOSTNAME" == "thana" ]; then
+	. ./scripts/power8.modules
+else
+    echo "Loading intel modules"
+	. ./scripts/modules-ecrc.sh
+
+fi
+module list
+git config --global credential.helper 'cache --timeout=36000'
+
 
 # Update submodules
 HICMADEVDIR=$PWD 
@@ -38,11 +40,21 @@ cd stars-h
 rm -rf build
 mkdir -p build/installdir
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF
+cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF -DGSL=OFF
 make clean
 make -j
 make install
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# STARS-H-CORE
+#cd $HICMADEVDIR
+#cd stars-h-core
+#rm -rf build
+#mkdir -p build/installdir
+#cd build
+#cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir 
+#make -j install
+#export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # CHAMELEON
 cd $HICMADEVDIR
@@ -67,3 +79,5 @@ make -j
 make install
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
+cd $currdir
+set +x

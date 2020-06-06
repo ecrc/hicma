@@ -22,7 +22,7 @@
 #  @author Florent Pruvost
 #  @author Eduardo Gonzalez
 #  @author Kadir Akbudak
-#  @date 2018-11-08
+#  @date 2019-11-25
 #
 ## disables all rank descriptors and runs in fixed rank mode
 #add_definitions(-DHICMA_ALWAYS_FIX_RANK)
@@ -195,12 +195,6 @@ if ( HICMA_SCHED_PARSEC OR HICMA_SCHED_STARPU )
      set(HICMA_ENABLE_MPI ON FORCE)
 endif()
 
-# # Use intermediate variable since cmake_dependent_option doesn't have OR conditions
-# set(HICMA_ENABLE_CUDA OFF CACHE INTERNAL "Tells if CUDA might be supported by the runtime")
-# if ( HICMA_SCHED_PARSEC OR HICMA_SCHED_STARPU )
-#      set(HICMA_ENABLE_CUDA ON FORCE)
-# endif()
-
 # Additional options
 # ------------------
 
@@ -213,22 +207,6 @@ if (HICMA_ENABLE_MPI AND NOT HICMA_USE_MPI)
     message("-- ${BoldGreen}HICMA_USE_MPI is set to OFF, turn it ON to use MPI (unsupported by Quark)${ColourReset}")
 endif()
 
-# # Enable Cuda kernels if StarPU (only if StarPU or PaRSEC runtime is enabled)
-# # TODO: Default should be changed to ON/OFF when it will be ok
-# cmake_dependent_option(HICMA_USE_CUDA
-#                     "Enable CUDA kernels" OFF
-#                     "HICMA_ENABLE_CUDA" OFF)
-# if (HICMA_ENABLE_CUDA AND NOT HICMA_USE_CUDA)
-#     message("-- ${BoldGreen}HICMA_USE_CUDA is set to OFF, turn it ON to use CUDA (unsupported by Quark)${ColourReset}")
-# endif()
-
-# # Enable MAGMA advanced kernels if CUDA is enabled
-# cmake_dependent_option(HICMA_USE_MAGMA
-#                     "Enable MAGMA Cuda kernels" OFF
-#                     "HICMA_USE_CUDA" OFF)
-# if (HICMA_USE_CUDA AND NOT HICMA_USE_MAGMA)
-#     message("-- ${BoldGreen}HICMA_USE_MAGMA is set to OFF, turn it ON to use MAGMA (only with StarPU)${ColourReset}")
-# endif()
 
 # Enable FXT if StarPU
 option(HICMA_ENABLE_TRACING "Enable tracing support" OFF)
@@ -438,127 +416,6 @@ if(NOT HICMA_SIMULATION)
         message(FATAL_ERROR "A LAPACKE library is required but has not been found")
     endif()
 
-#     # HICMA depends on TMG
-#     #-------------------------
-#     if (HICMA_ENABLE_TESTING OR HICMA_ENABLE_TIMING)
-#         find_package(TMG)
-#         if(TMG_FOUND AND TMG_LIBRARY_DIRS)
-#             # the RPATH to be used when installing
-#             list(APPEND CMAKE_INSTALL_RPATH "${TMG_LIBRARY_DIRS}")
-#         else()
-#             message(FATAL_ERROR "A TMG library is required but has not been found")
-#         endif()
-#         if(TMG_LINKER_FLAGS)
-#             list(APPEND CMAKE_EXE_LINKER_FLAGS "${TMG_LINKER_FLAGS}")
-#         endif()
-#         if (TMG_LIBRARIES)
-#             if (TMG_LIBRARIES_DEP)
-#                 list(INSERT HICMA_DEP 0 ${TMG_LIBRARIES_DEP})
-#             else()
-#                 list(INSERT HICMA_DEP 0 ${TMG_LIBRARIES})
-#             endif()
-#         endif()
-#     endif()
-
-#     # HICMA depends on CUDA/CUBLAS
-#     #----------------------------------
-#     if (HICMA_USE_CUDA)
-#
-#         find_package(CUDA REQUIRED)
-#
-#         if (CUDA_FOUND)
-#             message("-- ${Blue}Add definition HICMA_USE_CUDA"
-#             " - Activate CUDA in HiCMA${ColourReset}")
-#             set(EXTRA_LIBRARIES_CUDA)
-#             set(HICMA_USE_CUDA 1)
-#             if(CUDA_VERSION VERSION_LESS "3.0")
-#                 set(CUDA_HOST_COMPILATION_CPP OFF)
-#             endif(CUDA_VERSION VERSION_LESS "3.0")
-#             set(CUDA_BUILD_EMULATION OFF)
-#             if (CUDA_INCLUDE_DIRS)
-#                 include_directories(${CUDA_INCLUDE_DIRS})
-#             else()
-#                 message(WARNING "HICMA_USE_CUDA requires"
-#                 "\n   CUDA_INCLUDE_DIRS to be found. Be sure you have"
-#                 "\n   cuda headers with your distribution of CUDA.")
-#             endif()
-#             if (CUDA_LIBRARIES)
-#                 list(APPEND EXTRA_SOURCES src/gpu_data.c)
-#                 set(saved_include "${CMAKE_REQUIRED_INCLUDES}")
-#                 set(saved_libs "${CMAKE_REQUIRED_LIBRARIES}")
-#                 set(CMAKE_REQUIRED_INCLUDES  "${CMAKE_REQUIRED_INCLUDES};${CUDA_INCLUDE_DIRS}")
-#                 set(CMAKE_REQUIRED_LIBRARIES "${CMAKE_REQUIRED_LIBRARIES};${CUDA_LIBRARIES}")
-#                 if(CUDA_VERSION VERSION_LESS "4.0")
-#                     set(CUDA_HAVE_PEER_DEVICE_MEMORY_ACCESS 0)
-#                 else()
-#                     check_function_exists(cuDeviceCanAccessPeer CUDA_HAVE_PEER_DEVICE_MEMORY_ACCESS)
-#                 endif()
-#                 set(CMAKE_REQUIRED_INCLUDES  "${saved_include}")
-#                 set(CMAKE_REQUIRED_LIBRARIES "${saved_libs}")
-#                 # Add cublas if found
-#                 if (CUDA_CUBLAS_LIBRARIES)
-#                     message("-- ${Blue}Add definition HICMA_USE_CUBLAS"
-#                     " - Use GPU kernels from cuBLAS${ColourReset}")
-#                     set( HICMA_USE_CUBLAS 1)
-#                     list(APPEND EXTRA_LIBRARIES_CUDA ${CUDA_CUBLAS_LIBRARIES})
-#                     list(APPEND EXTRA_LIBRARIES_CUDA ${CUDA_LIBRARIES}) # need CUDA libs to link.
-#                 else()
-#                     message(FATAL_ERROR "HICMA_USE_CUDA requires"
-#                     "\n   CUDA_CUBLAS_LIBRARIES to be found. Be sure you have"
-#                     "\n   libcublas with your distribution of CUDA.")
-#                 endif()
-#             else()
-#                 message(FATAL_ERROR "HICMA_USE_CUDA requires"
-#                 "\n   CUDA_LIBRARIES to be found. Be sure you have"
-#                 "\n   libcuda with your distribution of CUDA.")
-#             endif()
-#             #FindHeader(CUDA cublas_v2.h)
-#             #if(CUDA_cublas_v2.h_DIRS)
-#                 #set(HICMA_USE_CUBLAS_V2 1)
-#             #endif()
-#         endif (CUDA_FOUND)
-#
-#         # HICMA depends on MAGMA gpu kernels
-#         # call our cmake module to test (in cmake_modules)
-#         # change this call position if not appropriated
-#         #----------------------------------------------
-#         if ( CUDA_FOUND AND HICMA_USE_MAGMA )
-#             set(HICMA_MAGMA_VERSION "1.4" CACHE STRING "oldest MAGMA version desired")
-#             find_package(MAGMA ${HICMA_MAGMA_VERSION})
-#             if ( MAGMA_FOUND )
-#                 message("-- ${Blue}Add definition HICMA_USE_MAGMA"
-#                 " - Use GPU kernels from MAGMA${ColourReset}")
-#                 set(HICMA_USE_MAGMA 1)
-#                 if(MAGMA_INCLUDE_DIRS)
-#                     include_directories(${MAGMA_INCLUDE_DIRS})
-#                 endif()
-#                 if(MAGMA_LIBRARY_DIRS)
-#                     # the RPATH to be used when installing
-#                     list(APPEND CMAKE_INSTALL_RPATH "${MAGMA_LIBRARY_DIRS}")
-#                 endif()
-#                 if (MAGMA_LIBRARIES)
-#                     list(INSERT EXTRA_LIBRARIES_CUDA 0 ${MAGMA_LIBRARIES})
-#                 endif()
-#             else( MAGMA_FOUND )
-#                 if(ECRC_VERBOSE_FIND_PACKAGE)
-#                     if (NOT MAGMA_magma.h_DIRS)
-#                         Print_Find_Header_Status(magma magma.h)
-#                     endif ()
-#                     if (NOT MAGMA_magma_LIBRARY)
-#                         Print_Find_Library_Status(magma libmagma)
-#                     endif ()
-#                 else()
-#                     message(WARNING "MAGMA library has not been found and ECRC_VERBOSE_FIND_PACKAGE is set to OFF."
-#                     " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
-#                 endif()
-#                 message(FATAL_ERROR "MAGMA library is required but has not been found")
-#             endif( MAGMA_FOUND )
-#         endif()
-#
-#         list(APPEND EXTRA_LIBRARIES ${EXTRA_LIBRARIES_CUDA})
-#
-#     endif(HICMA_USE_CUDA)
-
     # HICMA depends on MPI
     #-------------------------
     if (HICMA_USE_MPI)
@@ -598,34 +455,6 @@ else (NOT HICMA_SIMULATION)
 
     add_subdirectory(simucore)
 
-    # Guard against mis-used simulation mode
-#     if(NOT DEFINED HICMA_USE_CUDA)
-#         message(FATAL_ERROR "${BoldBlue}"
-#         "In simulation mode HICMA_USE_CUDA and HICMA_USE_MAGMA should be set to"
-#         "   ensure that the user is aware of the version to be used. If HiCMA's"
-#         "   kernels are available for NVIDIA CUDA GPUs and if the according"
-#         "   perfmodels are available in STARPU_HOME then use HICMA_USE_CUDA=ON"
-#         "   else set HICMA_USE_CUDA=OFF. The same idea is applicable with MAGMA."
-#         "${ColourReset}")
-#     endif()
-#     if(NOT DEFINED HICMA_USE_MAGMA)
-#         message(WARNING "${BoldBlue}"
-#         "In simulation mode HICMA_USE_CUDA and HICMA_USE_MAGMA should be set to"
-#         "   ensure that the user is aware of the version to be used. If HiCMA's"
-#         "   MAGMA kernels are available for NVIDIA CUDA GPUs and if the according"
-#         "   perfmodels are available in STARPU_HOME then use HICMA_USE_MAGMA=ON"
-#         "   else set HICMA_USE_MAGMA=OFF.${ColourReset}")
-#     endif()
-
-#     # Add CUDA definition if required
-#     if (HICMA_USE_CUDA)
-#         set(HICMA_USE_CUDA 1)
-#         # Add MAGMA definition if required
-#         if (HICMA_USE_MAGMA)
-#             set(HICMA_USE_MAGMA 1)
-#         endif()
-#     endif()
-
     if (NOT HICMA_SCHED_STARPU)
         message(FATAL_ERROR "Simulation mode of HiCMA only works with"
         "\n   the StarPU runtime. Please use HICMA_SCHED_STARPU=ON.")
@@ -663,26 +492,6 @@ else (NOT HICMA_SIMULATION)
             set(MPI_C_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}")
             list(APPEND MPI_C_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}/smpi")
         endif()
-#         if(NOT MPI_CXX_COMPILER)
-#             set(MPI_CXX_COMPILER "${SIMGRID_DIR_FOUND}/bin/smpicxx")
-#         endif()
-#         if(NOT MPI_CXX_LIBRARIES)
-#             set(MPI_CXX_LIBRARIES "${SIMGRID_LIBRARIES}")
-#         endif()
-#         if(NOT MPI_CXX_INCLUDE_PATH)
-#             set(MPI_CXX_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}")
-#             list(APPEND MPI_CXX_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}/smpi")
-#         endif()
-#         if(NOT MPI_Fortran_COMPILER)
-#             set(MPI_Fortran_COMPILER "${SIMGRID_DIR_FOUND}/bin/smpicxx")
-#         endif()
-#         if(NOT MPI_Fortran_LIBRARIES)
-#             set(MPI_Fortran_LIBRARIES "${SIMGRID_LIBRARIES}")
-#         endif()
-#         if(NOT MPI_Fortran_INCLUDE_PATH)
-#             set(MPI_Fortran_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}")
-#             list(APPEND MPI_Fortran_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}/smpi")
-#         endif()
         find_package(MPI REQUIRED)
 
         if (MPI_C_FOUND)
@@ -721,10 +530,12 @@ if( STARSH_FOUND )
             if ( ${GSL_IN_STARSH} EQUAL 0)
                 message( STATUS "STARSH depends on gsl. Adding it to dependency list")
                 find_package(GSL REQUIRED)
-                if (STARSH_LIBRARIES_DEP)
-                    list( APPEND STARSH_LIBRARIES_DEP ${GSL_LIBRARIES})
-                else()
-                    list( APPEND STARSH_LIBRARIES ${GSL_LIBRARIES})
+                if( GSL_FOUND )
+                    if (STARSH_LIBRARIES_DEP)
+                        list( APPEND STARSH_LIBRARIES_DEP ${GSL_LIBRARIES})
+                    else()
+                        list( APPEND STARSH_LIBRARIES ${GSL_LIBRARIES})
+                    endif()
                 endif()
             endif()
 	endif()
@@ -737,6 +548,46 @@ if( STARSH_FOUND )
     endif()
 endif()
 
+# HICMA depends on STARSHCORE
+# -------------------------------
+#pkg_search_module(STARSHCORE REQUIRED starsh_core)
+#include_directories(${STARSHCORE_INCLUDE_DIRS})
+#link_directories(${STARSHCORE_LIBRARY_DIRS})
+
+
+#find_package( STARSHCORE REQUIRED )
+#if( STARSHCORE_FOUND )
+    #include_directories(${STARSHCORE_INCLUDE_DIRS_DEP})
+    #if(STARSHCORE_LINKER_FLAGS)
+        #list(APPEND CMAKE_EXE_LINKER_FLAGS "${STARSHCORE_LINKER_FLAGS}")
+    #endif()
+    #if(STARSHCORE_LIBRARY_DIRS)
+        ## the RPATH to be used when installing
+        #list(APPEND CMAKE_INSTALL_RPATH "${STARSHCORE_LIBRARY_DIRS}")
+    #endif()
+    #if (STARSHCORE_LIBRARIES)
+        ## look for gsl
+        #find_library( _STARSHCORE_LIB NAME starsh_core PATHS ${STARSHCORE_LIBRARY_DIRS} )
+        #if( _STARSHCORE_LIB AND NOT "${STARSHCORE_LIBRARIES_DEP}" MATCHES "gsl" )
+            #execute_process( COMMAND nm ${_STARSHCORE_LIB} COMMAND grep -q gsl RESULT_VARIABLE GSL_IN_STARSHCORE )
+            #if ( ${GSL_IN_STARSHCORE} EQUAL 0)
+                #message( STATUS "STARSHCORE depends on gsl. Adding it to dependency list")
+                #find_package(GSL REQUIRED)
+                #if (STARSHCORE_LIBRARIES_DEP)
+                    #list( APPEND STARSHCORE_LIBRARIES_DEP ${GSL_LIBRARIES})
+                #else()
+                    #list( APPEND STARSHCORE_LIBRARIES ${GSL_LIBRARIES})
+                #endif()
+            #endif()
+	#endif()
+	## insert to dependencies
+        #if (STARSHCORE_LIBRARIES_DEP)
+            #list(APPEND HICMA_DEP ${STARSHCORE_LIBRARIES_DEP})
+        #else()
+            #list(APPEND HICMA_DEP ${STARSHCORE_LIBRARIES})
+        #endif()
+    #endif()
+#endif()
 
 # HICMA depends on a runtime
 # -------------------------------
@@ -748,9 +599,6 @@ if( HICMA_SCHED_STARPU )
     # create list of components in order to make a single call to find_package(starpu...)
     if(NOT HICMA_SIMULATION)
         set(STARPU_COMPONENT_LIST "HWLOC")
-#         if(HICMA_USE_CUDA)
-#             list(APPEND STARPU_COMPONENT_LIST "CUDA")
-#         endif()
     else()
         set(STARPU_COMPONENT_LIST "SIMGRID")
     endif()
@@ -950,9 +798,6 @@ if( HICMA_SCHED_PARSEC )
     if(HICMA_USE_MPI)
         list(APPEND PARSEC_COMPONENT_LIST "MPI")
     endif()
-#     if(HICMA_USE_CUDA)
-#         list(APPEND PARSEC_COMPONENT_LIST "CUDA")
-#     endif()
     # TODO: Add a HICMA_WITH_PROFILING option that enables Fxt for StarPU, or PAPI for PaRSEC
     #if(HICMA_WITH_PROFILING)
     #    list(APPEND PARSEC_COMPONENT_LIST "PAPI")
@@ -1114,12 +959,28 @@ if( CHAMELEON_FOUND )
     endif()
 endif()
 
+# HICMA depends on HCORE
+# -------------------------------
+find_package( HCORE REQUIRED )
+if( HCORE_FOUND )
+    include_directories( BEFORE ${HCORE_INCLUDE_DIRS_DEP} )
+    if(HCORE_LINKER_FLAGS)
+        list(APPEND CMAKE_EXE_LINKER_FLAGS "${HCORE_LINKER_FLAGS}")
+    endif()
+    if(HCORE_LIBRARY_DIRS)
+        # the RPATH to be used when installing
+        list(APPEND CMAKE_INSTALL_RPATH "${HCORE_LIBRARY_DIRS}")
+        link_directories(${HCORE_LIBRARY_DIRS})
+    endif()
+    if (HCORE_LIBRARIES)
+        if (HCORE_LIBRARIES_DEP)
+            list(INSERT HICMA_DEP 0 ${HCORE_LIBRARIES_DEP})
+        else()
+            list(INSERT HICMA_DEP 0 ${HCORE_LIBRARIES})
+        endif()
+    endif()
+endif()
 
-# # Add option to exploit cublas API v2
-# # -----------------------------------
-# cmake_dependent_option(HICMA_USE_CUBLAS_V2
-#   "Enable cublas API v2" ON
-#   "HICMA_USE_CUDA;HICMA_SCHED_STARPU" OFF)
 
 list(REMOVE_DUPLICATES CMAKE_EXE_LINKER_FLAGS)
 string(REPLACE ";" " " CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
@@ -1142,14 +1003,6 @@ elseif(HICMA_SCHED_PARSEC)
 elseif(HICMA_SCHED_QUARK)
     link_directories(${QUARK_LIBRARY_DIRS})
 endif()
-if(NOT HICMA_SIMULATION)
-#     if(HICMA_USE_CUDA)
-#         link_directories(${CUDA_LIBRARY_DIRS})
-#     endif()
-#     if(HICMA_USE_MAGMA)
-#         link_directories(${MAGMA_LIBRARY_DIRS})
-#     endif()
-endif()
 
 # Save extra dependencies (all required links)
 list(APPEND HICMA_DEP ${EXTRA_LIBRARIES})
@@ -1158,47 +1011,7 @@ list(REMOVE_DUPLICATES HICMA_DEP) # WARNING: is it safe, respect order?
 # Check for the subdirectories
 # ----------------------------
 
-# include headers
-# ---------------
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 
-
-###############################################################################
-# Coreblas library (kernels for CPUs) #
-#######################################
-
-#######add_subdirectory(hcore)
-#------------------------------------------------------------------------------
-
-
-###############################################################################
-# Cudablas library (kernels for CUDAs) #
-########################################
-
-# if(HICMA_USE_CUDA)
-#     add_subdirectory(cudablas)
-# endif()
-#------------------------------------------------------------------------------
-
-
-###############################################################################
-# Main library #
-################
-
-#add_subdirectory(include)
-#add_subdirectory(control)
-#######add_subdirectory(compute)
-#------------------------------------------------------------------------------
-
-
-###############################################################################
-# Runtime library #
-###################
-
-#######add_subdirectory(runtime)
-#------------------------------------------------------------------------------
 
 
 ###############################################################################
@@ -1232,15 +1045,6 @@ if(BLAS_VENDOR_FOUND MATCHES "Intel*")
 endif()
 
 
-# Timing executables
-if(HICMA_ENABLE_TIMING)
-  add_subdirectory(timing)
-endif(HICMA_ENABLE_TIMING)
-# Testing executables
-if(HICMA_ENABLE_TESTING)
-  add_subdirectory(testing)
-endif(HICMA_ENABLE_TESTING)
-#------------------------------------------------------------------------------
 
 ##################################################################
 # temporary basic build
@@ -1262,22 +1066,26 @@ endif()
 
 
 
-include_directories( ${CMAKE_SOURCE_DIR}/include )
+##### BUILD
+link_directories(${STARSH_LIBRARY_DIRS})
 
-SET( HICMA_HCORE_SRC
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zhagcm.c
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zhagdm.c
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgytlr.c
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zsyrk.c
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgemm_fast.c
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgemm.c
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zgemmbdcd.c
-    ${CMAKE_SOURCE_DIR}/hcore/compute/hcore_zuncompress.c
-  )
-include_directories( ${CMAKE_SOURCE_DIR}/hcore/include )
+
+# include headers
+# ---------------
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/hcore/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/hcore/misc/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
+include_directories( ${CMAKE_SOURCE_DIR}/include )
 
 set( HICMA_CONTROL_SRC
     ${CMAKE_SOURCE_DIR}/control/hicma_init.c
+    )
+set( HICMA_MISC_SRC
+    ${CMAKE_SOURCE_DIR}/misc/zproblem.c
+    ${CMAKE_SOURCE_DIR}/misc/zstat.c
+    ${CMAKE_SOURCE_DIR}/misc/descutil.c
     )
 set( HICMA_COMPUTE_SRC
     ${CMAKE_SOURCE_DIR}/compute/pzhagcm.c
@@ -1292,6 +1100,12 @@ set( HICMA_COMPUTE_SRC
     ${CMAKE_SOURCE_DIR}/compute/zgemm.c
     ${CMAKE_SOURCE_DIR}/compute/pztrsm.c
     ${CMAKE_SOURCE_DIR}/compute/ztrsm.c
+    ${CMAKE_SOURCE_DIR}/compute/zdiag.c
+    ${CMAKE_SOURCE_DIR}/compute/zuncompress.c
+    ${CMAKE_SOURCE_DIR}/compute/pzgenrhs.c
+    ${CMAKE_SOURCE_DIR}/compute/zgenrhs.c
+    ${CMAKE_SOURCE_DIR}/compute/pzgenmat.c
+    ${CMAKE_SOURCE_DIR}/compute/zgenmat.c
   )
 
 #set( HICMA_TIMING_SRC
@@ -1312,51 +1126,37 @@ set( HICMA_RUNTIME_SRC
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_ztrsm.c
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zsyrk.c
     ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgytlr_diag.c
+    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgenrhs.c
+    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgenmat.c
   )
 
-set( HICMA_AUX_SRC
-    ${CMAKE_SOURCE_DIR}/misc/compute/zuncompress.c
-    ${CMAKE_SOURCE_DIR}/misc/compute/zdiag.c
-    ${CMAKE_SOURCE_DIR}/misc/compute/zproblem.c
-    ${CMAKE_SOURCE_DIR}/misc/compute/znormest.c
-    ${CMAKE_SOURCE_DIR}/misc/descutil/descprint.c
-    ${CMAKE_SOURCE_DIR}/misc/descutil/descsame.c
-    ${CMAKE_SOURCE_DIR}/misc/compute/zstat.c
-  )
-include_directories( ${CMAKE_SOURCE_DIR}/misc/include )
 
-link_directories(${STARSH_LIBRARY_DIRS})
 link_directories(${STARPU_LIBRARY_DIRS})
 link_directories(${CHAMELEON_LIBRARY_DIRS})
 
-add_library( hicma ${HICMA_RUNTIME_SRC} ${HICMA_HCORE_SRC} ${HICMA_COMPUTE_SRC} ${HICMA_AUX_SRC} ${HICMA_CONTROL_SRC} )
+add_library( hicma ${HICMA_RUNTIME_SRC} ${HICMA_COMPUTE_SRC} ${HICMA_CONTROL_SRC} ${HICMA_MISC_SRC} )
+target_link_libraries(hicma ${HICMA_DEP})
 target_link_libraries(hicma ${STARSH_LIBRARIES_DEP})
-#add_executable( main ${HICMA_TIMING_SRC} )
-#target_link_libraries( main
-    #hicma
-    #${HICMA_DEP}
-    #${STARSH_LIBRARIES_DEP}
-    #${CHAMELEON_LIBRARIES_DEP}
-    #${STARPU_LIBRARIES_DEP}
-    #)
+
+# Timing executables
+if(HICMA_ENABLE_TIMING)
+  add_subdirectory(timing)
+endif(HICMA_ENABLE_TIMING)
+# Testing executables
+if(HICMA_ENABLE_TESTING)
+  add_subdirectory(testing)
+endif(HICMA_ENABLE_TESTING)
+#------------------------------------------------------------------------------
 
 # Installation step
 install( TARGETS hicma
          DESTINATION lib )
-#install( TARGETS main
-         #DESTINATION bin/timing )
-install( FILES hcore/include/hcore_z.h
-         DESTINATION include )
 install( FILES include/hicma_constants.h
          DESTINATION include )
 install( FILES include/hicma_struct.h
          DESTINATION include )
 install( FILES include/hicma_z.h
          DESTINATION include )
-install( FILES misc/include/auxcompute_z.h
-         DESTINATION include/misc )
-install( FILES misc/include/auxdescutil.h
-         DESTINATION include/misc )
 
 ###############################################################################
 # Documentation #

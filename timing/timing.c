@@ -83,11 +83,31 @@ void* morse_getaddr_null(const MORSE_desc_t *A, int m, int n)
 
 int ISEED[4] = {0,0,0,1};   /* initial seed for zlarnv() */
 
+void print_array(int m, int n, int ld, double* arr, FILE* fp){
+        int i, j;
+        fprintf(fp, "%d %d\n", m, n);
+        for(i = 0; i < m; i++){
+            for(j = 0; j < n; j++){
+                fprintf(fp, "%d\t", (int)arr[ld*j+i] );
+            }
+            fprintf(fp, "\n" );
+        }
+}
+void fwrite_array(int m, int n, int ld, double* arr, char* file){
+        FILE* fp = fopen(file, "w");
+        if(fp == NULL){
+            fprintf(stderr, "File %s cannot be opened to write\n", file);
+            exit(1);
+        }
+        print_array(m, n, ld, arr, fp);
+        fclose(fp);
+}
+
 static int
 Test(int64_t n, int *iparam, 
         double fixed_rank_decay, 
         double wave_k, 
-        char* rankfile) {
+        char* rankfile, double fixed_accuracy_threshold) {
     int      i, j, iter;
     int      thrdnbr, niter;
     int64_t  M, N, K, NRHS;
@@ -178,6 +198,7 @@ Test(int64_t n, int *iparam,
 
     dparam[IPARAM_HICMA_STARSH_DECAY] = fixed_rank_decay;
     dparam[IPARAM_HICMA_STARSH_WAVE_K] = wave_k;
+    dparam[IPARAM_HICMA_ACCURACY_THRESHOLD] = fixed_accuracy_threshold ;
     if ( iparam[IPARAM_WARMUP] ) {
         int status = RunTest( iparam, dparam, &(t[0]), rankfile);
         if (status != MORSE_SUCCESS) return status;
@@ -273,7 +294,7 @@ Test(int64_t n, int *iparam,
                             /*dparam[IPARAM_RES] /  dparam[IPARAM_XNORM] );*/
                             /*[>dparam[IPARAM_RES] / n / eps / (dparam[IPARAM_ANORM] * dparam[IPARAM_XNORM] + dparam[IPARAM_BNORM] ));<]*/
                 /*else*/
-                    printf( "%8.5e %8.5e %8.5e %8.5e                       %8.5e SUCCESS",
+                    printf( "%8.5e %8.5e %8.5e %8.5e                       %8.5e SUCCESSFUL Factorization",
                             dparam[IPARAM_RES], dparam[IPARAM_ANORM], dparam[IPARAM_XNORM], dparam[IPARAM_BNORM],
                             dparam[IPARAM_RES] /  dparam[IPARAM_XNORM] );
                             /*dparam[IPARAM_RES] / n / eps / (dparam[IPARAM_ANORM] * dparam[IPARAM_XNORM] + dparam[IPARAM_BNORM] ));*/
@@ -286,6 +307,21 @@ Test(int64_t n, int *iparam,
 
             printf("\n");
 
+         if ( iparam[IPARAM_CSOLVE] ){
+                    printf( "||A||inf: %8.5e ||X||inf: %8.5e ||B||inf: %8.5e abs||AX-B||inf: %8.5e rel||AX-B||inf: %8.5e      SUCCESSFUL Solver",
+                            dparam[IPARAM_IANORM], dparam[IPARAM_IXNORM], dparam[IPARAM_IBNORM], dparam[IPARAM_IRNORM], dparam[IPARAM_IRES]);
+            }
+            printf("\n");
+            fflush( stdout );
+/*
+            if ( MORSE_My_Mpi_Rank() == 0) {
+          printf("FinalResults: %d, %d, %d, %d, %d, %d, %9.2f, %8.5e, %8.5e, %8.5e\n", iparam[IPARAM_THRDNBR], iparam[IPARAM_M], iparam[IPARAM_N], iparam[IPARAM_K], iparam[IPARAM_MB], iparam[IPARAM_NB], sumt/niter, dparam[IPARAM_HICMA_ACCURACY_THRESHOLD], dparam[IPARAM_IRNORM], dparam[IPARAM_IRES]);
+            }
+            fflush( stdout );
+*/
+
+
+            printf("\n");
             fflush( stdout );
         }
         free(t);
@@ -382,6 +418,8 @@ Test(int64_t n, int *iparam,
                     "  --[a]sync        Enable/Disable synchronous calls in wrapper function such as POTRI. (default: async)\n"
                     "  --[no]bigmat     Allocating one big mat or plenty of small (default: bigmat)\n"
                     "  --[no]check      Check result (default: nocheck)\n"
+                    "  --solve          Cholesky solver (default: disabled by default)\n"
+                    "  --csolve    Check Cholesky solver (default: disabled by default), Please note: you need to enable solve\n"
                     "  --[no]progress   Display progress indicator (default: noprogress)\n"
                     "  --[no]gemm3m     Use gemm3m complex method (default: nogemm3m)\n"
                     "  --[no]inv        Check on inverse (default: noinv)\n"
@@ -408,13 +446,26 @@ Test(int64_t n, int *iparam,
                     "  --rhblk=N        If N > 0, enable Householder mode for QR and LQ factorization\n"
                     "                   N is the size of each subdomain (default: 0)\n"
                     " --rk              fixed rank\n"
-                    " --acc             fixed accuracy is used if fixed rank is equal to zero. This value is also used by STARSH-H in generation of matrix. Rndtiled also depends on this variable\n"
+                    " --acc             [use scientific notation] fixed accuracy is used if fixed rank is equal to zero. This value is also used by STARSH-H in generation of matrix. Rndtiled also depends on this variable\n"
                     " --starshmaxrank   buffer sizes in generation of matrices hcore_gytlr and the limit used in QR factorizations and SVD of hcore_gemm to verify that ranks do not excess current allocation.\n"
+                    " --starshwavek     Wave number for electrodynamics problem. The input must be a floating-point number.\n"
+                    " --reorderinnerproducts=[0,1]  Reorder inner products while performing HiCMA_GEMM()\n"
+                    "\n"
                     " Use one of the flags for selecting problem type:\n"
                     "                   --ss              Spatial statistics with square exp kernel\n"
+                    "                   --st-3D-sqexp     Spatial statistics with 3D sqexp kernel\n"
+                    "                   --st-3D-exp       Spatial statistics with 3D exp kernel\n"
                     "                   --geostat         Spatial statistics with Matern kernel\n"
                     "                   --edsin           Electro dynamics with Sinus\n"
                     "                   --rnd             Random matrix\n"
+                    "                   --m-3D-rbf        RBF Unstructured Mesh Deformation for 3D problems\n"
+                    " --reg             Regularization value\n"
+                    " --rad             RBF scaling factor\n"
+                    " --order           0: no ordering, 1: Morton ordering, 2:Hibert ordering\n"
+                    " --rbf_kernel      Type of RBF basis function (0:Gaussian, 1:Expon, 2:InvQUAD, 3:InvMQUAD, 4:Maternc1, 5:Maternc2, 6:TPS, 7:CTPS, 8:QUAD and 9:Wendland)\n"
+                    " --mesh_file       Either path to mesh file including file name in case of one batch of viurses or path to mesh folder if you enable batch mode add  / at the end\n"
+                    " --numobj          Total numnber of objects (total number of viurses within a population)\n"
+                    " --numsubobj       Numnber of subobjects (number of subviurses within a batch)\n"
                     /*             "\n" */
                     /*             " Options specific to the conversion format timings xgetri and xgecfi:\n" */
                     /*             "  --ifmt           Input format. (default: 0)\n" */
@@ -433,7 +484,7 @@ Test(int64_t n, int *iparam,
 
     static void
         print_header(char *prog_name, int * iparam,
-                double fixed_rank_decay, double wave_k) {
+                double fixed_rank_decay, double wave_k, double fixed_accuracy_threshold) {
             const char *bound_header   = iparam[IPARAM_BOUND]   ? "   thGflop/s" : "";
             //const char *check_header   = iparam[IPARAM_CHECK]   ? "     ||Ax-b||       ||A||       ||x||       ||b|| ||Ax-b||/N/eps/(||A||||x||+||b||)  RETURN" : "";
             const char *check_header   = iparam[IPARAM_CHECK]   ? "     ||DC-TLR||       ||init DC||       ||DC||       ||TLR|| ||DC-TLR||/||DC||  RETURN" : "";
@@ -464,6 +515,7 @@ Test(int64_t n, int *iparam,
                     "# shmaxrk:     %d\n"
                     "# shprob:      %d\n"
                     "# shdecay:     %e\n"
+                    "# reorder inner products:     %d\n"
                     "#\n",
                     prog_name,
                     iparam[IPARAM_THRDNBR],
@@ -477,16 +529,17 @@ Test(int64_t n, int *iparam,
                     iparam[IPARAM_IB],
                     eps,
                     iparam[IPARAM_RK],
-                    //iparam[IPARAM_ACC],
-                    pow(10, -1.0*iparam[IPARAM_ACC]),
+                    fixed_accuracy_threshold,
+                    //pow(10, -1.0*iparam[IPARAM_ACC]),
                     iparam[IPARAM_HICMA_ALWAYS_FIXED_RANK],
                     wave_k,
                     iparam[IPARAM_HICMA_STARSH_MAXRANK],
                     //iparam[IPARAM_HICMA_MAXRANK],
                     iparam[IPARAM_HICMA_STARSH_PROB],
                     //iparam[IPARAM_HICMA_STARSH_DECAY],
-                    fixed_rank_decay
+                    fixed_rank_decay,
                     //pow(10, -1.0*iparam[IPARAM_HICMA_STARSH_DECAY])
+                    iparam[IPARAM_HICMA_REORDER_INNER_PRODUCTS]
                     );
 
             printf( "#     M       N  K/NRHS   seconds   Gflop/s Deviation%s%s%s\n",
@@ -514,12 +567,15 @@ Test(int64_t n, int *iparam,
             int success = 0;
 
             double fixed_rank_decay = 0.0;
+            double fixed_accuracy_threshold = 0.0;
             double wave_k = 0.0;
             char* rankfile = calloc(2048, sizeof(char));
+            meshfile = calloc(2048, sizeof(char));
+            meshfile[0] = '\0';
             rankfile[0] = '\0';
-
             memset(iparam, 0, IPARAM_SIZEOF*sizeof(int));
 
+        
             iparam[IPARAM_THRDNBR       ] = -1;
             iparam[IPARAM_THRDNBR_SUBGRP] = 1;
             iparam[IPARAM_SCHEDULER     ] = 0;
@@ -535,6 +591,8 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_NITER         ] = 1;
             iparam[IPARAM_WARMUP        ] = 1;
             iparam[IPARAM_CHECK         ] = 0;
+            iparam[IPARAM_SOLVE         ] = 0;
+            iparam[IPARAM_CSOLVE        ] = 0;
             iparam[IPARAM_BIGMAT        ] = 1;
             iparam[IPARAM_VERBOSE       ] = 0;
             iparam[IPARAM_AUTOTUNING    ] = 0;
@@ -568,7 +626,6 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_BOUNDDEPS     ] = 0;
             iparam[IPARAM_BOUNDDEPSPRIO ] = 0;
             iparam[IPARAM_RK            ] = 0;
-            iparam[IPARAM_ACC           ] = 1;
             iparam[IPARAM_HICMA_ALWAYS_FIXED_RANK] = 0;
             iparam[IPARAM_HICMA_STARSH_PROB   ] = HICMA_STARSH_PROB_RND;
             iparam[IPARAM_HICMA_STARSH_MAXRANK] = 10;
@@ -576,7 +633,14 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_HICMA_PRINTMAT] = 0;
             iparam[IPARAM_HICMA_PRINTINDEX] = 0;
             iparam[IPARAM_HICMA_PRINTINDEXEND] = 0;
-
+            iparam[IPARAM_HICMA_REORDER_INNER_PRODUCTS] = 0;
+             //Set defaul values to RBF parameters
+            iparam[IPARAM_ORDER] = 0;
+            iparam[IPARAM_RBFKERNEL] = 9;
+            iparam[IPARAM_NUMOBJ] = 1;
+            iparam[IPARAM_NUMSUBOBJ] = 1;
+            rad=0.6;
+            reg=1.1;
             for (i = 1; i < argc && argv[i]; ++i) {
                 if ( startswith( argv[i], "--help") || startswith( argv[i], "-help") ||
                         startswith( argv[i], "--h") || startswith( argv[i], "-h") ) {
@@ -585,7 +649,8 @@ Test(int64_t n, int *iparam,
                 } else if (startswith( argv[i], "--rk=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_RK]) );
                 } else if (startswith( argv[i], "--acc=" )) {
-                    sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_ACC]) );
+                    sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(fixed_accuracy_threshold) );
+                    //printf("%s fixed_accuracy_threshold: %e\n", argv[i], fixed_accuracy_threshold);exit(-1);
                 } else if (startswith( argv[i], "--alwaysfixedrank" )) {
                     iparam[IPARAM_HICMA_ALWAYS_FIXED_RANK] = 1;
                 } else if (startswith( argv[i], "--matfile=" )) {
@@ -597,11 +662,17 @@ Test(int64_t n, int *iparam,
                     iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_RND;
                 } else if (startswith( argv[i], "--ss" )) {
                     iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_SS;
+                } else if (startswith( argv[i], "--st-3D-sqexp" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_ST_3D_SQEXP;
+                } else if (startswith( argv[i], "--st-3D-exp" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_ST_3D_EXP;
                 } else if (startswith( argv[i], "--geostat" )) {
                     iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_GEOSTAT;
                 } else if (startswith( argv[i], "--edsin" )) {
                     iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_EDSIN;
-                } else if (startswith( argv[i], "--starshwavek=" )) {
+                } else if (startswith( argv[i], "--m-3D-rbf" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_3D_RBF;
+                }else if (startswith( argv[i], "--starshwavek=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(wave_k) );
                 } else if (startswith( argv[i], "--starshdecay=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(fixed_rank_decay) );
@@ -615,8 +686,12 @@ Test(int64_t n, int *iparam,
                     iparam[IPARAM_HICMA_PRINTINDEX] = 1;
                 } else if (startswith( argv[i], "--rankfile" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%s", rankfile );
+                 } else if (startswith( argv[i], "--mesh_file" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%s", meshfile );
                 } else if (startswith( argv[i], "--printindexend" )) {
                     iparam[IPARAM_HICMA_PRINTINDEXEND] = 1;
+                } else if (startswith( argv[i], "--reorderinnerproducts" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_REORDER_INNER_PRODUCTS]) );
                 } else if (startswith( argv[i], "--threads=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_THRDNBR]) );
                 } else if (startswith( argv[i], "--gpus=" )) {
@@ -625,7 +700,11 @@ Test(int64_t n, int *iparam,
                     iparam[IPARAM_CHECK] = 1;
                 } else if (startswith( argv[i], "--nocheck" )) {
                     iparam[IPARAM_CHECK] = 0;
-                } else if (startswith( argv[i], "--bigmat" )) {
+                }  else if (startswith( argv[i], "--solve" )) {
+                    iparam[IPARAM_SOLVE] = 1;
+                }  else if (startswith( argv[i], "--csolve" )) {
+                    iparam[IPARAM_CSOLVE] = 1;
+                }else if (startswith( argv[i], "--bigmat" )) {
                     iparam[IPARAM_BIGMAT] = 1;
                 } else if (startswith( argv[i], "--nobigmat" )) {
                     iparam[IPARAM_BIGMAT] = 0;
@@ -684,6 +763,19 @@ Test(int64_t n, int *iparam,
                 sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_NX]) );
             } else if (startswith( argv[i], "--rhblk=" )) {
                 sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_RHBLK]) );
+            } else if (startswith( argv[i], "--rbf_kernel=" )) {
+                sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_RBFKERNEL]) );
+            } else if (startswith( argv[i], "--order=" )) {
+                sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_ORDER]) );
+            } else if (startswith( argv[i], "--numobj=" )) {
+                sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_NUMOBJ]) );
+            } else if (startswith( argv[i], "--numsubobj=" )) {
+                sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_NUMSUBOBJ]) );
+            }else if (startswith( argv[i], "--rad" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(rad) );
+            }else if (startswith( argv[i], "--reg" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(reg) );
+                    
                 /*         } else if (startswith( argv[i], "--inplace" )) { */
             /*             iparam[IPARAM_INPLACE] = morse_INPLACE; */
             /*         } else if (startswith( argv[i], "--outplace" )) { */
@@ -795,11 +887,11 @@ Test(int64_t n, int *iparam,
             MORSE_Set(MORSE_TRANSLATION_MODE, iparam[IPARAM_INPLACE]);
 
             if ( MORSE_My_Mpi_Rank() == 0 )
-                print_header( argv[0], iparam, fixed_rank_decay, wave_k);
+                print_header( argv[0], iparam, fixed_rank_decay, wave_k, fixed_accuracy_threshold);
 
             if (step < 1) step = 1;
 
-            int status = Test( -1, iparam, fixed_rank_decay, wave_k, rankfile ); /* print header */
+            int status = Test( -1, iparam, fixed_rank_decay, wave_k, rankfile, fixed_accuracy_threshold); /* print header */
             if (status != MORSE_SUCCESS) return status;
             for (i = start; i <= stop; i += step)
             {
@@ -814,7 +906,7 @@ Test(int64_t n, int *iparam,
                         iparam[IPARAM_M] = i;
                     iparam[IPARAM_N] = i;
                 }
-                int status = Test( iparam[IPARAM_N], iparam, fixed_rank_decay, wave_k, rankfile );
+                int status = Test( iparam[IPARAM_N], iparam, fixed_rank_decay, wave_k, rankfile, fixed_accuracy_threshold );
                 if (status != MORSE_SUCCESS) return status;
                 success += status;
             }
@@ -822,6 +914,7 @@ Test(int64_t n, int *iparam,
             MORSE_Finalize();
             starpu_data_display_memory_stats();
             free(rankfile);
+            free(meshfile);
             return success;
         }
 

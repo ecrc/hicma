@@ -125,7 +125,7 @@ void hicma_pzgytlr(
                         Dense
                         );
             } else {
-                //printf("off  %d,%d\n", m, n);
+                //printf("off  %d,%d, %d, %d\n", m, n, tempmmD, tempnn);
                 HICMA_TASK_zgytlr(
                         &options,
                         tempmmD, tempnn,

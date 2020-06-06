@@ -16,7 +16,7 @@
  *
  * @version 0.1.1
  * @author Kadir Akbudak
- * @date 2018-11-08
+ * @date 2019-11-21
  * @brief This file shows how to factorize and solve using HiCMA. X/B matrix in AX=B  is dense.
  **/
 /*
@@ -49,8 +49,8 @@
 #include "hicma_common.h"
 
 #include <assert.h>
-#include "auxcompute_z.h"
-#include "auxdescutil.h"
+#include "misc/auxcompute_z.h"
+#include "misc/auxdescutil.h"
 
 // zgytlr uses starsh in MPI mode.
 STARSH_blrf *mpiF;
@@ -85,6 +85,7 @@ int calc_rank_stat = 1;
 #include <morse.h>
 #include "testing_zauxiliary.h"
 
+#if ! defined(ARMPL)
 enum blas_order_type {
             blas_rowmajor = 101,
             blas_colmajor = 102 };
@@ -117,6 +118,7 @@ BLAS_error(char *rname, int err, int val, int x) {
   fprintf( stderr, "%s %d %d %d\n", rname, err, val, x );
   abort();
 }
+#endif
 
 static
 void

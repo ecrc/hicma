@@ -1,0 +1,7 @@
+#Number of nodes: 1 =============================
+#Thu Sep  5 19:04:35 UTC 2019 on 1 nodes. Hicma beta=0.01 --ss - small -  - 10:00:00 - 150  - hic - exp/cases/sqexp.sh "1" 1 (0-0-1)
+#case ids:  1
+25425.xci00
+25426.xci00
+25427.xci00
+25428.xci00

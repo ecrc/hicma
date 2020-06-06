@@ -18,6 +18,7 @@
 #undef REAL
 #define COMPLEX
 #include "morse.h"
+#include "hicma.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -165,6 +166,36 @@ int HICMA_ztrsmd_Tile_Async(MORSE_enum side, MORSE_enum uplo,
         MORSE_desc_t *Bdense,
         int maxrk,
         MORSE_sequence_t *sequence, MORSE_request_t *request);
+int HICMA_zuncompress(
+        MORSE_enum uplo, MORSE_desc_t *AUV, MORSE_desc_t *AD, MORSE_desc_t *Ark);
+int HICMA_zuncompress_custom_size(MORSE_enum uplo,
+        MORSE_desc_t *AUV, MORSE_desc_t *AD, MORSE_desc_t *Ark,
+        int numrows_matrix,
+        int numcolumns_matrix,
+        int numrows_block,
+        int numcolumns_block
+        );
+int HICMA_zdiag_vec2mat(
+        MORSE_desc_t *vec, MORSE_desc_t *mat);
+void HICMA_zgenerate_problem(
+        int probtype, //problem type defined in hicma_constants.h 
+        char sym,     // symmetricity of problem: 'N' or 'S'
+        double decay, // decay of singular values. Will be used in HICMA_STARSH_PROB_RND. Set 0 for now.
+        int _M,       // number of rows/columns of matrix
+        int _nb,      // number of rows/columns of a single tile
+        int _mt,      // number of tiles in row dimension
+        int _nt,      // number of tiles in column dimension
+        HICMA_problem_t *hicma_problem // pointer to hicma struct (starsh format will be used to pass coordinate info to number generation and compression phase)
+        );
+int HICMA_zgenrhs_Tile(
+        MORSE_desc_t *A);
+int HICMA_zgenrhs_Tile_Async(
+        MORSE_desc_t     *A,
+        MORSE_sequence_t *sequence,
+        MORSE_request_t  *request);
+void hicma_pzgenrhs(
+        MORSE_desc_t *A,
+        MORSE_sequence_t *sequence, MORSE_request_t *request );
 #ifdef __cplusplus
 }
 #endif

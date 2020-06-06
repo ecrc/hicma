@@ -715,7 +715,7 @@ void hicma_pztrsmd(MORSE_enum side, MORSE_enum uplo, MORSE_enum trans, MORSE_enu
              */
             else {
                 //@2
-                printf("%s %d Left Lower Trans B->m,n:%d,%d B->mt,nt:%d,%d\n", __FILE__, __LINE__, B->m, B->n, B->mt, B->nt);
+                if(0)printf("%s %d Left Lower Trans B->m,n:%d,%d B->mt,nt:%d,%d\n", __FILE__, __LINE__, B->m, B->n, B->mt, B->nt);
                 for (k = 0; k < B->mt; k++) {
                     int ldakuv = BLKLDD(AUV, B->mt-1-k);
                     int ldakd = BLKLDD(AD, B->mt-1-k);

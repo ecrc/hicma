@@ -91,7 +91,7 @@ void hicma_pzhagcm(
                     Ark,
                     m, n, 
                     ldamUV, ldamUV,
-                    maxrank, tol
+                    maxrank, tol, A->mt
                     );
         }
     }

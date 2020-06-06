@@ -29,6 +29,7 @@ ZCODELETS_HEADER(gemmbdcd_hcore)
 /*CHAMELEON_CL_CB(zgemm_hcore,         starpu_matrix_get_nx(task->handles[2]), starpu_matrix_get_ny(task->handles[2]), starpu_matrix_get_ny(task->handles[0]),     2. *M*N*K) [> If A^t, computation is wrong <]*/
 
 #include "hcore_z.h"
+extern flop_counter counters[FLOP_NUMTHREADS];
 
 extern int global_always_fixed_rank;
 extern int global_fixed_rank;
@@ -206,11 +207,15 @@ static void cl_zgemmbdcd_hcore_cpu_func(void *descr[], void *cl_arg)
         exit(101);
     }
 
+    flop_counter flops;
+    flops.update = 0;
     HCORE_zgemmbdcd(transA, transB,
             m, n,
             alpha, (isTransA ? AV : AU), (isTransA ? AU : AV), Ark, lda,
             BD, ldb,
-            beta, CD, ldc, work);
+            beta, CD, ldc, work, &flops);
+    int myid = RUNTIME_thread_rank(NULL);
+    counters[myid].update += flops.update; 
 
     if(HICMA_get_print_index() || HICMA_get_print_index_end()){
         char datebuf[128];

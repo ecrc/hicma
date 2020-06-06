@@ -77,7 +77,7 @@ void hicma_pzhagdm(
                     tempmm, tempnn,
                     Dense,
                     ldam,
-                    m, n
+                    m, n, Dense->mt
                     );
         }
     }
