@@ -98,10 +98,10 @@ void hicma_pzpotrf(MORSE_enum uplo,
         2 * AD->mb * 2 * maxrk   // for copying CU and CV into temporary buffer instead of using CUV itself. There is 2*maxrk because these buffers will be used to put two U's side by side
         + 2 * AD->mb       // qrtauA qrtauB
         + maxrk * maxrk    // qrb_aubut  AcolBcolT
-        + 2 * AD->mb * maxrk // newU newV
+        + 2 * chameleon_max(AD->mb, maxrk) * maxrk // newU newV
         + (2*maxrk) * (2*maxrk)    // svd_rA     _rA
-        //+ maxrk * maxrk    // svd_rB     _rB   I assume that use_trmm=1 so I commented out
-        //+ maxrk * maxrk    // svd_T      _T    I assume that use_trmm=1 so I commented out
+        + maxrk * maxrk    // svd_rB     _rB   TRMM will NOT be used so this sentence is invalid:I assume that use_trmm=1 so I commented out
+        + maxrk * maxrk    // svd_T      _T    TRMM will NOT be used so this sentence is invalid:I assume that use_trmm=1 so I commented out
         + (2*maxrk)          // sigma
         #ifdef HCORE_GEMM_USE_ORGQR
         + CUV->mb * 2*maxrk // newUV gemms

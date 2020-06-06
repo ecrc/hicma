@@ -23,7 +23,7 @@
 #  @author Emmanuel Agullo
 #  @author Mathieu Faverge
 #  @author Florent Pruvost
-#  @date 2018-11-08
+#  @date 2020-01-07
 #
 ###
 
@@ -40,10 +40,10 @@ MACRO(CONVERT_LIBSTYLE_TO_PKGCONFIG _liblist)
 	if (${_dep} MATCHES "^/")
 	  get_filename_component(dep_libname ${_dep} NAME)
 	  get_filename_component(dep_libdir  ${_dep} DIRECTORY)
+	  STRING(REPLACE ".dylib" "" dep_libname "${dep_libname}")
 	  STRING(REPLACE "lib"    "" dep_libname "${dep_libname}")
 	  STRING(REPLACE ".so"    "" dep_libname "${dep_libname}")
 	  STRING(REPLACE ".a"     "" dep_libname "${dep_libname}")
-	  STRING(REPLACE ".dylib" "" dep_libname "${dep_libname}")
 	  STRING(REPLACE ".dll"   "" dep_libname "${dep_libname}")
 	  list(APPEND ${_liblist} -L${dep_libdir} -l${dep_libname})
 	elseif(NOT ${_dep} MATCHES "^-")
@@ -81,11 +81,11 @@ ENDMACRO(CLEAN_LIB_LIST)
 MACRO(GENERATE_PKGCONFIG_FILE)
   # The link flags specific to this package and any required libraries
   # that don't support PkgConfig
-  set(HICMA_PKGCONFIG_LIBS "-lhicma")
+  set(HICMA_PKGCONFIG_LIBS "-lhicma -lhcore")
 
   # The link flags for private libraries required by this package but not
   # exposed to applications
-  set(HICMA_PKGCONFIG_LIBS_PRIVATE "")
+  set(HICMA_PKGCONFIG_LIBS_PRIVATE "-lhcore")
 
   # A list of packages required by this package
   set(HICMA_PKGCONFIG_REQUIRED "")

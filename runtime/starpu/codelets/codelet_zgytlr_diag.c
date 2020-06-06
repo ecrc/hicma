@@ -16,13 +16,23 @@
 #include "morse.h"
 #include "runtime/starpu/chameleon_starpu.h"
 //#include "runtime/starpu/include/runtime_codelet_z.h"
-#include "hcore_z.h"
 
 #include "runtime/starpu/runtime_codelets.h"
 ZCODELETS_HEADER(gytlrdiag)
 
 
-//CHAMELEON_CL_CB(zgytlr,        starpu_matrix_get_nx(task->handles[0]), starpu_matrix_get_ny(task->handles[0]), 0,                                                M*N)
+extern void zgytlr( int m, int n, /*dimension of squareAD*/
+        double *AU,
+        double *AV,
+        double *AD,
+        double *Ark,
+        int lda,
+        int ldu,
+        int ldv,
+        int bigM, int ii, int jj, unsigned long long int seed,
+        int maxrank, double tol, int compress_diag,
+        double *Dense
+        );
 /*   MORSE_TASK_zgytlr - Generate a tile for random matrix. */
 
 void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
@@ -37,7 +47,7 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
                         int bigM, int m0, int n0, unsigned long long int seed,
                         int maxrank, double tol,
                         int compress_diag,
-                        const MORSE_desc_t *Dense
+                        MORSE_desc_t *Dense
                         )
 {
     struct starpu_codelet *codelet = &cl_zgytlrdiag;
@@ -48,8 +58,8 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
     MORSE_BEGIN_ACCESS_DECLARATION;
     MORSE_ACCESS_W(AUV, Am, An);
     MORSE_ACCESS_W(AD, ADm, ADn);
-    MORSE_ACCESS_W(Dense, Am, An);
     MORSE_ACCESS_W(Ark, Am, An);
+    MORSE_ACCESS_RW(Dense, Am, An);
     MORSE_END_ACCESS_DECLARATION;
 
     // printf("%s:%d: Am:%d An:%d lda:%d bigM:%d m0:%d n0:%d\n ", __FILE__, __LINE__, Am, An, lda, bigM, m0, n0);
@@ -63,7 +73,7 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
             STARPU_W,         RTBLKADDR(AUV, double, Am, An),
             STARPU_W,         RTBLKADDR(AD, double, ADm, ADn),
             STARPU_W,         RTBLKADDR(Ark, double, Am, An),
-            STARPU_R,         RTBLKADDR(Dense, double, Am, An), // _R must be _W SERIOUSLY. BUT _W STALLS ON SHAHEEN. FIXME
+            STARPU_RW,         RTBLKADDR(Dense, double, Am, An), // _R must be _W SERIOUSLY. BUT _W STALLS ON SHAHEEN. FIXME
             STARPU_VALUE,  &lda,                      sizeof(int),
             STARPU_VALUE,  &ldu,                      sizeof(int),
             STARPU_VALUE,  &ldv,                      sizeof(int),
@@ -77,7 +87,7 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
             STARPU_PRIORITY,    options->priority,
             STARPU_CALLBACK,    callback,
 #if defined(CHAMELEON_CODELETS_HAVE_NAME)
-            STARPU_NAME, "hcore_zgytlr_diag",
+            STARPU_NAME, "zgytlr_diag",
 #endif
             0);
 }
@@ -119,7 +129,7 @@ static void cl_zgytlr_cpu_func(void *descr[], void *cl_arg)
     double *AV = &(AUV[nelm_AU]);
 
     //printf("(%d,%d)%d %s %d %d\n", m0/m,n0/n,MORSE_My_Mpi_Rank(), __func__, __LINE__, AD == Dense);
-    HCORE_zgytlr( m, n,
+    zgytlr( m, n,
             AU,
             AV,
             AD,

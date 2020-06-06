@@ -73,7 +73,7 @@ for nodes in $nprocs; do
 	ids="84"
         #nts="11" #uwork
 	    for nt in $nts; do
-            	$cmdbatch $HOME/hicma/exp/shmem.sh $nodes $nodes $nt - hic - "$ids" $dry $HOME/hicma/$cases "13:00:00" $que $sched $maxsub $minsub
+            	$cmdbatch $HOME/hicma-dev/exp/shmem.sh $nodes $nodes $nt - hic - "$ids" $dry $HOME/hicma-dev/$cases "13:00:00" $que $sched $maxsub $minsub
 	    done 
         done
     done

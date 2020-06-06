@@ -10,14 +10,12 @@
  *
  * @version 0.1.1
  * @author Kadir Akbudak
- * @date 2018-11-08
+ * @date 2019-11-21
  * @precisions normal z -> c d s
  **/
 #include "hicma.h"
 #include "hicma_common.h"
-#include "auxdescutil.h"
-#include "coreblas.h"
-#include "coreblas/lapacke.h"
+#include "misc/auxdescutil.h"
 #include "morse.h"
 #include "runtime/starpu/chameleon_starpu.h"
 //#include "runtime/starpu/include/runtime_codelet_z.h"
@@ -26,6 +24,10 @@
 
 #include "runtime/starpu/runtime_codelets.h"
 ZCODELETS_HEADER(trsm_hcore)
+
+#include "flop_util_structs.h"
+#include "flop_counts.h"
+extern flop_counter counters[FLOP_NUMTHREADS];
 
 //UPDATE this definition. I only copy-paste from runtime/starpu/codelets/codelet_zcallback.c
 /*CHAMELEON_CL_CB(ztrsm_hcore,         starpu_matrix_get_nx(task->handles[1]), starpu_matrix_get_ny(task->handles[1]), 0,                                               M*M*N)*/
@@ -181,6 +183,13 @@ static void cl_ztrsm_hcore_cpu_func(void *descr[], void *cl_arg)
         _Brk,
         CBLAS_SADDR(alpha), A, lda,
         B, ldb);
+    int myid = RUNTIME_thread_rank(NULL);
+    if(side == CblasLeft)
+        counters[myid].trsm += flop_counts('t', m, _Brk, 1, 0);
+    else if(side == CblasRight)
+        counters[myid].trsm += flop_counts('t', m, _Brk, 2, 0);
+    else
+        assert(0=="side is not CblasLeft or CblasRight");
     if(HICMA_get_print_index() == 1 || HICMA_get_print_index_end() == 1 || trsm_print_index_end){
         gettimeofday (&tvalAfter, NULL);
         printf("%d-TRSM\t|AD(%d,%d)%dx%d-%d BV(%d,%d)%dx%d-%d m:%d\t\t\t\tTRSM: %.4f\n",MORSE_My_Mpi_Rank(),Am,An, m, m, lda,Bm, Bn, m, _Brk, ldb, m,

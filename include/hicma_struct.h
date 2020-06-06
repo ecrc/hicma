@@ -14,26 +14,8 @@
 #ifndef __HICMA_STRUCT__
 #define __HICMA_STRUCT__
 
+
 #include "starsh.h"
-struct hicma_problem_s;
-typedef struct hicma_problem_s HICMA_problem_t;
-
-struct hicma_problem_s {
-    STARSH_blrf *starsh_format;
-
-    int ndim;
-    double *theta;
-    double beta;
-    double nu;
-    double noise;
-    double diag;
-
-    // Electrodynamics
-    double wave_k;
-
-    int kernel_type;	
-    double *point; //coordinates of points
-};
 
 struct hicma_stat_s;
 typedef struct hicma_stat_s HICMA_stat_t;
@@ -43,8 +25,6 @@ struct hicma_stat_s {
     int min;
     double avg;
 };
-
-
 struct hicma_context {
     STARSH_blrf *starsh_format;
     char datebuf[128];
@@ -67,5 +47,37 @@ struct hicma_context {
     int print_mat;
     int use_scratch; // Use scratch memory provided by starpu
     int calc_rank_stat;
+};
+typedef struct {
+    int id;
+    int rank;
+} idrank;
+
+struct hicma_problem_s;
+typedef struct hicma_problem_s HICMA_problem_t;
+
+struct hicma_problem_s {
+    STARSH_blrf *starsh_format;
+
+    int ndim;
+    double *theta;
+    double beta;
+    double nu;
+    double noise;
+    double diag;
+
+    // Electrodynamics
+    double wave_k;
+
+    int kernel_type;	
+    double *point; //coordinates of points
+   
+    double reg;
+    int numobj;
+    int isreg;
+    double rad;
+    int mesh_points;
+    int mordering;
+    char* mesh_file;
 };
 #endif

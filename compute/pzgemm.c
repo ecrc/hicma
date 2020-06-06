@@ -12,7 +12,7 @@
  * @version 0.1.1
  * @author Ali Charara
  * @author Kadir Akbudak
- * @date 2018-11-08
+ * @date 2019-10-21
  *
  **/
 
@@ -39,7 +39,7 @@
  * @author Mathieu Faverge
  * @author Emmanuel Agullo
  * @author Cedric Castagnede
- * @date 2018-11-08
+ * @date 2019-10-21
  * @precisions normal z -> s d c
  *
  **/
@@ -63,6 +63,8 @@
 
 #include "hicma.h"
 
+int reorder_inner_products;
+idrank*** iporder; //inner product order
 /**
  *  Parallel tile matrix-matrix multiplication - dynamic scheduling
  **/
@@ -138,12 +140,17 @@ void hicma_pzgemm(MORSE_enum transA, MORSE_enum transB,
             if (transA == MorseNoTrans) {
                 ldam = BLKLDD(AUV, m);
                 if (transB == MorseNoTrans) {
-                    for (k = 0; k < AUV->nt; k++) {
+                    for (int _k = 0; _k < AUV->nt; _k++) {
+                        if(reorder_inner_products == 1) {
+                            k = iporder[m][n][_k].id;
+                        } else {
+                            k = _k;
+                        }
                         tempkn = k == AUV->nt-1 ? AUV->n-k*AUV->nb : AUV->nb;
                         ldbk = BLKLDD(BUV, k);
                         zbeta = k == 0 ? beta : zone;
                         HICMA_TASK_zgemm(
-                            &options,
+                                &options,
                             transA, transB,
                             tempmm, tempnn, 
                             alpha, AUV(m, k), ldam,  /* lda * Z */
@@ -154,6 +161,7 @@ void hicma_pzgemm(MORSE_enum transA, MORSE_enum transB,
 				                RUNTIME_barrier(morse);
 				                #endif
                     }
+                    RUNTIME_barrier(morse); // FIXME for forcing the execution order to be same as submission order
                 }
                 /*
                  *  A: MorseNoTrans / B: Morse[Conj]Trans
