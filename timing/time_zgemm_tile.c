@@ -11,7 +11,7 @@
  *
  * @version 0.1.1
  * @author Kadir Akbudak
- * @date 2018-11-08
+ * @date 2019-11-21
  **/
 
 /*
@@ -46,11 +46,22 @@
 
 #include <assert.h>
 #include "hicma_z.h"
-#include "auxcompute_z.h"
-#include "auxdescutil.h"
+#include "misc/auxcompute_z.h"
+#include "misc/auxdescutil.h"
 
 #include "hicma.h"
+#include "hicma_common.h"
 #include "timing_zauxiliary.h"
+
+#include "flop_util_structs.h"
+extern flop_counter counters[FLOP_NUMTHREADS];
+#include "flop_util.h"
+
+//#if __has_include("starpu_mpi.h")
+#ifdef CHAMELEON_USE_MPI
+#define __ENABLE_MPI
+#include "starpu_mpi.h"
+#endif
 
 #include <math.h>
 #include <time.h>
@@ -65,15 +76,6 @@ int print_progress = 1;   // Print progress about the execution
 char datebuf[128];
 time_t timer;
 struct tm* tm_info;
-#define PROGRESS(str) \
-    if(print_progress){ \
-        int myrank = MORSE_My_Mpi_Rank();\
-        time(&timer); \
-        tm_info = localtime(&timer); \
-        strftime(datebuf, 26, "%Y-%m-%d %H:%M:%S",tm_info); \
-        fprintf(stdout, "%d:%s\t%d\t%s\t%s\n", myrank, datebuf, __LINE__, __func__, str);\
-        fflush(stdout);\
-    }
 #undef PROGRESS
 #define PROGRESS(str)
 
@@ -88,6 +90,17 @@ int print_index = 0;
 int main_print_mat = 0;
 int print_mat = 0;
 int use_scratch = 1; // Use scratch memory provided by starpu
+int calc_rank_stat = 1; 
+int reorder_inner_products = 0; 
+int comp_idrank (const void * elem1, const void * elem2) 
+{
+    idrank f = *((idrank*)elem1);
+    idrank s = *((idrank*)elem2);
+    if (f.rank > s.rank) return  1;
+    if (f.rank < s.rank) return -1;
+    return 0;
+}
+idrank*** iporder = NULL; //inner product order
 
 double timediff(struct timeval begin, struct timeval end){
     double elapsed = (end.tv_sec - begin.tv_sec) +
@@ -161,7 +174,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     // this paramater enables storing only diagonal tiles in a tall and skinny matrix
     store_only_diagonal_tiles = 0;
 
-    HICMA_set_use_fast_hcore_zgemm();
+    //HICMA_set_use_fast_hcore_zgemm();
 
     // Gemm requires more descriptors
     //chameleon/runtime/starpu/control/runtime_descriptor.c
@@ -174,7 +187,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     PASTE_CODE_IPARAM_LOCALS( iparam );
     // set global variable so that p.. files can fill dense matrix
     global_check = check;
-    // calculate total number of mpi processes (it is not used for now)
+    // calculate total number of mpi processes
     num_mpi_ranks = P*Q;
     print_index = iparam[IPARAM_HICMA_PRINTINDEX];
     print_mat   = iparam[IPARAM_HICMA_PRINTMAT];
@@ -182,6 +195,12 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     LDB = chameleon_max(K, iparam[IPARAM_LDB]);
     LDC = chameleon_max(M, iparam[IPARAM_LDC]);
     int hicma_maxrank  = iparam[IPARAM_HICMA_MAXRANK];
+    reorder_inner_products = iparam[IPARAM_HICMA_REORDER_INNER_PRODUCTS];
+
+    unsigned long*    opcounters  = NULL; // count all operations performed by a core
+    int nelm_opcounters = num_mpi_ranks*thrdnbr;
+    opcounters     = calloc(nelm_opcounters,     sizeof(unsigned long)); //TODO free
+    flop_util_init_counters(thrdnbr);
 
     // Idealy, in gemm C=AxB,
     // A is M by K
@@ -209,16 +228,16 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     /* Allocate Data */
     // initial matrices which will be used for accuracy checking
     // TODO: since HICMA_zgytlr_Tile does not handle NULL dense pointer, have to create them, better condition it with 'check' variable
-    PASTE_CODE_ALLOCATE_MATRIX_TILE( descA, 1, double, MorseRealDouble, LDA, M, M );
-    PASTE_CODE_ALLOCATE_MATRIX_TILE( descB, 1, double, MorseRealDouble, LDB, M, M );
-    PASTE_CODE_ALLOCATE_MATRIX_TILE( descC, 1, double, MorseRealDouble, LDC, M, M );
+    PASTE_CODE_ALLOCATE_MATRIX_TILE( descA, check, double, MorseRealDouble, LDA, M, M );
+    PASTE_CODE_ALLOCATE_MATRIX_TILE( descB, check, double, MorseRealDouble, LDB, M, M );
+    PASTE_CODE_ALLOCATE_MATRIX_TILE( descC, check, double, MorseRealDouble, LDC, M, M );
     PROGRESS("desc..'s are allocated");
 
-    // gemm will not have dense diagonals in RND TILED. So remove desc..D's in the future. TODO
-    // TODO: since HICMA_zgytlr_Tile does not handle NULL dense pointer, have to create them, better condition it with 'check' variable
-    PASTE_CODE_ALLOCATE_MATRIX_TILE( descAD, 1, double, MorseRealDouble, LDA, M, M );
-    PASTE_CODE_ALLOCATE_MATRIX_TILE( descBD, 1, double, MorseRealDouble, LDB, M, M );
-    PASTE_CODE_ALLOCATE_MATRIX_TILE( descCD, 1, double, MorseRealDouble, LDC, M, M );
+    // gemm will not have dense diagonals in RND TILED. So remove desc..D's in the future. 
+    // since HICMA_zgytlr_Tile does not handle NULL dense pointer, have to create them, better condition it with 'check' variable
+    /*PASTE_CODE_ALLOCATE_MATRIX_TILE( descAD, 1, double, MorseRealDouble, LDA, M, M );*/
+    /*PASTE_CODE_ALLOCATE_MATRIX_TILE( descBD, 1, double, MorseRealDouble, LDB, M, M );*/
+    /*PASTE_CODE_ALLOCATE_MATRIX_TILE( descCD, 1, double, MorseRealDouble, LDC, M, M );*/
     NB = saveNB;
 
 
@@ -253,10 +272,12 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     PROGRESS("desc..rk's are allocated");
 
     int _k = iparam[IPARAM_RK]; //genargs->k
-    double _acc = pow(10, -1.0*iparam[IPARAM_ACC]);
+    //double _acc = pow(10, -1.0*iparam[IPARAM_ACC]);
+    double _acc = dparam[IPARAM_HICMA_ACCURACY_THRESHOLD];
 
     char sym;
     sym = 'N';
+    sym = 'S'; // FIXME
     int probtype = iparam[IPARAM_HICMA_STARSH_PROB];
     int maxrank  = iparam[IPARAM_HICMA_STARSH_MAXRANK];
     double ddecay = dparam[IPARAM_HICMA_STARSH_DECAY];
@@ -264,6 +285,7 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     double initial_avgrank, final_avgrank;
     HICMA_problem_t hicma_problem;
 
+    hicma_problem.ndim = 2;
     //BEGIN: rndtiled
     if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_RND) {
         hicma_problem.noise    = 0.0;
@@ -291,6 +313,37 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
         hicma_problem.noise = 5.e-4; //works for 640K
     }
     //END: ss
+    //BEGIN: st-3D-exp
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_ST_3D_EXP) {
+        /*
+        // from lorapo
+        enum STARSH_PARTICLES_PLACEMENT place = STARSH_PARTICLES_UNIFORM;
+        double sigma = 1.0;
+        int ndim = 3;
+        kernel = starsh_ssdata_block_exp_kernel_3d; 
+        info = starsh_ssdata_generate((STARSH_ssdata **)&data, N, ndim,
+                beta, nu, noise,
+                place, sigma);
+         */
+        // Correlation length
+        hicma_problem.beta  = 0.1;
+        //If fixed rank is required set beta=1 and a sample case will be like this nb=25 maxrank=10 m=2500 So ranks will decrease.
+
+        // Smoothing parameter for Matern kernel
+        hicma_problem.nu    = 0.5;
+        // Shift added to diagonal elements
+        hicma_problem.noise = 1.e-4; //not enough for matrices larger than 600K
+        hicma_problem.noise = 5.e-4; //works for 640K
+    }
+    //END: st-3D-exp
+    //BEGIN: edsin
+    if(iparam[IPARAM_HICMA_STARSH_PROB] == HICMA_STARSH_PROB_EDSIN) {
+        // Wave number, >= 0
+        hicma_problem.wave_k = dparam[IPARAM_HICMA_STARSH_WAVE_K];
+        hicma_problem.diag = 0; 
+    //printf("%s %d: %g\n", __FILE__, __LINE__, hicma_problem.wave_k);
+    }
+    //END: edsin
     PROGRESS("generating coordinates started");
     HICMA_zgenerate_problem(probtype, sym, ddecay, M, MB, mt, nt, &hicma_problem);
     PROGRESS("generating coordinates ended");
@@ -301,10 +354,87 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     PROGRESS("zgytlr starting");
     //desc[A,B,C] are original problem if global check is enabled
     //desc[A,B,C]D are original problem. Temporary buffers should be used in hcore_zgytlr TODO Do not use desc..D in this gemm code
-    HICMA_zgytlr_Tile(MorseUpperLower, descAUV, descAD, descArk, 0, maxrank, _acc, compress_diag,  descA);
-    HICMA_zgytlr_Tile(MorseUpperLower, descBUV, descBD, descBrk, 0, maxrank, _acc, compress_diag,  descB);
-    HICMA_zgytlr_Tile(MorseUpperLower, descCUV, descCD, descCrk, 0, maxrank, _acc, compress_diag,  descC);
+    /*HICMA_zgytlr_Tile(MorseUpperLower, descAUV, descAD, descArk, 0, maxrank, _acc, compress_diag,  descA);*/
+    /*HICMA_zgytlr_Tile(MorseUpperLower, descBUV, descBD, descBrk, 0, maxrank, _acc, compress_diag,  descB);*/
+    /*HICMA_zgytlr_Tile(MorseUpperLower, descCUV, descCD, descCrk, 0, maxrank, _acc, compress_diag,  descC);*/
+   
+    if(check == 1){
+        HICMA_zhagdm_Tile(MorseUpperLower, descA);
+        HICMA_zhagdm_Tile(MorseUpperLower, descB);
+        HICMA_zhagdm_Tile(MorseUpperLower, descC);
+    }
+
+    HICMA_zhagcm_Tile(MorseUpperLower, descAUV, descArk, M, M, MB,  MB, maxrank, _acc); //FIXME sizes
+    HICMA_zhagcm_Tile(MorseUpperLower, descBUV, descBrk, M, M, MB,  MB, maxrank, _acc); //FIXME sizes
+    HICMA_zhagcm_Tile(MorseUpperLower, descCUV, descCrk, M, M, MB,  MB, maxrank, _acc); //FIXME sizes
+
     PROGRESS("zgytlr finished");
+
+
+    double* _Ark = NULL;
+    double* _Brk = NULL;
+    if(calc_rank_stat == 1 || reorder_inner_products == 1){
+        PASTE_TILE_TO_LAPACK( descArk, Ark, 1, double, MT, NT );
+        PASTE_TILE_TO_LAPACK( descBrk, Brk, 1, double, MT, NT );
+        _Ark = Ark;
+        _Brk = Brk;
+    }
+    if(reorder_inner_products == 1){
+        iporder = calloc(MT, sizeof(idrank**));
+        for(int i=0; i < MT; i++){
+            iporder[i] = calloc(NT, sizeof(idrank*));
+            for(int j=0; j < NT; j++){
+                iporder[i][j] = calloc(MT, sizeof(idrank));
+                for(int k=0; k < MT; k++){ // FIXME if matrices are rectangular
+                    int rankA = _Ark[k*ldrk+i];
+                    int rankB = _Brk[j*ldrk+k];
+                    iporder[i][j][k].id = k;
+                    iporder[i][j][k].rank = rankA > rankB ? rankA : rankB;
+                    //printf("%d,%d:%d\t%d,%d:%d [%d,%d]\n", i, k, rankA, k, j, rankB, iporder[i][j][k].id, iporder[i][j][k].rank);
+                }
+				/** sort tiles in ascending order of ranks */
+                qsort(iporder[i][j], MT, sizeof(idrank), comp_idrank);
+                for(int _k=0; _k < MT; _k++){ // FIXME if matrices are rectangular
+					int k = iporder[i][j][_k].id;
+                    int rankA = _Ark[k*ldrk+i];
+                    int rankB = _Brk[j*ldrk+k];
+                    //printf("%d,%d:%d\t%d,%d:%d\n", i, k, rankA, k, j, rankB);
+                }
+				//getc(stdin);
+            }
+        }
+    }
+    if(calc_rank_stat == 1) {
+        PASTE_TILE_TO_LAPACK( descArk, Ark_initial, 1, double, MT, NT );
+        if(MORSE_My_Mpi_Rank()==0){
+
+            /*sprintf(rankfile, "%s-1", rankfile);*/
+            //fwrite_array(descArk->m, descArk->n, descArk->m, Ark_initial, rankfile);
+            print_array(descArk->m, descArk->n, descArk->m, Ark_initial, stdout);
+
+            HICMA_stat_t hicma_statrk_initial;
+            zget_stat(MorseUpperLower, Ark_initial, mt, mt, mt,  &hicma_statrk_initial);
+            printf("Ainitial_ranks:");
+            zprint_stat(hicma_statrk_initial);
+            fflush(stderr);
+            fflush(stdout);
+        }
+    }
+    if(calc_rank_stat == 1) {
+        PASTE_TILE_TO_LAPACK( descCrk, Crk_initial, 1, double, MT, NT );
+        if(MORSE_My_Mpi_Rank()==0){
+
+            /*sprintf(rankfile, "%s-1", rankfile);*/
+            /*fwrite_array(descArk->m, descArk->n, descArk->m, Ark_initial, rankfile);*/
+
+            HICMA_stat_t hicma_statrk_initial;
+            zget_stat(MorseUpperLower, Crk_initial, mt, mt, mt,  &hicma_statrk_initial);
+            printf("Cinitial_ranks:");
+            zprint_stat(hicma_statrk_initial);
+            fflush(stderr);
+            fflush(stdout);
+        }
+    }
 
     int set_diag = 0;
     double diagVal = M;
@@ -328,6 +458,65 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     fflush(stdout);
     PROGRESS("gemm finished");
 
+    if(calc_rank_stat == 1) {
+        PASTE_TILE_TO_LAPACK( descCrk, Crk_final, 1, double, MT, NT );
+        if(MORSE_My_Mpi_Rank()==0){
+
+            /*sprintf(rankfile, "%s-1", rankfile);*/
+            /*fwrite_array(descArk->m, descArk->n, descArk->m, Ark_initial, rankfile);*/
+
+            HICMA_stat_t hicma_statrk_final;
+            zget_stat(MorseUpperLower, Crk_final, mt, mt, mt,  &hicma_statrk_final);
+            printf("Cfinal_ranks:");
+            zprint_stat(hicma_statrk_final);
+            fflush(stderr);
+            fflush(stdout);
+        }
+    }
+    assert(thrdnbr < FLOP_NUMTHREADS);
+    int myrank = MORSE_My_Mpi_Rank();
+    for(int i = 0; i < thrdnbr; i++){
+        flop_counter res = counters[i];
+        unsigned long totflop = res.potrf+res.trsm+res.syrk+res.update;
+        //printf("myrank:%d thread:%d %lu\n", myrank, i, totflop);
+        opcounters[myrank * thrdnbr + i] = totflop;
+    }
+
+    unsigned long* allopcounters = opcounters;
+#ifdef __ENABLE_MPI
+    allopcounters     = calloc(nelm_opcounters,     sizeof(unsigned long)); //TODO free
+    MPI_Reduce(opcounters, allopcounters, nelm_opcounters, MPI_UNSIGNED_LONG, MPI_MAX, 0, MPI_COMM_WORLD);  
+#endif
+    unsigned long totflop = 0;
+    if(MORSE_My_Mpi_Rank() == 0) {
+        unsigned long sum_thread = 0;
+        printf("nop_thread %d %d\n", num_mpi_ranks, thrdnbr);
+        for(int i = 0; i < num_mpi_ranks; i++){
+            for(int j = 0; j < thrdnbr; j++){
+                printf("%lu ", allopcounters[i*thrdnbr+j]);
+                sum_thread += allopcounters[i*thrdnbr+j];
+            }
+            printf("\n");
+        }
+        totflop += sum_thread;
+    }
+    if(MORSE_My_Mpi_Rank() == 0)
+    {
+        /** prints number of flops */
+        char str[1024];
+        str[1023] = '\0';
+        //printf("\t\tPOTRF\tTRSM \tSYRK\tGEMM\t\tTOTFLOP\t\tTOTGFLOP\tGFLOP/S\t\tTIME(s)\n");
+        printf("\t\tTOTFLOP\t\tTOTGFLOP\tGFLOP/S\t\tTIME(s)\n");
+        printf("ReShg\t");
+        printf("%lu\t", totflop);
+        double totgflop = totflop/(1024.0*1024*1024);
+        printf("%g\t", totgflop);
+        double totgflops = totgflop/t;
+        printf("%g\t", totgflops);
+        printf("%g", t);
+        printf("\n");
+    }
+
     if(check){
 
         PASTE_TILE_TO_LAPACK( descA, A, check, double, LDA, M );
@@ -350,19 +539,16 @@ RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile)
     PASTE_CODE_FREE_MATRIX( descCUV );
     PROGRESS("desc..UV's are freed");
 
-    PASTE_CODE_FREE_MATRIX( descAD );
-    PASTE_CODE_FREE_MATRIX( descBD );
-    PASTE_CODE_FREE_MATRIX( descCD );
-    PROGRESS("desc..D's are freed");
-
     PASTE_CODE_FREE_MATRIX( descArk );
     PASTE_CODE_FREE_MATRIX( descBrk );
     PASTE_CODE_FREE_MATRIX( descCrk );
     PROGRESS("desc..rk's are freed");
 
-    PASTE_CODE_FREE_MATRIX( descA );
-    PASTE_CODE_FREE_MATRIX( descB );
-    PASTE_CODE_FREE_MATRIX( descC );
+    if(check == 1) {
+        PASTE_CODE_FREE_MATRIX( descA );
+        PASTE_CODE_FREE_MATRIX( descB );
+        PASTE_CODE_FREE_MATRIX( descC );
+    }
     PROGRESS("desc..'s are freed");
     PROGRESS("freed descs");
     return 0;

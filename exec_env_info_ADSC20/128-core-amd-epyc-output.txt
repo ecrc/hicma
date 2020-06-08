@@ -1,0 +1,417 @@
+MKLROOT=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/mkl
+SLURM_JOB_NAME=bash
+MANPATH=/sw/csa/gcc/6.4.0/share/man:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/man/common:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/documentation/en/debugger/gdb-ia/man/:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/documentation/en/debugger/gdb-igfx/man/:/sw/csi/gcc/6.4.0/share/man::/opt/puppetlabs/puppet/share/man:/opt/slurm/cluster/raven/install/share/man
+AR=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/bin/intel64/xiar
+PMI_SIZE=1
+XDG_SESSION_ID=44831
+SLURMD_NODENAME=cn110-23-l
+SLURM_TOPOLOGY_ADDR=swtch.cn110-23-l
+SLURM_NTASKS_PER_NODE=1
+HOSTNAME=cn110-23-l
+SLURM_PRIO_PROCESS=0
+SLURM_SRUN_COMM_PORT=43200
+INTEL_LICENSE_FILE=28518@WTHFXNSR03
+IPPROOT=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/ipp
+SHELL=/bin/bash
+TERM=xterm-256color
+SLURM_JOB_QOS=normal
+SLURM_PTY_WIN_ROW=64
+HISTSIZE=1000
+TMPDIR=/tmp
+SLURM_TOPOLOGY_ADDR_PATTERN=switch.node
+SSH_CLIENT=10.232.6.115 53466 22
+LIBRARY_PATH=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/ipp/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/mkl/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.4:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/daal/lib/intel64_lin:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/tbb/lib/intel64_lin/gcc4.4:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64_lin
+SLURM_CPU_BIND_VERBOSE=quiet
+KAUST_ARCH=x86_64
+OLDPWD=/ibex/scratch/USER/hicma-torelease/hicma-dev
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+SSH_TTY=/dev/pts/8
+SLURM_CPU_BIND_LIST=0x00000000000000000000000000000001
+QT_GRAPHICSSYSTEM_CHECKED=1
+SLURM_NNODES=1
+USER=USER
+LS_COLORS=rs=0:di=38;5;27:ln=38;5;51:mh=44;38;5;15:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=05;48;5;232;38;5;15:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;34:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.axv=38;5;13:*.anx=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.axa=38;5;45:*.oga=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+F9C=/sw/csa/gcc/6.4.0/bin/gfortran
+LD_LIBRARY_PATH=/ibex/scratch/USER/sourcefiles-cs/starpu-1.2.6/install/lib:/ibex/scratch/USER/sourcefiles-cs/hwloc-2.0.2/install/lib:/sw/csa/gcc/6.4.0/lib64:/sw/csa/gcc/6.4.0/lib:/ibex/scratch/USER/sourcefiles-cs/starpu-1.2.6/install/lib:/ibex/scratch/USER/sourcefiles-cs/hwloc-2.0.2/install/lib:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/mpi/intel64/lib:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/ipp/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/mkl/lib/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/tbb/lib/intel64/gcc4.4:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/debugger/libipt/intel64/lib:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/daal/lib/intel64_lin:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/tbb/lib/intel64_lin/gcc4.4:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64_lin:/sw/csi/gcc/6.4.0/lib64:/sw/csi/gcc/6.4.0/lib
+SLURM_STEP_NUM_NODES=1
+SLURM_JOBID=109471
+SRUN_DEBUG=3
+KAUST_DISTRO=el7
+CPATH=/sw/csa/gcc/6.4.0/include:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/ipp/include:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/mkl/include:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/tbb/include:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/daal/include:/sw/csi/gcc/6.4.0/include
+TMOUT=7200
+SLURM_NTASKS=1
+SLURM_LAUNCH_NODE_IPADDR=10.109.66.217
+SLURM_STEP_ID=0
+NLSPATH=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/lib/intel64/locale/%l_%t/%N:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/mkl/lib/intel64/locale/%l_%t/%N:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/debugger/gdb/intel64_mic/share/locale/%l_%t/%N:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/debugger/gdb/intel64/share/locale/%l_%t/%N
+SLURM_STEP_LAUNCHER_PORT=43200
+SLURM_TASKS_PER_NODE=1
+PATH=/sw/csa/gcc/6.4.0/bin:/ibex/scratch/USER/HODLR/deps/cmake/bin:/sw/csi/cmake/3.13.4/el7.5_gnu6.4.0/bin/:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/pkg_bin/intel64:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/pkg_bin:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/bin/intel64:/sw/csi/gcc/6.4.0/bin:/usr/lpp/mmfs/bin:/usr/lib64/qt-3.3/bin:/usr/lpp/mmfs/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/slurm/scripts/bin:/opt/puppetlabs/bin:/opt/slurm/cluster/ibex/install/bin:/opt/slurm/scripts/bin:/opt/slurm/scripts/bin:/opt/slurm/cluster/ibex/install/bin:/opt/slurm/scripts/bin:/ibex/scratch/USER/HODLR/deps/cmake/bin/
+MAIL=/var/spool/mail/USER
+LIBGL_ALWAYS_INDIRECT=1
+SLURM_WORKING_CLUSTER=raven:slurm-00:6917:8704:109
+KAUST_APPS_ROOT=/cbrc/software
+PMI_RANK=0
+SLURM_JOB_ID=109471
+KAUST_NODETYPE=amd
+LD_RUN_PATH=/sw/csa/gcc/6.4.0/lib64:/sw/csa/gcc/6.4.0/lib:/sw/csi/gcc/6.4.0/lib64:/sw/csi/gcc/6.4.0/lib
+LD=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/bin/intel64/xild
+TBBROOT=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/tbb
+SLURM_JOB_USER=USER
+SLURM_STEPID=0
+PWD=/ibex/scratch/USER/hicma-torelease/hicma-dev/exec_env_info
+F90=/sw/csa/gcc/6.4.0/bin/gfortran
+SLURM_SRUN_COMM_HOST=10.109.66.217
+_LMFILES_=/sw/csi/modulefiles/compilers/gcc/6.4.0:/sw/csi/modulefiles/compilers/intel/2019:/sw/csi/modulefiles/compilers/cmake/3.13.4/gnu-6.4.0:/sw/csa/modulefiles/compilers/gcc/6.4.0:/sw/csa/modulefiles/compilers/cmake/3.13.4/gnu-6.4.0
+SLURM_CPU_BIND_TYPE=mask_cpu:
+LANG=en_US.UTF-8
+SLURM_PTY_WIN_COL=160
+SLURM_UMASK=0022
+MODULEPATH=/sw/csa/modulefiles/applications:/sw/csa/modulefiles/compilers:/sw/csa/modulefiles/libs:/sw/services/modulefiles
+SLURM_JOB_UID=117653
+KDEDIRS=/usr
+LOADEDMODULES=gcc/6.4.0:intel/2019:cmake/3.13.4/gnu-6.4.0
+SLURM_NODEID=0
+SLURM_STEP_RESV_PORTS=12103-12104
+SLURM_SUBMIT_DIR=/ibex/scratch/USER/hicma-torelease/hicma-dev/exec_env_info
+F77=/sw/csa/gcc/6.4.0/bin/gfortran
+PMI_JOBID=109471.0
+SLURM_TASK_PID=74704
+SLURM_NPROCS=1
+KAUST_MODULES_ROOT=/cbrc/modules
+SLURM_CPUS_ON_NODE=1
+DAALROOT=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/daal
+SLURM_PROCID=0
+KRB5CCNAME=KEYRING:persistent:117653
+HISTCONTROL=ignoredups
+CXX=/sw/csa/gcc/6.4.0/bin/g++
+MPM_LAUNCHER=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/debugger/mpm/mic/bin/start_mpm.sh
+SLURM_JOB_NODELIST=cn110-23-l
+INTEL_PYTHONHOME=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/debugger/python/intel64/
+SLURM_PTY_PORT=36843
+HOME=/home/USER
+SHLVL=2
+SLURM_LOCALID=0
+PMI_FD=11
+SLURM_JOB_GID=1117653
+SLURM_JOB_CPUS_PER_NODE=1
+SLURM_CLUSTER_NAME=raven
+KAUST_FACILITY=Ibex
+SLURM_GTIDS=0
+SLURM_SUBMIT_HOST=login510-37
+FC=/sw/csa/gcc/6.4.0/bin/gfortran
+SLURM_JOB_PARTITION=users
+LOGNAME=USER
+SLURM_STEP_NUM_TASKS=1
+QTLIB=/usr/lib64/qt-3.3/lib
+SLURM_JOB_ACCOUNT=default
+SSH_CONNECTION=10.232.6.115 53466 10.109.66.217 22
+XDG_DATA_DIRS=/home/USER/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+CLASSPATH=/sw/csi/intel/2019_u5/compilers_and_libraries/linux/daal/lib/daal.jar
+SLURM_JOB_NUM_NODES=1
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+PKG_CONFIG_PATH=/ibex/scratch/USER/sourcefiles-cs/starpu-1.2.6/install/lib/pkgconfig:/ibex/scratch/USER/sourcefiles-cs/hwloc-2.0.2/install/lib/pkgconfig:/ibex/scratch/USER/sourcefiles-cs/starpu-1.2.6/install/lib/pkgconfig:/ibex/scratch/USER/sourcefiles-cs/hwloc-2.0.2/install/lib/pkgconfig:
+SLURM_STEP_TASKS_PER_NODE=1
+SLURM_STEP_NODELIST=cn110-23-l
+INFOPATH=/sw/csa/gcc/6.4.0/share/info:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/documentation/en/debugger/gdb-ia/info/:/sw/csi/intel/2019_u5/compilers_and_libraries/linux/documentation/en/debugger/gdb-igfx/info/:/sw/csi/gcc/6.4.0/share/info
+XDG_RUNTIME_DIR=/run/user/117653
+EIGEN_PATH=/ibex/scratch/USER/HODLR/deps/eigen/
+CC=/sw/csa/gcc/6.4.0/bin/gcc
+QT_PLUGIN_PATH=/usr/lib64/kde4/plugins:/usr/lib/kde4/plugins
+SLURM_CPU_BIND=quiet,mask_cpu:0x00000000000000000000000000000001
+CMAKE_ROOT=/sw/csi/cmake/3.13.4/el7.5_gnu6.4.0/
+HODLR_PATH=/ibex/scratch/USER/HODLR
+BASH_FUNC_module()=() {  eval `LD_PRELOAD=/usr/lib64/libtcl8.5.so /usr/bin/modulecmd bash $*`
+}
+_=/usr/bin/env
+++ lsb_release -a
+LSB Version:	:core-4.1-amd64:core-4.1-ia32:core-4.1-noarch:cxx-4.1-amd64:cxx-4.1-noarch:desktop-4.1-amd64:desktop-4.1-noarch:languages-4.1-amd64:languages-4.1-noarch:printing-4.1-amd64:printing-4.1-noarch
+Distributor ID:	CentOS
+Description:	CentOS Linux release 7.7.1908 (Core)
+Release:	7.7.1908
+Codename:	Core
+++ uname -a
+Linux cn110-23-l 3.10.0-1062.9.1.el7.x86_64 #1 SMP Fri Dec 6 15:49:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+++ lscpu
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                128
+On-line CPU(s) list:   0-127
+Thread(s) per core:    1
+Core(s) per socket:    64
+Socket(s):             2
+NUMA node(s):          2
+Vendor ID:             AuthenticAMD
+CPU family:            23
+Model:                 49
+Model name:            AMD EPYC 7702 64-Core Processor
+Stepping:              0
+CPU MHz:               1500.000
+CPU max MHz:           2000.0000
+CPU min MHz:           1500.0000
+BogoMIPS:              3999.85
+Virtualization:        AMD-V
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              512K
+L3 cache:              16384K
+NUMA node0 CPU(s):     0-63
+NUMA node1 CPU(s):     64-127
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc art rep_good nopl xtopology nonstop_tsc extd_apicid aperfmperf eagerfpu pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_l2 cpb cat_l3 cdp_l3 hw_pstate sme retpoline_amd ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif umip overflow_recov succor smca
+++ cat /proc/meminfo
+MemTotal:       528291384 kB
+MemFree:        291694440 kB
+MemAvailable:   511871980 kB
+Buffers:            4192 kB
+Cached:         226678300 kB
+SwapCached:            0 kB
+Active:          3543356 kB
+Inactive:       223769896 kB
+Active(anon):    3370540 kB
+Inactive(anon):  3194904 kB
+Active(file):     172816 kB
+Inactive(file): 220574992 kB
+Unevictable:     1048576 kB
+Mlocked:         1048576 kB
+SwapTotal:      31457276 kB
+SwapFree:       31457276 kB
+Dirty:                 0 kB
+Writeback:             0 kB
+AnonPages:       1684544 kB
+Mapped:           212264 kB
+Shmem:           5934684 kB
+Slab:            2168520 kB
+SReclaimable:     826768 kB
+SUnreclaim:      1341752 kB
+KernelStack:       29824 kB
+PageTables:        14544 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    295602968 kB
+Committed_AS:    8583944 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:     2968976 kB
+VmallocChunk:   34088344044 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   1140736 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      784028 kB
+DirectMap2M:    16887808 kB
+DirectMap1G:    519045120 kB
+++ inxi -F -c0
+bash: inxi: command not found
+++ lsblk -a
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+nvme0n1                 259:0    0  1.8T  0 disk 
+└─nvme0n1p1             259:1    0  1.8T  0 part 
+  ├─vg_datapool-tmp     253:0    0   20G  0 lvm  /tmp
+  ├─vg_datapool-swap    253:1    0   30G  0 lvm  [SWAP]
+  └─vg_datapool-scratch 253:2    0  1.8T  0 lvm  /local
+++ lsscsi -s
+++ module list
++++ LD_PRELOAD=/usr/lib64/libtcl8.5.so
++++ /usr/bin/modulecmd bash list
+Currently Loaded Modulefiles:
+ModuleCmd_List.c(146):FATAL:996: The environment variables LOADEDMODULES and _LMFILES_ have inconsistent lengths.
+++ eval
+++ nvidia-smi
+bash: nvidia-smi: command not found
+++ cat
+++ lshw -short -quiet -sanitize
+WARNING: you should run this program as super-user.
+H/W path        Device   Class          Description
+===================================================
+                         system         Computer
+/0                       bus            Motherboard
+/0/0                     memory         512GiB System memory
+/0/1                     processor      AMD EPYC 7702 64-Core Processor
+/0/2                     processor      AMD EPYC 7702 64-Core Processor
+/0/100                   bridge         Starship/Matisse Root Complex
+/0/100/0.2               generic        Starship/Matisse IOMMU
+/0/100/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/100/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/100/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/100/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/100/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/100/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/100/8.1/0.3           bus            Starship USB 3.0 Host Controller
+/0/100/14                bus            FCH SMBus Controller
+/0/100/14.3              bridge         FCH LPC Bridge
+/0/101                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/102                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/103                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/104                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/105                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/106                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/107                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/108                   bridge         Starship Device 24; Function 0
+/0/109                   bridge         Starship Device 24; Function 1
+/0/10a                   bridge         Starship Device 24; Function 2
+/0/10b                   bridge         Starship Device 24; Function 3
+/0/10c                   bridge         Starship Device 24; Function 4
+/0/10d                   bridge         Starship Device 24; Function 5
+/0/10e                   bridge         Starship Device 24; Function 6
+/0/10f                   bridge         Starship Device 24; Function 7
+/0/110                   bridge         Starship Device 24; Function 0
+/0/111                   bridge         Starship Device 24; Function 1
+/0/112                   bridge         Starship Device 24; Function 2
+/0/113                   bridge         Starship Device 24; Function 3
+/0/114                   bridge         Starship Device 24; Function 4
+/0/115                   bridge         Starship Device 24; Function 5
+/0/116                   bridge         Starship Device 24; Function 6
+/0/117                   bridge         Starship Device 24; Function 7
+/0/118                   bridge         Starship/Matisse Root Complex
+/0/118/0.2               generic        Starship/Matisse IOMMU
+/0/118/3.2               bridge         Starship/Matisse GPP Bridge
+/0/118/3.2/0    eth0     network        Ethernet Controller 10G X550T
+/0/118/3.2/0.1  p2049p2  network        Ethernet Controller 10G X550T
+/0/118/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/118/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/118/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/118/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/118/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/118/8.1/0.1           generic        Starship/Matisse Cryptographic Coprocessor PSPCPP
+/0/118/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/118/8.1/0.3           bus            Starship USB 3.0 Host Controller
+/0/118/8.2               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/118/8.2/0             storage        FCH SATA Controller [AHCI mode]
+/0/118/8.3               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/118/8.3/0             storage        FCH SATA Controller [AHCI mode]
+/0/119                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/11a                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/11b                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/11c                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/11d                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/11e                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/11f                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/120                   bridge         Starship/Matisse Root Complex
+/0/120/0.2               generic        Starship/Matisse IOMMU
+/0/120/1.1               bridge         Starship/Matisse GPP Bridge
+/0/120/1.1/0    ib0      network        MT28908 Family [ConnectX-6]
+/0/120/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/120/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/120/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/120/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/120/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/120/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/120/8.2               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/120/8.2/0             storage        FCH SATA Controller [AHCI mode]
+/0/120/8.3               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/120/8.3/0             storage        FCH SATA Controller [AHCI mode]
+/0/121                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/122                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/123                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/124                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/125                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/126                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/127                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/128                   bridge         Starship/Matisse Root Complex
+/0/128/0.2               generic        Starship/Matisse IOMMU
+/0/128/3.1               bridge         Starship/Matisse GPP Bridge
+/0/128/3.1/0             bridge         AST1150 PCI-to-PCI Bridge
+/0/128/3.1/0/0           display        ASPEED Graphics Family
+/0/128/3.3               bridge         Starship/Matisse GPP Bridge
+/0/128/3.3/0             storage        NVMe Datacenter SSD [3DNAND, Beta Rock Controller]
+/0/128/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/128/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/128/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/128/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/128/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/128/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/129                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/12a                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/12b                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/12c                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/12d                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/12e                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/12f                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/130                   bridge         Starship/Matisse Root Complex
+/0/130/0.2               generic        Starship/Matisse IOMMU
+/0/130/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/130/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/130/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/130/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/130/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/130/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/130/8.1/0.3           bus            Starship USB 3.0 Host Controller
+/0/131                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/132                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/133                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/134                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/135                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/136                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/137                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/138                   bridge         Starship/Matisse Root Complex
+/0/138/0.2               generic        Starship/Matisse IOMMU
+/0/138/3.1               bridge         Starship/Matisse GPP Bridge
+/0/138/3.2               bridge         Starship/Matisse GPP Bridge
+/0/138/3.3               bridge         Starship/Matisse GPP Bridge
+/0/138/3.4               bridge         Starship/Matisse GPP Bridge
+/0/138/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/138/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/138/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/138/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/138/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/138/8.1/0.1           generic        Starship/Matisse Cryptographic Coprocessor PSPCPP
+/0/138/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/138/8.1/0.3           bus            Starship USB 3.0 Host Controller
+/0/138/8.2               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/138/8.2/0             storage        FCH SATA Controller [AHCI mode]
+/0/138/8.3               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/138/8.3/0             storage        FCH SATA Controller [AHCI mode]
+/0/139                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/13a                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/13b                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/13c                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/13d                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/13e                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/13f                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/140                   bridge         Starship/Matisse Root Complex
+/0/140/0.2               generic        Starship/Matisse IOMMU
+/0/140/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/140/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/140/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/140/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/140/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/140/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/140/8.2               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/140/8.2/0             storage        FCH SATA Controller [AHCI mode]
+/0/140/8.3               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/140/8.3/0             storage        FCH SATA Controller [AHCI mode]
+/0/141                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/142                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/143                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/144                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/145                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/146                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/147                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/148                   bridge         Starship/Matisse Root Complex
+/0/148/0.2               generic        Starship/Matisse IOMMU
+/0/148/7.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/148/7.1/0             generic        Starship/Matisse PCIe Dummy Function
+/0/148/7.1/0.2           generic        Starship/Matisse PTDMA
+/0/148/8.1               bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/148/8.1/0             generic        Starship/Matisse Reserved SPP
+/0/148/8.1/0.2           generic        Starship/Matisse PTDMA
+/0/149                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/14a                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/14b                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/14c                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/14d                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/14e                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/14f                   bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/3                     system         PnP device PNP0c01
+/0/4                     system         PnP device PNP0b00
+/0/5                     system         PnP device PNP0c02
+/0/6                     communication  PnP device PNP0501
+/0/7                     communication  PnP device PNP0501
+/0/8                     system         PnP device PNP0c02

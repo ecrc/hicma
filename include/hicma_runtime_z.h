@@ -81,7 +81,8 @@ extern "C" {
             const MORSE_desc_t *Dense, 
             int ld_Dense,
             int tile_row_index,
-            int tile_col_index
+            int tile_col_index,
+            int A_mt
             );
     void HICMA_TASK_zhagdmi( const MORSE_option_t *options,
             int nrows_Dense, int ncols_Dense,
@@ -99,7 +100,8 @@ extern "C" {
             int Am, int An, 
             int ldu,
             int ldv,
-            int maxrank, double tol
+            int maxrank, double tol,
+            int A_mt
             );
     void HICMA_TASK_zpotrf(const MORSE_option_t *options,
             MORSE_enum uplo, int n, int nb,
@@ -130,6 +132,12 @@ extern "C" {
             double beta,  
             const MORSE_desc_t *CD, 
             int Cm, int Cn, int ldc);
+
+     void HICMA_TASK_zgenrhs( const MORSE_option_t *options,
+            int m, int n,
+            const MORSE_desc_t *A, int Am, int An,
+            int lda,
+            int bigM, int m0, int n0);
 #ifdef __cplusplus
 }
 #endif

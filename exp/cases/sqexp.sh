@@ -1,5 +1,5 @@
 sizes="big"
-#sizes="small"
+sizes="small"
 if [ "$sizes" == "small"  ];then
 nrows[1]=54000;  nb[1]=1350; acc[1]=8;   maxrank[1]=100;
 nrows[2]=54000; nb[2]=1500; acc[2]=8;   maxrank[2]=100;
@@ -33,6 +33,7 @@ nrows[29]=243000;   nb[29]=1350;    acc[29]=8;  maxrank[29]=100;
 nrows[30]=243000;   nb[30]=1500;    acc[30]=8;  maxrank[30]=100;
 nrows[31]=243000;   nb[31]=1800;    acc[31]=8;  maxrank[31]=100;
 nrows[32]=243000;   nb[32]=2250;    acc[32]=8;  maxrank[32]=100;
+
 nrows[33]=270000;   nb[33]=1350;    acc[33]=8;  maxrank[33]=100;
 nrows[34]=270000;   nb[34]=1500;    acc[34]=8;  maxrank[34]=100;
 nrows[35]=270000;   nb[35]=1800;    acc[35]=8;  maxrank[35]=100;
@@ -90,6 +91,16 @@ allcaseids[16]="`seq 1 24`"
 allcaseids[16]="`seq 1 4`"
 #allcaseids[16]="1"
 nprocs="16"
+nprocs="1 2 4 8 16"
+allcaseids[1]="`seq 1 4` `seq 9 12`"
+nprocs="1 2 4 8 16"
+nprocs="1"
+allcaseids[1]="`seq 1 32`"
+allcaseids[1]="`seq 1 1`"
+allcaseids[2]="`seq 1 4` `seq 9 12`"
+allcaseids[4]="`seq 1 4` `seq 9 12`"
+allcaseids[8]="`seq 1 4` `seq 9 12`"
+allcaseids[16]="`seq 14 16` `seq 37 40`"
 else
 nrows[1]=1080000;   nb[1]=2700; acc[1]=8;   maxrank[1]=50;
 nrows[2]=1080000;   nb[2]=3000; acc[2]=8;   maxrank[2]=50;
@@ -134,10 +145,10 @@ allcaseids[256]="`seq 1 28`";
 allcaseids[512]="`seq 1 28`"; 
 allcaseids[1024]="`seq 1 28`"; 
 nprocs="16 32 64"
-nprocs="128 256 512 1024"
-nprocs="16 32 64 128 256 512 1024"
+#nprocs="128 256 512 1024"
+#nprocs="16 32 64 128 256 512 1024"
 #nprocs="32 64"
-#nprocs="16"
+nprocs="16"
 fi
 
 

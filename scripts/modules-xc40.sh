@@ -13,6 +13,6 @@ module load hwloc/1.11.9
 module unload intel
 #module load intel/16.3.3.210
 module load intel
-module load gsl
-module load python  #for compiling starsh
+#module load gsl
+#module load python  #for compiling starsh
 

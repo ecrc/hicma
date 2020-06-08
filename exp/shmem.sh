@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --job-name=hicma
+#SBATCH --job-name=hicma-dev
 #SBATCH --account=k1205
-#SBATCH --output=/project/k1205/akbudak/hicma/exp/out/%j
-#SBATCH --error=/project/k1205/akbudak/hicma/exp/err/%j
+#SBATCH --output=/project/k1205/akbudak/hicma-dev/exp/out/%j
+#SBATCH --error=/project/k1205/akbudak/hicma-dev/exp/err/%j
 #SBATCH --cpus-per-task=32
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=kadir.akbudak@kaust.edu.sa
@@ -36,7 +36,7 @@ export STARPU_CALIBRATE=0
 #export STARPU_BUS_STATS=1
 #export STARPU_WORKER_STATS=1
 #export STARPU_STATS=1
-#export STARPU_IDLE_TIME=/project/k1205/akbudak/hicma/exp/starpulog/$SLURM_JOBID.idle
+#export STARPU_IDLE_TIME=/project/k1205/akbudak/hicma-dev/exp/starpulog/$SLURM_JOBID.idle
 #export STARPU_PROFILING=1
 #STARPU_SILENT=1  
 
@@ -90,7 +90,7 @@ sqrt_numnodesQ=$((numnodes/sqrt_numnodes))
 ntasks_per_node=$((nummpi/numnodes))
 
 
-#Parameters for HiCMA
+#Parameters for hicma-dev
 _factor=2 #TODO #ratio of mb/maxrank
 _acc=8          #fixed accuracy
 
@@ -134,8 +134,8 @@ for sched in $scheds;do
 
 
         if [ "$prog" == "hic" ]; then
-	    rankfile=$HOME/hicma/exp/ranks/$prog-$sched-$_m-$_mb-$_nb-$numnodes-$nummpi-$numthreads-$SLURM_JOBID-SS-$_acc-$_maxrank
-            cmd="$HOME/hicma/build/timing/time_zpotrf_tile \
+	    rankfile=$HOME/hicma-dev/exp/ranks/$prog-$sched-$_m-$_mb-$_nb-$numnodes-$nummpi-$numthreads-$SLURM_JOBID-SS-$_acc-$_maxrank
+            cmd="$HOME/hicma-dev/build/timing/time_zpotrf_tile \
             --m=$_m \
             --n_range=$_n:$_n \
             --k=$_m \
@@ -157,9 +157,9 @@ for sched in $scheds;do
 #--ss \
         elif [ "$prog" == "cham" ]; then
             if [ "$trace" != "-" ]; then
-                cmd="/project/k1205/akbudak/hicma/chameleon/build-fxt-s121/timing/time_dpotrf_tile --nowarmup --p=$sqrt_numnodes --m=$_m --n_range=$_m:$_m:$_m --nb=$_b --threads=$numthreads $tracearg"
+                cmd="/project/k1205/akbudak/hicma-dev/chameleon/build-fxt-s121/timing/time_dpotrf_tile --nowarmup --p=$sqrt_numnodes --m=$_m --n_range=$_m:$_m:$_m --nb=$_b --threads=$numthreads $tracearg"
             else
-                cmd="/project/k1205/akbudak/hicma/chameleon/build/timing/time_dpotrf_tile --nowarmup --p=$sqrt_numnodes --m=$_m --n_range=$_m:$_m:$_m --nb=$_b --threads=$numthreads"
+                cmd="/project/k1205/akbudak/hicma-dev/chameleon/build/timing/time_dpotrf_tile --nowarmup --p=$sqrt_numnodes --m=$_m --n_range=$_m:$_m:$_m --nb=$_b --threads=$numthreads"
             fi
         fi
         minmaxsubinfo=

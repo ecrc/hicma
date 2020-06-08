@@ -29,6 +29,7 @@ ZCODELETS_HEADER(gemm_hcore)
 /*CHAMELEON_CL_CB(zgemm_hcore,         starpu_matrix_get_nx(task->handles[2]), starpu_matrix_get_ny(task->handles[2]), starpu_matrix_get_ny(task->handles[0]),     2. *M*N*K) [> If A^t, computation is wrong <]*/
 
 #include "hcore_z.h"
+extern flop_counter counters[FLOP_NUMTHREADS];
 
 extern int global_always_fixed_rank;
 extern int global_fixed_rank;
@@ -95,7 +96,7 @@ void HICMA_TASK_zgemm(const MORSE_option_t *options,
         elseifval = execution_rank;
         rank_changed = 1;
     }
-    //printf("m:%d n:%d k:%d nb:%d\n", m, n, k, nb); all of them are nb (1156)
+    //printf("%d,%d %d,%d %d,%d\n", Am, An, Bm, Bn, Cm, Cn);
     //printf("initialval:\t%d if:%d\t else:\t%d rc:\t%d\n", initialval, ifval, elseifval, rank_changed);
     MORSE_BEGIN_ACCESS_DECLARATION;
     MORSE_ACCESS_R(AUV, Am, An);
@@ -215,6 +216,8 @@ static void cl_zgemm_hcore_cpu_func(void *descr[], void *cl_arg)
     MORSE_starpu_ws_t *h_work;
     starpu_codelet_unpack_args(cl_arg, &transA, &transB, &m, &n, &alpha, &lda, &ldb, &beta, &ldc, &rk, &maxrk, &acc, &Am, &An, &Bm, &Bn, &Cm, &Cn, &nAUV, &nBUV, &nCUV, &h_work);
 
+    //printf("%d,%d:%g\t%d,%d:%g\t%d,%d:%g\n", Am, An, *Ark, Bm, Bn, *Brk, Cm, Cn, *Crk);
+
     double *AU = AUV;
     double *BU = BUV;
     double *CU = CUV;
@@ -246,6 +249,8 @@ static void cl_zgemm_hcore_cpu_func(void *descr[], void *cl_arg)
 
     int isTransA = transA == MorseTrans;
     int isTransB = transB == MorseTrans;
+    flop_counter flops;
+    flops.update = 0;
 
     if(HICMA_get_use_fast_hcore_zgemm() == 1){
         HCORE_zgemm_fast(transA, transB,
@@ -258,8 +263,12 @@ static void cl_zgemm_hcore_cpu_func(void *descr[], void *cl_arg)
                     m, n,
                     alpha, (isTransA ? AV : AU), (isTransA ? AU : AV), Ark, lda,
                            (isTransB ? BU : BV), (isTransB ? BV : BU), Brk, ldb,
-                    beta, CU, CV, Crk, ldc, rk, maxrk, acc, work);
+                    beta, CU, CV, Crk, ldc, rk, maxrk, acc, work,
+                    &flops);
     }
+    int myid = RUNTIME_thread_rank(NULL);
+    counters[myid].update += flops.update; 
+
     if(print_index || print_index_end){
         char datebuf[128];
         time_t timer;

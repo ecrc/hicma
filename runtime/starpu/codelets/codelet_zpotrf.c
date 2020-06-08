@@ -11,18 +11,22 @@
  *
  * @version 0.1.1
  * @author Kadir Akbudak
- * @date 2018-11-08
+ * @date 2019-11-21
  **/
-#include "coreblas/lapacke.h"
 #include "morse.h"
+#include "hicma.h"
 #include "runtime/starpu/chameleon_starpu.h"
 //#include "runtime/starpu/include/runtime_codelet_z.h"
-#include "auxdescutil.h"
+#include "misc/auxdescutil.h"
 
 #include <sys/time.h>
 
 #include "runtime/starpu/runtime_codelets.h"
 ZCODELETS_HEADER(potrf_hcore)
+
+#include "flop_util_structs.h"
+#include "flop_counts.h"
+extern flop_counter counters[FLOP_NUMTHREADS];
 
 void HICMA_TASK_zpotrf(const MORSE_option_t *options,
                        MORSE_enum uplo, int n, int nb,
@@ -88,12 +92,17 @@ static void cl_zpotrf_hcore_cpu_func(void *descr[], void *cl_arg)
         LAPACK_COL_MAJOR,
         morse_lapack_const(uplo),
         n, A, lda);
+    int myid = RUNTIME_thread_rank(NULL);
+    counters[myid].potrf += flop_counts('c', n, 0, 0, 0);
     if(HICMA_get_print_mat() == 1){
         printf("%d\tpotrf-output\n", __LINE__);
         _printmat(A, n, n, lda);
     }
     if(info != 0){
         fprintf(stderr, "%s\t|%d\t|Error in LAPACK potrf. info:%d\n", __FILE__, __LINE__, info);
+        if(info >= 0) {
+            printf("Tile:%d,%d element:%d,%d has negative value of %.2e\n", Am, An, info, info, A[info*lda+info]);
+        }
         if(0) {
             int p,q;
             for(p=0; p<n;p++){

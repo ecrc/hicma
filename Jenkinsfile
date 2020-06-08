@@ -43,7 +43,7 @@ module load hwloc/1.11.8-gcc-5.5.0
 module load openmpi/3.0.0-gcc-5.5.0
 module load ecrc-extras
 module load starpu/1.2.4-gcc-5.5.0-mkl-openmpi-3.0.0
-module load gsl/2.4-gcc-5.5.0
+#module load gsl/2.4-gcc-5.5.0
 
 
 module list
@@ -54,40 +54,60 @@ set -x
 
 HICMADEVDIR=$PWD
 
-# Update submodules
-#git submodule update --init --recursive
+INSTALLDIR=$PWD/dependencies-prefix
+mkdir -p $INSTALLDIR
+rm -rf $INSTALLDIR/*
+export PKG_CONFIG_PATH=$INSTALLDIR/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # STARS-H
+cd $HICMADEVDIR
 cd stars-h
+git log -1
+ls -l
 rm -rf build
-mkdir -p build/installdir
+mkdir -p build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF
+cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALLDIR -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF -DGSL=OFF
 make clean
-make -j
+make -j 4
 make install
-export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # CHAMELEON
 cd $HICMADEVDIR
 cd chameleon
+git log -1
+ls -l
 rm -rf build
-mkdir -p build/installdir
+mkdir -p build
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DCHAMELEON_USE_MPI=ON  -DCMAKE_INSTALL_PREFIX=$PWD/installdir
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DCHAMELEON_USE_MPI=ON  -DCMAKE_INSTALL_PREFIX=$INSTALLDIR
 make clean
-make -j
+make -j 4
 make install
-export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# HCORE
+cd $HICMADEVDIR
+cd hcore
+git log -1
+ls -l
+rm -rf build
+mkdir -p build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALLDIR
+make clean
+make -j 4
+make install
 
 # HICMA
 cd $HICMADEVDIR
+git log -1
+ls -l
 rm -rf build
 mkdir -p build/installdir
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DHICMA_USE_MPI=ON
 make clean
-make -j
+make -j 4
 make install
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -110,7 +130,7 @@ module load cmake/3.9.6
 module load hwloc/1.11.8-gcc-5.5.0
 module load ecrc-extras
 module load starpu/1.2.4-gcc-5.5.0-mkl-openmpi-3.0.0
-module load gsl/2.4-gcc-5.5.0
+#module load gsl/2.4-gcc-5.5.0
 
 module list
 
@@ -120,40 +140,59 @@ set -x
 
 HICMADEVDIR=$PWD
 
-# Update submodules
-#git submodule update --init --recursive
+INSTALLDIR=$PWD/dependencies-prefix
+mkdir -p $INSTALLDIR
+rm -rf $INSTALLDIR/*
+export PKG_CONFIG_PATH=$INSTALLDIR/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # STARS-H
 cd stars-h
+git log -1
+ls -l
 rm -rf build
-mkdir -p build/installdir
+mkdir -p build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF
+cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALLDIR -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF -DGSL=OFF
 make clean
-make -j
+make -j 4
 make install
-export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # CHAMELEON
 cd $HICMADEVDIR
 cd chameleon
+git log -1
+ls -l
 rm -rf build
-mkdir -p build/installdir
+mkdir -p build
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DCHAMELEON_USE_MPI=OFF  -DCMAKE_INSTALL_PREFIX=$PWD/installdir
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCHAMELEON_USE_MPI=OFF  -DCMAKE_INSTALL_PREFIX=$INSTALLDIR
 make clean
-make -j
+make -j 4
 make install
-export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
+
+# HCORE
+cd $HICMADEVDIR
+cd hcore
+git log -1
+ls -l
+rm -rf build
+mkdir -p build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALLDIR
+make clean
+make -j 4
+make install
 
 # HICMA
 cd $HICMADEVDIR
+git log -1
+ls -l
 rm -rf build
 mkdir -p build/installdir
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DHICMA_USE_MPI=OFF
 make clean
-make -j
+make -j 4
 make install
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -179,7 +218,7 @@ module load hwloc/1.11.8-gcc-5.5.0
 module load openmpi/3.0.0-gcc-5.5.0
 module load ecrc-extras
 module load starpu/1.2.4-gcc-5.5.0-mkl-openmpi-3.0.0
-module load gsl/2.4-gcc-5.5.0
+#module load gsl/2.4-gcc-5.5.0
 
 module list
 
@@ -189,7 +228,7 @@ ctest -T Test --no-compress-output -V
 if [ "$BRANCH_NAME" != "master" ]
 then
     # valgring for timing takes too long. Test the rest
-    #ctest -T memcheck -LE timing 
+    #ctest -T memcheck -LE timing
     :
 fi
 
@@ -215,7 +254,7 @@ module load cmake/3.9.6
 module load hwloc/1.11.8-gcc-5.5.0
 module load ecrc-extras
 module load starpu/1.2.4-gcc-5.5.0-mkl-openmpi-3.0.0
-module load gsl/2.4-gcc-5.5.0
+#module load gsl/2.4-gcc-5.5.0
 
 module list
 
@@ -225,7 +264,7 @@ ctest -T Test --no-compress-output -V
 if [ "$BRANCH_NAME" != "master" ]
 then
     # valgring for timing takes too long. Test the rest
-    #ctest -T memcheck -LE timing 
+    #ctest -T memcheck -LE timing
     :
 fi
 
@@ -253,7 +292,7 @@ module load hwloc/1.11.8-gcc-5.5.0
 module load openmpi/3.0.0-gcc-5.5.0
 module load ecrc-extras
 module load starpu/1.2.4-gcc-5.5.0-mkl-openmpi-3.0.0
-module load gsl/2.4-gcc-5.5.0
+#module load gsl/2.4-gcc-5.5.0
 module list
 cd $WORKSPACE/build
 make docs
@@ -282,10 +321,10 @@ cppcheck-htmlreport --source-encoding="iso8859-1" --title="HiCMA" --source-dir=.
         //failure {
         //}
          unstable {
-             emailext body: "${env.JOB_NAME} - Please go to ${env.BUILD_URL}", subject: "Jenkins Pipeline build is UNSTABLE", recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+             emailext body: "${env.JOB_NAME} - Please go to ${env.BUILD_URL}", subject: "Jenkins Pipeline build is UNSTABLE", recipientProviders: [culprits(),requestor()]
          }
          failure {
-             emailext body: "${env.JOB_NAME} - Please go to ${env.BUILD_URL}", subject: "Jenkins Pipeline build FAILED", recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+             emailext body: "${env.JOB_NAME} - Please go to ${env.BUILD_URL}", subject: "Jenkins Pipeline build FAILED", recipientProviders: [culprits(),requestor()]
          }
      }
 }

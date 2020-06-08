@@ -21,7 +21,7 @@
 #
 #  @author Florent Pruvost
 #  @author Eduardo Gonzalez
-#  @date 22-08-2017
+#  @date 2019-11-25
 #
 ###
 set(dep_message "\nConfiguration of HiCMA:\n"
@@ -57,6 +57,7 @@ set(dep_message "${dep_message}"
 "\n"
 "       Chameleon ...........: ${CHAMELEON_DIR_FOUND}\n"
 "       STARS-H .............: ${STARSH_DIR_FOUND}\n"
+"       HCORE . .............: ${HCORE_DIR_FOUND}\n"
 "\n"
 "       Trace ...............: ${HICMA_ENABLE_TRACING}\n"
 "       Simulation mode .....: ${HICMA_SIMULATION}\n"

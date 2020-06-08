@@ -40,8 +40,13 @@
 
 
 typedef double morse_time_t;
+char *meshfile; //path to the mesh file
+double rad; // RBF scaling factor
+double reg; // RBF regularization value
 
-
+#include <stdio.h>
+void print_array(int m, int n, int ld, double* arr, FILE* fp);
+void fwrite_array(int m, int n, int ld, double* arr, char* file);
 int RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile);
 void* morse_getaddr_null(const MORSE_desc_t *A, int m, int n);
 
@@ -93,7 +98,6 @@ enum iparam_timing {
     IPARAM_BOUNDDEPS,
     IPARAM_BOUNDDEPSPRIO,
     IPARAM_RK,
-    IPARAM_ACC,
     IPARAM_HICMA_MAXRANK,
     IPARAM_HICMA_STARSH_PROB,
     IPARAM_HICMA_STARSH_MAXRANK,
@@ -101,6 +105,14 @@ enum iparam_timing {
     IPARAM_HICMA_PRINTINDEX,
     IPARAM_HICMA_PRINTINDEXEND,
     IPARAM_HICMA_ALWAYS_FIXED_RANK,
+    IPARAM_HICMA_REORDER_INNER_PRODUCTS,
+    IPARAM_ORDER, // 0: no ordering, 1: Morton ordering
+    IPARAM_RBFKERNEL, // RBF kernel_type
+    IPARAM_NUMOBJ, // how many objects (e.g. total number of viruses)
+    IPARAM_NUMSUBOBJ, // how many subobjects (e.g. number of subviruses within one batch)
+    IPARAM_SOLVE,  /* Cholesky solver*/
+    IPARAM_CSOLVE,  /* Check Cholesky solver*/
+
     /* End */
     IPARAM_SIZEOF
 };
@@ -111,6 +123,15 @@ enum dparam_timing {
   IPARAM_BNORM,
   IPARAM_XNORM,
   IPARAM_RNORM,
+
+   //Infinity Norm for checking the solution
+
+  IPARAM_IANORM,
+  IPARAM_IBNORM,
+  IPARAM_IXNORM,
+  IPARAM_IRNORM,
+  IPARAM_IRES,
+
   IPARAM_AinvNORM,
   IPARAM_ESTIMATED_PEAK,
   IPARAM_RES,
@@ -118,11 +139,13 @@ enum dparam_timing {
   IPARAM_THRESHOLD_CHECK, /* Maximum value accepted for: |Ax-b||/N/eps/(||A||||x||+||b||) */
   IPARAM_HICMA_STARSH_DECAY,
   IPARAM_HICMA_STARSH_WAVE_K,
+  IPARAM_HICMA_ACCURACY_THRESHOLD,
   /* End section for hydra integration tool  */
   IPARAM_DNBPARAM
 };
 
 #define PASTE_CODE_IPARAM_LOCALS(iparam)           \
+    int64_t thrdnbr = iparam[IPARAM_THRDNBR];              \
     double  t;                                     \
     int64_t M     = iparam[IPARAM_M];              \
     int64_t N     = iparam[IPARAM_N];              \
@@ -140,6 +163,8 @@ enum dparam_timing {
     int64_t NT    = (N%NB==0) ? (N/NB) : (N/NB+1); \
     int bigmat     = iparam[IPARAM_BIGMAT];         \
     int check     = iparam[IPARAM_CHECK];          \
+    int solve     = iparam[IPARAM_SOLVE];          \
+    int check_solve     = iparam[IPARAM_CSOLVE];          \
     int loud      = iparam[IPARAM_VERBOSE];        \
     (void)M;(void)N;(void)K;(void)NRHS;            \
     (void)LDA;(void)LDB;(void)LDC;                 \

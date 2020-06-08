@@ -3,7 +3,8 @@ module purge
 if [ "$HOSTNAME" == "thana" ]; then
 	. ./scripts/power8.modules
 else
-	. ./scripts/intel.modules
+	. ./scripts/modules-ecrc.sh
+	. ./scripts/modules-ecrc-mpi.sh
 fi
 
 module list
@@ -49,7 +50,7 @@ fi
 echo $CMD
 
 export STARPU_SILENT=1
-irange="3 3";  nta=$nthreads;_b=400; acc=8; check="--check"
+irange="3 3";  nta=$nthreads;_b=400; acc=1e-8; check="--check"
 for nt in $nta;do 
     n=$((m/factor))
     maxrank=$((nb/factor))

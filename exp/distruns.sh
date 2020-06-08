@@ -14,47 +14,6 @@ if [ $# -eq 1 -o $# -eq 2 ]; then
         exit
     else
         . $cases
-#allcaseids[16]="`seq 1 28`"
-#allcaseids[32]="`seq 1 28`"
-#allcaseids[64]="`seq 1 28`"
-#allcaseids[128]="`seq 1 28`"
-#allcaseids[256]="`seq 1 28`"
-#allcaseids[512]="`seq 1 28`"
-#nprocs="16 32 64 128 256 512"
-##_appdata="--edsin"; _wavek=25; _compmaxrank=100; tlmxrk=30
-#_appdata="--edsin"; _wavek=50; _compmaxrank=150; tlmxrk=50
-#step=1
-##_appdata="--edsin"; _wavek=100; _compmaxrank=300
-#timelimit="03:00:00"
-#note="Hicma $_appdata - $sizes - wavek:$_wavek - timelimit:$timelimit - compmaxrank:$_compmaxrank - tile max rank:$tlmxrk "
-#nrows[1]=1080000;   nb[1]=2700; acc[1]=8;   maxrank[1]=$tlmxrk;
-#nrows[2]=1080000;   nb[2]=3000; acc[2]=8;   maxrank[2]=$tlmxrk;
-#nrows[3]=1080000;   nb[3]=3375; acc[3]=8;   maxrank[3]=$tlmxrk;
-#nrows[4]=1080000;   nb[4]=4500; acc[4]=8;   maxrank[4]=$tlmxrk;
-#nrows[5]=2295000;   nb[5]=2700; acc[5]=8;   maxrank[5]=$tlmxrk;
-#nrows[6]=2295000;   nb[6]=3000; acc[6]=8;   maxrank[6]=$tlmxrk;
-#nrows[7]=2295000;   nb[7]=3375; acc[7]=8;   maxrank[7]=$tlmxrk;
-#nrows[8]=2295000;   nb[8]=4500; acc[8]=8;   maxrank[8]=$tlmxrk;
-#nrows[9]=3510000;   nb[9]=2700; acc[9]=8;   maxrank[9]=$tlmxrk;
-#nrows[10]=3510000;  nb[10]=3000;    acc[10]=8;  maxrank[10]=$tlmxrk;
-#nrows[11]=3510000;  nb[11]=3375;    acc[11]=8;  maxrank[11]=$tlmxrk;
-#nrows[12]=3510000;  nb[12]=4500;    acc[12]=8;  maxrank[12]=$tlmxrk;
-#nrows[13]=4725000;  nb[13]=2700;    acc[13]=8;  maxrank[13]=$tlmxrk;
-#nrows[14]=4725000;  nb[14]=3000;    acc[14]=8;  maxrank[14]=$tlmxrk;
-#nrows[15]=4725000;  nb[15]=3375;    acc[15]=8;  maxrank[15]=$tlmxrk;
-#nrows[16]=4725000;  nb[16]=4500;    acc[16]=8;  maxrank[16]=$tlmxrk;
-#nrows[17]=5940000;  nb[17]=2700;    acc[17]=8;  maxrank[17]=$tlmxrk;
-#nrows[18]=5940000;  nb[18]=3000;    acc[18]=8;  maxrank[18]=$tlmxrk;
-#nrows[19]=5940000;  nb[19]=3375;    acc[19]=8;  maxrank[19]=$tlmxrk;
-#nrows[20]=5940000;  nb[20]=4500;    acc[20]=8;  maxrank[20]=$tlmxrk;
-#nrows[21]=8100000;  nb[21]=2700;    acc[21]=8;  maxrank[21]=$tlmxrk;
-#nrows[22]=8100000;  nb[22]=3000;    acc[22]=8;  maxrank[22]=$tlmxrk;
-#nrows[23]=8100000;  nb[23]=3375;    acc[23]=8;  maxrank[23]=$tlmxrk;
-#nrows[24]=8100000;  nb[24]=4500;    acc[24]=8;  maxrank[24]=$tlmxrk;
-#nrows[25]=10800000; nb[25]=2700;    acc[25]=8;  maxrank[25]=$tlmxrk;
-#nrows[26]=10800000; nb[26]=3000;    acc[26]=8;  maxrank[26]=$tlmxrk;
-#nrows[27]=10800000; nb[27]=3375;    acc[27]=8;  maxrank[27]=$tlmxrk;
-#nrows[28]=10800000; nb[28]=4500;    acc[28]=8;  maxrank[28]=$tlmxrk;
     fi
     if [ $# -eq 2 ]; then
         dry=$2
@@ -63,17 +22,60 @@ else
     echo "Usage: $0 casesFile [dry]" 1>&2
     exit
 fi
-#corespernode=40; numthreads=39 #skylake
-corespernode=30; numthreads=31 #shaheen
-corespernode=30; numthreads="1 2 4 8 16 31" #shaheen
+cdir=`basename $PWD`
+if [[ $cdir != "hicma-dev" ]]; then
+    echo "run this script in hicma-dev folder. The name of the current folder is: $cdir"
+    exit -1
+fi
+# numthreads=39 #skylake
+numthreads=31 #shaheen
+# numthreads="1 2 4 8 16 31" #shaheen
+hn="$HOSTNAME"
+if [[ "$hn" = xci* ]]; then
+    numthreads="16 32 60 61 62 63 64" #isambard
+    numthreads="63" #isambard
+    #numthreads="32 63" #isambard
+fi
+if [[ "$hn" = flamingo ]]; then
+    numthreads="55" #flamingo
+fi
+if [[ "$hn" = vulture ]]; then
+    numthreads="39" #flamingo
+fi
+if [[ "$hn" = shihab ]]; then
+    numthreads="35" #shihab
+fi
+if [[ "$hn" = jasmine ]]; then
+    numthreads="27" #jasmine
+fi
+if [[ "$hn" = kw60319 ]]; then
+    numthreads="27" #kw60319
+fi
 
 #que="debug"; timelimit="00:30:00"; echo "DEBUG DEBUG DEBUG DEBUG DEBUG "
 for nodes in $nprocs; do
     echo "#Number of nodes: $nodes ============================="
-    if [ "$dry" == "dry" ]; then
+    hn="$HOSTNAME"
+    if [[ "$hn" = xci* ]]; then
+        que="arm"; 
+        #cmdbatch="aprun -n $nodes -d 64 -j 1 " 
+        cmdbatch="qsub -q $que -l select=$nodes -l walltime=$timelimit -j oe -N hicma-$nodes "
+    elif [[ "$hn" = flamingo ]]; then
+        cmdbatch=""
+    elif [[ "$hn" = shihab ]]; then
+        cmdbatch=""
+    elif [[ "$hn" = vulture ]]; then
+        cmdbatch=""
+    elif [[ "$hn" = jasmine ]]; then
+        cmdbatch=""
+    elif [[ "$hn" = kw60319 ]]; then
         cmdbatch=""
     else
-        cmdbatch="sbatch --parsable --nodes=$nodes --partition=$que --time=$timelimit --account=k1205 --job-name=hicma-$nodes "
+        cmdbatch="sbatch --parsable --nodes=$nodes --partition=$que --time=$timelimit --account=k1205 --job-name=hicma-$nodes "  #shaheen
+    fi
+    echo "# $cmdbatch"
+    if [ "$dry" == "dry" ]; then
+        cmdbatch=""
     fi
     maxsubs[1]=500; minsubs[1]=250
     maxsubs[2]=1000; minsubs[2]=500
@@ -92,8 +94,6 @@ for nodes in $nprocs; do
         #$cmdbatch exp/trial.sh $nodes $nodes 31 - cham - "$ids" $dry $cases "13:00:00" $que $sched $maxsub $minsub;continue
 
 
-        prog="hic"
-        #prog="cham"
         caseids=${allcaseids[$nodes]}      
         ncases=`echo "$caseids" | wc -w`    
         startt=0;   endt=$((ncases-1)); 
@@ -116,10 +116,40 @@ for nodes in $nprocs; do
             ct=$((ct+step))
             echo "#case ids: $ids"
             for nt in $numthreads; do
+                #if [[ "$hn" = xci* ]]; then
+                #    cmdbatch2="$cmdbatch -o $PWD/exp/out/$prog-$nodes-$nt-$PBS_JOBID"
+                #fi
                 corespernode=$nt
                 maxsub=$((nodes*(corespernode+10)))
                 minsub=$((nodes*corespernode))
-                $cmdbatch exp/distmem.sh $nodes $nodes $nt $trace $prog - "$ids" $dry $cases $timelimit $que $sched $maxsub $minsub $op
+                cmd="$PWD/exp/distmem.sh $nodes $nodes $nt $trace $prog - \"$ids\" $dry $PWD/$cases $timelimit $que $sched $maxsub $minsub $op" 
+                if [ "$dry" == "dry" ]; then
+                    eval $cmd 
+                    continue
+                fi
+                if [[ "$hn" = xci* ]]; then
+                    cmd="$PWD/exp/distmem.sh $nodes $nodes $nt $trace $prog - \"$ids\" $dry $PWD/$cases $timelimit $que $sched $maxsub $minsub $op" 
+                    if [ "$dry" == "dry" ]; then
+                        eval $cmd 
+                        continue
+                    fi
+                    jobid=$(echo $cmd | $cmdbatch) 
+                    echo "$jobid"
+                    date=$(date '+%Y-%m-%d--%H-%M')
+                    qalter -o $PWD/exp/out/$prog-$nodes-$nt--$date--$jobid $jobid
+                elif [[ "$hn" = flamingo ]]; then
+                    eval $cmd
+                elif [[ "$hn" = shihab ]]; then
+                    eval $cmd
+                elif [[ "$hn" = vulture ]]; then
+                    eval $cmd
+                elif [[ "$hn" = jasmine ]]; then
+                    eval $cmd
+                elif [[ "$hn" = kw60319 ]]; then
+                    eval $cmd
+                else
+                    $cmdbatch $PWD/exp/distmem.sh $nodes $nodes $nt $trace $prog - "$ids" $dry $cases $timelimit $que $sched $maxsub $minsub $op
+                fi
             done
         done
     done
