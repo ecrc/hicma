@@ -1,0 +1,20 @@
+#Job for max/min sub:20480 15360 on 512 nodes
+Submitted batch job 4310337
+Submitted batch job 4310338
+Submitted batch job 4310339
+Submitted batch job 4310340
+Submitted batch job 4310341
+Submitted batch job 4310342
+Submitted batch job 4310343
+Submitted batch job 4310344
+Submitted batch job 4310345
+#Job for max/min sub:40960 30720 on 1024 nodes
+Submitted batch job 4310346
+Submitted batch job 4310347
+Submitted batch job 4310348
+Submitted batch job 4310349
+Submitted batch job 4310350
+Submitted batch job 4310351
+Submitted batch job 4310352
+Submitted batch job 4310353
+Submitted batch job 4310354

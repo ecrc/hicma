@@ -1,0 +1,22 @@
+#Wed Jan 24 13:30:09 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-20)
+4680589
+#Wed Jan 24 21:16:00 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-20)
+4684023
+#Wed Jan 24 21:36:16 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-20)
+4684306
+#Number of nodes: 64 =============================
+#Thu Feb  1 10:18:17 AST 2018 on 64 nodes. Hicma runs - EDSIN - 1e-4missing - exp/cases/1M-acc.txt "4" 1 (0-0-10)
+#case ids:  4
+4776037
+#Number of nodes: 64 =============================
+#Thu Feb  1 10:50:44 AST 2018 on 64 nodes. Hicma runs - EDSIN - 1e-4missing - exp/cases/1M-acc.txt "4 6 9 13" 4 (0-3-10)
+#case ids:  4 6 9 13
+4776318
+#Number of nodes: 64 =============================
+#Thu Feb 15 12:40:00 AST 2018 on 64 nodes. Hicma - accuracy - SS - custom maxrank - hic - exp/cases/1M-acc.txt "1 2 3 4 5 6 7" 7 (0-6-10)
+#case ids:  1 2 3 4 5 6 7
+5025046
+#Number of nodes: 64 =============================
+#Thu Feb 15 15:16:22 AST 2018 on 64 nodes. Hicma - accuracy - SS - custom maxrank - hic - exp/cases/1M-acc.txt "3 4 5 6 7" 5 (0-4-10)
+#case ids:  3 4 5 6 7
+5026176

@@ -1,0 +1,9 @@
+#Thu Nov  2 04:43:28 AST 2017 on 16 nodes. Hicma runs to compare vs scalapack
+4377668
+4377669
+4377670
+4377671
+4377672
+4377673
+4377674
+4377675

@@ -1,0 +1,179 @@
+#Mon Jan 22 14:00:07 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (-5)
+4665289
+4665290
+4665291
+4665292
+4665293
+#Mon Jan 22 14:12:45 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-5-1)
+4665453
+4665454
+4665455
+4665456
+4665457
+#Mon Jan 22 15:01:00 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-3-1)
+#1
+4665759
+#2
+4665760
+#3 outlier
+#4665761
+#3-r2
+4665845
+#Mon Jan 22 14:47:31 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-2-1)
+#4
+4665685
+#5
+4665686
+#Mon Jan 22 14:31:58 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-11-1)
+#6
+4665566
+#7
+4665567
+#8
+4665568
+#8-r2
+4665846
+#9
+4665569
+#9-r2
+4665847
+#10
+4665570
+#11
+4665571
+#12
+4665572
+#13
+4665573
+#14 not working
+4665574
+#15 not working
+4665575
+#16 not working
+4665576
+#Mon Jan 22 21:07:02 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667255
+4667256
+4667257
+4667258
+4667259
+4667260
+4667261
+4667262
+4667263
+4667264
+4667265
+4667266
+4667267
+#Mon Jan 22 21:07:05 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667269
+4667270
+4667271
+4667272
+4667273
+4667274
+4667275
+4667276
+4667277
+4667278
+4667279
+4667280
+4667281
+#Mon Jan 22 21:07:10 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667282
+4667283
+4667284
+4667285
+4667286
+4667287
+4667288
+4667289
+4667290
+4667291
+4667292
+4667293
+4667294
+#Mon Jan 22 21:07:12 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667295
+4667296
+4667297
+4667298
+4667299
+4667300
+4667301
+4667302
+4667303
+4667304
+4667305
+4667306
+4667307
+#Mon Jan 22 22:22:40 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667559
+4667560
+4667561
+4667562
+4667563
+4667564
+4667565
+4667566
+4667567
+4667568
+4667569
+4667570
+4667571
+#Mon Jan 22 22:22:41 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667572
+4667573
+4667574
+4667575
+4667576
+4667577
+4667578
+4667579
+4667580
+4667581
+4667582
+4667583
+4667584
+#Mon Jan 22 22:22:42 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667585
+4667586
+4667587
+4667588
+4667589
+4667590
+4667591
+4667592
+4667593
+4667594
+4667595
+4667596
+4667597
+#Mon Jan 22 22:22:43 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667598
+4667599
+4667600
+4667601
+4667602
+4667603
+4667604
+4667605
+4667606
+4667607
+4667608
+4667609
+4667610
+#Mon Jan 22 22:22:46 AST 2018 on 64 nodes. Hicma runs - different accuracy - exp/cases/1M-acc.txt (1-13-1)
+4667611
+4667612
+4667613
+4667614
+4667615
+4667616
+4667617
+4667618
+4667619
+4667620
+4667621
+4667622
+4667623

@@ -1,0 +1,3 @@
+
+nrows[1]=10; nb[1]=5;  
+_acc=2          #fixed accuracy

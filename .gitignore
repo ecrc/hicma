@@ -1,3 +1,14 @@
+.DS_Store
+._.DS_Store
+exp/trace
+exp/err
+exp/cerr
+exp/out
+exp/ranks
+main
+tags
+build*
+
 # Object files
 *.o
 *.ko

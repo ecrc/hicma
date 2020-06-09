@@ -1,0 +1,1354 @@
+#Number of nodes: 16 =============================
+#Mon Feb 12 00:33:33 AST 2018 on 16 nodes. Hicma edsin - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8" 8 (0-7-1)
+#case ids:  1
+4985890
+#case ids:  2
+4985891
+#case ids:  3
+4985892
+#case ids:  4
+4985893
+#case ids:  5
+4985894
+#case ids:  6
+4985895
+#case ids:  7
+4985896
+#case ids:  8
+4985897
+#Number of nodes: 32 =============================
+#Mon Feb 12 00:33:34 AST 2018 on 32 nodes. Hicma edsin - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12" 12 (0-11-1)
+#case ids:  1
+4985898
+#case ids:  2
+4985899
+#case ids:  3
+4985900
+#case ids:  4
+4985901
+#case ids:  5
+4985902
+#case ids:  6
+4985903
+#case ids:  7
+4985904
+#case ids:  8
+4985905
+#case ids:  9
+4985906
+#case ids:  10
+4985907
+#case ids:  11
+4985908
+#case ids:  12
+4985909
+#Number of nodes: 64 =============================
+#Mon Feb 12 00:33:34 AST 2018 on 64 nodes. Hicma edsin - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" 15 (0-14-1)
+#case ids:  1
+4985910
+#case ids:  2
+4985911
+#case ids:  3
+4985912
+#case ids:  4
+4985913
+#case ids:  5
+4985914
+#case ids:  6
+4985915
+#case ids:  7
+4985916
+#case ids:  8
+4985917
+#case ids:  9
+4985918
+#case ids:  10
+4985919
+#case ids:  11
+4985920
+#case ids:  12
+4985921
+#case ids:  13
+4985922
+#case ids:  14
+4985923
+#case ids:  15
+4985924
+#Number of nodes: 128 =============================
+#Mon Feb 12 00:33:34 AST 2018 on 128 nodes. Hicma edsin - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20" 20 (0-19-1)
+#case ids:  1
+4985925
+#case ids:  2
+4985926
+#case ids:  3
+4985927
+#case ids:  4
+4985928
+#case ids:  5
+4985929
+#case ids:  6
+4985930
+#case ids:  7
+4985931
+#case ids:  8
+4985932
+#case ids:  9
+4985933
+#case ids:  10
+4985934
+#case ids:  11
+4985935
+#case ids:  12
+4985936
+#case ids:  13
+4985937
+#case ids:  14
+4985938
+#case ids:  15
+4985939
+#case ids:  16
+4985940
+#case ids:  17
+4985941
+#case ids:  18
+4985942
+#case ids:  19
+4985943
+#case ids:  20
+4985944
+#Number of nodes: 256 =============================
+#Mon Feb 12 00:33:35 AST 2018 on 256 nodes. Hicma edsin - hic - exp/cases/edsin.sh "17 18 19 20 21 22 23 24" 8 (0-7-1)
+#case ids:  17
+4985945
+#case ids:  18
+4985946
+#case ids:  19
+4985947
+#case ids:  20
+4985948
+#case ids:  21
+4985949
+#case ids:  22
+4985950
+#case ids:  23
+4985951
+#case ids:  24
+4985952
+#Number of nodes: 512 =============================
+#Mon Feb 12 00:33:35 AST 2018 on 512 nodes. Hicma edsin - hic - exp/cases/edsin.sh "21 22 23 24 25 26 27 28" 8 (0-7-1)
+#case ids:  21
+4985953
+#case ids:  22
+4985954
+#case ids:  23
+4985955
+#case ids:  24
+4985956
+#case ids:  25
+4985957
+#case ids:  26
+4985958
+#case ids:  27
+4985959
+#case ids:  28
+4985960
+#Number of nodes: 16 =============================
+#Mon Feb 12 15:31:18 AST 2018 on 16 nodes. Hicma --edsin - big - 100 - 03:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+4993927
+#case ids:  2
+4993928
+#case ids:  3
+4993929
+#case ids:  4
+4993930
+#case ids:  5
+4993931
+#case ids:  6
+4993932
+#case ids:  7
+4993933
+#case ids:  8
+4993934
+#case ids:  9
+4993935
+#case ids:  10
+4993936
+#case ids:  11
+4993937
+#case ids:  12
+4993938
+#case ids:  13
+4993939
+#case ids:  14
+4993940
+#case ids:  15
+4993941
+#case ids:  16
+4993942
+#case ids:  17
+4993943
+#case ids:  18
+4993944
+#case ids:  19
+4993945
+#case ids:  20
+4993946
+#case ids:  21
+4993947
+#case ids:  22
+4993948
+#case ids:  23
+4993949
+#case ids:  24
+4993950
+#case ids:  25
+4993951
+#case ids:  26
+4993952
+#case ids:  27
+4993953
+#case ids:  28
+4993954
+#Number of nodes: 32 =============================
+#Mon Feb 12 15:31:19 AST 2018 on 32 nodes. Hicma --edsin - big - 100 - 03:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+4993955
+#case ids:  2
+4993956
+#case ids:  3
+4993957
+#case ids:  4
+4993958
+#case ids:  5
+4993959
+#case ids:  6
+4993960
+#case ids:  7
+4993961
+#case ids:  8
+4993962
+#case ids:  9
+4993963
+#case ids:  10
+4993964
+#case ids:  11
+4993965
+#case ids:  12
+4993966
+#case ids:  13
+4993967
+#case ids:  14
+4993968
+#case ids:  15
+4993969
+#case ids:  16
+4993970
+#case ids:  17
+4993971
+#case ids:  18
+4993972
+#case ids:  19
+4993973
+#case ids:  20
+4993974
+#case ids:  21
+4993975
+#case ids:  22
+4993976
+#case ids:  23
+4993977
+#case ids:  24
+4993978
+#case ids:  25
+4993979
+#case ids:  26
+4993980
+#case ids:  27
+4993981
+#case ids:  28
+4993982
+#Number of nodes: 64 =============================
+#Mon Feb 12 15:31:19 AST 2018 on 64 nodes. Hicma --edsin - big - 100 - 03:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+4993983
+#case ids:  2
+4993984
+#case ids:  3
+4993985
+#case ids:  4
+4993986
+#case ids:  5
+4993987
+#case ids:  6
+4993988
+#case ids:  7
+4993989
+#case ids:  8
+4993990
+#case ids:  9
+4993991
+#case ids:  10
+4993992
+#case ids:  11
+4993993
+#case ids:  12
+4993994
+#case ids:  13
+4993995
+#case ids:  14
+4993996
+#case ids:  15
+4993997
+#case ids:  16
+4993998
+#case ids:  17
+4993999
+#case ids:  18
+4994000
+#case ids:  19
+4994001
+#case ids:  20
+4994002
+#case ids:  21
+4994003
+#case ids:  22
+4994004
+#case ids:  23
+4994005
+#case ids:  24
+4994006
+#case ids:  25
+4994007
+#case ids:  26
+4994008
+#case ids:  27
+4994009
+#case ids:  28
+4994010
+#Number of nodes: 128 =============================
+#Mon Feb 12 15:31:20 AST 2018 on 128 nodes. Hicma --edsin - big - 100 - 03:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+4994011
+#case ids:  2
+4994012
+#case ids:  3
+4994013
+#case ids:  4
+4994014
+#case ids:  5
+4994015
+#case ids:  6
+4994016
+#case ids:  7
+4994017
+#case ids:  8
+4994018
+#case ids:  9
+4994019
+#case ids:  10
+4994020
+#case ids:  11
+4994021
+#case ids:  12
+4994022
+#case ids:  13
+4994023
+#case ids:  14
+4994024
+#case ids:  15
+4994025
+#case ids:  16
+4994026
+#case ids:  17
+4994027
+#case ids:  18
+4994028
+#case ids:  19
+4994029
+#case ids:  20
+4994030
+#case ids:  21
+4994031
+#case ids:  22
+4994032
+#case ids:  23
+4994033
+#case ids:  24
+4994034
+#case ids:  25
+4994035
+#case ids:  26
+4994036
+#case ids:  27
+4994037
+#case ids:  28
+4994038
+#Number of nodes: 256 =============================
+#Mon Feb 12 15:31:22 AST 2018 on 256 nodes. Hicma --edsin - big - 100 - 03:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+4994041
+#case ids:  2
+4994042
+#case ids:  3
+4994043
+#case ids:  4
+4994046
+#case ids:  5
+4994047
+#case ids:  6
+4994048
+#case ids:  7
+4994049
+#case ids:  8
+4994050
+#case ids:  9
+4994051
+#case ids:  10
+4994052
+#case ids:  11
+4994053
+#case ids:  12
+4994054
+#case ids:  13
+4994055
+#case ids:  14
+4994056
+#case ids:  15
+4994057
+#case ids:  16
+4994058
+#case ids:  17
+4994059
+#case ids:  18
+4994060
+#case ids:  19
+4994061
+#case ids:  20
+4994062
+#case ids:  21
+4994063
+#case ids:  22
+4994064
+#case ids:  23
+4994066
+#case ids:  24
+4994067
+#case ids:  25
+4994068
+#case ids:  26
+4994069
+#case ids:  27
+4994070
+#case ids:  28
+4994071
+#Number of nodes: 512 =============================
+#Mon Feb 12 15:31:45 AST 2018 on 512 nodes. Hicma --edsin - big - 100 - 03:00:00 - 250  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+4994072
+#case ids:  2
+4994073
+#case ids:  3
+4994075
+#case ids:  4
+4994076
+#case ids:  5
+4994077
+#case ids:  6
+4994079
+#case ids:  7
+4994080
+#case ids:  8
+4994081
+#case ids:  9
+4994082
+#case ids:  10
+4994084
+#case ids:  11
+4994086
+#case ids:  12
+4994087
+#case ids:  13
+4994088
+#case ids:  14
+4994089
+#case ids:  15
+4994090
+#case ids:  16
+4994092
+#case ids:  17
+4994093
+#case ids:  18
+4994094
+#case ids:  19
+4994095
+#case ids:  20
+4994096
+#case ids:  21
+4994097
+#case ids:  22
+4994098
+#case ids:  23
+4994099
+#case ids:  24
+4994100
+#case ids:  25
+4994101
+#case ids:  26
+4994102
+#case ids:  27
+4994103
+#case ids:  28
+4994104
+#Number of nodes: 16 =============================
+#Thu Feb 15 13:48:46 AST 2018 on 16 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025410
+#case ids:  2
+5025411
+#case ids:  3
+5025412
+#case ids:  4
+5025413
+#case ids:  5
+5025414
+#case ids:  6
+5025415
+#case ids:  7
+5025416
+#case ids:  8
+5025417
+#case ids:  9
+5025418
+#case ids:  10
+5025419
+#case ids:  11
+5025420
+#case ids:  12
+5025421
+#case ids:  13
+5025422
+#case ids:  14
+5025423
+#case ids:  15
+5025424
+#case ids:  16
+5025425
+#case ids:  17
+5025426
+#case ids:  18
+5025427
+#case ids:  19
+5025428
+#case ids:  20
+5025429
+#case ids:  21
+5025430
+#case ids:  22
+5025431
+#case ids:  23
+5025432
+#case ids:  24
+5025433
+#case ids:  25
+5025434
+#case ids:  26
+5025435
+#case ids:  27
+5025436
+#case ids:  28
+5025437
+#Number of nodes: 32 =============================
+#Thu Feb 15 13:48:47 AST 2018 on 32 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025438
+#case ids:  2
+5025439
+#case ids:  3
+5025440
+#case ids:  4
+5025441
+#case ids:  5
+5025442
+#case ids:  6
+5025443
+#case ids:  7
+5025444
+#case ids:  8
+5025445
+#case ids:  9
+5025446
+#case ids:  10
+5025447
+#case ids:  11
+5025448
+#case ids:  12
+5025449
+#case ids:  13
+5025450
+#case ids:  14
+5025451
+#case ids:  15
+5025452
+#case ids:  16
+5025453
+#case ids:  17
+5025454
+#case ids:  18
+5025455
+#case ids:  19
+5025456
+#case ids:  20
+5025457
+#case ids:  21
+5025458
+#case ids:  22
+5025459
+#case ids:  23
+5025460
+#case ids:  24
+5025461
+#case ids:  25
+5025462
+#case ids:  26
+5025463
+#case ids:  27
+5025464
+#case ids:  28
+5025465
+#Number of nodes: 64 =============================
+#Thu Feb 15 13:48:48 AST 2018 on 64 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025466
+#case ids:  2
+5025467
+#case ids:  3
+5025468
+#case ids:  4
+5025469
+#case ids:  5
+5025470
+#case ids:  6
+5025471
+#case ids:  7
+5025472
+#case ids:  8
+5025473
+#case ids:  9
+5025474
+#case ids:  10
+5025475
+#case ids:  11
+5025476
+#case ids:  12
+5025477
+#case ids:  13
+5025478
+#case ids:  14
+5025479
+#case ids:  15
+5025480
+#case ids:  16
+5025481
+#case ids:  17
+5025482
+#case ids:  18
+5025483
+#case ids:  19
+5025484
+#case ids:  20
+5025485
+#case ids:  21
+5025486
+#case ids:  22
+5025487
+#case ids:  23
+5025488
+#case ids:  24
+5025489
+#case ids:  25
+5025490
+#case ids:  26
+5025491
+#case ids:  27
+5025492
+#case ids:  28
+5025493
+#Number of nodes: 128 =============================
+#Thu Feb 15 13:48:48 AST 2018 on 128 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025494
+#case ids:  2
+5025495
+#case ids:  3
+5025496
+#case ids:  4
+5025497
+#case ids:  5
+5025498
+#case ids:  6
+5025499
+#case ids:  7
+5025500
+#case ids:  8
+5025501
+#case ids:  9
+5025502
+#case ids:  10
+5025503
+#case ids:  11
+5025504
+#case ids:  12
+5025505
+#case ids:  13
+5025506
+#case ids:  14
+5025507
+#case ids:  15
+5025508
+#case ids:  16
+5025509
+#case ids:  17
+5025510
+#case ids:  18
+5025511
+#case ids:  19
+5025512
+#case ids:  20
+5025513
+#case ids:  21
+5025514
+#case ids:  22
+5025515
+#case ids:  23
+5025516
+#case ids:  24
+5025517
+#case ids:  25
+5025518
+#case ids:  26
+5025519
+#case ids:  27
+5025520
+#case ids:  28
+5025521
+#Number of nodes: 256 =============================
+#Thu Feb 15 13:48:49 AST 2018 on 256 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025522
+#case ids:  2
+5025523
+#case ids:  3
+5025524
+#case ids:  4
+5025525
+#case ids:  5
+5025526
+#case ids:  6
+5025527
+#case ids:  7
+5025528
+#case ids:  8
+5025529
+#case ids:  9
+5025530
+#case ids:  10
+5025531
+#case ids:  11
+5025532
+#case ids:  12
+5025533
+#case ids:  13
+5025534
+#case ids:  14
+5025535
+#case ids:  15
+5025536
+#case ids:  16
+5025537
+#case ids:  17
+5025538
+#case ids:  18
+5025539
+#case ids:  19
+5025540
+#case ids:  20
+5025541
+#case ids:  21
+5025542
+#case ids:  22
+5025543
+#case ids:  23
+5025544
+#case ids:  24
+5025545
+#case ids:  25
+5025546
+#case ids:  26
+5025547
+#case ids:  27
+5025548
+#case ids:  28
+5025549
+#Number of nodes: 512 =============================
+#Thu Feb 15 13:48:49 AST 2018 on 512 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025550
+#case ids:  2
+5025551
+#case ids:  3
+5025552
+#case ids:  4
+5025553
+#case ids:  5
+5025554
+#case ids:  6
+5025555
+#case ids:  7
+5025556
+#case ids:  8
+5025557
+#case ids:  9
+5025558
+#case ids:  10
+5025559
+#case ids:  11
+5025560
+#case ids:  12
+5025561
+#case ids:  13
+5025562
+#case ids:  14
+5025563
+#case ids:  15
+5025564
+#case ids:  16
+5025565
+#case ids:  17
+5025566
+#case ids:  18
+5025567
+#case ids:  19
+5025568
+#case ids:  20
+5025569
+#case ids:  21
+5025570
+#case ids:  22
+5025571
+#case ids:  23
+5025572
+#case ids:  24
+5025573
+#case ids:  25
+5025574
+#case ids:  26
+5025575
+#case ids:  27
+5025577
+#case ids:  28
+5025578
+#Number of nodes: 16 =============================
+#Thu Feb 15 13:54:04 AST 2018 on 16 nodes. Hicma --edsin - big - 50 - 03:00:00 - 200  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025608
+#case ids:  2
+5025609
+#case ids:  3
+5025610
+#case ids:  4
+5025611
+#case ids:  5
+5025612
+#case ids:  6
+5025613
+#case ids:  7
+5025614
+#case ids:  8
+5025615
+#case ids:  9
+5025616
+#case ids:  10
+5025617
+#case ids:  11
+5025618
+#case ids:  12
+5025619
+#case ids:  13
+5025620
+#case ids:  14
+5025621
+#case ids:  15
+5025622
+#case ids:  16
+5025623
+#case ids:  17
+5025624
+#case ids:  18
+5025625
+#case ids:  19
+5025626
+#case ids:  20
+5025627
+#case ids:  21
+5025628
+#case ids:  22
+5025629
+#case ids:  23
+5025630
+#case ids:  24
+5025631
+#case ids:  25
+5025632
+#case ids:  26
+5025633
+#case ids:  27
+5025634
+#case ids:  28
+5025635
+#Number of nodes: 32 =============================
+#Thu Feb 15 13:54:05 AST 2018 on 32 nodes. Hicma --edsin - big - 50 - 03:00:00 - 200  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025636
+#case ids:  2
+5025637
+#case ids:  3
+5025638
+#case ids:  4
+5025639
+#case ids:  5
+5025640
+#case ids:  6
+5025641
+#case ids:  7
+5025642
+#case ids:  8
+5025643
+#case ids:  9
+5025644
+#case ids:  10
+5025645
+#case ids:  11
+5025646
+#case ids:  12
+5025647
+#case ids:  13
+5025648
+#case ids:  14
+5025649
+#case ids:  15
+5025650
+#case ids:  16
+5025651
+#case ids:  17
+5025652
+#case ids:  18
+5025653
+#case ids:  19
+5025654
+#case ids:  20
+5025655
+#case ids:  21
+5025656
+#case ids:  22
+5025657
+#case ids:  23
+5025658
+#case ids:  24
+5025659
+#case ids:  25
+5025660
+#case ids:  26
+5025661
+#case ids:  27
+5025662
+#case ids:  28
+5025663
+#Number of nodes: 64 =============================
+#Thu Feb 15 13:54:05 AST 2018 on 64 nodes. Hicma --edsin - big - 50 - 03:00:00 - 200  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025664
+#case ids:  2
+5025665
+#case ids:  3
+5025666
+#case ids:  4
+5025667
+#case ids:  5
+5025668
+#case ids:  6
+5025669
+#case ids:  7
+5025670
+#case ids:  8
+5025671
+#case ids:  9
+5025672
+#case ids:  10
+5025673
+#case ids:  11
+5025674
+#case ids:  12
+5025675
+#case ids:  13
+5025676
+#case ids:  14
+5025677
+#case ids:  15
+5025678
+#case ids:  16
+5025679
+#case ids:  17
+5025680
+#case ids:  18
+5025681
+#case ids:  19
+5025682
+#case ids:  20
+5025683
+#case ids:  21
+5025684
+#case ids:  22
+5025685
+#case ids:  23
+5025686
+#case ids:  24
+5025687
+#case ids:  25
+5025688
+#case ids:  26
+5025689
+#case ids:  27
+5025690
+#case ids:  28
+5025691
+#Number of nodes: 128 =============================
+#Thu Feb 15 13:54:06 AST 2018 on 128 nodes. Hicma --edsin - big - 50 - 03:00:00 - 200  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025692
+#case ids:  2
+5025693
+#case ids:  3
+5025694
+#case ids:  4
+5025695
+#case ids:  5
+5025696
+#case ids:  6
+5025697
+#case ids:  7
+5025698
+#case ids:  8
+5025699
+#case ids:  9
+5025700
+#case ids:  10
+5025701
+#case ids:  11
+5025702
+#case ids:  12
+5025703
+#case ids:  13
+5025704
+#case ids:  14
+5025705
+#case ids:  15
+5025706
+#case ids:  16
+5025707
+#case ids:  17
+5025708
+#case ids:  18
+5025709
+#case ids:  19
+5025710
+#case ids:  20
+5025711
+#case ids:  21
+5025712
+#case ids:  22
+5025713
+#case ids:  23
+5025714
+#case ids:  24
+5025715
+#case ids:  25
+5025717
+#case ids:  26
+5025718
+#case ids:  27
+5025719
+#case ids:  28
+5025720
+#Number of nodes: 256 =============================
+#Thu Feb 15 13:54:06 AST 2018 on 256 nodes. Hicma --edsin - big - 50 - 03:00:00 - 200  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025721
+#case ids:  2
+5025722
+#case ids:  3
+5025723
+#case ids:  4
+5025724
+#case ids:  5
+5025725
+#case ids:  6
+5025726
+#case ids:  7
+5025727
+#case ids:  8
+5025728
+#case ids:  9
+5025729
+#case ids:  10
+5025730
+#case ids:  11
+5025731
+#case ids:  12
+5025732
+#case ids:  13
+5025733
+#case ids:  14
+5025734
+#case ids:  15
+5025735
+#case ids:  16
+5025736
+#case ids:  17
+5025737
+#case ids:  18
+5025738
+#case ids:  19
+5025739
+#case ids:  20
+5025740
+#case ids:  21
+5025741
+#case ids:  22
+5025742
+#case ids:  23
+5025743
+#case ids:  24
+5025744
+#case ids:  25
+5025745
+#case ids:  26
+5025746
+#case ids:  27
+5025747
+#case ids:  28
+5025748
+#Number of nodes: 512 =============================
+#Thu Feb 15 13:54:07 AST 2018 on 512 nodes. Hicma --edsin - big - 50 - 03:00:00 - 200  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5025749
+#case ids:  2
+5025750
+#case ids:  3
+5025751
+#case ids:  4
+5025752
+#case ids:  5
+5025753
+#case ids:  6
+5025754
+#case ids:  7
+5025755
+#case ids:  8
+5025756
+#case ids:  9
+5025757
+#case ids:  10
+5025758
+#case ids:  11
+5025759
+#case ids:  12
+5025760
+#case ids:  13
+5025761
+#case ids:  14
+5025762
+#case ids:  15
+5025763
+#case ids:  16
+5025764
+#case ids:  17
+5025765
+#case ids:  18
+5025766
+#case ids:  19
+5025767
+#case ids:  20
+5025768
+#case ids:  21
+5025769
+#case ids:  22
+5025770
+#case ids:  23
+5025771
+#case ids:  24
+5025772
+#case ids:  25
+5025773
+#case ids:  26
+5025774
+#case ids:  27
+5025775
+#case ids:  28
+5025776
+#Number of nodes: 128 =============================
+#Fri Feb 16 03:59:07 AST 2018 on 128 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 19 (0-18-1)
+#case ids:  10
+5027508
+#case ids:  11
+5027509
+#case ids:  12
+5027510
+#case ids:  13
+5027511
+#case ids:  14
+5027512
+#case ids:  15
+5027513
+#case ids:  16
+5027514
+#case ids:  17
+5027515
+#case ids:  18
+5027516
+#case ids:  19
+5027517
+#case ids:  20
+5027518
+#case ids:  21
+5027519
+#case ids:  22
+5027520
+#case ids:  23
+5027521
+#case ids:  24
+5027522
+#case ids:  25
+5027523
+#case ids:  26
+5027524
+#case ids:  27
+5027525
+#case ids:  28
+5027526
+#Number of nodes: 256 =============================
+#Fri Feb 16 03:59:08 AST 2018 on 256 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5027527
+#case ids:  2
+5027528
+#case ids:  3
+5027529
+#case ids:  4
+5027530
+#case ids:  5
+5027531
+#case ids:  6
+5027532
+#case ids:  7
+5027533
+#case ids:  8
+5027534
+#case ids:  9
+5027535
+#case ids:  10
+5027536
+#case ids:  11
+5027537
+#case ids:  12
+5027538
+#case ids:  13
+5027539
+#case ids:  14
+5027540
+#case ids:  15
+5027541
+#case ids:  16
+5027542
+#case ids:  17
+5027543
+#case ids:  18
+5027544
+#case ids:  19
+5027545
+#case ids:  20
+5027546
+#case ids:  21
+5027547
+#case ids:  22
+5027548
+#case ids:  23
+5027549
+#case ids:  24
+5027550
+#case ids:  25
+5027551
+#case ids:  26
+5027552
+#case ids:  27
+5027553
+#case ids:  28
+5027554
+#Number of nodes: 512 =============================
+#Fri Feb 16 03:59:10 AST 2018 on 512 nodes. Hicma --edsin - big - 25 - 03:00:00 - 100  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5027555
+#case ids:  2
+5027556
+#case ids:  3
+5027557
+#case ids:  4
+5027558
+#case ids:  5
+5027559
+#case ids:  6
+5027560
+#case ids:  7
+5027561
+#case ids:  8
+5027562
+#case ids:  9
+5027563
+#case ids:  10
+5027564
+#case ids:  11
+5027565
+#case ids:  12
+5027566
+#case ids:  13
+5027567
+#case ids:  14
+5027568
+#case ids:  15
+5027569
+#case ids:  16
+5027570
+#case ids:  17
+5027571
+#case ids:  18
+5027572
+#case ids:  19
+5027573
+#case ids:  20
+5027574
+#case ids:  21
+5027575
+#case ids:  22
+5027576
+#case ids:  23
+5027577
+#case ids:  24
+5027578
+#case ids:  25
+5027579
+#case ids:  26
+5027580
+#case ids:  27
+5027581
+#case ids:  28
+5027582

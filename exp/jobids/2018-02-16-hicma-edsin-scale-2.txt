@@ -1,0 +1,696 @@
+#Number of nodes: 16 =============================
+#Fri Feb 16 11:11:40 AST 2018 on 16 nodes. Hicma --edsin -  - wavek:25 - timelimit:03:00:00 - compmaxrank:100 - tile max rank:30  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028129
+#case ids:  2
+5028130
+#case ids:  3
+5028131
+#case ids:  4
+5028132
+#case ids:  5
+5028133
+#case ids:  6
+5028134
+#case ids:  7
+5028135
+#case ids:  8
+5028136
+#case ids:  9
+5028137
+#case ids:  10
+5028138
+#case ids:  11
+5028139
+#case ids:  12
+5028140
+#case ids:  13
+5028141
+#case ids:  14
+5028142
+#case ids:  15
+5028143
+#case ids:  16
+5028144
+#case ids:  17
+5028145
+#case ids:  18
+5028146
+#case ids:  19
+5028147
+#case ids:  20
+5028148
+#case ids:  21
+5028149
+#case ids:  22
+5028150
+#case ids:  23
+5028151
+#case ids:  24
+5028152
+#case ids:  25
+5028153
+#case ids:  26
+5028154
+#case ids:  27
+5028155
+#case ids:  28
+5028156
+#Number of nodes: 32 =============================
+#Fri Feb 16 11:11:40 AST 2018 on 32 nodes. Hicma --edsin -  - wavek:25 - timelimit:03:00:00 - compmaxrank:100 - tile max rank:30  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028157
+#case ids:  2
+5028158
+#case ids:  3
+5028159
+#case ids:  4
+5028160
+#case ids:  5
+5028161
+#case ids:  6
+5028162
+#case ids:  7
+5028163
+#case ids:  8
+5028164
+#case ids:  9
+5028165
+#case ids:  10
+5028166
+#case ids:  11
+5028167
+#case ids:  12
+5028168
+#case ids:  13
+5028169
+#case ids:  14
+5028170
+#case ids:  15
+5028171
+#case ids:  16
+5028172
+#case ids:  17
+5028173
+#case ids:  18
+5028174
+#case ids:  19
+5028175
+#case ids:  20
+5028176
+#case ids:  21
+5028177
+#case ids:  22
+5028178
+#case ids:  23
+5028179
+#case ids:  24
+5028180
+#case ids:  25
+5028181
+#case ids:  26
+5028182
+#case ids:  27
+5028183
+#case ids:  28
+5028184
+#Number of nodes: 64 =============================
+#Fri Feb 16 11:11:41 AST 2018 on 64 nodes. Hicma --edsin -  - wavek:25 - timelimit:03:00:00 - compmaxrank:100 - tile max rank:30  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028185
+#case ids:  2
+5028186
+#case ids:  3
+5028187
+#case ids:  4
+5028188
+#case ids:  5
+5028189
+#case ids:  6
+5028190
+#case ids:  7
+5028191
+#case ids:  8
+5028192
+#case ids:  9
+5028193
+#case ids:  10
+5028194
+#case ids:  11
+5028195
+#case ids:  12
+5028196
+#case ids:  13
+5028197
+#case ids:  14
+5028198
+#case ids:  15
+5028199
+#case ids:  16
+5028200
+#case ids:  17
+5028201
+#case ids:  18
+5028202
+#case ids:  19
+5028203
+#case ids:  20
+5028204
+#case ids:  21
+5028205
+#case ids:  22
+5028206
+#case ids:  23
+5028207
+#case ids:  24
+5028208
+#case ids:  25
+5028209
+#case ids:  26
+5028210
+#case ids:  27
+5028211
+#case ids:  28
+5028212
+#Number of nodes: 128 =============================
+#Fri Feb 16 11:11:41 AST 2018 on 128 nodes. Hicma --edsin -  - wavek:25 - timelimit:03:00:00 - compmaxrank:100 - tile max rank:30  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028213
+#case ids:  2
+5028214
+#case ids:  3
+5028215
+#case ids:  4
+5028216
+#case ids:  5
+5028217
+#case ids:  6
+5028218
+#case ids:  7
+5028219
+#case ids:  8
+5028220
+#case ids:  9
+5028221
+#case ids:  10
+5028222
+#case ids:  11
+5028223
+#case ids:  12
+5028224
+#case ids:  13
+5028225
+#case ids:  14
+5028226
+#case ids:  15
+5028227
+#case ids:  16
+5028228
+#case ids:  17
+5028229
+#case ids:  18
+5028230
+#case ids:  19
+5028231
+#case ids:  20
+5028232
+#case ids:  21
+5028233
+#case ids:  22
+5028234
+#case ids:  23
+5028235
+#case ids:  24
+5028236
+#case ids:  25
+5028237
+#case ids:  26
+5028238
+#case ids:  27
+5028239
+#case ids:  28
+5028240
+#Number of nodes: 256 =============================
+#Fri Feb 16 11:11:42 AST 2018 on 256 nodes. Hicma --edsin -  - wavek:25 - timelimit:03:00:00 - compmaxrank:100 - tile max rank:30  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028241
+#case ids:  2
+5028242
+#case ids:  3
+5028243
+#case ids:  4
+5028244
+#case ids:  5
+5028245
+#case ids:  6
+5028246
+#case ids:  7
+5028247
+#case ids:  8
+5028248
+#case ids:  9
+5028249
+#case ids:  10
+5028250
+#case ids:  11
+5028251
+#case ids:  12
+5028252
+#case ids:  13
+5028253
+#case ids:  14
+5028254
+#case ids:  15
+5028255
+#case ids:  16
+5028256
+#case ids:  17
+5028257
+#case ids:  18
+5028258
+#case ids:  19
+5028259
+#case ids:  20
+5028260
+#case ids:  21
+5028261
+#case ids:  22
+5028262
+#case ids:  23
+5028263
+#case ids:  24
+5028264
+#case ids:  25
+5028265
+#case ids:  26
+5028266
+#case ids:  27
+5028267
+#case ids:  28
+5028268
+#Number of nodes: 512 =============================
+#Fri Feb 16 11:11:42 AST 2018 on 512 nodes. Hicma --edsin -  - wavek:25 - timelimit:03:00:00 - compmaxrank:100 - tile max rank:30  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028269
+#case ids:  2
+5028270
+#case ids:  3
+5028271
+#case ids:  4
+5028272
+#case ids:  5
+5028273
+#case ids:  6
+5028274
+#case ids:  7
+5028275
+#case ids:  8
+5028276
+#case ids:  9
+5028277
+#case ids:  10
+5028278
+#case ids:  11
+5028279
+#case ids:  12
+5028280
+#case ids:  13
+5028281
+#case ids:  14
+5028282
+#case ids:  15
+5028283
+#case ids:  16
+5028284
+#case ids:  17
+5028285
+#case ids:  18
+5028286
+#case ids:  19
+5028287
+#case ids:  20
+5028288
+#case ids:  21
+5028289
+#case ids:  22
+5028290
+#case ids:  23
+5028291
+#case ids:  24
+5028292
+#case ids:  25
+5028293
+#case ids:  26
+5028294
+#case ids:  27
+5028295
+#case ids:  28
+5028296
+#Number of nodes: 16 =============================
+#Fri Feb 16 11:12:15 AST 2018 on 16 nodes. Hicma --edsin -  - wavek:50 - timelimit:03:00:00 - compmaxrank:150 - tile max rank:50  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028297
+#case ids:  2
+5028298
+#case ids:  3
+5028299
+#case ids:  4
+5028300
+#case ids:  5
+5028301
+#case ids:  6
+5028302
+#case ids:  7
+5028303
+#case ids:  8
+5028304
+#case ids:  9
+5028305
+#case ids:  10
+5028306
+#case ids:  11
+5028307
+#case ids:  12
+5028308
+#case ids:  13
+5028309
+#case ids:  14
+5028310
+#case ids:  15
+5028311
+#case ids:  16
+5028312
+#case ids:  17
+5028313
+#case ids:  18
+5028314
+#case ids:  19
+5028315
+#case ids:  20
+5028316
+#case ids:  21
+5028317
+#case ids:  22
+5028318
+#case ids:  23
+5028319
+#case ids:  24
+5028320
+#case ids:  25
+5028321
+#case ids:  26
+5028322
+#case ids:  27
+5028323
+#case ids:  28
+5028324
+#Number of nodes: 32 =============================
+#Fri Feb 16 11:12:16 AST 2018 on 32 nodes. Hicma --edsin -  - wavek:50 - timelimit:03:00:00 - compmaxrank:150 - tile max rank:50  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028325
+#case ids:  2
+5028326
+#case ids:  3
+5028327
+#case ids:  4
+5028328
+#case ids:  5
+5028329
+#case ids:  6
+5028330
+#case ids:  7
+5028331
+#case ids:  8
+5028332
+#case ids:  9
+5028333
+#case ids:  10
+5028334
+#case ids:  11
+5028335
+#case ids:  12
+5028336
+#case ids:  13
+5028337
+#case ids:  14
+5028338
+#case ids:  15
+5028339
+#case ids:  16
+5028340
+#case ids:  17
+5028341
+#case ids:  18
+5028342
+#case ids:  19
+5028343
+#case ids:  20
+5028344
+#case ids:  21
+5028345
+#case ids:  22
+5028346
+#case ids:  23
+5028347
+#case ids:  24
+5028348
+#case ids:  25
+5028349
+#case ids:  26
+5028350
+#case ids:  27
+5028351
+#case ids:  28
+5028352
+#Number of nodes: 64 =============================
+#Fri Feb 16 11:12:16 AST 2018 on 64 nodes. Hicma --edsin -  - wavek:50 - timelimit:03:00:00 - compmaxrank:150 - tile max rank:50  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028353
+#case ids:  2
+5028354
+#case ids:  3
+5028355
+#case ids:  4
+5028356
+#case ids:  5
+5028357
+#case ids:  6
+5028358
+#case ids:  7
+5028359
+#case ids:  8
+5028360
+#case ids:  9
+5028361
+#case ids:  10
+5028362
+#case ids:  11
+5028363
+#case ids:  12
+5028364
+#case ids:  13
+5028365
+#case ids:  14
+5028366
+#case ids:  15
+5028367
+#case ids:  16
+5028368
+#case ids:  17
+5028369
+#case ids:  18
+5028370
+#case ids:  19
+5028371
+#case ids:  20
+5028372
+#case ids:  21
+5028373
+#case ids:  22
+5028374
+#case ids:  23
+5028375
+#case ids:  24
+5028376
+#case ids:  25
+5028377
+#case ids:  26
+5028378
+#case ids:  27
+5028379
+#case ids:  28
+5028380
+#Number of nodes: 128 =============================
+#Fri Feb 16 11:12:17 AST 2018 on 128 nodes. Hicma --edsin -  - wavek:50 - timelimit:03:00:00 - compmaxrank:150 - tile max rank:50  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028381
+#case ids:  2
+5028382
+#case ids:  3
+5028383
+#case ids:  4
+5028384
+#case ids:  5
+5028385
+#case ids:  6
+5028386
+#case ids:  7
+5028387
+#case ids:  8
+5028388
+#case ids:  9
+5028389
+#case ids:  10
+5028390
+#case ids:  11
+5028391
+#case ids:  12
+5028392
+#case ids:  13
+5028393
+#case ids:  14
+5028394
+#case ids:  15
+5028395
+#case ids:  16
+5028396
+#case ids:  17
+5028397
+#case ids:  18
+5028398
+#case ids:  19
+5028399
+#case ids:  20
+5028400
+#case ids:  21
+5028401
+#case ids:  22
+5028402
+#case ids:  23
+5028403
+#case ids:  24
+5028404
+#case ids:  25
+5028405
+#case ids:  26
+5028406
+#case ids:  27
+5028407
+#case ids:  28
+5028408
+#Number of nodes: 256 =============================
+#Fri Feb 16 11:12:17 AST 2018 on 256 nodes. Hicma --edsin -  - wavek:50 - timelimit:03:00:00 - compmaxrank:150 - tile max rank:50  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028409
+#case ids:  2
+5028410
+#case ids:  3
+5028411
+#case ids:  4
+5028412
+#case ids:  5
+5028413
+#case ids:  6
+5028414
+#case ids:  7
+5028415
+#case ids:  8
+5028416
+#case ids:  9
+5028417
+#case ids:  10
+5028418
+#case ids:  11
+5028419
+#case ids:  12
+5028420
+#case ids:  13
+5028421
+#case ids:  14
+5028422
+#case ids:  15
+5028423
+#case ids:  16
+5028424
+#case ids:  17
+5028425
+#case ids:  18
+5028426
+#case ids:  19
+5028427
+#case ids:  20
+5028428
+#case ids:  21
+5028429
+#case ids:  22
+5028430
+#case ids:  23
+5028431
+#case ids:  24
+5028432
+#case ids:  25
+5028433
+#case ids:  26
+5028434
+#case ids:  27
+5028435
+#case ids:  28
+5028436
+#Number of nodes: 512 =============================
+#Fri Feb 16 11:12:18 AST 2018 on 512 nodes. Hicma --edsin -  - wavek:50 - timelimit:03:00:00 - compmaxrank:150 - tile max rank:50  - hic - exp/cases/edsin.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28" 28 (0-27-1)
+#case ids:  1
+5028437
+#case ids:  2
+5028438
+#case ids:  3
+5028439
+#case ids:  4
+5028440
+#case ids:  5
+5028441
+#case ids:  6
+5028442
+#case ids:  7
+5028443
+#case ids:  8
+5028444
+#case ids:  9
+5028445
+#case ids:  10
+5028446
+#case ids:  11
+5028447
+#case ids:  12
+5028448
+#case ids:  13
+5028449
+#case ids:  14
+5028450
+#case ids:  15
+5028451
+#case ids:  16
+5028452
+#case ids:  17
+5028453
+#case ids:  18
+5028454
+#case ids:  19
+5028455
+#case ids:  20
+5028456
+#case ids:  21
+5028457
+#case ids:  22
+5028458
+#case ids:  23
+5028459
+#case ids:  24
+5028460
+#case ids:  25
+5028461
+#case ids:  26
+5028462
+#case ids:  27
+5028463
+#case ids:  28
+5028464

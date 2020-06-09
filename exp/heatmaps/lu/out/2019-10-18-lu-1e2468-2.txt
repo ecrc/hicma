@@ -1,0 +1,370 @@
+#Number of nodes: 1 =============================
+# 
+#Fri Oct 18 22:48:13 +03 2019 on 1 nodes. Hicma beta=0.01 --ss -  -  - 10:00:00 -   - hic - ./exp/cases/lu-vul-ra.sh "1" 1 (0-0-1)
+#case ids:  1
+kw60319
+numactl --interleave=all
+
+Experiment case:1 nrows:21960 mb:1464
+!BEGIN: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 22:48:13 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=2 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  28
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          1464
+# NB:          1024
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-02
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     2048
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      7320
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:7320 N:15360, NB:1024
+
+ global_nt:10 local_nt:488 N:15360 NB:1464 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        7320
+ NUMBER OF UNKNOWNS:       21960
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       21960
+Tcompress:213.795
+15 15
+0	224	132	123	60	38	54	32	5	5	5	5	7	9	16	
+224	0	137	16	9	5	5	6	4	5	5	5	5	5	5	
+132	137	0	166	23	12	7	8	5	5	5	6	6	7	7	
+123	16	166	0	217	30	15	11	5	5	6	7	7	7	7	
+61	9	23	217	0	222	31	18	5	5	7	7	7	8	13	
+38	5	12	30	222	0	228	34	5	6	7	7	8	13	22	
+53	5	7	15	31	228	0	231	5	6	7	8	13	23	62	
+32	6	8	11	18	34	231	0	174	97	127	84	55	75	277	
+5	4	5	5	5	5	5	173	0	124	13	7	5	5	5	
+5	5	5	5	5	6	6	97	124	0	151	19	11	7	6	
+5	5	5	6	7	7	7	127	13	151	0	186	27	14	9	
+5	5	6	7	7	7	8	84	7	19	186	0	222	30	15	
+7	5	6	7	7	8	13	55	5	11	27	222	0	225	32	
+9	5	7	7	8	13	23	75	5	7	14	30	225	-2147483648	231	
+16	5	7	7	13	22	62	278	5	6	9	15	32	231	0	
+initial_ranks:avg:45.1619 min:4 max:278
+15 15
+0	224	132	123	60	38	54	32	5	5	5	5	7	9	16	
+224	0	137	16	9	5	5	6	4	5	5	5	5	5	5	
+132	137	0	166	23	12	7	8	5	5	5	6	6	7	7	
+123	16	166	0	217	30	15	11	5	5	6	7	7	7	7	
+61	9	23	217	0	222	31	18	5	5	7	7	7	8	13	
+38	5	12	30	222	0	228	34	5	6	7	7	8	13	22	
+53	5	7	15	31	228	0	231	5	6	7	8	13	23	62	
+32	6	8	11	18	34	231	0	174	97	127	84	55	75	277	
+5	4	5	5	5	5	5	173	0	124	13	7	5	5	5	
+5	5	5	5	5	6	6	97	124	0	151	19	11	7	6	
+5	5	5	6	7	7	7	127	13	151	0	186	27	14	9	
+5	5	6	7	7	7	8	84	7	19	186	0	222	30	15	
+7	5	6	7	7	8	13	55	5	11	27	222	0	225	32	
+9	5	7	7	8	13	23	75	5	7	14	30	225	-2147483648	231	
+16	5	7	7	13	22	62	278	5	6	9	15	32	231	0	
+final_ranks:avg:45.1619 min:4 max:278
+  21960   15360   21960    10.993      0.00 +-   0.00  
+
+!END: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 22:48:13 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=2 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh SECOND:277 MINUTE:4 HOUR:0
+Fri Oct 18 22:52:50 +03 2019
+
+!BEGIN: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 22:52:50 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  28
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          1464
+# NB:          1024
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-03
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     2048
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      7320
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:7320 N:15360, NB:1024
+
+ global_nt:10 local_nt:488 N:15360 NB:1464 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        7320
+ NUMBER OF UNKNOWNS:       21960
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       21960
+Tcompress:210.936
+15 15
+0	307	188	167	98	70	81	55	8	9	10	13	15	19	37	
+309	0	224	32	22	16	13	10	6	8	8	8	8	8	8	
+190	225	0	273	46	29	22	17	8	8	8	9	10	11	14	
+168	32	273	0	357	61	34	25	8	8	9	10	13	17	22	
+98	22	46	358	0	361	65	35	8	8	10	12	17	23	30	
+70	16	29	61	362	0	380	69	8	9	12	17	23	31	46	
+82	13	22	34	65	380	0	386	8	10	16	22	31	48	140	
+56	10	17	25	35	69	386	0	228	141	171	131	100	128	451	
+8	6	8	8	8	8	8	228	0	200	26	18	14	10	8	
+9	8	8	8	8	9	10	141	200	0	249	39	26	20	15	
+10	8	8	9	10	12	16	172	26	249	0	309	56	32	24	
+13	8	9	10	12	17	22	131	18	39	308	0	363	63	34	
+15	8	10	13	17	23	31	100	14	26	56	364	0	375	68	
+19	8	11	17	23	31	48	129	10	20	32	63	376	-2147483648	385	
+37	8	14	22	30	46	139	452	8	15	24	34	68	385	0	
+initial_ranks:avg:76.0238 min:6 max:452
+15 15
+0	307	188	167	98	70	81	55	8	9	10	13	15	19	37	
+309	0	224	32	22	16	13	10	6	8	8	8	8	8	8	
+190	225	0	273	46	29	22	17	8	8	8	9	10	11	14	
+168	32	273	0	357	61	34	25	8	8	9	10	13	17	22	
+98	22	46	358	0	361	65	35	8	8	10	12	17	24	30	
+70	16	29	61	362	0	380	69	8	9	12	17	24	31	46	
+82	13	22	34	65	380	0	386	8	10	16	23	31	48	140	
+56	10	17	25	35	69	386	0	228	141	171	131	100	128	451	
+8	6	8	8	8	8	8	228	0	200	26	18	14	10	8	
+9	8	8	8	8	9	10	141	200	0	249	39	26	20	15	
+10	8	8	9	10	12	16	172	26	249	0	309	56	32	24	
+13	8	9	10	12	17	23	131	18	39	308	0	363	63	34	
+15	8	10	13	17	24	31	100	14	26	56	364	0	375	68	
+19	8	11	17	24	31	48	129	10	20	32	63	376	-2147483648	385	
+37	8	14	22	30	46	139	452	8	15	24	34	68	385	0	
+final_ranks:avg:76.0524 min:6 max:452
+  21960   15360   21960    23.180      0.00 +-   0.00  
+
+!END: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 22:52:50 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh SECOND:286 MINUTE:4 HOUR:0
+Fri Oct 18 22:57:36 +03 2019
+
+!BEGIN: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 22:57:36 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=4 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  28
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          1464
+# NB:          1024
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-04
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     2048
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      7320
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:7320 N:15360, NB:1024
+
+ global_nt:10 local_nt:488 N:15360 NB:1464 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        7320
+ NUMBER OF UNKNOWNS:       21960
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       21960
+Tcompress:212.91
+15 15
+0	377	239	205	138	103	104	77	11	14	17	20	25	35	58	
+378	0	296	59	32	26	23	20	10	11	12	12	13	14	18	
+241	295	0	359	87	43	33	28	10	12	13	14	18	23	26	
+206	59	358	0	461	111	54	38	12	13	14	19	25	28	34	
+138	32	88	461	0	455	118	55	12	14	18	25	29	35	44	
+103	26	43	111	456	0	485	125	12	16	24	29	35	46	82	
+105	23	33	54	118	485	0	486	13	21	28	34	46	87	231	
+78	20	28	38	55	125	484	0	270	187	214	180	149	204	558	
+11	10	10	12	12	12	13	272	0	265	47	28	23	20	16	
+14	11	12	13	14	16	21	187	264	0	326	70	38	30	26	
+17	12	13	14	18	24	28	215	47	327	0	400	102	49	36	
+20	12	14	19	25	29	34	179	28	70	402	0	463	115	54	
+25	13	18	25	29	35	46	149	23	38	102	463	0	476	121	
+35	14	23	28	35	46	87	205	20	30	49	115	477	0	485	
+59	18	26	34	44	81	233	562	16	26	36	54	121	487	0	
+initial_ranks:avg:104.857 min:10 max:562
+15 15
+0	377	239	205	138	103	104	77	11	14	17	20	25	35	58	
+378	0	296	59	32	26	23	20	10	11	12	12	13	14	18	
+241	295	0	359	87	43	33	28	10	12	13	14	18	23	26	
+206	59	358	0	461	111	54	38	12	13	14	19	25	28	34	
+138	32	88	461	0	455	118	55	12	14	18	25	29	35	44	
+103	26	43	111	456	0	485	125	12	16	24	29	35	47	82	
+105	23	33	54	118	485	0	486	13	21	28	34	47	87	231	
+78	20	28	38	55	125	484	0	270	187	214	180	149	204	558	
+11	10	10	12	12	12	13	272	0	265	47	28	23	20	16	
+14	11	12	13	14	16	21	187	264	0	326	70	39	30	26	
+17	12	13	14	18	24	28	215	47	327	0	400	102	50	36	
+20	12	14	19	25	29	34	179	28	70	402	0	463	115	54	
+25	13	18	25	29	35	47	149	23	39	102	463	0	476	121	
+35	14	23	28	35	47	87	205	20	30	50	115	477	0	485	
+59	18	26	34	44	81	233	562	16	26	36	54	121	487	0	
+final_ranks:avg:104.895 min:10 max:562
+  21960   15360   21960    35.130      0.00 +-   0.00  
+
+!END: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 22:57:36 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=4 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh SECOND:324 MINUTE:5 HOUR:0
+Fri Oct 18 23:03:00 +03 2019
+
+!BEGIN: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 23:03:00 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=5 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  28
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          1464
+# NB:          1024
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-05
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     2048
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      7320
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:7320 N:15360, NB:1024
+
+ global_nt:10 local_nt:488 N:15360 NB:1464 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        7320
+ NUMBER OF UNKNOWNS:       21960
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       21960
+Tcompress:203.637
+15 15
+0	492	313	241	179	138	127	98	16	21	25	30	37	50	79	
+489	0	416	160	53	36	30	27	13	14	15	17	20	24	26	
+306	419	0	456	204	103	47	38	14	16	19	24	26	30	35	
+241	162	460	0	552	210	154	57	14	18	25	29	32	38	45	
+179	55	216	551	0	573	204	108	14	23	28	33	38	47	85	
+139	36	102	215	573	0	578	187	16	25	32	38	48	110	173	
+128	30	47	154	199	579	0	580	20	28	37	47	103	189	338	
+99	27	38	56	99	187	578	0	330	238	252	228	224	287	670	
+16	13	14	14	14	16	20	336	0	393	125	41	32	28	24	
+21	14	16	18	23	25	28	237	395	0	437	181	72	41	34	
+25	15	19	25	28	32	37	253	126	441	0	500	209	137	51	
+30	17	24	29	33	38	47	228	41	196	503	0	568	202	149	
+37	20	26	32	38	48	101	226	32	78	217	567	0	577	203	
+51	24	30	38	47	108	189	286	28	41	139	200	579	0	588	
+81	26	35	45	89	175	343	674	24	34	52	148	204	589	0	
+initial_ranks:avg:147.038 min:13 max:674
+15 15
+0	492	313	241	179	138	127	98	16	21	25	30	37	50	79	
+489	0	416	160	53	36	30	27	13	14	15	17	20	24	26	
+306	419	0	456	204	103	47	38	14	16	19	24	26	30	35	
+241	162	460	0	552	210	154	57	14	18	25	29	32	38	45	
+179	55	216	551	0	573	204	108	14	23	28	33	38	47	85	
+139	36	102	215	573	0	578	187	16	25	32	39	48	110	173	
+128	30	47	154	199	579	0	580	20	28	37	47	103	189	338	
+99	27	38	56	99	187	578	0	330	238	252	228	224	287	670	
+16	13	14	14	14	16	20	336	0	393	125	41	32	29	24	
+21	14	16	18	23	25	28	237	395	0	437	181	72	41	35	
+25	15	19	25	28	32	37	253	126	441	0	500	209	137	51	
+30	17	24	29	33	39	47	228	41	196	503	0	568	202	149	
+37	20	26	32	38	48	101	226	32	78	217	567	0	577	203	
+51	24	30	38	47	108	189	286	29	41	139	200	579	0	588	
+81	26	35	45	89	175	343	674	24	35	52	148	204	589	0	
+final_ranks:avg:147.067 min:13 max:674
+  21960   15360   21960    60.406      0.00 +-   0.00  
+
+!END: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 23:03:00 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=5 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh SECOND:314 MINUTE:5 HOUR:0
+Fri Oct 18 23:08:14 +03 2019
+
+!BEGIN: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 23:08:14 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=6 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  28
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          1464
+# NB:          1024
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-06
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     2048
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      7320
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:7320 N:15360, NB:1024
+
+ global_nt:10 local_nt:488 N:15360 NB:1464 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        7320
+ NUMBER OF UNKNOWNS:       21960
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       21960
+Tcompress:204.129
+15 15
+0	811	535	325	260	215	175	127	22	28	34	40	63	81	108	
+856	0	778	527	186	52	41	39	16	19	20	25	28	31	33	
+585	790	0	805	625	386	80	52	19	21	27	31	34	40	46	
+351	556	825	0	864	647	548	136	19	27	31	35	42	52	69	
+278	204	639	880	0	873	628	427	22	29	35	42	51	77	380	
+240	52	434	643	883	0	894	471	27	33	41	51	85	450	609	
+196	41	81	548	636	898	0	726	28	36	50	73	431	624	698	
+132	39	52	141	363	457	718	0	477	362	318	382	534	602	789	
+22	16	19	19	22	27	28	520	0	759	423	90	43	37	32	
+28	19	21	27	29	33	36	384	778	0	793	596	296	63	46	
+34	20	27	31	35	41	50	336	475	811	0	825	637	497	108	
+41	25	31	35	42	51	72	391	99	608	857	0	873	640	560	
+73	28	34	42	51	86	424	591	43	335	640	887	0	885	607	
+89	31	40	52	77	452	630	626	37	63	515	633	889	0	897	
+118	33	46	69	398	605	714	803	32	46	110	562	623	916	0	
+initial_ranks:avg:292.467 min:16 max:916
+
+!END: M:21960 N:15360 MB:1464 NB:1024 MAXRANK:1024 DATE:Fri Oct 18 23:08:14 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=21960 --n_range=15360:15360 --k=21960 --mb=1464 --nb=1024 --nowarmup --threads=28 --p=1 --rk=0 --acc=6 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=2048 --ntrian=7320 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:38 MINSUB:28 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-vul-ra.sh SECOND:542 MINUTE:9 HOUR:0
+Fri Oct 18 23:17:16 +03 2019
+

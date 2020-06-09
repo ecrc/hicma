@@ -1,0 +1,46 @@
+#Number of nodes: 16 =============================
+#Sat Feb 17 23:29:52 AST 2018 on 16 nodes. Hicma trsm --ss - small -  - 03:00:00 - 1350  - hic - exp/cases/sqexp-trsm.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22" 22 (0-21-1)
+#case ids:  1
+5034956
+#case ids:  2
+5034957
+#case ids:  3
+5034958
+#case ids:  4
+5034959
+#case ids:  5
+5034960
+#case ids:  6
+5034961
+#case ids:  7
+5034962
+#case ids:  8
+5034963
+#case ids:  9
+5034964
+#case ids:  10
+5034965
+#case ids:  11
+5034966
+#case ids:  12
+5034967
+#case ids:  13
+5034968
+#case ids:  14
+5034969
+#case ids:  15
+5034970
+#case ids:  16
+5034971
+#case ids:  17
+5034972
+#case ids:  18
+5034973
+#case ids:  19
+5034974
+#case ids:  20
+5034975
+#case ids:  21
+5034976
+#case ids:  22
+5034977

@@ -1,0 +1,30 @@
+#Number of nodes: 16 =============================
+#Sat Jan 27 22:37:32 AST 2018 on 16 nodes. Hicma runs - Skylake cluster - exp/cases/ae-10M.txt "1 7" 2 (0-1-1)
+#case ids:  1
+4720894
+#case ids:  7
+4720895
+#Number of nodes: 16 =============================
+#Sat Jan 27 23:14:20 AST 2018 on 16 nodes. Hicma runs - Skylake cluster - exp/cases/ae-10M.txt "1 7" 2 (0-1-1)
+#case ids:  1
+4721179
+#case ids:  7
+4721180
+#Number of nodes: 16 =============================
+#Sat Jan 27 23:27:58 AST 2018 on 16 nodes. Hicma runs - Skylake cluster - exp/cases/ae-10M.txt "1 7" 2 (0-1-1)
+#case ids:  1
+4721254
+#case ids:  7
+4721255
+#Number of nodes: 16 =============================
+#Sat Jan 27 23:36:59 AST 2018 on 16 nodes. Hicma runs - Skylake cluster - exp/cases/ae-10M.txt "1 7" 2 (0-1-1)
+#case ids:  1
+4721318
+#case ids:  7
+4721319
+#Number of nodes: 16 =============================
+#Sat Jan 27 23:53:11 AST 2018 on 16 nodes. Hicma runs - Skylake cluster - exp/cases/ae-10M.txt "1 7" 2 (0-1-1)
+#case ids:  1
+4721433
+#case ids:  7
+4721434

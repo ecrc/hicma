@@ -1,0 +1,30 @@
+1				! total no. of frequencies
+1.0d2                           ! single frequency
+0.0d0   0.0d0    1.0d0   0.0d0  ! the,phi,ethetad,ephid
+0.0d0	180.0d0               	! the_sta_degree and the_end_degree
+0.0d0	0.0d0			! phi_sta_degree and phi_end_degree
+361	1                   	! ntheta, and nphi
+1.0d0   1.0d0  0.0d0	        ! epsilon_r, mu_r, loss_sigma
+2                               ! order of triangle for mesh
+
+2                               ! order_old of old basis function
+
+6                               ! nhdgqp_far
+42                              ! nhdgqp_near
+25                              ! nlqp; num of quad point in theta direction
+25                              ! nclgp; num of quad point in rho direction
+1.0d-8                          ! precision of iteration solver
+100000                          ! maximum iteration number
+4.00d-1                         ! near patch distance (meter)
+42                              ! number of gauss points for rcs
+0                               ! 0: not normalized rcs; 1: normalized rcs
+0                               ! 0: read ANSYS file;  1: read IDEA-s file
+0                               ! 0: not point convert;  1: point convert 
+0                               ! 0: not use jj_mie;  1: use jj_mie
+0                               ! 0: not calculate onepatch;  1: calculate onepatch
+0                               ! 0: not calculate total patch;  1: calculate total patc
+4.0d0                           ! position of near field observation point
+0.0d0	180.0d0               	! the_sta_degree and the_end_degree for near field observation point
+0.0d0	0.0d0			! phi_sta_degree and phi_end_degree for near field observation point
+361	1                   	! ntheta, and nphi for near field observation point
+600000                          ! unknowns more than this, use iterative solver; otherwise, direct solver

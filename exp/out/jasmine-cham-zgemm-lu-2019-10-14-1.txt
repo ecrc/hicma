@@ -1,0 +1,116 @@
+21960
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+  21960   21960   21960    93.590    905.22 +-   0.00  
+36162
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+  36162   36162   36162   418.490    903.99 +-   0.00  
+43920
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+  43920   43920   43920   748.161    905.90 +-   0.00  
+67110
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+  67110   67110   67110  2699.250    895.79 +-   0.00  
+73728
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+  73728   73728   73728  3585.237    894.27 +-   0.00  
+86028
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+  86028   86028   86028 96960
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+  96960   96960   96960 109761
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+ 109761  109761  109761 119388
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+ 119388  119388  119388 131781
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+ 131781  131781  131781 147456
+#
+# CHAMELEON 1.0.0, /home/akbudak/hicma-dev/chameleon/build/timing/time_zgemm_tile
+# Nb threads: 28
+# Nb GPUs:    0
+# NB:         320
+# IB:         32
+# eps:        1.110223e-16
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+ 147456  147456  147456 

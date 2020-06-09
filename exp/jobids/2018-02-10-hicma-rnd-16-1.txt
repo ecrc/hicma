@@ -1,0 +1,196 @@
+#Number of nodes: 16 =============================
+#Sat Feb 10 22:53:40 AST 2018 on 16 nodes. Hicma edsin - hic - exp/cases/50K500K.txt "1" 1 (0-0-1)
+#case ids:  1
+4971380
+#
+4971803
+4971804
+4971805
+4971806
+4971807
+4971808
+4971809
+4971810
+4971811
+4971812
+4971813
+4971814
+4971815
+4971816
+4971817
+4971818
+4971819
+4971820
+4971821
+4971822
+4971823
+#Number of nodes: 16 =============================
+#Mon Feb 12 00:39:24 AST 2018 on 16 nodes. Hicma rnd - hic - exp/cases/rnd.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84" 84 (0-83-1)
+#case ids:  1
+4986003
+#case ids:  2
+4986004
+#case ids:  3
+4986005
+#case ids:  4
+4986006
+#case ids:  5
+4986007
+#case ids:  6
+4986008
+#case ids:  7
+4986009
+#case ids:  8
+4986010
+#case ids:  9
+4986011
+#case ids:  10
+4986012
+#case ids:  11
+4986013
+#case ids:  12
+4986014
+#case ids:  13
+4986015
+#case ids:  14
+4986016
+#case ids:  15
+4986017
+#case ids:  16
+4986018
+#case ids:  17
+4986019
+#case ids:  18
+4986020
+#case ids:  19
+4986021
+#case ids:  20
+4986022
+#case ids:  21
+4986023
+#case ids:  22
+4986024
+#case ids:  23
+4986025
+#case ids:  24
+4986026
+#case ids:  25
+4986027
+#case ids:  26
+4986028
+#case ids:  27
+4986029
+#case ids:  28
+4986030
+#case ids:  29
+4986031
+#case ids:  30
+4986032
+#case ids:  31
+4986033
+#case ids:  32
+4986034
+#case ids:  33
+4986035
+#case ids:  34
+4986036
+#case ids:  35
+4986037
+#case ids:  36
+4986038
+#case ids:  37
+4986039
+#case ids:  38
+4986040
+#case ids:  39
+4986041
+#case ids:  40
+4986042
+#case ids:  41
+4986043
+#case ids:  42
+4986044
+#case ids:  43
+4986045
+#case ids:  44
+4986046
+#case ids:  45
+4986047
+#case ids:  46
+4986048
+#case ids:  47
+4986049
+#case ids:  48
+4986050
+#case ids:  49
+4986051
+#case ids:  50
+4986052
+#case ids:  51
+4986053
+#case ids:  52
+4986054
+#case ids:  53
+4986055
+#case ids:  54
+4986056
+#case ids:  55
+4986057
+#case ids:  56
+4986058
+#case ids:  57
+4986059
+#case ids:  58
+4986060
+#case ids:  59
+4986061
+#case ids:  60
+4986062
+#case ids:  61
+4986063
+#case ids:  62
+4986064
+#case ids:  63
+4986065
+#case ids:  64
+4986066
+#case ids:  65
+4986067
+#case ids:  66
+4986068
+#case ids:  67
+4986069
+#case ids:  68
+4986070
+#case ids:  69
+4986071
+#case ids:  70
+4986072
+#case ids:  71
+4986073
+#case ids:  72
+4986074
+#case ids:  73
+4986075
+#case ids:  74
+4986076
+#case ids:  75
+4986077
+#case ids:  76
+4986078
+#case ids:  77
+4986079
+#case ids:  78
+4986080
+#case ids:  79
+4986081
+#case ids:  80
+4986082
+#case ids:  81
+4986083
+#case ids:  82
+4986084
+#case ids:  83
+4986085
+#case ids:  84
+4986086

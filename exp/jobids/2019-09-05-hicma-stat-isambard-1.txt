@@ -1,0 +1,418 @@
+#25898.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Fri Sep  6 10:48:12 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 - 150  - hic - exp/cases/statistics.sh "101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224" 48 (0-47-1)
+#case ids:  101
+25509.xci00
+#case ids:  102
+25510.xci00
+#case ids:  103
+25511.xci00
+#case ids:  104
+25512.xci00
+#case ids:  105
+25513.xci00
+#case ids:  106
+25514.xci00
+#case ids:  107
+25515.xci00
+#case ids:  108
+25516.xci00
+#case ids:  109
+25517.xci00
+#case ids:  110
+25518.xci00
+#case ids:  111
+25519.xci00
+#case ids:  112
+25520.xci00
+#case ids:  113
+25521.xci00
+#case ids:  114
+25522.xci00
+#case ids:  115
+25523.xci00
+#case ids:  116
+25524.xci00
+#case ids:  117
+25525.xci00
+#case ids:  118
+25526.xci00
+#case ids:  119
+25527.xci00
+#case ids:  120
+25528.xci00
+#case ids:  121
+25529.xci00
+#case ids:  122
+25530.xci00
+#case ids:  123
+25531.xci00
+#case ids:  124
+25532.xci00
+#case ids:  201
+25533.xci00
+#case ids:  202
+25534.xci00
+#case ids:  203
+25535.xci00
+#case ids:  204
+25536.xci00
+#case ids:  205
+25537.xci00
+#case ids:  206
+25538.xci00
+#case ids:  207
+25539.xci00
+#case ids:  208
+25540.xci00
+#case ids:  209
+25541.xci00
+#case ids:  210
+25542.xci00
+#case ids:  211
+25543.xci00
+#case ids:  212
+25544.xci00
+#case ids:  213
+25545.xci00
+#case ids:  214
+25546.xci00
+#case ids:  215
+25547.xci00
+#case ids:  216
+25548.xci00
+#case ids:  217
+25549.xci00
+#case ids:  218
+25550.xci00
+#case ids:  219
+25551.xci00
+#case ids:  220
+25552.xci00
+#case ids:  221
+25553.xci00
+#case ids:  222
+25554.xci00
+#case ids:  223
+25555.xci00
+#case ids:  224
+25556.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Fri Sep  6 11:23:29 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 - 150  - hic - exp/cases/statistics.sh "201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224" 24 (0-23-1)
+#case ids:  201
+25558.xci00
+#case ids:  202
+25559.xci00
+#case ids:  203
+25560.xci00
+#case ids:  204
+25561.xci00
+#case ids:  205
+25562.xci00
+#case ids:  206
+25563.xci00
+#case ids:  207
+25564.xci00
+#case ids:  208
+25565.xci00
+#case ids:  209
+25566.xci00
+#case ids:  210
+25567.xci00
+#case ids:  211
+25568.xci00
+#case ids:  212
+25569.xci00
+#case ids:  213
+25570.xci00
+#case ids:  214
+25571.xci00
+#case ids:  215
+25572.xci00
+#case ids:  216
+25573.xci00
+#case ids:  217
+25574.xci00
+#case ids:  218
+25575.xci00
+#case ids:  219
+25576.xci00
+#case ids:  220
+25577.xci00
+#case ids:  221
+25578.xci00
+#case ids:  222
+25579.xci00
+#case ids:  223
+25580.xci00
+#case ids:  224
+25581.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Fri Sep  6 11:29:34 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224" 24 (0-23-1)
+#case ids:  201
+25582.xci00
+#case ids:  202
+25583.xci00
+#case ids:  203
+25584.xci00
+#case ids:  204
+25585.xci00
+#case ids:  205
+25586.xci00
+#case ids:  206
+25587.xci00
+#case ids:  207
+25588.xci00
+#case ids:  208
+25589.xci00
+#case ids:  209
+25590.xci00
+#case ids:  210
+25591.xci00
+#case ids:  211
+25592.xci00
+#case ids:  212
+25593.xci00
+#case ids:  213
+25594.xci00
+#case ids:  214
+25595.xci00
+#case ids:  215
+25596.xci00
+#case ids:  216
+25597.xci00
+#case ids:  217
+25598.xci00
+#case ids:  218
+25599.xci00
+#case ids:  219
+25600.xci00
+#case ids:  220
+25601.xci00
+#case ids:  221
+25602.xci00
+#case ids:  222
+25603.xci00
+#case ids:  223
+25604.xci00
+#case ids:  224
+25605.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Fri Sep  6 11:31:55 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201" 1 (0-0-1)
+#case ids:  201
+25606.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Fri Sep  6 11:37:36 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201" 1 (0-0-1)
+#case ids:  201
+25607.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Fri Sep  6 11:42:32 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201" 1 (0-0-1)
+#case ids:  201
+25608.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 05:13:03 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201" 1 (0-0-1)
+#case ids:  201
+25665.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 05:24:28 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201" 1 (0-0-1)
+#case ids:  201
+25666.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 05:26:10 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201" 1 (0-0-1)
+#case ids:  201
+25667.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 05:31:33 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224" 24 (0-23-1)
+#case ids:  201
+25668.xci00
+#case ids:  202
+25669.xci00
+#case ids:  203
+25670.xci00
+#case ids:  204
+25671.xci00
+#case ids:  205
+25672.xci00
+#case ids:  206
+25673.xci00
+#case ids:  207
+25674.xci00
+#case ids:  208
+25675.xci00
+#case ids:  209
+25676.xci00
+#case ids:  210
+25677.xci00
+#case ids:  211
+25678.xci00
+#case ids:  212
+25679.xci00
+#case ids:  213
+25680.xci00
+#case ids:  214
+25681.xci00
+#case ids:  215
+25682.xci00
+#case ids:  216
+25683.xci00
+#case ids:  217
+25684.xci00
+#case ids:  218
+25685.xci00
+#case ids:  219
+25686.xci00
+#case ids:  220
+25687.xci00
+#case ids:  221
+25688.xci00
+#case ids:  222
+25689.xci00
+#case ids:  223
+25690.xci00
+#case ids:  224
+25691.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 06:00:45 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - cham - exp/cases/statistics.sh "101 106 111 116 121" 5 (0-4-1)
+#case ids:  101
+25692.xci00
+#case ids:  106
+25693.xci00
+#case ids:  111
+25694.xci00
+#case ids:  116
+25695.xci00
+#case ids:  121
+25696.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 06:32:30 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "201" 1 (0-0-1)
+#case ids:  201
+25699.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 06:34:04 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - cham - exp/cases/statistics-cham.sh "101 106 111 116 121" 5 (0-4-1)
+#case ids:  101
+25700.xci00
+#case ids:  106
+25701.xci00
+#case ids:  111
+25702.xci00
+#case ids:  116
+25703.xci00
+#case ids:  121
+25704.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Sat Sep  7 06:39:50 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - cham - exp/cases/statistics-cham.sh "101 106 111 116 121" 5 (0-4-1)
+#case ids:  101
+25705.xci00
+#case ids:  106
+25706.xci00
+#case ids:  111
+25707.xci00
+#case ids:  116
+25708.xci00
+#case ids:  121
+25709.xci00
+#Number of nodes: 1 =============================
+# qsub -q arm -l select=1 -l walltime=01:00:00 -j oe -N hicma-1 
+#Mon Sep  9 18:10:34 UTC 2019 on 1 nodes. Hicma beta=0.01  - small -  - 01:00:00 -   - hic - exp/cases/statistics.sh "101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220" 44 (0-43-1)
+#case ids:  101
+25855.xci00
+#case ids:  102
+25856.xci00
+#case ids:  103
+25857.xci00
+#case ids:  104
+25858.xci00
+#case ids:  105
+25859.xci00
+#case ids:  106
+25860.xci00
+#case ids:  107
+25861.xci00
+#case ids:  108
+25862.xci00
+#case ids:  109
+25863.xci00
+#case ids:  110
+25864.xci00
+#case ids:  111
+25865.xci00
+#case ids:  112
+25866.xci00
+#case ids:  113
+25867.xci00
+#case ids:  114
+25868.xci00
+#case ids:  115
+25869.xci00
+#case ids:  116
+25870.xci00
+#case ids:  117
+25871.xci00
+#case ids:  118
+25872.xci00
+#case ids:  119
+25873.xci00
+#case ids:  120
+25874.xci00
+#case ids:  121
+25875.xci00
+#case ids:  122
+25876.xci00
+#case ids:  123
+25877.xci00
+#case ids:  124
+25878.xci00
+#case ids:  201
+25879.xci00
+#case ids:  202
+25880.xci00
+#case ids:  203
+25881.xci00
+#case ids:  204
+25882.xci00
+#case ids:  205
+25883.xci00
+#case ids:  206
+25884.xci00
+#case ids:  207
+25885.xci00
+#case ids:  208
+25886.xci00
+#case ids:  209
+25887.xci00
+#case ids:  210
+25888.xci00
+#case ids:  211
+25889.xci00
+#case ids:  212
+25890.xci00
+#case ids:  213
+25891.xci00
+#case ids:  214
+25892.xci00
+#case ids:  215
+25893.xci00
+#case ids:  216
+25894.xci00
+#case ids:  217
+25895.xci00
+#case ids:  218
+25896.xci00
+#case ids:  219
+25897.xci00
+#case ids:  220
+25898.xci00

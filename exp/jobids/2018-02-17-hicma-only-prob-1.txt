@@ -1,0 +1,440 @@
+#Number of nodes: 16 =============================
+#Sat Feb 17 10:24:35 AST 2018 on 16 nodes. Hicma beta=0.01 only dense matrix --ss - small -  - 00:25:00 - 150  - hic - exp/cases/sqexp2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030706
+#case ids:  2
+5030707
+#case ids:  3
+5030708
+#case ids:  4
+5030709
+#case ids:  5
+5030710
+#case ids:  6
+5030711
+#case ids:  7
+5030712
+#case ids:  8
+5030713
+#case ids:  9
+5030714
+#case ids:  10
+5030715
+#case ids:  11
+5030716
+#case ids:  12
+5030717
+#case ids:  13
+5030718
+#case ids:  14
+5030719
+#case ids:  15
+5030720
+#case ids:  16
+5030721
+#case ids:  17
+5030722
+#case ids:  18
+5030723
+#case ids:  19
+5030724
+#case ids:  20
+5030725
+#case ids:  21
+5030726
+#Number of nodes: 32 =============================
+#Sat Feb 17 10:24:35 AST 2018 on 32 nodes. Hicma beta=0.01 only dense matrix --ss - small -  - 00:25:00 - 150  - hic - exp/cases/sqexp2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030727
+#case ids:  2
+5030728
+#case ids:  3
+5030729
+#case ids:  4
+5030730
+#case ids:  5
+5030731
+#case ids:  6
+5030732
+#case ids:  7
+5030733
+#case ids:  8
+5030734
+#case ids:  9
+5030735
+#case ids:  10
+5030736
+#case ids:  11
+5030737
+#case ids:  12
+5030738
+#case ids:  13
+5030739
+#case ids:  14
+5030740
+#case ids:  15
+5030741
+#case ids:  16
+5030742
+#case ids:  17
+5030743
+#case ids:  18
+5030744
+#case ids:  19
+5030745
+#case ids:  20
+5030746
+#case ids:  21
+5030747
+#Number of nodes: 64 =============================
+#Sat Feb 17 10:24:36 AST 2018 on 64 nodes. Hicma beta=0.01 only dense matrix --ss - small -  - 00:25:00 - 150  - hic - exp/cases/sqexp2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030748
+#case ids:  2
+5030749
+#case ids:  3
+5030750
+#case ids:  4
+5030751
+#case ids:  5
+5030752
+#case ids:  6
+5030753
+#case ids:  7
+5030754
+#case ids:  8
+5030755
+#case ids:  9
+5030756
+#case ids:  10
+5030757
+#case ids:  11
+5030758
+#case ids:  12
+5030759
+#case ids:  13
+5030760
+#case ids:  14
+5030761
+#case ids:  15
+5030762
+#case ids:  16
+5030763
+#case ids:  17
+5030764
+#case ids:  18
+5030765
+#case ids:  19
+5030766
+#case ids:  20
+5030767
+#case ids:  21
+5030768
+#Number of nodes: 128 =============================
+#Sat Feb 17 10:24:36 AST 2018 on 128 nodes. Hicma beta=0.01 only dense matrix --ss - small -  - 00:25:00 - 150  - hic - exp/cases/sqexp2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030769
+#case ids:  2
+5030770
+#case ids:  3
+5030771
+#case ids:  4
+5030772
+#case ids:  5
+5030773
+#case ids:  6
+5030774
+#case ids:  7
+5030775
+#case ids:  8
+5030776
+#case ids:  9
+5030777
+#case ids:  10
+5030778
+#case ids:  11
+5030779
+#case ids:  12
+5030780
+#case ids:  13
+5030781
+#case ids:  14
+5030782
+#case ids:  15
+5030783
+#case ids:  16
+5030784
+#case ids:  17
+5030785
+#case ids:  18
+5030786
+#case ids:  19
+5030787
+#case ids:  20
+5030788
+#case ids:  21
+5030789
+#Number of nodes: 256 =============================
+#Sat Feb 17 10:24:37 AST 2018 on 256 nodes. Hicma beta=0.01 only dense matrix --ss - small -  - 00:25:00 - 150  - hic - exp/cases/sqexp2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030790
+#case ids:  2
+5030791
+#case ids:  3
+5030792
+#case ids:  4
+5030793
+#case ids:  5
+5030794
+#case ids:  6
+5030795
+#case ids:  7
+5030796
+#case ids:  8
+5030797
+#case ids:  9
+5030798
+#case ids:  10
+5030799
+#case ids:  11
+5030800
+#case ids:  12
+5030801
+#case ids:  13
+5030802
+#case ids:  14
+5030803
+#case ids:  15
+5030804
+#case ids:  16
+5030805
+#case ids:  17
+5030806
+#case ids:  18
+5030807
+#case ids:  19
+5030808
+#case ids:  20
+5030809
+#case ids:  21
+5030810
+#Number of nodes: 16 =============================
+#Sat Feb 17 10:24:50 AST 2018 on 16 nodes. Hicma only dense matrix --edsin - small - 100 - 00:25:00 - 250  - hic - exp/cases/edsin2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030812
+#case ids:  2
+5030813
+#case ids:  3
+5030814
+#case ids:  4
+5030815
+#case ids:  5
+5030816
+#case ids:  6
+5030817
+#case ids:  7
+5030818
+#case ids:  8
+5030819
+#case ids:  9
+5030820
+#case ids:  10
+5030821
+#case ids:  11
+5030822
+#case ids:  12
+5030823
+#case ids:  13
+5030824
+#case ids:  14
+5030825
+#case ids:  15
+5030826
+#case ids:  16
+5030827
+#case ids:  17
+5030828
+#case ids:  18
+5030829
+#case ids:  19
+5030830
+#case ids:  20
+5030831
+#case ids:  21
+5030832
+#Number of nodes: 32 =============================
+#Sat Feb 17 10:24:50 AST 2018 on 32 nodes. Hicma only dense matrix --edsin - small - 100 - 00:25:00 - 250  - hic - exp/cases/edsin2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030833
+#case ids:  2
+5030834
+#case ids:  3
+5030835
+#case ids:  4
+5030836
+#case ids:  5
+5030837
+#case ids:  6
+5030838
+#case ids:  7
+5030839
+#case ids:  8
+5030840
+#case ids:  9
+5030841
+#case ids:  10
+5030842
+#case ids:  11
+5030843
+#case ids:  12
+5030844
+#case ids:  13
+5030845
+#case ids:  14
+5030846
+#case ids:  15
+5030847
+#case ids:  16
+5030848
+#case ids:  17
+5030849
+#case ids:  18
+5030850
+#case ids:  19
+5030851
+#case ids:  20
+5030852
+#case ids:  21
+5030853
+#Number of nodes: 64 =============================
+#Sat Feb 17 10:24:51 AST 2018 on 64 nodes. Hicma only dense matrix --edsin - small - 100 - 00:25:00 - 250  - hic - exp/cases/edsin2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030854
+#case ids:  2
+5030855
+#case ids:  3
+5030856
+#case ids:  4
+5030857
+#case ids:  5
+5030858
+#case ids:  6
+5030859
+#case ids:  7
+5030860
+#case ids:  8
+5030861
+#case ids:  9
+5030862
+#case ids:  10
+5030863
+#case ids:  11
+5030864
+#case ids:  12
+5030865
+#case ids:  13
+5030866
+#case ids:  14
+5030867
+#case ids:  15
+5030868
+#case ids:  16
+5030869
+#case ids:  17
+5030870
+#case ids:  18
+5030871
+#case ids:  19
+5030872
+#case ids:  20
+5030873
+#case ids:  21
+5030874
+#Number of nodes: 128 =============================
+#Sat Feb 17 10:24:51 AST 2018 on 128 nodes. Hicma only dense matrix --edsin - small - 100 - 00:25:00 - 250  - hic - exp/cases/edsin2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030875
+#case ids:  2
+5030876
+#case ids:  3
+5030877
+#case ids:  4
+5030878
+#case ids:  5
+5030879
+#case ids:  6
+5030880
+#case ids:  7
+5030881
+#case ids:  8
+5030882
+#case ids:  9
+5030883
+#case ids:  10
+5030884
+#case ids:  11
+5030885
+#case ids:  12
+5030886
+#case ids:  13
+5030887
+#case ids:  14
+5030888
+#case ids:  15
+5030889
+#case ids:  16
+5030890
+#case ids:  17
+5030891
+#case ids:  18
+5030892
+#case ids:  19
+5030893
+#case ids:  20
+5030894
+#case ids:  21
+5030895
+#Number of nodes: 256 =============================
+#Sat Feb 17 10:24:51 AST 2018 on 256 nodes. Hicma only dense matrix --edsin - small - 100 - 00:25:00 - 250  - hic - exp/cases/edsin2.sh "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" 21 (0-20-1)
+#case ids:  1
+5030896
+#case ids:  2
+5030897
+#case ids:  3
+5030898
+#case ids:  4
+5030899
+#case ids:  5
+5030900
+#case ids:  6
+5030901
+#case ids:  7
+5030902
+#case ids:  8
+5030903
+#case ids:  9
+5030904
+#case ids:  10
+5030905
+#case ids:  11
+5030906
+#case ids:  12
+5030907
+#case ids:  13
+5030908
+#case ids:  14
+5030909
+#case ids:  15
+5030910
+#case ids:  16
+5030911
+#case ids:  17
+5030912
+#case ids:  18
+5030913
+#case ids:  19
+5030914
+#case ids:  20
+5030915
+#case ids:  21
+5030916

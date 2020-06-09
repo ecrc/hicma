@@ -1,0 +1,228 @@
+#Number of nodes: 1 =============================
+# 
+#Tue Oct 29 00:44:27 +03 2019 on 1 nodes. Hicma beta=0.01 --ss -  -  - 10:00:00 -   - hic - ./exp/cases/lu-ka-cham.sh "7 8 9 10 11" 5 (0-4-1)
+#case ids:  7
+vulture
+numactl --interleave=all
+
+Experiment case:7 nrows:36162 mb:882
+!BEGIN: M:36162 N:20500 MB:882 NB:500 MAXRANK:500 DATE:Tue Oct 29 00:44:27 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=36162 --n_range=20500:20500 --k=36162 --mb=882 --nb=500 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=6027 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon
+# Nb threads:  40
+# Nb GPUs:     0
+# MB:          882
+# NB:          500
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-03
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     1000
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    6
+# ntrian:      6027
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:6 , ntrian:6027 N:36162, NB:882
+
+ global_nt:41 local_nt:147 N:36162 NB:882 
+ nipp =            6
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        6027
+ NUMBER OF UNKNOWNS:       36162
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       36162
+Tgenerate:41.4113
+  36162   20500   36162    72.805      0.00 +-   0.00  
+
+!END: M:36162 N:20500 MB:882 NB:500 MAXRANK:500 DATE:Tue Oct 29 00:44:27 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=36162 --n_range=20500:20500 --k=36162 --mb=882 --nb=500 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=6027 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh SECOND:114 MINUTE:1 HOUR:0
+Tue Oct 29 00:46:21 +03 2019
+
+#case ids:  8
+vulture
+numactl --interleave=all
+
+Experiment case:8 nrows:43920 mb:1830
+!BEGIN: M:43920 N:19200 MB:1830 NB:800 MAXRANK:800 DATE:Tue Oct 29 00:46:21 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=43920 --n_range=19200:19200 --k=43920 --mb=1830 --nb=800 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1600 --ntrian=7320 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon
+# Nb threads:  40
+# Nb GPUs:     0
+# MB:          1830
+# NB:          800
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-03
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     1600
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    6
+# ntrian:      7320
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:6 , ntrian:7320 N:43920, NB:1830
+
+ global_nt:24 local_nt:305 N:43920 NB:1830 
+ nipp =            6
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        7320
+ NUMBER OF UNKNOWNS:       43920
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       43920
+Tgenerate:63.376
+  43920   19200   43920   133.477      0.00 +-   0.00  
+
+!END: M:43920 N:19200 MB:1830 NB:800 MAXRANK:800 DATE:Tue Oct 29 00:46:21 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=43920 --n_range=19200:19200 --k=43920 --mb=1830 --nb=800 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1600 --ntrian=7320 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh SECOND:197 MINUTE:3 HOUR:0
+Tue Oct 29 00:49:39 +03 2019
+
+#case ids:  9
+vulture
+numactl --interleave=all
+
+Experiment case:9 nrows:73728 mb:2304
+!BEGIN: M:73728 N:48000 MB:2304 NB:1500 MAXRANK:1500 DATE:Tue Oct 29 00:49:39 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=73728 --n_range=48000:48000 --k=73728 --mb=2304 --nb=1500 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=3000 --ntrian=12288 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon
+# Nb threads:  40
+# Nb GPUs:     0
+# MB:          2304
+# NB:          1500
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-03
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     3000
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    6
+# ntrian:      12288
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:6 , ntrian:12288 N:73728, NB:2304
+
+ global_nt:32 local_nt:384 N:73728 NB:2304 
+ nipp =            6
+ read inmom is done!
+ read curve file is done!
+ number of triangles:       12288
+ NUMBER OF UNKNOWNS:       73728
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       73728
+Tgenerate:184.79
+  73728   48000   73728   598.602      0.00 +-   0.00  
+
+!END: M:73728 N:48000 MB:2304 NB:1500 MAXRANK:1500 DATE:Tue Oct 29 00:49:39 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=73728 --n_range=48000:48000 --k=73728 --mb=2304 --nb=1500 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=3000 --ntrian=12288 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh SECOND:784 MINUTE:13 HOUR:0
+Tue Oct 29 01:02:43 +03 2019
+
+#case ids:  10
+vulture
+numactl --interleave=all
+
+Experiment case:10 nrows:86028 mb:1284
+!BEGIN: M:86028 N:60300 MB:1284 NB:900 MAXRANK:900 DATE:Tue Oct 29 01:02:43 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=86028 --n_range=60300:60300 --k=86028 --mb=1284 --nb=900 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1800 --ntrian=14338 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon
+# Nb threads:  40
+# Nb GPUs:     0
+# MB:          1284
+# NB:          900
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-03
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     1800
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    6
+# ntrian:      14338
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:6 , ntrian:14338 N:86028, NB:1284
+
+ global_nt:67 local_nt:214 N:86028 NB:1284 
+ nipp =            6
+ read inmom is done!
+ read curve file is done!
+ number of triangles:       14338
+ NUMBER OF UNKNOWNS:       86028
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       86028
+Tgenerate:212.505
+  86028   60300   86028   912.603      0.00 +-   0.00  
+
+!END: M:86028 N:60300 MB:1284 NB:900 MAXRANK:900 DATE:Tue Oct 29 01:02:43 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=86028 --n_range=60300:60300 --k=86028 --mb=1284 --nb=900 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1800 --ntrian=14338 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh SECOND:1126 MINUTE:18 HOUR:0
+Tue Oct 29 01:21:29 +03 2019
+
+#case ids:  11
+vulture
+numactl --interleave=all
+
+Experiment case:11 nrows:96960 mb:2424
+!BEGIN: M:96960 N:60000 MB:2424 NB:1500 MAXRANK:1500 DATE:Tue Oct 29 01:21:29 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=96960 --n_range=60000:60000 --k=96960 --mb=2424 --nb=1500 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=3000 --ntrian=16160 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon
+# Nb threads:  40
+# Nb GPUs:     0
+# MB:          2424
+# NB:          1500
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-03
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     3000
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    6
+# ntrian:      16160
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:6 , ntrian:16160 N:96960, NB:2424
+
+ global_nt:40 local_nt:404 N:96960 NB:2424 
+ nipp =            6
+ read inmom is done!
+ read curve file is done!
+ number of triangles:       16160
+ NUMBER OF UNKNOWNS:       96960
+ the whole program is done!
+ NUMBER OF UNKNOWNS:       96960
+Tgenerate:265.742
+  96960   60000   96960  1269.138      0.00 +-   0.00  
+
+!END: M:96960 N:60000 MB:2424 NB:1500 MAXRANK:1500 DATE:Tue Oct 29 01:21:29 +03 2019 SCHED:eager CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile_chameleon --m=96960 --n_range=60000:60000 --k=96960 --mb=2424 --nb=1500 --nowarmup --threads=40 --p=1 --rk=0 --acc=3 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=3000 --ntrian=16160 --nipp=6 --isPrecent=0 --solve=0 MAXSUB:50 MINSUB:40 CASE:/home/akbudak/hicma-dev/./exp/cases/lu-ka-cham.sh SECOND:1535 MINUTE:25 HOUR:0
+Tue Oct 29 01:47:05 +03 2019
+

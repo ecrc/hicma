@@ -1,0 +1,76 @@
+nrows[1]=50176; nb[1]=1024; acc[1]=8;   maxrank[1]=400;
+nrows[2]=50176; nb[2]=1350; acc[2]=8;   maxrank[2]=400;
+nrows[3]=50176; nb[3]=1500; acc[3]=8;   maxrank[3]=400;
+nrows[4]=50176; nb[4]=2250; acc[4]=8;   maxrank[4]=400;
+nrows[5]=65536; nb[5]=1024; acc[5]=8;   maxrank[5]=400;
+nrows[6]=65536; nb[6]=1350; acc[6]=8;   maxrank[6]=400;
+nrows[7]=65536; nb[7]=1500; acc[7]=8;   maxrank[7]=400;
+nrows[8]=65536; nb[8]=2250; acc[8]=8;   maxrank[8]=400;
+nrows[9]=82944; nb[9]=1024; acc[9]=8;   maxrank[9]=400;
+nrows[10]=82944;    nb[10]=1350;    acc[10]=8;  maxrank[10]=400;
+nrows[11]=82944;    nb[11]=1500;    acc[11]=8;  maxrank[11]=400;
+nrows[12]=82944;    nb[12]=2250;    acc[12]=8;  maxrank[12]=400;
+nrows[13]=102400;   nb[13]=1024;    acc[13]=8;  maxrank[13]=400;
+nrows[14]=102400;   nb[14]=1350;    acc[14]=8;  maxrank[14]=400;
+nrows[15]=102400;   nb[15]=1500;    acc[15]=8;  maxrank[15]=400;
+nrows[16]=102400;   nb[16]=2250;    acc[16]=8;  maxrank[16]=400;
+nrows[17]=123904;   nb[17]=1024;    acc[17]=8;  maxrank[17]=400;
+nrows[18]=123904;   nb[18]=1350;    acc[18]=8;  maxrank[18]=400;
+nrows[19]=123904;   nb[19]=1500;    acc[19]=8;  maxrank[19]=400;
+nrows[20]=123904;   nb[20]=2250;    acc[20]=8;  maxrank[20]=400;
+nrows[21]=147456;   nb[21]=1024;    acc[21]=8;  maxrank[21]=400;
+nrows[22]=147456;   nb[22]=1350;    acc[22]=8;  maxrank[22]=400;
+nrows[23]=147456;   nb[23]=1500;    acc[23]=8;  maxrank[23]=400;
+nrows[24]=147456;   nb[24]=2250;    acc[24]=8;  maxrank[24]=400;
+nrows[25]=173056;   nb[25]=1024;    acc[25]=8;  maxrank[25]=400;
+nrows[26]=173056;   nb[26]=1350;    acc[26]=8;  maxrank[26]=400;
+nrows[27]=173056;   nb[27]=1500;    acc[27]=8;  maxrank[27]=400;
+nrows[28]=173056;   nb[28]=2250;    acc[28]=8;  maxrank[28]=400;
+nrows[29]=200704;   nb[29]=1024;    acc[29]=8;  maxrank[29]=400;
+nrows[30]=200704;   nb[30]=1350;    acc[30]=8;  maxrank[30]=400;
+nrows[31]=200704;   nb[31]=1500;    acc[31]=8;  maxrank[31]=400;
+nrows[32]=200704;   nb[32]=2250;    acc[32]=8;  maxrank[32]=400;
+nrows[33]=230400;   nb[33]=1024;    acc[33]=8;  maxrank[33]=400;
+nrows[34]=230400;   nb[34]=1350;    acc[34]=8;  maxrank[34]=400;
+nrows[35]=230400;   nb[35]=1500;    acc[35]=8;  maxrank[35]=400;
+nrows[36]=230400;   nb[36]=2250;    acc[36]=8;  maxrank[36]=400;
+nrows[37]=262144;   nb[37]=1024;    acc[37]=8;  maxrank[37]=400;
+nrows[38]=262144;   nb[38]=1350;    acc[38]=8;  maxrank[38]=400;
+nrows[39]=262144;   nb[39]=1500;    acc[39]=8;  maxrank[39]=400;
+nrows[40]=262144;   nb[40]=2250;    acc[40]=8;  maxrank[40]=400;
+nrows[41]=295936;   nb[41]=1024;    acc[41]=8;  maxrank[41]=400;
+nrows[42]=295936;   nb[42]=1350;    acc[42]=8;  maxrank[42]=400;
+nrows[43]=295936;   nb[43]=1500;    acc[43]=8;  maxrank[43]=400;
+nrows[44]=295936;   nb[44]=2250;    acc[44]=8;  maxrank[44]=400;
+nrows[45]=331776;   nb[45]=1024;    acc[45]=8;  maxrank[45]=400;
+nrows[46]=331776;   nb[46]=1350;    acc[46]=8;  maxrank[46]=400;
+nrows[47]=331776;   nb[47]=1500;    acc[47]=8;  maxrank[47]=400;
+nrows[48]=331776;   nb[48]=2250;    acc[48]=8;  maxrank[48]=400;
+nrows[49]=369664;   nb[49]=1024;    acc[49]=8;  maxrank[49]=400;
+nrows[50]=369664;   nb[50]=1350;    acc[50]=8;  maxrank[50]=400;
+nrows[51]=369664;   nb[51]=1500;    acc[51]=8;  maxrank[51]=400;
+nrows[52]=369664;   nb[52]=2250;    acc[52]=8;  maxrank[52]=400;
+nrows[53]=409600;   nb[53]=1024;    acc[53]=8;  maxrank[53]=400;
+nrows[54]=409600;   nb[54]=1350;    acc[54]=8;  maxrank[54]=400;
+nrows[55]=409600;   nb[55]=1500;    acc[55]=8;  maxrank[55]=400;
+nrows[56]=409600;   nb[56]=2250;    acc[56]=8;  maxrank[56]=400;
+nrows[57]=451584;   nb[57]=1024;    acc[57]=8;  maxrank[57]=400;
+nrows[58]=451584;   nb[58]=1350;    acc[58]=8;  maxrank[58]=400;
+nrows[59]=451584;   nb[59]=1500;    acc[59]=8;  maxrank[59]=400;
+nrows[60]=451584;   nb[60]=2250;    acc[60]=8;  maxrank[60]=400;
+nrows[61]=495616;   nb[61]=1024;    acc[61]=8;  maxrank[61]=400;
+nrows[62]=495616;   nb[62]=1350;    acc[62]=8;  maxrank[62]=400;
+nrows[63]=495616;   nb[63]=1500;    acc[63]=8;  maxrank[63]=400;
+nrows[64]=495616;   nb[64]=2250;    acc[64]=8;  maxrank[64]=400;
+nrows[65]=541696;   nb[65]=1024;    acc[65]=8;  maxrank[65]=400;
+nrows[66]=541696;   nb[66]=1350;    acc[66]=8;  maxrank[66]=400;
+nrows[67]=541696;   nb[67]=1500;    acc[67]=8;  maxrank[67]=400;
+nrows[68]=541696;   nb[68]=2250;    acc[68]=8;  maxrank[68]=400;
+
+note="Hicma mattern"
+allcaseids[16]="`seq 1 68`"
+allcaseids[16]="1"
+timelimit="02:00:00"
+step=1
+nprocs="16"
+_appdata="--geostat"

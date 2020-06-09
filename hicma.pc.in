@@ -1,0 +1,15 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${exec_prefix}/include
+
+Name: HICMA
+Description: HiCMA: Hierarchical Computations on Manycore Architectures.
+Version: @HICMA_VERSION@
+URL: http://github.com/ecrc/hicma
+Cflags: -I${includedir}
+Libs: -L${libdir} @HICMA_PKGCONFIG_LIBS@
+Libs.private: @HICMA_PKGCONFIG_LIBS_PRIVATE@
+Requires: @HICMA_PKGCONFIG_REQUIRED@
+Requires.private: @HICMA_PKGCONFIG_REQUIRED_PRIVATE@
+

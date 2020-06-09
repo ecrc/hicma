@@ -1,0 +1,318 @@
+#Number of nodes: 1 =============================
+# 
+#Fri Oct 18 19:32:34 +03 2019 on 1 nodes. Hicma beta=0.01 --ss -  -  - 01:00:00 -   - hic - ./exp/cases/small.sh "38" 1 (0-0-1)
+#case ids:  38
+kw60319
+mpirun -n 1 numactl --interleave=all
+
+Experiment case:38 nrows:7680 mb:384
+!BEGIN: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:32:34 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=2 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  20
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          384
+# NB:          384
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-02
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     1000
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      2560
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:2560 N:7680, NB:384
+
+ global_nt:20 local_nt:128 N:7680 NB:384 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        2560
+ NUMBER OF UNKNOWNS:        7680
+ the whole program is done!
+ NUMBER OF UNKNOWNS:        7680
+Tcompress:3.95943
+20 20
+0	81	43	41	34	30	27	28	17	22	10	4	5	5	5	5	6	7	9	11	
+82	0	72	16	9	6	5	5	5	5	5	4	5	5	5	5	5	5	5	5	
+43	73	0	86	24	14	10	7	6	6	5	5	5	5	5	5	5	5	6	6	
+41	16	87	0	114	42	19	13	9	7	5	5	5	5	5	6	6	7	7	7	
+34	9	24	114	0	137	49	22	14	10	5	5	5	5	6	7	7	7	7	7	
+30	6	14	42	138	0	138	49	21	14	6	5	5	6	7	7	7	7	7	11	
+28	5	10	19	49	138	0	139	46	22	7	5	5	6	7	7	7	7	11	15	
+28	5	7	13	22	49	140	0	133	43	9	5	6	7	7	7	7	11	15	23	
+17	5	6	9	14	21	46	133	0	132	12	5	6	7	7	7	11	15	22	41	
+22	5	6	7	10	14	22	44	132	0	23	5	6	7	7	11	15	22	42	140	
+10	5	5	5	5	6	7	9	12	23	0	78	36	36	33	31	26	27	23	33	
+4	4	5	5	5	5	5	5	5	5	78	0	72	17	9	7	5	5	5	5	
+5	5	5	5	5	5	5	6	6	6	36	72	0	85	24	14	10	7	6	6	
+5	5	5	5	5	6	6	7	7	7	36	17	85	0	116	41	19	12	9	7	
+5	5	5	5	6	7	7	7	7	7	34	9	24	116	0	136	49	21	14	10	
+5	5	5	6	7	7	7	7	7	11	31	7	14	41	136	0	138	47	21	14	
+6	5	5	6	7	7	7	7	11	15	26	5	10	19	49	139	0	137	44	21	
+7	5	5	7	7	7	7	11	15	23	27	5	7	12	21	47	137	0	133	41	
+9	5	6	7	7	7	11	15	22	43	23	5	6	9	14	21	44	132	0	134	
+11	5	6	7	7	11	15	23	41	141	33	5	6	7	10	14	21	41	134	0	
+initial_ranks:avg:23.5868 min:4 max:141
+20 20
+0	81	43	41	34	30	27	28	17	22	10	4	5	5	5	5	6	7	9	11	
+82	0	72	16	9	6	5	5	5	5	5	4	5	5	5	5	5	5	5	5	
+43	73	0	86	24	14	10	7	6	6	5	5	5	5	5	5	5	5	6	6	
+41	16	87	0	114	42	19	13	9	7	5	5	5	5	5	6	6	7	7	7	
+34	9	24	114	0	137	49	22	14	10	5	5	5	5	6	7	7	7	7	7	
+30	6	14	42	138	0	138	49	21	14	6	5	5	6	7	7	7	7	7	11	
+28	5	10	19	49	138	0	139	46	22	7	5	5	6	7	7	7	7	11	15	
+28	5	7	13	22	49	140	0	133	43	9	5	6	7	7	7	7	11	15	23	
+17	5	6	9	14	21	46	133	0	132	12	5	6	7	7	7	11	15	22	41	
+22	5	6	7	10	14	22	44	132	0	23	5	6	7	7	11	15	22	42	140	
+10	5	5	5	5	6	7	9	12	23	0	78	36	36	33	31	26	27	23	33	
+4	4	5	5	5	5	5	5	5	5	78	0	72	17	9	7	5	5	5	5	
+5	5	5	5	5	5	5	6	6	6	36	72	0	85	24	14	10	7	6	6	
+5	5	5	5	5	6	6	7	7	7	36	17	85	0	116	41	19	12	9	7	
+5	5	5	5	6	7	7	7	7	7	34	9	24	116	0	136	49	21	14	10	
+5	5	5	6	7	7	7	7	7	11	31	7	14	41	136	0	138	47	21	14	
+6	5	5	6	7	7	7	7	11	15	26	5	10	19	49	139	0	137	44	21	
+7	5	5	7	7	7	7	11	15	23	27	5	7	12	21	47	137	0	133	41	
+9	5	6	7	7	7	11	15	22	43	23	5	6	9	14	21	44	132	0	134	
+11	5	6	7	7	11	15	23	41	141	33	5	6	7	10	14	21	41	134	0	
+final_ranks:avg:23.5868 min:4 max:141
+   7680    7680    7680     1.687      0.00 +-   0.00  
+
+!END: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:32:34 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=2 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh SECOND:16 MINUTE:0 HOUR:0
+Fri Oct 18 19:32:50 +03 2019
+
+!BEGIN: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:32:50 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=4 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  20
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          384
+# NB:          384
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-04
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     1000
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      2560
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:2560 N:7680, NB:384
+
+ global_nt:20 local_nt:128 N:7680 NB:384 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        2560
+ NUMBER OF UNKNOWNS:        7680
+ the whole program is done!
+ NUMBER OF UNKNOWNS:        7680
+Tcompress:3.92475
+20 20
+0	147	95	86	79	72	69	66	45	50	27	11	13	15	16	18	20	23	27	38	
+148	0	150	58	32	27	24	21	18	16	11	9	10	10	12	12	12	12	12	13	
+95	150	0	174	81	52	35	30	25	23	14	10	12	12	12	12	13	15	17	20	
+86	57	175	0	220	123	69	44	34	30	16	11	12	12	13	14	17	20	24	27	
+79	32	82	222	0	256	137	77	49	37	18	12	12	13	14	18	21	25	28	32	
+71	27	52	122	257	0	266	139	75	49	20	12	12	14	18	22	26	29	33	38	
+70	24	35	69	138	265	0	269	136	76	23	12	13	17	21	26	29	34	40	49	
+67	21	30	44	76	139	268	0	257	138	29	12	15	20	26	29	34	40	51	78	
+44	18	25	34	49	75	136	257	0	260	35	12	17	24	28	33	39	50	78	135	
+51	16	23	30	37	48	75	138	261	0	51	14	20	27	32	39	50	78	141	282	
+27	11	14	16	18	20	23	29	34	51	0	142	86	80	73	71	67	66	57	63	
+11	9	10	11	12	12	12	12	12	14	143	0	150	59	33	27	24	21	18	16	
+13	10	12	12	12	12	13	15	17	20	87	150	0	174	82	52	35	29	26	23	
+15	10	12	12	13	14	17	20	24	27	80	59	175	0	222	121	67	43	34	30	
+16	12	12	13	14	18	21	26	28	32	74	33	82	222	0	255	137	75	49	37	
+18	12	12	14	18	22	26	29	33	39	72	27	52	120	256	0	266	138	75	48	
+20	12	13	17	21	26	29	34	39	50	67	24	35	67	137	265	0	265	135	74	
+23	12	15	20	25	29	34	40	50	78	67	21	29	43	75	138	265	0	259	134	
+28	12	17	24	28	33	40	51	78	141	57	18	26	34	49	75	135	258	0	264	
+39	13	20	27	32	38	49	78	135	283	65	16	23	30	37	48	74	135	266	0	
+initial_ranks:avg:59.2026 min:9 max:283
+20 20
+0	147	95	86	79	72	69	66	45	50	27	11	13	15	16	18	20	23	27	38	
+148	0	150	58	32	27	24	21	18	16	11	9	10	10	12	12	12	12	12	13	
+95	150	0	174	81	52	35	30	25	23	14	10	12	12	12	12	13	15	17	20	
+86	57	175	0	220	123	69	44	34	30	16	11	12	12	13	14	17	20	24	27	
+79	32	82	222	0	256	137	77	49	37	18	12	12	13	14	18	21	25	28	32	
+71	27	52	122	257	0	266	139	75	49	20	12	12	14	18	22	26	29	33	38	
+70	24	35	69	138	265	0	269	136	76	23	12	13	17	21	26	29	34	40	49	
+67	21	30	44	76	139	286	0	257	141	29	12	15	20	26	29	34	40	51	78	
+44	18	25	34	49	75	136	259	0	371	35	12	17	24	28	33	39	50	78	151	
+51	16	23	30	37	48	75	138	286	0	51	14	20	27	32	39	50	78	221	298	
+27	11	14	16	18	20	23	29	34	51	0	142	86	80	73	71	67	66	57	63	
+11	9	10	11	12	12	12	12	12	14	143	0	150	59	33	27	24	21	18	16	
+13	10	12	12	12	12	13	15	17	20	87	150	0	174	82	52	35	29	26	23	
+15	10	12	12	13	14	17	20	24	27	80	59	175	0	248	121	67	43	34	30	
+16	12	12	13	14	18	21	26	28	32	74	33	82	222	0	427	137	75	49	37	
+18	12	12	14	18	22	26	29	33	39	72	27	52	120	256	0	266	148	75	48	
+20	12	13	17	21	26	29	34	39	50	67	24	35	67	137	271	0	519	157	74	
+23	12	15	20	25	29	34	40	50	78	67	21	29	43	75	138	298	0	311	178	
+28	12	17	24	28	33	40	51	78	141	57	18	26	34	49	75	135	274	0	276	
+39	13	20	27	32	38	49	78	135	315	65	16	23	30	37	48	74	135	299	0	
+final_ranks:avg:61.7895 min:9 max:519
+Maximum actual rank 519 is larger than block size 384 so this program won't give correct results. Exiting...
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+
+!END: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:32:50 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=4 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh SECOND:24 MINUTE:0 HOUR:0
+Fri Oct 18 19:33:14 +03 2019
+
+!BEGIN: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:33:14 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=6 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  20
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          384
+# NB:          384
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-06
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     1000
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      2560
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:2560 N:7680, NB:384
+
+ global_nt:20 local_nt:128 N:7680 NB:384 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        2560
+ NUMBER OF UNKNOWNS:        7680
+ the whole program is done!
+ NUMBER OF UNKNOWNS:        7680
+Tcompress:4.11435
+20 20
+0	294	247	148	135	122	118	108	89	84	55	21	24	27	30	35	46	58	63	72	
+290	0	311	270	153	64	43	38	33	30	21	14	17	18	18	20	23	26	27	28	
+243	313	0	317	280	259	148	61	45	39	26	17	18	20	25	27	29	31	33	36	
+146	264	317	0	319	303	283	247	101	54	30	18	21	25	29	31	33	37	40	44	
+136	151	283	321	0	321	294	283	257	106	34	18	24	28	31	35	38	43	48	58	
+125	63	253	304	321	0	343	305	282	265	46	21	27	31	34	38	44	50	62	120	
+119	43	150	288	299	341	0	349	309	292	57	23	29	33	38	44	51	63	137	266	
+110	38	61	238	279	306	348	0	334	324	68	26	31	37	43	51	65	159	259	294	
+93	33	45	103	250	274	311	334	0	342	70	27	33	39	48	61	138	258	286	320	
+85	30	39	54	107	253	286	327	342	0	85	29	36	44	59	124	264	285	327	373	
+55	21	26	30	34	45	58	69	69	83	0	288	230	141	130	123	120	112	102	93	
+21	14	17	18	18	21	23	26	27	29	284	0	310	276	174	75	44	38	34	31	
+24	17	18	21	24	27	29	31	33	36	227	310	0	313	280	259	158	59	45	39	
+27	18	20	25	28	31	33	37	39	44	139	268	318	0	324	299	279	242	91	52	
+30	18	25	29	31	34	38	43	48	59	132	173	280	327	0	325	290	282	262	92	
+35	20	27	31	35	38	44	51	61	122	125	75	256	301	324	0	343	302	286	269	
+47	23	29	33	38	44	51	66	139	270	122	44	160	283	295	343	0	344	309	288	
+57	26	31	37	43	50	63	157	256	294	111	38	59	233	278	309	344	0	342	322	
+63	27	33	40	48	62	137	258	286	329	103	34	45	92	255	280	309	342	0	344	
+73	28	36	44	58	120	260	285	318	372	95	31	39	52	93	260	283	325	346	0	
+initial_ranks:avg:131.597 min:14 max:373
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+
+!END: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:33:14 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=6 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh SECOND:27 MINUTE:0 HOUR:0
+Fri Oct 18 19:33:41 +03 2019
+
+!BEGIN: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:33:41 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=8 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh
+#
+# morse /home/akbudak/hicma-dev/build/timing/time_zgetrf_tile
+# Nb threads:  20
+# Nb GPUs:     0
+# Nb mpi:      1
+# PxQ:         1x1
+# MB:          384
+# NB:          384
+# IB:          32
+# eps:         1.110223e-16
+# fixed rank:  0
+# fixed acc:   1.0e-08
+# alwaysfixedrank:      0
+# wave_k:     0
+# shmaxrk:     1000
+# shprob:      2
+# shdecay:     0.000000e+00
+# reorder inner products:     0
+# nipp:			    3
+# ntrian:      2560
+#
+#     M       N  K/NRHS   seconds   Gflop/s Deviation
+
+ ************************I am in complex part ************************
+
+ nip:3 , ntrian:2560 N:7680, NB:384
+
+ global_nt:20 local_nt:128 N:7680 NB:384 
+ nipp =            3
+ read inmom is done!
+ read curve file is done!
+ number of triangles:        2560
+ NUMBER OF UNKNOWNS:        7680
+ the whole program is done!
+ NUMBER OF UNKNOWNS:        7680
+Tcompress:3.94066
+20 20
+0	347	309	193	169	156	146	134	120	111	76	32	38	44	51	56	72	84	91	99	
+345	0	373	362	225	100	75	65	53	47	34	24	25	31	33	36	38	39	41	43	
+299	373	0	370	355	346	220	97	81	69	42	26	33	37	39	43	46	50	53	58	
+188	357	368	0	350	371	367	342	154	93	49	31	37	41	46	49	53	59	70	80	
+167	218	356	349	0	342	352	353	349	161	56	34	39	46	51	56	61	75	88	100	
+155	100	343	374	342	0	372	366	342	351	70	36	43	49	56	62	77	90	104	187	
+143	75	213	368	350	371	0	372	352	369	80	38	46	53	61	77	91	107	207	355	
+132	65	97	331	354	366	371	0	351	378	92	40	49	59	76	90	110	227	336	375	
+118	53	81	151	347	342	350	353	0	361	97	42	52	67	87	103	202	343	372	360	
+109	47	68	93	158	344	367	379	359	0	108	44	57	80	101	180	349	365	371	382	
+76	34	42	49	56	70	82	94	99	109	0	338	296	186	167	158	148	137	128	117	
+32	24	26	31	34	36	38	40	42	44	338	0	373	366	249	116	77	65	53	47	
+38	25	33	37	39	43	46	49	52	57	282	373	0	375	353	341	234	96	81	67	
+44	31	37	41	46	49	53	59	67	80	181	357	373	0	360	368	365	330	141	91	
+51	33	39	46	51	56	61	76	87	101	164	236	353	360	0	344	345	359	353	141	
+56	36	43	49	56	62	77	90	103	191	156	117	341	370	345	0	368	359	346	353	
+71	38	46	53	61	77	91	109	205	353	148	77	223	367	345	369	0	356	349	365	
+83	39	50	59	75	90	107	227	342	367	135	65	96	325	359	361	355	0	360	367	
+89	41	53	69	87	104	200	333	373	372	127	53	81	138	352	346	349	359	0	363	
+97	43	57	79	100	177	350	373	360	382	116	47	67	91	136	351	364	368	361	0	
+initial_ranks:avg:169.889 min:24 max:382
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+
+!END: M:7680 N:7680 MB:384 NB:384 MAXRANK:384 DATE:Fri Oct 18 19:33:41 +03 2019 SCHED:prio CMD:/home/akbudak/hicma-dev/build/timing/time_zgetrf_tile --m=7680 --n_range=7680:7680 --k=7680 --mb=384 --nb=384 --nowarmup --threads=20 --p=1 --rk=0 --acc=8 --ss --starshwavek=0 --starshdecay=0 --starshmaxrank=1000 --ntrian=2560 --nipp=3 --isPrecent=0 --solve=0 MAXSUB:30 MINSUB:20 CASE:/home/akbudak/hicma-dev/./exp/cases/small.sh SECOND:30 MINUTE:0 HOUR:0
+Fri Oct 18 19:34:11 +03 2019
+

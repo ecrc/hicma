@@ -1,0 +1,12 @@
+nrows[1]=1080000;   nb[1]=2700; acc[1]=8;   maxrank[1]=50; decay[1]=0.41; compmaxrank[1]=100
+nrows[2]=1080000;   nb[2]=3000; acc[2]=8;   maxrank[2]=50;
+nrows[3]=1080000;   nb[3]=3375; acc[3]=8;   maxrank[3]=50;
+nrows[4]=1080000;   nb[4]=4500; acc[4]=8;   maxrank[4]=50;
+_appdata="--rnd";
+
+note="Hicma runs - Synthetic"
+allcaseids[16]="1 2 3 4"
+allcaseids[16]="1"
+timelimit="01:00:00"
+step=1
+nprocs="16"

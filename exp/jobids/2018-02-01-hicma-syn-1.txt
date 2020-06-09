@@ -1,0 +1,4 @@
+#Number of nodes: 16 =============================
+#Thu Feb  1 14:41:30 AST 2018 on 16 nodes. Hicma runs - Synthetic - exp/cases/1M-8M.txt "1" 1 (0-0-1)
+#case ids:  1
+4778408
