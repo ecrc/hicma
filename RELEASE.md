@@ -1,3 +1,9 @@
+# Release 0.1.4
+
+## Features
+
+* LU factorization (hicma_zgetrf) on double complex matrices stored in tile low-rank (TLR) format. ![Link to branch.](https://github.com/ecrc/hicma/tree/zgetrf)
+
 # Release 0.1.3
 
 ## Features

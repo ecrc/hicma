@@ -62,10 +62,10 @@ foreach(_timing ${TIMINGS_SRC})
                       COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 1 ${_name_exe} --m=10370 --n_range=10370:10370 --k=10370 --mb=1037 --nb=1037 --nowarmup --threads=8 --rk=0 --acc=1e-6 --check --m-3D-rbf --starshdecay=0 --starshmaxrank=2047 --starshwavek=0 --rbf_kernel=9 --rad=0.6 --numobj=1 --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/singleviursdata/SortVirus10370.txt  --p=1)
             set_tests_properties( ${_name_exe}-m-3D-rbf1 PROPERTIES LABELS "mpi;timing" )
             set_tests_properties( ${_name_exe}-m-3D-rbf1 PROPERTIES ENVIRONMENT "STARPU_SILENT=1" )
-            add_test( NAME ${_name_exe}-m-3D-rbf2
-                      COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 1 ${_name_exe} --m=103700 --n_range=3000:3000 --k=103700 --mb=2074 --nb=60 --nowarmup --threads=8 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=120 --starshwavek=0 --rbf_kernel=9 --rad=-1 --numobj=10  --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/S1data/SortVirus103700.txt  --p=1)
-            set_tests_properties( ${_name_exe}-m-3D-rbf2 PROPERTIES LABELS "mpi;timing" )
-            set_tests_properties( ${_name_exe}-m-3D-rbf2 PROPERTIES ENVIRONMENT "STARPU_SILENT=1" )
+           # add_test( NAME ${_name_exe}-m-3D-rbf2
+           #           COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 1 ${_name_exe} --m=103700 --n_range=3000:3000 --k=103700 --mb=2074 --nb=60 --nowarmup --threads=8 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=120 --starshwavek=0 --rbf_kernel=9 --rad=-1 --numobj=10  --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/S1data/SortVirus103700.txt  --p=1)
+            #set_tests_properties( ${_name_exe}-m-3D-rbf2 PROPERTIES LABELS "mpi;timing" )
+            #set_tests_properties( ${_name_exe}-m-3D-rbf2 PROPERTIES ENVIRONMENT "STARPU_SILENT=1" )
 
 #            add_test( NAME ${_name_exe}-m-3D-rbf3
 #                      COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${_name_exe} --m=207400 --n_range=6800:6800 --k=207400 --mb=3050 --nb=100 --nowarmup --threads=8 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=200 --starshwavek=0 --rbf_kernel=9 --rad=-1 --numobj=10  --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/S1data/SortVirus207400.txt  --p=2)
@@ -82,12 +82,12 @@ foreach(_timing ${TIMINGS_SRC})
             add_test( NAME ${_name_exe}-m-3D-rbf1
                       COMMAND ${_name_exe} --m=10370 --n_range=10370:10370 --k=10370 --mb=1037 --nb=1037 --nowarmup --threads=16 --rk=0 --acc=1e-6 --check --m-3D-rbf --starshdecay=0 --starshmaxrank=2047 --starshwavek=0 --rbf_kernel=9 --rad=0.6 --numobj=1 --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/singleviursdata/SortVirus10370.txt  --p=1)
             set_tests_properties( ${_name_exe}-m-3D-rbf1 PROPERTIES LABELS "timing" )
-            add_test( NAME ${_name_exe}-m-3D-rbf2
-                      COMMAND ${_name_exe} --m=103700 --n_range=3000:3000 --k=103700 --mb=2074 --nb=60 --nowarmup --threads=16 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=120 --starshwavek=0 --rbf_kernel=9 --rad=-1 --numobj=10 --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/S1data/SortVirus103700.txt  --p=1)
-            set_tests_properties( ${_name_exe}-m-3D-rbf2 PROPERTIES LABELS "timing" )
-            add_test( NAME ${_name_exe}-m-3D-rbf3
-                      COMMAND ${_name_exe} --m=117715 --n_range=3900:3900 --k=117715 --mb=1811 --nb=60 --nowarmup --threads=16 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=120 --starshwavek=0 --rbf_kernel=9 --rad=0.6 --numobj=1 --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/singleviursdata/SortVirus117715.txt  --p=1)
-            set_tests_properties( ${_name_exe}-m-3D-rbf3 PROPERTIES LABELS "timing" )
+           # add_test( NAME ${_name_exe}-m-3D-rbf2
+           #           COMMAND ${_name_exe} --m=103700 --n_range=3000:3000 --k=103700 --mb=2074 --nb=60 --nowarmup --threads=16 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=120 --starshwavek=0 --rbf_kernel=9 --rad=-1 --numobj=10 --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/S1data/SortVirus103700.txt  --p=1)
+           # set_tests_properties( ${_name_exe}-m-3D-rbf2 PROPERTIES LABELS "timing" )
+           # add_test( NAME ${_name_exe}-m-3D-rbf3
+           #           COMMAND ${_name_exe} --m=117715 --n_range=3900:3900 --k=117715 --mb=1811 --nb=60 --nowarmup --threads=16 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=120 --starshwavek=0 --rbf_kernel=9 --rad=0.6 --numobj=1 --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/singleviursdata/SortVirus117715.txt  --p=1)
+           # set_tests_properties( ${_name_exe}-m-3D-rbf3 PROPERTIES LABELS "timing" )
             #add_test( NAME ${_name_exe}-m-3D-rbf4
             #          COMMAND ${_name_exe} --m=207400 --n_range=6800:6800 --k=207400 --mb=3050 --nb=100 --nowarmup --threads=16 --rk=0 --acc=1e-6  --m-3D-rbf --starshdecay=0 --starshmaxrank=200 --starshwavek=0 --rbf_kernel=9 --rad=-1 --numobj=10 --order=2 --mesh_file=${CMAKE_SOURCE_DIR}/stars-h/SARS-CoV-2-meshes/S1data/SortVirus207400.txt  --p=1)
             #set_tests_properties( ${_name_exe}-m-3D-rbf4 PROPERTIES LABELS "timing" )

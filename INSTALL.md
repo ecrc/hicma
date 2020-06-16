@@ -4,15 +4,15 @@
 
 2.  Get HiCMA from git repository
 
-        git clone git@github.com:ecrc/hicma-dev
+        git clone git@github.com:ecrc/hicma
 
 3.  Run the following command: (This command will also setup PKG_CONFIG_PATH for STARS-H)
 
-        . hicma-dev/scripts/build-nompi.sh
+        . hicma/scripts/build.sh
 
 4.  Run the following command for seeing which experimental cases will be executed:
     
-        cd ./hicma-dev
+        cd ./hicma
         ./exp/distruns.sh exp/cases/statistics.sh dry
 
 5.  Remove the keyword "dry" to really run the cases.
@@ -31,7 +31,7 @@ follow these instructions:
 
         cd hicma
 
-3.  Get submodules using git as follows. The submodules Chameleon and STARS-H should be compiled and the `PKG_CONFIG_PATH` should be set.
+3.  Get submodules using git as follows. The submodules Chameleon, HCORE and STARS-H should be compiled and the `PKG_CONFIG_PATH` should be set.
 
         git submodule update --init --recursive
 

@@ -10,7 +10,7 @@ computations operating on the underlying tile low-rank data format, while satisf
 numerical accuracy and leveraging performance from massively parallel hardware architectures. 
 
 
-Features of HiCMA 0.1.3
+Features of HiCMA 0.1.4
 -----------------------------
 * Matrix-Matrix Multiplication
 * Cholesky Factorization/Solve
@@ -20,10 +20,10 @@ Features of HiCMA 0.1.3
 * Support for StarPU Dynamic Runtime Systems
 * Testing Suite and Examples
 * Support for 3D unstructured mesh deformation of a population of the novel coronaviruses (i.e., SARS-CoV-2)
+* LU factorization (hicma_zgetrf) on double complex matrices stored in tile low-rank (TLR) format. ![Link to branch.](https://github.com/ecrc/hicma/tree/zgetrf)
 
 Current Research
 ----------------
-* LU Factorization/Solve
 * Matrix Inversion
 * Schur Complements
 * Preconditioners
@@ -38,6 +38,7 @@ External Dependencies
 ---------------------
 HiCMA depends on the following libraries:
 * Chameleon
+* HCORE
 * STARS-H
 * hwloc
 * StarPU
@@ -61,7 +62,7 @@ Conference (ISC17)**, June 18-22, 2017, Frankfurt, Germany.
 
 4. Q. Cao, Y. Pei, K. Akbudak, A. Mikhalev, G. Bosilca, H. Ltaief, D. E. Keyes, and J. Dongarra, *Extreme-Scale Task-Based Cholesky Factorization Toward Climate and Weather Prediction Applications*, **The Platform for Advanced Scientific Computing (PASC 2020)**.
 
-5. N. Al-Harthi, R. Alomairy, K. Akbudak, R. Chen, H. Ltaief, H. Bagci, and D. E. Keyes, *Solving Acoustic Boundary Integral Equations Using High Performance Tile Low-Rank LU Factorization*, **International Supercomputing Conference (ISC 2020)**.
+5. N. Al-Harthi, R. Alomairy, K. Akbudak, R. Chen, H. Ltaief, H. Bagci, and D. E. Keyes, *Solving Acoustic Boundary Integral Equations Using High Performance Tile Low-Rank LU Factorization*, **International Supercomputing Conference (ISC 2020)**. [GCS Award Winning Paper at ISC2020](https://www.gauss-centre.eu/news/newsflashes/article/gcs-award-2020-1/)
 
 
 
