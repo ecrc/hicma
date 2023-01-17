@@ -86,9 +86,10 @@ ntasks_per_node=$((nummpi/numnodes))
 
 hn=$HOSTNAME
 echo $HOSTNAME
-HICMADIR=$HOME/hicma-torelease/hicma-dev
+HICMADIR=$HOME/hicma-dev
 BINDIR=$HICMADIR/build/timing
 CHAMDIR=$HICMADIR/chameleon/build
+MKLBIN=$HOME/hicma-potrf/src/mkl/bench_dpotrf
 if [[ "$hn" = xci* ]]; then #isambard
     sruncmd="aprun -n $numnodes -d 64 -j 1 " 
     cham_block_size_arg="--nb=300"
@@ -115,12 +116,10 @@ else
     BINDIR=$HICMADIR/build/timing
     CHAMDIR=$HICMADIR/chameleon/build
 fi
-echo $sruncmd
-echo
-
+echo "sruncmd: \"$sruncmd\""
 
 if [ "$op" == "potrf" ]; then
-    BINNAME=time_z${op}_tile
+    BINNAME=time_d${op}_tile
 elif [ "$op" == "posv" ]; then
     #BINDIR=/project/k1205/akbudak/hicma/build-only-prob/testing  #TODO
     BINNAME=testing_z${op}
@@ -203,178 +202,181 @@ for sched in $scheds;do
         _order=${order[iexp]}
         _mesh_file=${mesh_file[iexp]}
         _rbf_kernel=${rbf_kernel[iexp]}
+        _denst=${denst[iexp]}
         for _acc in ${acc[iexp]}; do
-          for _ker in $_rbf_kernel; do
-            if [ ! -z "${decay[iexp]}" ]; then 
-                _decay=${decay[iexp]}
-            fi
-            if [ ! -z "${_compmaxrank}" ]; then 
-                #echo $_compmaxrank
-                :
-            elif [ ! -z "${compmaxrank[iexp]}" ]; then 
-                _compmaxrank=${compmaxrank[iexp]}
-            else
-                ## calculate maxrank used for buffers during computation
-                scaledb=$((_b/10))
-                scaledmaxrank=$((_maxrank*4))
-                val=$scaledmaxrank
-                if [ $scaledb -lt $scaledmaxrank ]; then
-                    val=$scaledb
+            for _ker in $_rbf_kernel; do
+                if [ ! -z "${decay[iexp]}" ]; then 
+                    _decay=${decay[iexp]}
                 fi
-                if [ $val -le $_wavek ]; then
-                    val=$((_wavek+50))
-                fi
-                _compmaxrank=$val
-                _compmaxrank=$((_b/2))
-            fi
-            if [ -z "$_m" ]; then 
-                continue
-            fi
-            if [ -z "$_b" ]; then 
-                continue
-            fi
-               _mb=$_b;
-if [ $(( _m % _mb )) -eq 0 ]; then
-               _n=$(((_m/_mb)*_maxrank))
-             _nb=$_maxrank
-else
-    printf '%s\n' "Number $n is Odd"
-              _ts=$(((_m/_mb)+1))
-               _n=$((_ts*_maxrank))
-              _nb=$_maxrank
-fi
-            echo $_n
-            echo $_nb
-            echo $_mb
-
-        if [ $sqrt_numnodes -eq $sqrt_numnodesQ ]; then
-            pdims=$sqrt_numnodes 
-        else
-            pdims="$sqrt_numnodes $sqrt_numnodesQ" 
-        fi
-        for pdim in $pdims; do
-            if [ "$prog" == "hic" ]; then
-                rankfile=$BINDIR/../../exp/ranks/$prog-$sched-$_m-$_mb-$_nb-$numnodes-$nummpi-$numthreads-$SLURM_JOBID-$_acc-$_order-$_ker
-                if [ "$op" == "potrf" ]; then
-                    cmd="$BIN \
-                        --m=$_m \
-                        --n_range=$_n:$_n \
-                        --k=$_m \
-                        --mb=$_mb \
-                        --nb=$_maxrank \
-                        --nowarmup \
-                        --threads=$numthreads \
-                        --p=$pdim \
-                        $tracearg \
-                        --rk=0 \
-                        --acc=$_acc \
-                        $_appdata \
-                        --starshwavek=$_wavek \
-                        --starshdecay=$_decay \
-                        --starshmaxrank=$_compmaxrank \
-                        --rankfile=$rankfile \
-                        --rbf_kernel=$_ker\
-                        --rad=$_rad \
-                        --numobj=$_numobj\
-                        --order=$_order\
-                        --mesh_file=$_mesh_file \
-                        #--csolve \
-                        #--solve \
-                        #--check \
-                        "
-                elif [ "$op" == "posv" ]; then
-                    cmd="$BIN \
-                        $numthreads \
-                        0 \
-                        $op \
-                        $_m \
-                        $_m \
-                        $_nrhs \
-                        $_m \
-                        $_mb \
-                        1e-$_acc \
-                        0 \
-                        $_maxrank \
-                        $_compmaxrank \
-                        $pdim \
-                        $((numnodes/pdim)) \
-                        "
-                fi
-            elif [ "$prog" == "cham" ]; then
-                export STARPU_SCHED=$sched
-                export STARPU_SCHED=eager ## prio does not work with chameleon potrf
-                if [ "$trace" != "-" ]; then
-                    cmd="/lustre/project/k1205/akbudak/hicma/chameleon/build-cdt-fxt-s13/timing/time_dpotrf_tile --nowarmup --P=$pdim --m=$_m --n_range=$_m:$_m:$_m --nb=$_b --threads=$numthreads $tracearg"
+                if [ ! -z "${_compmaxrank}" ]; then 
+                    #echo $_compmaxrank
+                    :
+                elif [ ! -z "${compmaxrank[iexp]}" ]; then 
+                    _compmaxrank=${compmaxrank[iexp]}
                 else
-                    cmd="$CHAMDIR/timing/time_dpotrf_tile --P=$pdim --m=$_m --n_range=$_m:$_m:$_m $cham_block_size_arg --threads=$numthreads --nowarmup "
-                fi
-                fi
-                minmaxsubinfo=
-                if [ "$minmaxsub" != "-" ]; then
-                    _mt=$((_m/_mb))
-                    _ntasks=$((_mt*_mt*_mt/3))
-                    _maxsub=$((_ntasks/8))
-                    _minsub=$((_ntasks/10))
-                    #_maxsub=10000; _minsub=8000
-                    #_maxsub=1000;  _minsub=500
-                    minmaxsubinfo="MT:$_mt NTASKS:$_ntasks MAXSUB:$_maxsub MINSUB:$_minsub"
-                    export STARPU_LIMIT_MAX_SUBMITTED_TASKS=$_maxsub
-                    export STARPU_LIMIT_MIN_SUBMITTED_TASKS=$_minsub
-                fi
-                if [ "$maxsub" != "-" -a "$minsub" != "-" ]; then
-                    minmaxsubinfo="MAXSUB:$maxsub MINSUB:$minsub"
-                    export STARPU_LIMIT_MAX_SUBMITTED_TASKS=$maxsub
-                    export STARPU_LIMIT_MIN_SUBMITTED_TASKS=$minsub
-                fi
-                #export STARPU_SILENT=1
-
-                msg="M:$_m N:$_n MB:$_mb NB:$_nb MAXRANK:$_maxrank DATE:`date` SCHED:$STARPU_SCHED CMD:$cmd $minmaxsubinfo CASE:$sizefile" 
-                echo "!BEGIN:" $msg 
-                if [ "$trace" != "-" ]; then
-                    traceprefix=`pwd`/exp/trace/$prog-$sched-$_m-$_mb-$_nb-$numnodes-$nummpi-$numthreads/$SLURM_JOBID
-                    mkdir -p $traceprefix
-                    export STARPU_FXT_PREFIX=$traceprefix
-                fi
-                if [ "$dry" == "dry" ]; then
-                    echo $cmd
-                    #echo $sruncmd $cmd
-                else
-                    echo "!BEGIN:" $msg 1>&2 
-                    tstart=$SECONDS
-                    $sruncmd $cmd
-                    tend=$SECONDS
-                    time_sec=$((tend-tstart))
-                    time_min=$((time_sec/60))
-                    time_hour=$((time_min/60))
-                    echo
-                    echo "!END:" $msg SECOND:$time_sec MINUTE:$time_min HOUR:$time_hour
-                    echo "!END:" $msg 1>&2 
-                    
-                    if [ "$trace" != "-" ]; then
-                        combinedtrace=${traceprefix}trace
-                        /project/k1205/akbudak/codes/starpu13-install-cdt-fxt/bin/starpu_fxt_tool -i ${traceprefix}prof_file_akbudak_* -o ${combinedtrace}
-                        mv activity.data  dag.dot  data.rec  distrib.data  tasks.rec  trace.html paje.trace    $traceprefix/ #
-                        echo $SLURM_JOBID > $traceprefix/0_jobid 
-                        #echo "Dot is starting:"
-                        #dot -Tpng $traceprefix/dag.dot -o $traceprefix/$prog.png
-                        #echo "Dot ended"
+                    ## calculate maxrank used for buffers during computation
+                    scaledb=$((_b/10))
+                    scaledmaxrank=$((_maxrank*4))
+                    val=$scaledmaxrank
+                    if [ $scaledb -lt $scaledmaxrank ]; then
+                        val=$scaledb
                     fi
+                    if [ $val -le $_wavek ]; then
+                        val=$((_wavek+50))
+                    fi
+                    _compmaxrank=$val
+                    _compmaxrank=$((_b/2))
                 fi
-                date
-                echo
-             done #kernel
+                if [ -z "$_m" ]; then 
+                    continue
+                fi
+                if [ -z "$_b" ]; then 
+                    continue
+                fi
+                _mb=$_b;
+                if [ $(( _m % _mb )) -eq 0 ]; then
+                    _n=$(((_m/_mb)*_maxrank))
+                    _nb=$_maxrank
+                else
+                    printf '%s\n' "Number $n is Odd"
+                    _ts=$(((_m/_mb)+1))
+                    _n=$((_ts*_maxrank))
+                    _nb=$_maxrank
+                fi
+                echo "N: $_n NB:$_nb MB:$_mb"
+
+                if [ $sqrt_numnodes -eq $sqrt_numnodesQ ]; then
+                    pdims=$sqrt_numnodes 
+                else
+                    pdims="$sqrt_numnodes $sqrt_numnodesQ" 
+                fi
+                for pdim in $pdims; do
+                    if [ "$prog" == "hic" ]; then
+                        rankfile=$BINDIR/../../exp/ranks/$prog-$sched-$_m-$_mb-$_nb-$numnodes-$nummpi-$numthreads-$SLURM_JOBID-$_acc-$_order-$_ker-$_denst
+                        if [ "$op" == "potrf" ]; then
+                            cmd="$BIN \
+                                --m=$_m \
+                                --n_range=$_n:$_n \
+                                --k=$_m \
+                                --mb=$_mb \
+                                --nb=$_maxrank \
+                                --nowarmup \
+                                --threads=$numthreads \
+                                --p=$pdim \
+                                $tracearg \
+                                --rk=0 \
+                                --acc=$_acc \
+                                $_appdata \
+                                --starshwavek=$_wavek \
+                                --starshdecay=$_decay \
+                                --starshmaxrank=$_compmaxrank \
+                                --denst=$_denst \
+                                --rbf_kernel=$_ker \
+                                --rad=$_rad \
+                                --numobj=$_numobj\
+                                --order=$_order\
+                                --mesh_file=$_mesh_file \
+                                --rankfile=$rankfile \
+                                "
+
+                                #--csolve \
+                                #--solve \
+                                #--check \
+                        elif [ "$op" == "posv" ]; then
+                            cmd="$BIN \
+                                $numthreads \
+                                0 \
+                                $op \
+                                $_m \
+                                $_m \
+                                $_nrhs \
+                                $_m \
+                                $_mb \
+                                1e-$_acc \
+                                0 \
+                                $_maxrank \
+                                $_compmaxrank \
+                                $pdim \
+                                $((numnodes/pdim)) \
+                                "
+                        fi
+                    elif [ "$prog" == "cham" ]; then
+                        export STARPU_SCHED=$sched
+                        export STARPU_SCHED=eager ## prio does not work with chameleon potrf
+                        if [ "$trace" != "-" ]; then
+                            cmd="/lustre/project/k1205/akbudak/hicma/chameleon/build-cdt-fxt-s13/timing/time_dpotrf_tile --nowarmup --P=$pdim --m=$_m --n_range=$_m:$_m:$_m --nb=$_b --threads=$numthreads $tracearg"
+                        else
+                            cmd="$CHAMDIR/timing/time_dpotrf_tile --P=$pdim --m=$_m --n_range=$_m:$_m:$_m $cham_block_size_arg --threads=$numthreads --nowarmup "
+                        fi
+                    elif [ "$prog" == "mkl" ]; then
+                        cmd="$MKLBIN $_m 2"
+                    fi
+                    minmaxsubinfo=
+                    if [ "$minmaxsub" != "-" ]; then
+                        _mt=$((_m/_mb))
+                        _ntasks=$((_mt*_mt*_mt/3))
+                        _maxsub=$((_ntasks/8))
+                        _minsub=$((_ntasks/10))
+                        #_maxsub=10000; _minsub=8000
+                        #_maxsub=1000;  _minsub=500
+                        minmaxsubinfo="MT:$_mt NTASKS:$_ntasks MAXSUB:$_maxsub MINSUB:$_minsub"
+                        export STARPU_LIMIT_MAX_SUBMITTED_TASKS=$_maxsub
+                        export STARPU_LIMIT_MIN_SUBMITTED_TASKS=$_minsub
+                    fi
+                    if [ "$maxsub" != "-" -a "$minsub" != "-" ]; then
+                        minmaxsubinfo="MAXSUB:$maxsub MINSUB:$minsub"
+                        export STARPU_LIMIT_MAX_SUBMITTED_TASKS=$maxsub
+                        export STARPU_LIMIT_MIN_SUBMITTED_TASKS=$minsub
+                    fi
+                    #export STARPU_SILENT=1
+
+                    msg="M:$_m N:$_n MB:$_mb NB:$_nb MAXRANK:$_maxrank DATE:`date` SCHED:$STARPU_SCHED CMD:$cmd $minmaxsubinfo CASE:$sizefile" 
+                    echo "!BEGIN:" $msg 
+                    if [ "$trace" != "-" ]; then
+                        traceprefix=`pwd`/exp/trace/$prog-$sched-$_m-$_mb-$_nb-$numnodes-$nummpi-$numthreads/$SLURM_JOBID
+                        mkdir -p $traceprefix
+                        export STARPU_FXT_PREFIX=$traceprefix
+                    fi
+                    if [ "$dry" == "dry" ]; then
+                        echo $cmd
+                        #echo $sruncmd $cmd
+                    else
+                        echo "!BEGIN:" $msg 1>&2 
+                        tstart=$SECONDS
+                        $sruncmd $cmd
+                        tend=$SECONDS
+                        time_sec=$((tend-tstart))
+                        time_min=$((time_sec/60))
+                        time_hour=$((time_min/60))
+                        echo
+                        echo "!END:" $msg SECOND:$time_sec MINUTE:$time_min HOUR:$time_hour
+                        echo "!END:" $msg 1>&2 
+
+                        if [ "$trace" != "-" ]; then
+                            combinedtrace=${traceprefix}trace
+                            /project/k1205/akbudak/codes/starpu13-install-cdt-fxt/bin/starpu_fxt_tool -i ${traceprefix}prof_file_akbudak_* -o ${combinedtrace}
+                            mv activity.data  dag.dot  data.rec  distrib.data  tasks.rec  trace.html paje.trace    $traceprefix/ #
+                            echo $SLURM_JOBID > $traceprefix/0_jobid 
+                            #echo "Dot is starting:"
+                            #dot -Tpng $traceprefix/dag.dot -o $traceprefix/$prog.png
+                            #echo "Dot ended"
+                        fi
+                    fi
+                    date
+                    echo
+                done #kernel
             done
         done ## for each accuracy
     done ## for each case
 done ## for each scheduler
 
 exit 0
-    --printindex \
+--printindex \
     --check \
     --printmat \
     --printindex \
     --trace \
---tag-output --timestamp-output 
+    --tag-output --timestamp-output 
 
 $SLURM_JOBID    Job ID  5741192 $PBS_JOBID
 $SLURM_JOB_NAME Job Name    myjob   $PBS_JOBNAME

@@ -1,3 +1,8 @@
+/**
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
+ *                     All rights reserved.
+ */
+
 #include <stdio.h>
 #include <starsh_core.h>
 // Add this header, wait it to be fixed by Aleks

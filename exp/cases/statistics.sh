@@ -125,7 +125,33 @@ nrows[81]=594000;   nb[81]=1350;    acc[81]=8;  maxrank[81]=100;
 nrows[82]=594000;   nb[82]=1500;    acc[82]=8;  maxrank[82]=100;
 nrows[83]=594000;   nb[83]=1800;    acc[83]=8;  maxrank[83]=100;
 nrows[84]=594000;   nb[84]=2250;    acc[84]=8;  maxrank[84]=100;
-_ci=555; nrows[$_ci]=10370;     nb[$_ci]=1037;     acc[$_ci]="1e-6"; maxrank[$_ci]=500;   compmaxrank[$_ci]=1000; appdata[$_ci]="--st-3D-rbf";
+_ci=555; nrows[$_ci]=10370;     nb[$_ci]=1037;     acc[$_ci]="1e-8"; maxrank[$_ci]=500;   compmaxrank[$_ci]=1000; appdata[$_ci]="--ss"; rbf_kernel[$_ci]="NA"; denst[$_ci]="NA"; rad[$_ci]="NA";mesh_file[$_ci]="NA";numobj[$_ci]="NA";order[$_ci]="NA"
+_ci=556; nrows[$_ci]=10370;     nb[$_ci]=1037;     acc[$_ci]="1e-8"; maxrank[$_ci]=500;   compmaxrank[$_ci]=1000; appdata[$_ci]="--st-2D-exp"; rbf_kernel[$_ci]="NA"; denst[$_ci]="NA"; rad[$_ci]="NA";mesh_file[$_ci]="NA";numobj[$_ci]="NA";order[$_ci]="NA"
+nbs=(792 858 936 1144 1287 784 1274 1456 1568 2548 896 952 1088 1792 1904 2176 3808 900 1125 1350 1500 1620 2025 2250 2700 3375 4050 4500 1296 1404 1872 1944 2106 2808 3159 3888 4212 5616 1377 1683 1782 1836 2244 2754 3366 3564 5049 5508 1683 2079 2142 2618 3213 3366 3927 4158 5049 1836 2244 2376 2448 2992 3366 3672 4488 4752 5049 2673 2754 3366 4131 5049 5346 2244 2295 2805 2970 3060 3366 3740 4590 5049 5610 5940 2646 3087 3969 4116 5292 2754 3366 3564 3672 4488 5049 5508 3366 3861 3978
+4862 5049 5967 3213 3366 3927 4158 4284 5049 5236 3366 4455 4590 5049 5610 3672 4488 4752 4896 5049 5984 3900 4290 4400 5200 5720 4200 4400 4620 5280 5600 5775 4368 4680 4914 5040 5460 5616 )
+nts=(13 12 11 9 8 26 16 14 13 8 34 32 28 17 16 14 8 45 36 30 27 25 20 18 15 12 10 9 39 36 27 26 24 18 16 13 12 9 44 36 34 33 27 22 18 17 12 11 42 34 33 27 22 21 18 17 14 44 36 34 33 27 24 22 18 17 16 34 33 27 22 18 17 45 44 36 34 33 30 27 22 20 18 17 42 36 28 27 21 44 36 34 33 27 24 22 39 34 33 27 26 22 44 42 36 34 33 28 27 45 34 33 30 27 44 36 34 33 32 27 44 40 39 33 30 44 42 40 35 33 32 45 42 40 39 36 35 )
+nbs=(360 390 420 520 540 560 630 720 780 840 910 1040 1080 1170 1260 1560 1680 1820 1890 2160 2340 2520 2730 3120 3510 3640 3780 4680 5040 5460 )
+nts=(546 504 468 378 364 351 312 273 252 234 216 189 182 168 156 126 117 108 104 91 84 78 72 63 56 54 52 42 39 36 )
+lennbs=${#nbs[@]}
+ncases=$((lennbs*2))
+echo "Number of nbs:$lennbs Number of cases:$ncases"
+for i in "${!nbs[@]}"; do
+    __nb=${nbs[i]}
+    __nt=${nts[i]}
+    __m=$((__nb*__nt))
+    __halfnb=$((__nb/2))
+    __maxrank=250
+    if [[ $__halfnb -lt $__maxrank ]]; then
+        __maxrank=$__halfnb;
+    fi
+    _ci=$((i+1)); nrows[$_ci]=$__m;     nb[$_ci]=$__nb;     acc[$_ci]="1e-8"; maxrank[$_ci]=$__maxrank;   compmaxrank[$_ci]=$__maxrank; appdata[$_ci]="--ss"; rbf_kernel[$_ci]="NA"; denst[$_ci]="NA"; rad[$_ci]="NA";mesh_file[$_ci]="NA";numobj[$_ci]="NA";order[$_ci]="NA"
+    #_ci=$((i+1)); nrows[$_ci]=$__m;     nb[$_ci]=$__nb;     acc[$_ci]="1e-8"; maxrank[$_ci]=500;   compmaxrank[$_ci]=500; appdata[$_ci]="--ss"; rbf_kernel[$_ci]="NA"; denst[$_ci]="NA"; rad[$_ci]="NA";mesh_file[$_ci]="NA";numobj[$_ci]="NA";order[$_ci]="NA"
+    __maxrank=800
+    if [[ $__halfnb -lt $__maxrank ]]; then
+        __maxrank=$__halfnb;
+    fi
+    _ci=$((i+1+lennbs)); nrows[$_ci]=$__m;     nb[$_ci]=$__nb;     acc[$_ci]="1e-8"; maxrank[$_ci]=$__maxrank;   compmaxrank[$_ci]=$__maxrank; appdata[$_ci]="--st-2D-exp"; rbf_kernel[$_ci]="NA"; denst[$_ci]="NA"; rad[$_ci]="NA";mesh_file[$_ci]="NA";numobj[$_ci]="NA";order[$_ci]="NA"
+done
 
 allcaseids[16]="`seq 1 84`"
 allcaseids[16]="`seq 1 24`"
@@ -134,10 +160,12 @@ allcaseids[16]="`seq 1 4`"
 nprocs="1 2 4 8 16"
 nprocs="1"
 allcaseids[1]="`seq 101 124` `seq 201 220`"
-allcaseids[1]="555"  # @HATEM test only, 1 case
+allcaseids[1]="555 556"  
+allcaseids[1]="`seq $lennbs $ncases`"  
+allcaseids[1]="`seq 1 $ncases`"  
 #allcaseids[1]="`seq 201 220`" # @HATEM st-3d-sqexp two accuracies, 6 matrix sizes
-echo "@HATEM: uncomment $((LINENO-1)) of exp/cases/statistics.sh to run all cases"
 prog="hic"
+#prog="mkl"
 
 allcaseids[2]="`seq 1 4` `seq 9 12`"
 allcaseids[4]="`seq 1 4` `seq 9 12`"
@@ -204,11 +232,11 @@ nprocs="2 4 8 16 32"
 nprocs="8 16 32"
 nprocs="2 4 8"
 nprocs="4 16"
+prog="hic"
 fi
 
 
 
-prog="hic"
 step=1
 timelimit="02:00:00"
 #_compmaxrank=70 # for 216000<= <=594000 maxrank=50

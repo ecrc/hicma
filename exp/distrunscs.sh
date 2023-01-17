@@ -104,9 +104,9 @@ for nodes in $nprocs; do
         caseids=${allcaseids[$nodes]}      
         ncases=`echo "$caseids" | wc -w`    
         startt=0;   endt=$((ncases-1)); 
-        echo -n "#`date` on $nodes nodes. $note - $prog - $cases "
-        echo -n \"$caseids\" 
-        echo " $ncases ($startt-$endt-$step)"
+    #    echo -n "#`date` on $nodes nodes. $note - $prog - $cases "
+    #    echo -n \"$caseids\" 
+    #    echo " $ncases ($startt-$endt-$step)"
 
         ct=$startt
         while [ $ct -le $endt ]; do
@@ -121,7 +121,7 @@ for nodes in $nprocs; do
                 ids="$ids ${arrcaseids[icase]}"
             done
             ct=$((ct+step))
-            echo "#case ids: $ids"
+    #        echo "#case ids: $ids"
             for nt in $numthreads; do
                 #if [[ "$hn" = xci* ]]; then
                 #    cmdbatch2="$cmdbatch -o $PWD/exp/out/$prog-$nodes-$nt-$PBS_JOBID"

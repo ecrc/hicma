@@ -1,13 +1,13 @@
 #!/bin/bash
 repo=hicma-dev
-hwloc_install_dir=$HOME/hicma-dev/hwloc-install
-starpu_install_dir=$HOME/hicma-dev/starpu-1.2-install
+hwloc_install_dir=/ibex/scratch/omairyrm/hicma-cs/hicma-dev/hwloc-install
+starpu_install_dir=/ibex/scratch/omairyrm/hicma-cs/hicma-dev/starpu-1.2-install
 
 
 currentdir=`pwd`
 run_clone=0
 set_pkgconfig_runtime_libs=1
-run_update_submodules=1
+run_update_submodules=0
 run_module_setup=0
 compile_hwloc=1
 compile_starpu=1
@@ -46,6 +46,7 @@ if [ $run_module_setup -eq 1 ]; then
     . scripts/modules-isambard-allinea.sh
     pause_info
 fi
+cd  $currentdir/$repo
 if [ $compile_hwloc -eq 1 ];then
     if [  ! -f "hwloc-1.11.13.tar.gz" ]; then
 	wget https://download.open-mpi.org/release/hwloc/v1.11/hwloc-1.11.13.tar.gz
@@ -76,7 +77,7 @@ if [ $compile_starpu -eq 1 ];then
     tar -zxvf starpu-1.2.6.tar.gz
     cd starpu-1.2.6
     [[ -d $starpu_install_dir ]] || mkdir -p $starpu_install_dir
-    ./configure --prefix=$starpu_install_dir --disable-cuda --disable-opencl  --disable-build-doc --disable-export-dynamic  --without-mpicc 
+    ./configure --prefix=$starpu_install_dir --disable-cuda --disable-opencl  --disable-build-doc --disable-export-dynamic  --without-mpicc --enable-maxcpus=40 
     #--disable-mpi-check 
     make -j
     make -j install
@@ -93,7 +94,7 @@ if [ $compile_cham -eq 1 ];then
     fi
     mkdir build 
     cd build
-    cmake .. -DCMAKE_INSTALL_PREFIX=$currentdir/$repo/chameleon/build/install -DCMAKE_COLOR_MAKEFILE:BOOL=ON -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DBUILD_SHARED_LIBS=OFF -DCHAMELEON_ENABLE_EXAMPLE=ON -DCHAMELEON_ENABLE_TESTING=OFF -DCHAMELEON_ENABLE_TIMING=ON -DCHAMELEON_USE_MPI=OFF -DCHAMELEON_USE_CUDA=OFF -DCHAMELEON_SCHED_QUARK=OFF -DCHAMELEON_SCHED_STARPU=ON 
+    cmake .. -DCMAKE_INSTALL_PREFIX=$currentdir/$repo/chameleon/build/install -DCMAKE_COLOR_MAKEFILE:BOOL=ON -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DBUILD_SHARED_LIBS=OFF -DCHAMELEON_ENABLE_EXAMPLE=ON -DCHAMELEON_ENABLE_TESTING=OFF -DCHAMELEON_ENABLE_TIMING=ON -DHICMA_USE_MPI=OFF -DCHAMELEON_USE_CUDA=OFF -DCHAMELEON_SCHED_QUARK=OFF -DCHAMELEON_SCHED_STARPU=ON
     make -j install
     if [ -d $currentdir/$repo/chameleon/build/install ]; then
         export PKG_CONFIG_PATH=$currentdir/$repo/chameleon/build/install/lib/pkgconfig/:$PKG_CONFIG_PATH

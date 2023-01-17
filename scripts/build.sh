@@ -3,7 +3,7 @@
 
 
 # BASH verbose mode
-set -x 
+#set -x
 currdir=$PWD
 
 echo "Current dir is $PWD. The files in the current dir are here:"; ls -al
@@ -26,10 +26,14 @@ fi
 module purge
 if [ "$HOSTNAME" == "thana" ]; then
 	. ./scripts/power8.modules
+#elif [ "$HOSTNAME" == "almaha.kaust.edu.sa" ]; then
+#	echo "Loading modules for ub18"
+#	. ./scripts/modules-ecrc-ub18-mpi.sh
 else
-    echo "Loading intel modules"
-	. ./scripts/modules-ecrc.sh
-	. ./scripts/modules-ecrc-mpi.sh
+	echo "Loading modules"
+	. ./scripts/modules-ecrc-ub18-mpi.sh
+#	. ./scripts/modules-ecrc.sh
+#	. ./scripts/modules-ecrc-mpi.sh
 fi
 module list
 
@@ -37,17 +41,24 @@ module list
 HICMADEVDIR=$PWD 
 git submodule update --init --recursive
 
+## enable/disable compilation of libraries
+starsh=1
+chameleon=1
+hcore=1
+hicma=1
 
-# STARS-H
-cd $HICMADEVDIR
-cd stars-h
-rm -rf build
-mkdir -p build/installdir
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF -DGSL=OFF
-make clean
-make -j
-make install
+if [ $starsh -eq 1 ]; then
+	# STARS-H
+	cd $HICMADEVDIR
+	cd stars-h
+	rm -rf build
+	mkdir -p build/installdir
+	cd build
+	cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DMPI=OFF -DOPENMP=OFF -DSTARPU=OFF -DGSL=OFF
+	make clean
+	make -j
+	make install
+fi
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # STARS-H-CORE
@@ -60,39 +71,46 @@ export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 #make -j install
 #export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
-# CHAMELEON
-cd $HICMADEVDIR
-cd chameleon
-rm -rf build
-mkdir -p build/installdir
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DCHAMELEON_USE_MPI=ON  -DCMAKE_INSTALL_PREFIX=$PWD/installdir
-make clean
-make -j
-make install
+if [ $chameleon -eq 1 ]; then
+	# CHAMELEON
+	cd $HICMADEVDIR
+	cd chameleon
+	rm -rf build
+	mkdir -p build/installdir
+	cd build
+	cmake .. -DCMAKE_BUILD_TYPE=Debug -DHICMA_USE_MPI=ON -DCHAMELEON_USE_CUDA=OFF -DCHAMELEON_ENABLE_CUDA=OFF -DCMAKE_INSTALL_PREFIX=$PWD/installdir
+	make clean
+	make -j
+	make install
+fi
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
-# HCORE
-cd $HICMADEVDIR
-cd hcore
-rm -rf build
-mkdir -p build/installdir
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir
-make clean
-make -j
-make install
+
+if [ $hcore -eq 1 ]; then
+	# HCORE
+	cd $HICMADEVDIR
+	cd hcore
+	rm -rf build
+	mkdir -p build/installdir
+	cd build
+	cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/installdir
+	make clean
+	make -j
+	make install
+fi
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
-# HICMA
-cd $HICMADEVDIR
-rm -rf build
-mkdir -p build/installdir
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DHICMA_USE_MPI=ON
-make clean
-make -j
-make install
+if [ $hicma -eq 1 ]; then
+	# HICMA
+	cd $HICMADEVDIR
+	rm -rf build
+	mkdir -p build/installdir
+	cd build
+	cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$PWD/installdir -DHICMA_USE_MPI=ON
+	make clean
+	make -j
+	make install
+fi
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH
 
 cd $currdir

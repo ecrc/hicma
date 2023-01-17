@@ -1,3 +1,8 @@
+/**
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
+ *                     All rights reserved.
+ */
+
 #include "hicma_struct.h"
 static struct hicma_context hicma_context = {
     0, '\0', 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 

@@ -5,7 +5,7 @@
 #                          All rights reserved.
 # @copyright (c) 2012-2016 Inria. All rights reserved.
 # @copyright (c) 2012-2016 Bordeaux INP, CNRS (LaBRI UMR 5800), Inria, Univ. Bordeaux. All rights reserved.
-# @copyright (c) 2017      King Abdullah University of Science and Technology (KAUST)
+# @copyright (c) 2017-2022      King Abdullah University of Science and Technology (KAUST). All rights reserved.
 #
 ###
 #
@@ -15,7 +15,7 @@
 #  HiCMA is a software package provided by:
 #     King Abdullah University of Science and Technology
 #
-#  @version 0.1.1
+#  @version 1.0.0
 #  @author Cedric Castagnede
 #  @author Emmanuel Agullo
 #  @author Mathieu Faverge
@@ -37,16 +37,17 @@
 #add_definitions(-DMKL)
 #add_definitions(-DLAPACKE_UTILS)
 
-cmake_minimum_required(VERSION 3.2.3)
+cmake_minimum_required(VERSION 2.8)
+# cmake_minimum_required(VERSION 3.2.3)
 
 # directly make an error if in-source build
-if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
-   message(FATAL_ERROR "In-source builds are not allowed.\n"
-   "Please create a build directory first and execute cmake configuration from "
-   "this directory. Example: mkdir build && cd build && cmake ..")
-endif()
+if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
+    message(FATAL_ERROR "In-source builds are not allowed.\n"
+            "Please create a build directory first and execute cmake configuration from "
+            "this directory. Example: mkdir build && cd build && cmake ..")
+endif ()
 
-project(HICMA C )
+project(HICMA C)
 
 # set project version number
 set(HICMA_VERSION_MAJOR 0)
@@ -57,19 +58,20 @@ set(MORSE_CMAKE_DIR "" CACHE PATH "Directory of MORSE CMake modules, can be exte
 
 ## CMAKE MODULES :: ECRC
 ## REQUIRED FOR TESTS TO LINK LIBRARIES
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/cmake_modules/ecrc/modules" )
+if (NOT EXISTS "${PROJECT_SOURCE_DIR}/cmake_modules/ecrc/modules")
     find_package(Git REQUIRED)
     execute_process(COMMAND ${GIT_EXECUTABLE} submodule init WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} RESULT_VARIABLE _res_init OUTPUT_QUIET ERROR_QUIET)
     execute_process(COMMAND ${GIT_EXECUTABLE} submodule update WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} RESULT_VARIABLE _res_update OUTPUT_QUIET ERROR_QUIET)
-    if( ${_res_init} GREATER 0 OR ${_res_update} GREATER 0 )
+    if (${_res_init} GREATER 0 OR ${_res_update} GREATER 0)
         message(FATAL_ERROR "ECRC CMake modules were not found.\n"
-                            "We tried: 'git submodule init && git submodule update' and resulted in error" )
-    endif()
-endif()
+                "We tried: 'git submodule init && git submodule update' and resulted in error")
+    endif ()
+endif ()
 ## ECRC INITIALIZATION
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules/ecrc/modules")
-set(ECRC_CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules/ecrc/modules )
+set(ECRC_CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules/ecrc/modules)
+
 include(EcrcInit)
 include(GenPkgConfig)
 
@@ -106,7 +108,7 @@ include(GenPkgConfig)
 # --------------------
 
 # use, i.e. don't skip the full RPATH for the build tree
-set(CMAKE_SKIP_BUILD_RPATH  FALSE)
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
 
 # when building, don't use the install RPATH already
 # (but later on when installing)
@@ -121,8 +123,8 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 # Define precision supported by HICMA
 # -----------------------------------------
-set( RP_HICMA_DICTIONNARY ${PROJECT_SOURCE_DIR}/cmake_modules/morse_cmake/modules/precision_generator/subs.py )
-set( RP_HICMA_PRECISIONS  "s;d;c;z" )
+set(RP_HICMA_DICTIONNARY ${PROJECT_SOURCE_DIR}/cmake_modules/morse_cmake/modules/precision_generator/subs.py)
+set(RP_HICMA_PRECISIONS "s;d;c;z")
 include(RulesPrecisions)
 
 # Options to select the runtime
@@ -134,13 +136,13 @@ set(HICMA_SCHED_list "STARPU")
 
 # Initially PaRSEC runtime is enabled
 option(HICMA_SCHED_PARSEC
-    "Enable PaRSEC scheduler as the default runtime
+        "Enable PaRSEC scheduler as the default runtime
     (Conflict with other HICMA_SCHED_* options)" OFF)
 option(HICMA_SCHED_STARPU
-    "Enable StarPU scheduler as the default runtime
+        "Enable StarPU scheduler as the default runtime
     (Conflict with other HICMA_SCHED_* options)" ON)
 option(HICMA_SCHED_QUARK
-    "Enable Quark scheduler as the default runtime
+        "Enable Quark scheduler as the default runtime
     (Conflict with other HICMA_SCHED_* options)" OFF)
 
 # For now, we are able to compile only one runtime at a time, so we disable combinations of runtimes
@@ -153,27 +155,27 @@ elseif (HICMA_SCHED_QUARK)
 elseif (HICMA_SCHED_PARSEC)
     set(HICMA_SCHED_QUARK OFF)
     set(HICMA_SCHED_STARPU OFF)
-endif()
+endif ()
 # Set default to StarPU if nothing specific is required by the user
-if ( NOT HICMA_SCHED_STARPU AND NOT HICMA_SCHED_PARSEC AND NOT HICMA_SCHED_QUARK )
+if (NOT HICMA_SCHED_STARPU AND NOT HICMA_SCHED_PARSEC AND NOT HICMA_SCHED_QUARK)
     set(HICMA_SCHED_STARPU ON)
-endif()
+endif ()
 if (HICMA_SCHED_STARPU)
     message("-- ${BoldGreen}HICMA_SCHED_STARPU is set to ON: HICMA uses StarPU runtime\n"
             "   To use HICMA with Quark  runtime: set HICMA_SCHED_QUARK  to ON\n"
             "   To use HICMA with PaRSEC runtime: set HICMA_SCHED_PARSEC to ON\n"
             "   (HICMA_SCHED_STARPU will be disabled)${ColourReset}")
-elseif(HICMA_SCHED_QUARK)
+elseif (HICMA_SCHED_QUARK)
     message("-- ${BoldGreen}HICMA_SCHED_QUARK is set to ON: HICMA uses Quark runtime\n"
             "   To use HICMA with StarPU runtime: set HICMA_SCHED_STARPU to ON\n"
             "   To use HICMA with PaRSEC runtime: set HICMA_SCHED_PARSEC to ON\n"
             "   (HICMA_SCHED_QUARK will be disabled)${ColourReset}")
-elseif(HICMA_SCHED_PARSEC)
+elseif (HICMA_SCHED_PARSEC)
     message("-- ${BoldGreen}HICMA_SCHED_PARSEC is set to ON: HICMA uses PaRSEC runtime\n"
             "   To use HICMA with StarPU runtime: set HICMA_SCHED_STARPU to ON\n"
             "   To use HICMA with Quark  runtime: set HICMA_SCHED_QUARK  to ON\n"
             "   (HICMA_SCHED_PARSEC will be disabled)${ColourReset}")
-endif()
+endif ()
 
 # Check that one, and only one, SCHED option is set to ON
 # count number of runtime sets to ON
@@ -181,19 +183,19 @@ math(EXPR number_of_active_runtime 0)
 foreach (runtime ${HICMA_SCHED_list})
     if (HICMA_SCHED_${runtime})
         math(EXPR number_of_active_runtime "${number_of_active_runtime}+1")
-    endif()
-endforeach()
+    endif ()
+endforeach ()
 if (NOT number_of_active_runtime STREQUAL 1)
     message(FATAL_ERROR
             "Number of active runtime is ${number_of_active_runtime}, "
             "the user should activate one (and only one) runtime. ")
-endif()
+endif ()
 
 # Use intermediate variable since cmake_dependent_option doesn't have OR conditions
 set(HICMA_ENABLE_MPI OFF CACHE INTERNAL "Tells if MPI might be supported by the runtime")
-if ( HICMA_SCHED_PARSEC OR HICMA_SCHED_STARPU )
-     set(HICMA_ENABLE_MPI ON FORCE)
-endif()
+if (HICMA_SCHED_PARSEC OR HICMA_SCHED_STARPU)
+    set(HICMA_ENABLE_MPI ON FORCE)
+endif ()
 
 # Additional options
 # ------------------
@@ -201,18 +203,18 @@ endif()
 # Enable the distributed interface (allowed only when StarPU or PaRSEC is enabled)
 # TODO: Default should be changed to ON/OFF when it will be ok
 cmake_dependent_option(HICMA_USE_MPI
-                    "Enable distributed memory through MPI" OFF
-                    "HICMA_ENABLE_MPI" OFF)
+        "Enable distributed memory through MPI" OFF
+        "HICMA_ENABLE_MPI" OFF)
 if (HICMA_ENABLE_MPI AND NOT HICMA_USE_MPI)
     message("-- ${BoldGreen}HICMA_USE_MPI is set to OFF, turn it ON to use MPI (unsupported by Quark)${ColourReset}")
-endif()
+endif ()
 
 
 # Enable FXT if StarPU
 option(HICMA_ENABLE_TRACING "Enable tracing support" OFF)
 if (NOT HICMA_ENABLE_TRACING)
     message("-- ${BoldGreen}HICMA_ENABLE_TRACING is set to OFF, turn it ON to use FxT (with StarPU)${ColourReset}")
-endif()
+endif ()
 #option(HICMA_USE_EZTRACE "Enable EZTRACE to build modules" OFF)
 
 # # Options to enable/disable testings and timings
@@ -231,39 +233,39 @@ endif()
 # endif()
 option(HICMA_ENABLE_DOCS "Build documentation in docs directory" ON)
 # If docs option is ON
-if(HICMA_ENABLE_DOCS)
+if (HICMA_ENABLE_DOCS)
     find_package(Doxygen)
-    if(DOXYGEN_FOUND)
+    if (DOXYGEN_FOUND)
         add_subdirectory("docs")
-    else()
+    else ()
         message(STATUS "Doxygen NOT found, skipping it")
-    endif()
-endif()
-option(HICMA_ENABLE_TIMING   "Enable timings build"        ON)
+    endif ()
+endif ()
+option(HICMA_ENABLE_TIMING "Enable timings build" ON)
 if (HICMA_ENABLE_TIMING)
     message("-- ${BoldGreen}HICMA_ENABLE_TIMING is set to ON, turn it OFF to avoid building timing${ColourReset}")
-endif()
-option(HICMA_ENABLE_TESTING   "Enable testings build"        ON)
+endif ()
+option(HICMA_ENABLE_TESTING "Enable testings build" ON)
 if (HICMA_ENABLE_TESTING)
     message("-- ${BoldGreen}HICMA_ENABLE_TESTING is set to ON, turn it OFF to avoid building testing${ColourReset}")
-endif()
+endif ()
 
 # Option to activate or not simulation mode (use Simgrid through StarPU)
 # ----------------------------------------------------------------------
-if(HICMA_SCHED_STARPU)
+if (HICMA_SCHED_STARPU)
     option(HICMA_SIMULATION "Enable simulation mode using Simgrid through StarPU" OFF)
     if (NOT HICMA_SIMULATION)
         message("-- ${BoldGreen}HICMA_SIMULATION is set to OFF, turn it ON to use"
-            " SIMULATION mode (only with StarPU compiled with SimGrid)${ColourReset}")
-    endif()
+                " SIMULATION mode (only with StarPU compiled with SimGrid)${ColourReset}")
+    endif ()
     option(HICMA_ENABLE_PRUNING_STATS "Enable pruning statistics" OFF)
     if (NOT HICMA_ENABLE_PRUNING_STATS)
         message("-- ${BoldGreen}HICMA_ENABLE_PRUNING_STATS is set to OFF, turn it ON to build pruning statistics${ColourReset}")
-    endif()
-    if(HICMA_ENABLE_PRUNING_STATS)
+    endif ()
+    if (HICMA_ENABLE_PRUNING_STATS)
         add_definitions(-DHICMA_ENABLE_PRUNING_STATS)
-    endif(HICMA_ENABLE_PRUNING_STATS)
-endif()
+    endif (HICMA_ENABLE_PRUNING_STATS)
+endif ()
 
 # Initially we need to generate files for different precisions
 # TODO: use this option to avoid generate multiple precisions each time we launch cmake
@@ -280,92 +282,92 @@ set(HICMA_DEP "")
 # ------------------------
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 find_package(Threads REQUIRED)
-if( THREADS_FOUND )
+if (THREADS_FOUND)
     list(APPEND EXTRA_LIBRARIES ${CMAKE_THREAD_LIBS_INIT})
 endif ()
 
 # Add math library to the list of extra
 # it normally exists on all common systems provided with a C compiler
 set(M_LIBRARIES "")
-if(UNIX OR WIN32)
+if (UNIX OR WIN32)
     find_library(
-        M_m_LIBRARY
-        NAMES m
-        )
+            M_m_LIBRARY
+            NAMES m
+    )
     mark_as_advanced(M_m_LIBRARY)
     if (M_m_LIBRARY)
         list(APPEND M_LIBRARIES "${M_m_LIBRARY}")
         list(APPEND EXTRA_LIBRARIES "${M_m_LIBRARY}")
-    else()
+    else ()
         message(FATAL_ERROR "Could NOT find libm on your system."
-            " Are you sure to a have a C compiler installed?")
-    endif()
-endif()
+                " Are you sure to a have a C compiler installed?")
+    endif ()
+endif ()
 
 # Try to find librt (libposix4 - POSIX.1b Realtime Extensions library)
 # on Unix systems except Apple ones because it does not exist on it
 set(RT_LIBRARIES "")
-if(UNIX AND NOT APPLE)
+if (UNIX AND NOT APPLE)
     find_library(
-        RT_rt_LIBRARY
-        NAMES rt
-        )
+            RT_rt_LIBRARY
+            NAMES rt
+    )
     mark_as_advanced(RT_rt_LIBRARY)
     if (RT_rt_LIBRARY)
         list(APPEND RT_LIBRARIES "${RT_rt_LIBRARY}")
         list(APPEND EXTRA_LIBRARIES "${RT_rt_LIBRARY}")
-    else()
+    else ()
         message(FATAL_ERROR "Could NOT find librt on your system")
-    endif()
-endif()
+    endif ()
+endif ()
 
 # If simulation we don't enter in kernel functions so that we don't need to
 # link with concerned libraries
-if(NOT HICMA_SIMULATION)
+if (NOT HICMA_SIMULATION)
 
     # HICMA depends on CBLAS
     #---------------------------
     find_package(CBLAS COMPONENTS BLASEXT)
-    if(BLAS_FOUND)
+    if (BLAS_FOUND)
         if (BLAS_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${BLAS_LIBRARY_DIRS}")
-        endif()
-        if(BLAS_LINKER_FLAGS)
+        endif ()
+        if (BLAS_LINKER_FLAGS)
             list(APPEND CMAKE_EXE_LINKER_FLAGS "${BLAS_LINKER_FLAGS}")
-        endif()
-    else()
+        endif ()
+    else ()
         message(FATAL_ERROR "BLAS library has not been found")
-    endif()
-    if(CBLAS_FOUND)
+    endif ()
+    if (CBLAS_FOUND)
         include_directories(${CBLAS_INCLUDE_DIRS})
-        if(CBLAS_LIBRARY_DIRS)
+        if (CBLAS_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${CBLAS_LIBRARY_DIRS}")
-        endif()
+        endif ()
         if (CBLAS_LIBRARIES)
             if (CBLAS_LIBRARIES_DEP)
                 list(INSERT HICMA_DEP 0 ${CBLAS_LIBRARIES_DEP})
-            else()
+            else ()
                 list(INSERT HICMA_DEP 0 ${CBLAS_LIBRARIES})
-            endif()
-        endif()
-    else()
-        if(ECRC_VERBOSE_FIND_PACKAGE)
-            if(CBLAS_STANDALONE OR NOT CBLAS_WORKS)
+            endif ()
+        endif ()
+    else ()
+        if (ECRC_VERBOSE_FIND_PACKAGE)
+            if (CBLAS_STANDALONE OR NOT CBLAS_WORKS)
                 if (NOT CBLAS_cblas.h_DIRS)
                     Print_Find_Header_Status(cblas cblas.h)
                 endif ()
                 if (NOT CBLAS_cblas_LIBRARY)
                     Print_Find_Library_Status(cblas libcblas)
                 endif ()
-            endif()
-        else()
+            endif ()
+        else ()
             message(WARNING "CBLAS library has not been found and ECRC_VERBOSE_FIND_PACKAGE is set to OFF."
-            " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
-        endif()
+                    " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
+        endif ()
         message(FATAL_ERROR "A CBLAS library is required but has not been found")
-    endif()
+    endif ()
 
     list(REMOVE_DUPLICATES CMAKE_EXE_LINKER_FLAGS)
     string(REPLACE ";" " " CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
@@ -377,30 +379,30 @@ if(NOT HICMA_SIMULATION)
     # functions in lapack library such as mkl, acml, ...
     #set(LAPACKE_STANDALONE TRUE)
     find_package(LAPACKE COMPONENTS LAPACKEXT)
-    if(LAPACK_FOUND AND LAPACK_LIBRARY_DIRS)
+    if (LAPACK_FOUND AND LAPACK_LIBRARY_DIRS)
         # the RPATH to be used when installing
         list(APPEND CMAKE_INSTALL_RPATH "${LAPACK_LIBRARY_DIRS}")
-    else()
+    else ()
         message(FATAL_ERROR "A LAPACK library is required but has not been found")
-    endif()
-    if(LAPACKE_FOUND)
+    endif ()
+    if (LAPACKE_FOUND)
         include_directories(${LAPACKE_INCLUDE_DIRS})
-        if(LAPACKE_LIBRARY_DIRS)
+        if (LAPACKE_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${LAPACKE_LIBRARY_DIRS}")
-        endif()
-        if(LAPACKE_LINKER_FLAGS)
+        endif ()
+        if (LAPACKE_LINKER_FLAGS)
             list(APPEND CMAKE_EXE_LINKER_FLAGS "${LAPACKE_LINKER_FLAGS}")
-        endif()
+        endif ()
         if (LAPACKE_LIBRARIES)
             if (LAPACKE_LIBRARIES_DEP)
                 list(INSERT HICMA_DEP 0 ${LAPACKE_LIBRARIES_DEP})
-            else()
+            else ()
                 list(INSERT HICMA_DEP 0 ${LAPACKE_LIBRARIES})
-            endif()
-        endif()
-    else()
-        if(ECRC_VERBOSE_FIND_PACKAGE)
+            endif ()
+        endif ()
+    else ()
+        if (ECRC_VERBOSE_FIND_PACKAGE)
             if (LAPACKE_STANDALONE OR NOT LAPACKE_WORKS)
                 if (NOT LAPACKE_lapacke.h_DIRS)
                     Print_Find_Header_Status(lapacke lapacke.h)
@@ -408,38 +410,38 @@ if(NOT HICMA_SIMULATION)
                 if (NOT LAPACKE_lapacke_LIBRARY)
                     Print_Find_Library_Status(lapacke liblapacke)
                 endif ()
-            endif()
-        else()
+            endif ()
+        else ()
             message(WARNING "LAPACKE library has not been found and ECRC_VERBOSE_FIND_PACKAGE is set to OFF."
-            " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
-        endif()
+                    " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
+        endif ()
         message(FATAL_ERROR "A LAPACKE library is required but has not been found")
-    endif()
+    endif ()
 
     # HICMA depends on MPI
     #-------------------------
     if (HICMA_USE_MPI)
-
+        add_definitions(-DHICMA_USE_MPI)
         # allows to use an external mpi compilation by setting compilers with
         # -DMPI_C_COMPILER=path/to/mpicc -DMPI_Fortran_COMPILER=path/to/mpif90
         # at cmake configure
-        if(NOT MPI_C_COMPILER)
+        if (NOT MPI_C_COMPILER)
             set(MPI_C_COMPILER mpicc)
-        endif()
+        endif ()
         find_package(MPI REQUIRED)
 
         if (MPI_C_FOUND)
             message("-- ${Blue}Add definition HICMA_USE_MPI"
-            " - Activate MPI in HiCMA${ColourReset}")
+                    " - Activate MPI in HiCMA${ColourReset}")
             set(HICMA_USE_MPI 1)
-            list(APPEND EXTRA_LIBRARIES ${MPI_C_LIBRARIES} )
-            include_directories( ${MPI_C_INCLUDE_PATH} )
+            list(APPEND EXTRA_LIBRARIES ${MPI_C_LIBRARIES})
+            include_directories(${MPI_C_INCLUDE_PATH})
             # tests for intel mpi
             #list(APPEND MPI_C_COMPILE_FLAGS "-mt_mpi")
             #list(APPEND MPI_COMPILE_FLAGS "-mt_mpi")
-            if(MPI_C_LINK_FLAGS)
+            if (MPI_C_LINK_FLAGS)
                 list(APPEND CMAKE_EXE_LINKER_FLAGS "${MPI_C_LINK_FLAGS}")
-            endif()
+            endif ()
         endif (MPI_C_FOUND)
 
     endif (HICMA_USE_MPI)
@@ -447,18 +449,18 @@ if(NOT HICMA_SIMULATION)
 else (NOT HICMA_SIMULATION)
 
     message("-- ${BoldBlue}Simulation mode of HICMA is activated (HICMA_SIMULATION=ON)."
-    "\n   This mode allows you to simulate execution of algorithms with StarPU compiled with SimGrid.${ColourReset}")
+            "\n   This mode allows you to simulate execution of algorithms with StarPU compiled with SimGrid.${ColourReset}")
 
     message("-- ${Blue}Add definition HICMA_SIMULATION"
-    " - Activate simulation mode in HiCMA (to use with StarPU+SimGrid)${ColourReset}")
+            " - Activate simulation mode in HiCMA (to use with StarPU+SimGrid)${ColourReset}")
     set(HICMA_SIMULATION 1)
 
     add_subdirectory(simucore)
 
     if (NOT HICMA_SCHED_STARPU)
         message(FATAL_ERROR "Simulation mode of HiCMA only works with"
-        "\n   the StarPU runtime. Please use HICMA_SCHED_STARPU=ON.")
-    endif()
+                "\n   the StarPU runtime. Please use HICMA_SCHED_STARPU=ON.")
+    endif ()
 
     if (HICMA_ENABLE_EXAMPLE)
         set(HICMA_ENABLE_EXAMPLE OFF)
@@ -467,9 +469,9 @@ else (NOT HICMA_SIMULATION)
     if (HICMA_ENABLE_TESTING)
         set(HICMA_ENABLE_TESTING OFF)
         message("-- ${BoldBlue}HICMA_ENABLE_TESTING is set to ON but we turn it OFF."
-            "\n   Because we are compiling the simulation mode (HICMA_SIMULATION=ON),"
-            "\n   there is no sense in compiling testing drivers that are used to check"
-            "\n   numerical correctness of algorithms and kernels.${ColourReset}")
+                "\n   Because we are compiling the simulation mode (HICMA_SIMULATION=ON),"
+                "\n   there is no sense in compiling testing drivers that are used to check"
+                "\n   numerical correctness of algorithms and kernels.${ColourReset}")
     endif ()
 
     # Simulation mode: we depend on SimGrid
@@ -482,71 +484,71 @@ else (NOT HICMA_SIMULATION)
         # allows to use an external mpi compilation by setting compilers with
         # -DMPI_C_COMPILER=path/to/mpicc -DMPI_Fortran_COMPILER=path/to/mpif90
         # at cmake configure
-        if(NOT MPI_C_COMPILER)
+        if (NOT MPI_C_COMPILER)
             set(MPI_C_COMPILER "${SIMGRID_DIR_FOUND}/bin/smpicc")
-        endif()
-        if(NOT MPI_C_LIBRARIES)
+        endif ()
+        if (NOT MPI_C_LIBRARIES)
             set(MPI_C_LIBRARIES "${SIMGRID_LIBRARIES}")
-        endif()
-        if(NOT MPI_C_INCLUDE_PATH)
+        endif ()
+        if (NOT MPI_C_INCLUDE_PATH)
             set(MPI_C_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}")
             list(APPEND MPI_C_INCLUDE_PATH "${SIMGRID_INCLUDE_DIRS}/smpi")
-        endif()
+        endif ()
         find_package(MPI REQUIRED)
 
         if (MPI_C_FOUND)
             message("-- ${Blue}Add definition HICMA_USE_MPI"
-            " - Activate MPI in HiCMA${ColourReset}")
+                    " - Activate MPI in HiCMA${ColourReset}")
             set(HICMA_USE_MPI 1)
-            list(APPEND EXTRA_LIBRARIES ${MPI_C_LIBRARIES} )
-            include_directories( ${MPI_C_INCLUDE_PATH} )
-            if(MPI_C_LINK_FLAGS)
+            list(APPEND EXTRA_LIBRARIES ${MPI_C_LIBRARIES})
+            include_directories(${MPI_C_INCLUDE_PATH})
+            if (MPI_C_LINK_FLAGS)
                 list(APPEND CMAKE_EXE_LINKER_FLAGS "${MPI_C_LINK_FLAGS}")
-            endif()
+            endif ()
         endif (MPI_C_FOUND)
 
     endif (HICMA_USE_MPI)
 
-endif(NOT HICMA_SIMULATION)
+endif (NOT HICMA_SIMULATION)
 
 
 # HICMA depends on STARSH
 # -------------------------------
-find_package( STARSH REQUIRED )
-if( STARSH_FOUND )
+find_package(STARSH REQUIRED)
+if (STARSH_FOUND)
     include_directories(${STARSH_INCLUDE_DIRS_DEP})
-    if(STARSH_LINKER_FLAGS)
+    if (STARSH_LINKER_FLAGS)
         list(APPEND CMAKE_EXE_LINKER_FLAGS "${STARSH_LINKER_FLAGS}")
-    endif()
-    if(STARSH_LIBRARY_DIRS)
+    endif ()
+    if (STARSH_LIBRARY_DIRS)
         # the RPATH to be used when installing
         list(APPEND CMAKE_INSTALL_RPATH "${STARSH_LIBRARY_DIRS}")
-    endif()
+    endif ()
     if (STARSH_LIBRARIES)
         # look for gsl
-        find_library( _STARSH_LIB NAME starsh PATHS ${STARSH_LIBRARY_DIRS} )
-        if( _STARSH_LIB AND NOT "${STARSH_LIBRARIES_DEP}" MATCHES "gsl" )
-            execute_process( COMMAND nm ${_STARSH_LIB} COMMAND grep -q gsl RESULT_VARIABLE GSL_IN_STARSH )
-            if ( ${GSL_IN_STARSH} EQUAL 0)
-                message( STATUS "STARSH depends on gsl. Adding it to dependency list")
+        find_library(_STARSH_LIB NAME starsh PATHS ${STARSH_LIBRARY_DIRS})
+        if (_STARSH_LIB AND NOT "${STARSH_LIBRARIES_DEP}" MATCHES "gsl")
+            execute_process(COMMAND nm ${_STARSH_LIB} COMMAND grep -q gsl RESULT_VARIABLE GSL_IN_STARSH)
+            if (${GSL_IN_STARSH} EQUAL 0)
+                message(STATUS "STARSH depends on gsl. Adding it to dependency list")
                 find_package(GSL REQUIRED)
-                if( GSL_FOUND )
+                if (GSL_FOUND)
                     if (STARSH_LIBRARIES_DEP)
-                        list( APPEND STARSH_LIBRARIES_DEP ${GSL_LIBRARIES})
-                    else()
-                        list( APPEND STARSH_LIBRARIES ${GSL_LIBRARIES})
-                    endif()
-                endif()
-            endif()
-	endif()
-	# insert to dependencies
+                        list(APPEND STARSH_LIBRARIES_DEP ${GSL_LIBRARIES})
+                    else ()
+                        list(APPEND STARSH_LIBRARIES ${GSL_LIBRARIES})
+                    endif ()
+                endif ()
+            endif ()
+        endif ()
+        # insert to dependencies
         if (STARSH_LIBRARIES_DEP)
             list(APPEND HICMA_DEP ${STARSH_LIBRARIES_DEP})
-        else()
+        else ()
             list(APPEND HICMA_DEP ${STARSH_LIBRARIES})
-        endif()
-    endif()
-endif()
+        endif ()
+    endif ()
+endif ()
 
 # HICMA depends on STARSHCORE
 # -------------------------------
@@ -557,247 +559,247 @@ endif()
 
 #find_package( STARSHCORE REQUIRED )
 #if( STARSHCORE_FOUND )
-    #include_directories(${STARSHCORE_INCLUDE_DIRS_DEP})
-    #if(STARSHCORE_LINKER_FLAGS)
-        #list(APPEND CMAKE_EXE_LINKER_FLAGS "${STARSHCORE_LINKER_FLAGS}")
-    #endif()
-    #if(STARSHCORE_LIBRARY_DIRS)
-        ## the RPATH to be used when installing
-        #list(APPEND CMAKE_INSTALL_RPATH "${STARSHCORE_LIBRARY_DIRS}")
-    #endif()
-    #if (STARSHCORE_LIBRARIES)
-        ## look for gsl
-        #find_library( _STARSHCORE_LIB NAME starsh_core PATHS ${STARSHCORE_LIBRARY_DIRS} )
-        #if( _STARSHCORE_LIB AND NOT "${STARSHCORE_LIBRARIES_DEP}" MATCHES "gsl" )
-            #execute_process( COMMAND nm ${_STARSHCORE_LIB} COMMAND grep -q gsl RESULT_VARIABLE GSL_IN_STARSHCORE )
-            #if ( ${GSL_IN_STARSHCORE} EQUAL 0)
-                #message( STATUS "STARSHCORE depends on gsl. Adding it to dependency list")
-                #find_package(GSL REQUIRED)
-                #if (STARSHCORE_LIBRARIES_DEP)
-                    #list( APPEND STARSHCORE_LIBRARIES_DEP ${GSL_LIBRARIES})
-                #else()
-                    #list( APPEND STARSHCORE_LIBRARIES ${GSL_LIBRARIES})
-                #endif()
-            #endif()
-	#endif()
-	## insert to dependencies
-        #if (STARSHCORE_LIBRARIES_DEP)
-            #list(APPEND HICMA_DEP ${STARSHCORE_LIBRARIES_DEP})
-        #else()
-            #list(APPEND HICMA_DEP ${STARSHCORE_LIBRARIES})
-        #endif()
-    #endif()
+#include_directories(${STARSHCORE_INCLUDE_DIRS_DEP})
+#if(STARSHCORE_LINKER_FLAGS)
+#list(APPEND CMAKE_EXE_LINKER_FLAGS "${STARSHCORE_LINKER_FLAGS}")
+#endif()
+#if(STARSHCORE_LIBRARY_DIRS)
+## the RPATH to be used when installing
+#list(APPEND CMAKE_INSTALL_RPATH "${STARSHCORE_LIBRARY_DIRS}")
+#endif()
+#if (STARSHCORE_LIBRARIES)
+## look for gsl
+#find_library( _STARSHCORE_LIB NAME starsh_core PATHS ${STARSHCORE_LIBRARY_DIRS} )
+#if( _STARSHCORE_LIB AND NOT "${STARSHCORE_LIBRARIES_DEP}" MATCHES "gsl" )
+#execute_process( COMMAND nm ${_STARSHCORE_LIB} COMMAND grep -q gsl RESULT_VARIABLE GSL_IN_STARSHCORE )
+#if ( ${GSL_IN_STARSHCORE} EQUAL 0)
+#message( STATUS "STARSHCORE depends on gsl. Adding it to dependency list")
+#find_package(GSL REQUIRED)
+#if (STARSHCORE_LIBRARIES_DEP)
+#list( APPEND STARSHCORE_LIBRARIES_DEP ${GSL_LIBRARIES})
+#else()
+#list( APPEND STARSHCORE_LIBRARIES ${GSL_LIBRARIES})
+#endif()
+#endif()
+#endif()
+## insert to dependencies
+#if (STARSHCORE_LIBRARIES_DEP)
+#list(APPEND HICMA_DEP ${STARSHCORE_LIBRARIES_DEP})
+#else()
+#list(APPEND HICMA_DEP ${STARSHCORE_LIBRARIES})
+#endif()
+#endif()
 #endif()
 
 # HICMA depends on a runtime
 # -------------------------------
-if( HICMA_SCHED_STARPU )
+if (HICMA_SCHED_STARPU)
 
-  #set(HICMA_STARPU_VERSION "1.1" CACHE STRING "oldest STARPU version desired")
-  set(HICMA_STARPU_VERSION "1.2" CACHE STRING "STARPU version desired")
+    #set(HICMA_STARPU_VERSION "1.1" CACHE STRING "oldest STARPU version desired")
+    set(HICMA_STARPU_VERSION "1.2" CACHE STRING "STARPU version desired")
 
     # create list of components in order to make a single call to find_package(starpu...)
-    if(NOT HICMA_SIMULATION)
+    if (NOT HICMA_SIMULATION)
         set(STARPU_COMPONENT_LIST "HWLOC")
-    else()
+    else ()
         set(STARPU_COMPONENT_LIST "SIMGRID")
-    endif()
-    if(HICMA_USE_MPI)
+    endif ()
+    if (HICMA_USE_MPI)
         list(APPEND STARPU_COMPONENT_LIST "MPI")
-    endif()
-    if(HICMA_ENABLE_TRACING)
+    endif ()
+    if (HICMA_ENABLE_TRACING)
         list(APPEND STARPU_COMPONENT_LIST "FXT")
-    endif()
+    endif ()
 
     find_package(STARPU ${HICMA_STARPU_VERSION} REQUIRED
-                 COMPONENTS ${STARPU_COMPONENT_LIST})
+            COMPONENTS ${STARPU_COMPONENT_LIST})
 
     # Add definition and include_dir if found
-    if ( STARPU_FOUND )
+    if (STARPU_FOUND)
         message("-- ${Blue}Add definition HICMA_SCHED_STARPU"
-        " - Activate StarPU in HiCMA${ColourReset}")
+                " - Activate StarPU in HiCMA${ColourReset}")
         set(HICMA_SCHED_STARPU ON)
         include_directories(${STARPU_INCLUDE_DIRS_DEP})
-        if(STARPU_LINKER_FLAGS)
+        if (STARPU_LINKER_FLAGS)
             list(APPEND CMAKE_EXE_LINKER_FLAGS "${STARPU_LINKER_FLAGS}")
-        endif()
+        endif ()
         set(CMAKE_REQUIRED_INCLUDES "${STARPU_INCLUDE_DIRS_DEP}")
-        foreach(libdir ${STARPU_LIBRARY_DIRS_DEP})
+        foreach (libdir ${STARPU_LIBRARY_DIRS_DEP})
             list(APPEND CMAKE_REQUIRED_FLAGS "-L${libdir}")
-        endforeach()
+        endforeach ()
         set(CMAKE_REQUIRED_LIBRARIES "${STARPU_LIBRARIES_DEP}")
         if (HICMA_USE_MPI)
             list(APPEND CMAKE_REQUIRED_INCLUDES "${MPI_C_INCLUDE_PATH}")
             list(APPEND CMAKE_REQUIRED_FLAGS "${MPI_C_LINK_FLAGS}")
             list(APPEND CMAKE_REQUIRED_LIBRARIES "${MPI_C_LIBRARIES}")
-        endif()
+        endif ()
         if (HICMA_SIMULATION)
             list(APPEND CMAKE_REQUIRED_FLAGS "-include" "starpu_simgrid_wrap.h")
-        endif()
+        endif ()
         string(REPLACE ";" " " CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS}")
         check_function_exists(starpu_data_idle_prefetch_on_node STARPU_IDLE_PREFETCH_FOUND)
-        if ( STARPU_IDLE_PREFETCH_FOUND )
+        if (STARPU_IDLE_PREFETCH_FOUND)
             set(HAVE_STARPU_IDLE_PREFETCH 1)
             message("-- ${Blue}Add definition HAVE_STARPU_IDLE_PREFETCH${ColourReset}")
-        endif()
+        endif ()
         check_function_exists(starpu_iteration_push STARPU_ITERATION_PUSH_FOUND)
-        if ( STARPU_ITERATION_PUSH_FOUND )
+        if (STARPU_ITERATION_PUSH_FOUND)
             set(HAVE_STARPU_ITERATION_PUSH 1)
             message("-- ${Blue}Add definition HAVE_STARPU_ITERATION_PUSH${ColourReset}")
-        endif()
+        endif ()
         check_function_exists(starpu_data_wont_use STARPU_DATA_WONT_USE_FOUND)
-        if ( STARPU_DATA_WONT_USE_FOUND )
+        if (STARPU_DATA_WONT_USE_FOUND)
             set(HAVE_STARPU_DATA_WONT_USE 1)
             message("-- ${Blue}Add definition HAVE_STARPU_DATA_WONT_USE${ColourReset}")
-        endif()
+        endif ()
         check_function_exists(starpu_data_set_coordinates STARPU_DATA_SET_COORDINATES_FOUND)
-        if ( STARPU_DATA_SET_COORDINATES_FOUND )
+        if (STARPU_DATA_SET_COORDINATES_FOUND)
             set(HAVE_STARPU_DATA_SET_COORDINATES 1)
             message("-- ${Blue}Add definition HAVE_STARPU_DATA_SET_COORDINATES${ColourReset}")
-        endif()
+        endif ()
         check_function_exists(starpu_malloc_on_node_set_default_flags STARPU_MALLOC_ON_NODE_SET_DEFAULT_FLAGS)
-        if ( STARPU_MALLOC_ON_NODE_SET_DEFAULT_FLAGS )
+        if (STARPU_MALLOC_ON_NODE_SET_DEFAULT_FLAGS)
             set(HAVE_STARPU_MALLOC_ON_NODE_SET_DEFAULT_FLAGS 1)
             message("-- ${Blue}Add definition HAVE_STARPU_MALLOC_ON_NODE_SET_DEFAULT_FLAGS${ColourReset}")
-        endif()
-        if(HICMA_ENABLE_TRACING)
+        endif ()
+        if (HICMA_ENABLE_TRACING)
             # check if fxt profiling is accessible in starpu and activate it in hicma
             unset(STARPU_FXT_START_PROFILING_FOUND CACHE)
             check_function_exists(starpu_fxt_start_profiling STARPU_FXT_START_PROFILING_FOUND)
-            if ( STARPU_FXT_START_PROFILING_FOUND )
+            if (STARPU_FXT_START_PROFILING_FOUND)
                 message("-- ${Blue}Add definition HAVE_STARPU_FXT_PROFILING"
-                " - Activate FxT profiling through StarPU${ColourReset}")
+                        " - Activate FxT profiling through StarPU${ColourReset}")
                 set(HAVE_STARPU_FXT_PROFILING 1)
-            else()
+            else ()
                 message("-- ${Red}Looking for starpu with fxt"
-                " - starpu_fxt_start_profiling() test fails in StarPU${ColourReset}")
+                        " - starpu_fxt_start_profiling() test fails in StarPU${ColourReset}")
                 message("-- ${Red}Check in CMakeFiles/CMakeError.log to figure out why it fails${ColourReset}")
-            endif()
-        endif()
+            endif ()
+        endif ()
         if (HICMA_USE_MPI)
             # Check if a specific function exist
             unset(STARPU_MPI_DATA_REGISTER_FOUND CACHE)
             check_function_exists(starpu_mpi_data_register_comm STARPU_MPI_DATA_REGISTER_FOUND)
-            if ( STARPU_MPI_DATA_REGISTER_FOUND )
+            if (STARPU_MPI_DATA_REGISTER_FOUND)
                 message("-- ${Blue}Add definition HAVE_STARPU_MPI_DATA_REGISTER - Activate"
-                " use of starpu_mpi_data_register() in HiCMA with StarPU${ColourReset}")
+                        " use of starpu_mpi_data_register() in HiCMA with StarPU${ColourReset}")
                 set(HAVE_STARPU_MPI_DATA_REGISTER 1)
-            else()
+            else ()
                 message("-- ${Red}Looking for starpu with starpu_mpi_data_register"
-                " - starpu_mpi_data_register() test fails in StarPU${ColourReset}")
+                        " - starpu_mpi_data_register() test fails in StarPU${ColourReset}")
                 message("-- ${Red}Check in CMakeFiles/CMakeError.log to figure out why it fails${ColourReset}")
-            endif()
+            endif ()
             unset(STARPU_MPI_COMM_RANK_FOUND CACHE)
             check_function_exists(starpu_mpi_comm_rank STARPU_MPI_COMM_RANK_FOUND)
-            if ( STARPU_MPI_COMM_RANK_FOUND )
+            if (STARPU_MPI_COMM_RANK_FOUND)
                 message("-- ${Blue}Add definition HAVE_STARPU_MPI_COMM_RANK - Activate"
-                " use of starpu_mpi_comm_rank() in HiCMA with StarPU${ColourReset}")
+                        " use of starpu_mpi_comm_rank() in HiCMA with StarPU${ColourReset}")
                 set(HAVE_STARPU_MPI_COMM_RANK 1)
-            else()
+            else ()
                 message("-- ${Red}Looking for starpu with starpu_mpi_comm_rank"
-                " - starpu_mpi_comm_rank() test fails in StarPU${ColourReset}")
+                        " - starpu_mpi_comm_rank() test fails in StarPU${ColourReset}")
                 message("-- ${Red}Check in CMakeFiles/CMakeError.log to figure out why it fails${ColourReset}")
-            endif()
-	    check_function_exists(starpu_mpi_cached_receive STARPU_MPI_CACHED_RECEIVE)
-	    if ( STARPU_MPI_CACHED_RECEIVE )
-		set(HAVE_STARPU_MPI_CACHED_RECEIVE 1)
-		message("-- ${Blue}Add definition HAVE_STARPU_MPI_CACHED_RECEIVE${ColourReset}")
-	    endif()
-        endif()
-        if(HWLOC_FOUND AND HWLOC_LIBRARY_DIRS)
+            endif ()
+            check_function_exists(starpu_mpi_cached_receive STARPU_MPI_CACHED_RECEIVE)
+            if (STARPU_MPI_CACHED_RECEIVE)
+                set(HAVE_STARPU_MPI_CACHED_RECEIVE 1)
+                message("-- ${Blue}Add definition HAVE_STARPU_MPI_CACHED_RECEIVE${ColourReset}")
+            endif ()
+        endif ()
+        if (HWLOC_FOUND AND HWLOC_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${HWLOC_LIBRARY_DIRS}")
-        endif()
-        if(FXT_FOUND AND FXT_LIBRARY_DIRS)
+        endif ()
+        if (FXT_FOUND AND FXT_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${FXT_LIBRARY_DIRS}")
-        endif()
-        if(SIMGRID_FOUND AND SIMGRID_LIBRARY_DIRS)
+        endif ()
+        if (SIMGRID_FOUND AND SIMGRID_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${SIMGRID_LIBRARY_DIRS}")
-        endif()
-        if(STARPU_FOUND AND STARPU_LIBRARY_DIRS)
+        endif ()
+        if (STARPU_FOUND AND STARPU_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${STARPU_LIBRARY_DIRS}")
-        endif()
+        endif ()
         if (STARPU_LIBRARIES)
             if (STARPU_LIBRARIES_DEP)
                 list(INSERT HICMA_DEP 0 ${STARPU_LIBRARIES_DEP})
-            else()
+            else ()
                 list(INSERT HICMA_DEP 0 ${STARPU_LIBRARIES})
-            endif()
-        endif()
-    else ( STARPU_FOUND )
-        if(ECRC_VERBOSE_FIND_PACKAGE)
-            if(NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
+            endif ()
+        endif ()
+    else (STARPU_FOUND)
+        if (ECRC_VERBOSE_FIND_PACKAGE)
+            if (NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
                 if (NOT HWLOC_hwloc.h_DIRS)
                     Print_Find_Header_Status(hwloc hwloc.h)
                 endif ()
                 if (NOT HWLOC_hwloc_LIBRARY)
                     Print_Find_Library_Status(hwloc libhwloc)
                 endif ()
-            endif()
-            if(HICMA_ENABLE_TRACING AND (NOT FXT_FOUND OR NOT FXT_LIBRARIES))
+            endif ()
+            if (HICMA_ENABLE_TRACING AND (NOT FXT_FOUND OR NOT FXT_LIBRARIES))
                 if (NOT FXT_fxt.h_DIRS)
                     Print_Find_Header_Status(fxt fxt.h)
                 endif ()
                 if (NOT FXT_fxt_LIBRARY)
                     Print_Find_Library_Status(fxt libfxt)
                 endif ()
-            endif()
-            if(HICMA_SIMULATION AND (NOT SIMGRID_FOUND OR NOT SIMGRID_LIBRARIES))
+            endif ()
+            if (HICMA_SIMULATION AND (NOT SIMGRID_FOUND OR NOT SIMGRID_LIBRARIES))
                 if (NOT SIMGRID_simgrid.h_DIRS)
                     Print_Find_Header_Status(simgrid simgrid.h)
                 endif ()
                 if (NOT SIMGRID_simgrid_LIBRARY)
                     Print_Find_Library_Status(simgrid libsimgrid)
                 endif ()
-            endif()
-            if( (NOT STARPU_SHM_FOUND) OR (NOT STARPU_SHM_LIBRARIES) OR
-                ( STARPU_LOOK_FOR_MPI AND (NOT STARPU_MPI_FOUND OR NOT STARPU_MPI_LIBRARIES) )
-              )
-                foreach(starpu_hdr ${STARPU_hdrs_to_find})
+            endif ()
+            if ((NOT STARPU_SHM_FOUND) OR (NOT STARPU_SHM_LIBRARIES) OR
+            (STARPU_LOOK_FOR_MPI AND (NOT STARPU_MPI_FOUND OR NOT STARPU_MPI_LIBRARIES))
+                    )
+                foreach (starpu_hdr ${STARPU_hdrs_to_find})
                     if (NOT STARPU_${starpu_hdr}_INCLUDE_DIRS)
                         Print_Find_Header_Status(starpu ${starpu_hdr})
                     endif ()
-                endforeach()
-                if(STARPU_VERSION_STRING)
-                    foreach(starpu_lib ${STARPU_libs_to_find})
+                endforeach ()
+                if (STARPU_VERSION_STRING)
+                    foreach (starpu_lib ${STARPU_libs_to_find})
                         if (NOT STARPU_${starpu_lib}_LIBRARY)
                             Print_Find_Library_Status(starpu ${starpu_lib})
                         endif ()
-                    endforeach()
+                    endforeach ()
                 endif ()
             endif ()
-        else(ECRC_VERBOSE_FIND_PACKAGE)
+        else (ECRC_VERBOSE_FIND_PACKAGE)
             message(WARNING "StarPU library has not been found and ECRC_VERBOSE_FIND_PACKAGE is set to OFF."
-            " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
-        endif(ECRC_VERBOSE_FIND_PACKAGE)
-        if(NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
+                    " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
+        endif (ECRC_VERBOSE_FIND_PACKAGE)
+        if (NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
             message(FATAL_ERROR "hwloc library is required but has not been found")
-        endif()
-        if(HICMA_SIMULATION AND (NOT SIMGRID_FOUND OR NOT SIMGRID_LIBRARIES))
+        endif ()
+        if (HICMA_SIMULATION AND (NOT SIMGRID_FOUND OR NOT SIMGRID_LIBRARIES))
             message(FATAL_ERROR "SimGrid library is required but has not been found")
-        endif()
-        if(HICMA_ENABLE_TRACING AND (NOT FXT_FOUND OR NOT FXT_LIBRARIES))
+        endif ()
+        if (HICMA_ENABLE_TRACING AND (NOT FXT_FOUND OR NOT FXT_LIBRARIES))
             message(FATAL_ERROR "FxT library is required but has not been found")
-        endif()
-        if( (NOT STARPU_SHM_FOUND) OR (NOT STARPU_SHM_LIBRARIES) OR
-            ( STARPU_LOOK_FOR_MPI AND (NOT STARPU_MPI_FOUND OR NOT STARPU_MPI_LIBRARIES) )
-          )
+        endif ()
+        if ((NOT STARPU_SHM_FOUND) OR (NOT STARPU_SHM_LIBRARIES) OR
+        (STARPU_LOOK_FOR_MPI AND (NOT STARPU_MPI_FOUND OR NOT STARPU_MPI_LIBRARIES))
+                )
             message(FATAL_ERROR "StarPU library is required but has not been found")
-        endif()
-    endif ( STARPU_FOUND )
+        endif ()
+    endif (STARPU_FOUND)
 
-endif( HICMA_SCHED_STARPU )
+endif (HICMA_SCHED_STARPU)
 
-if( HICMA_SCHED_PARSEC )
+if (HICMA_SCHED_PARSEC)
 
     # create list of components in order to make a single call to find_package(starpu...)
     set(PARSEC_COMPONENT_LIST "HWLOC")
-    if(HICMA_USE_MPI)
+    if (HICMA_USE_MPI)
         list(APPEND PARSEC_COMPONENT_LIST "MPI")
-    endif()
+    endif ()
     # TODO: Add a HICMA_WITH_PROFILING option that enables Fxt for StarPU, or PAPI for PaRSEC
     #if(HICMA_WITH_PROFILING)
     #    list(APPEND PARSEC_COMPONENT_LIST "PAPI")
@@ -806,180 +808,180 @@ if( HICMA_SCHED_PARSEC )
     find_package(PARSEC COMPONENTS ${PARSEC_COMPONENT_LIST})
 
     # Add definition and include_dir if found
-    if(PARSEC_FOUND)
+    if (PARSEC_FOUND)
         message("-- ${Blue}Add definition HICMA_SCHED_PARSEC"
-        " - Activate PaRSEC in HiCMA${ColourReset}")
+                " - Activate PaRSEC in HiCMA${ColourReset}")
 
-      set(HICMA_SCHED_PARSEC 1)
-      include_directories(${PARSEC_INCLUDE_DIRS_DEP})
-      include_directories(${PARSEC_INCLUDE_DIRS}/daguepp)
-      set(CMAKE_REQUIRED_INCLUDES "${PARSEC_INCLUDE_DIRS_DEP}")
+        set(HICMA_SCHED_PARSEC 1)
+        include_directories(${PARSEC_INCLUDE_DIRS_DEP})
+        include_directories(${PARSEC_INCLUDE_DIRS}/daguepp)
+        set(CMAKE_REQUIRED_INCLUDES "${PARSEC_INCLUDE_DIRS_DEP}")
 
-      if(PARSEC_LINKER_FLAGS)
-           list(APPEND CMAKE_EXE_LINKER_FLAGS "${PARSEC_LINKER_FLAGS}")
-      endif()
-      foreach(libdir ${PARSEC_LIBRARY_DIRS_DEP})
-          list(APPEND CMAKE_REQUIRED_FLAGS "-L${libdir}")
-      endforeach()
-      string(REPLACE ";" " " CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS}")
-      set(CMAKE_REQUIRED_LIBRARIES "${PARSEC_LIBRARIES_DEP}")
+        if (PARSEC_LINKER_FLAGS)
+            list(APPEND CMAKE_EXE_LINKER_FLAGS "${PARSEC_LINKER_FLAGS}")
+        endif ()
+        foreach (libdir ${PARSEC_LIBRARY_DIRS_DEP})
+            list(APPEND CMAKE_REQUIRED_FLAGS "-L${libdir}")
+        endforeach ()
+        string(REPLACE ";" " " CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS}")
+        set(CMAKE_REQUIRED_LIBRARIES "${PARSEC_LIBRARIES_DEP}")
 
-      if(HWLOC_FOUND AND HWLOC_LIBRARY_DIRS)
+        if (HWLOC_FOUND AND HWLOC_LIBRARY_DIRS)
             # the RPATH to be used when installing
-          list(APPEND CMAKE_INSTALL_RPATH "${HWLOC_LIBRARY_DIRS}")
-      endif()
-      if(PARSEC_FOUND AND PARSEC_LIBRARY_DIRS_DEP)
-          # the RPATH to be used when installing
-          list(APPEND CMAKE_INSTALL_RPATH "${PARSEC_LIBRARY_DIRS_DEP}")
-      endif()
-      if (PARSEC_LIBRARIES)
-          if (PARSEC_LIBRARIES_DEP)
-              list(INSERT HICMA_DEP 0 ${PARSEC_LIBRARIES_DEP})
-          else()
-              list(INSERT HICMA_DEP 0 ${PARSEC_LIBRARIES})
-          endif()
-      endif()
-    else ( PARSEC_FOUND )
-        if(ECRC_VERBOSE_FIND_PACKAGE)
-            if(NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
+            list(APPEND CMAKE_INSTALL_RPATH "${HWLOC_LIBRARY_DIRS}")
+        endif ()
+        if (PARSEC_FOUND AND PARSEC_LIBRARY_DIRS_DEP)
+            # the RPATH to be used when installing
+            list(APPEND CMAKE_INSTALL_RPATH "${PARSEC_LIBRARY_DIRS_DEP}")
+        endif ()
+        if (PARSEC_LIBRARIES)
+            if (PARSEC_LIBRARIES_DEP)
+                list(INSERT HICMA_DEP 0 ${PARSEC_LIBRARIES_DEP})
+            else ()
+                list(INSERT HICMA_DEP 0 ${PARSEC_LIBRARIES})
+            endif ()
+        endif ()
+    else (PARSEC_FOUND)
+        if (ECRC_VERBOSE_FIND_PACKAGE)
+            if (NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
                 if (NOT HWLOC_hwloc.h_DIRS)
                     Print_Find_Header_Status(hwloc hwloc.h)
                 endif ()
                 if (NOT HWLOC_hwloc_LIBRARY)
                     Print_Find_Library_Status(hwloc libhwloc)
                 endif ()
-            endif()
-            if( (NOT PARSEC_FOUND) OR (NOT PARSEC_LIBRARIES_DEP) )
-              foreach(parsec_hdr ${PARSEC_hdrs_to_find})
+            endif ()
+            if ((NOT PARSEC_FOUND) OR (NOT PARSEC_LIBRARIES_DEP))
+                foreach (parsec_hdr ${PARSEC_hdrs_to_find})
                     if (NOT PARSEC_${parsec_hdr}_INCLUDE_DIRS)
                         Print_Find_Header_Status(parsec ${parsec_hdr})
                     endif ()
-                endforeach()
-                if(PARSEC_VERSION_STRING)
-                    foreach(parsec_lib ${PARSEC_libs_to_find})
+                endforeach ()
+                if (PARSEC_VERSION_STRING)
+                    foreach (parsec_lib ${PARSEC_libs_to_find})
                         if (NOT PARSEC_${parsec_lib}_LIBRARY)
                             Print_Find_Library_Status(parsec ${parsec_lib})
                         endif ()
-                    endforeach()
-                endif()
-            endif()
-        else(ECRC_VERBOSE_FIND_PACKAGE)
+                    endforeach ()
+                endif ()
+            endif ()
+        else (ECRC_VERBOSE_FIND_PACKAGE)
             message(WARNING "PaRSEC library has not been found and ECRC_VERBOSE_FIND_PACKAGE is set to OFF."
-            " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
-        endif(ECRC_VERBOSE_FIND_PACKAGE)
-        if(NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
+                    " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
+        endif (ECRC_VERBOSE_FIND_PACKAGE)
+        if (NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
             message(FATAL_ERROR "hwloc library is required but has not been found")
-        endif()
-        if( (NOT PARSEC_FOUND) OR (NOT PARSEC_LIBRARIES_DEP) )
+        endif ()
+        if ((NOT PARSEC_FOUND) OR (NOT PARSEC_LIBRARIES_DEP))
             message(FATAL_ERROR "PaRSEC library is required but has not been found")
-        endif()
-    endif ( PARSEC_FOUND )
+        endif ()
+    endif (PARSEC_FOUND)
 
-endif( HICMA_SCHED_PARSEC )
+endif (HICMA_SCHED_PARSEC)
 
 # try to find quark runtime
-if( HICMA_SCHED_QUARK )
+if (HICMA_SCHED_QUARK)
 
     find_package(QUARK COMPONENTS HWLOC)
 
     # Add definition and include_dir if found
-    if(QUARK_FOUND)
+    if (QUARK_FOUND)
         message("-- ${Blue}Add definition HICMA_SCHED_QUARK"
-        " - Activate QUARK in HiCMA${ColourReset}")
+                " - Activate QUARK in HiCMA${ColourReset}")
         set(HICMA_SCHED_QUARK 1)
         include_directories(${QUARK_INCLUDE_DIRS})
-        if(QUARK_LIBRARY_DIRS)
+        if (QUARK_LIBRARY_DIRS)
             # the RPATH to be used when installing
             list(APPEND CMAKE_INSTALL_RPATH "${QUARK_LIBRARY_DIRS}")
-        endif()
+        endif ()
         if (QUARK_LIBRARIES)
             if (QUARK_LIBRARIES_DEP)
                 list(INSERT HICMA_DEP 0 ${QUARK_LIBRARIES_DEP})
-            else()
+            else ()
                 list(INSERT HICMA_DEP 0 ${QUARK_LIBRARIES})
-            endif()
-        endif()
-    else(QUARK_FOUND)
-        if(ECRC_VERBOSE_FIND_PACKAGE)
-            if(NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
+            endif ()
+        endif ()
+    else (QUARK_FOUND)
+        if (ECRC_VERBOSE_FIND_PACKAGE)
+            if (NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
                 if (NOT HWLOC_hwloc.h_DIRS)
                     Print_Find_Header_Status(hwloc hwloc.h)
                 endif ()
                 if (NOT HWLOC_hwloc_LIBRARY)
                     Print_Find_Library_Status(hwloc libhwloc)
                 endif ()
-            endif()
+            endif ()
             if (NOT QUARK_quark.h_DIRS)
                 Print_Find_Header_Status(quark quark.h)
             endif ()
             if (NOT QUARK_quark_LIBRARY)
                 Print_Find_Library_Status(quark libquark)
             endif ()
-        else()
+        else ()
             message(WARNING "QUARK library has not been found and ECRC_VERBOSE_FIND_PACKAGE is set to OFF."
-            " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
-        endif()
-        if(NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
+                    " Try to activate ECRC_VERBOSE_FIND_PACKAGE option (-DECRC_VERBOSE_FIND_PACKAGE=ON) to get some hints for the detection")
+        endif ()
+        if (NOT HWLOC_FOUND OR NOT HWLOC_LIBRARIES)
             message(FATAL_ERROR "hwloc library is required but has not been found")
-        endif()
+        endif ()
         message(FATAL_ERROR "QUARK library is required but has not been found")
-    endif(QUARK_FOUND)
+    endif (QUARK_FOUND)
 
-endif()
-
-set( CHAMELEON_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/chameleon" CACHE PATH "Location of CHAMELEON source code" )
-set( CHAMELEON_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/chameleon/build" CACHE PATH "Location of CHAMELEON build directory" )
-
-#required files in source dir
-include_directories( AFTER ${CHAMELEON_SOURCE_DIR}/ )
-
-
-#required files in build dir
-#../chameleon/bb/runtime/starpu/include/chameleon_starpu.h
-include_directories( AFTER ${CHAMELEON_BUILD_DIR} )
+endif ()
+#
+#set( CHAMELEON_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/chameleon" CACHE PATH "Location of CHAMELEON source code" )
+#set( CHAMELEON_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/chameleon/build" CACHE PATH "Location of CHAMELEON build directory" )
+#
+##required files in source dir
+#include_directories( AFTER ${CHAMELEON_SOURCE_DIR}/ )
+#
+#
+##required files in build dir
+##../chameleon/bb/runtime/starpu/include/chameleon_starpu.h
+#include_directories( AFTER ${CHAMELEON_BUILD_DIR} )
 
 # HICMA depends on CHAMELEON
 # -------------------------------
-find_package( CHAMELEON REQUIRED )
-if( CHAMELEON_FOUND )
-    include_directories( BEFORE ${CHAMELEON_INCLUDE_DIRS_DEP} )
-    if(CHAMELEON_LINKER_FLAGS)
-        list(APPEND CMAKE_EXE_LINKER_FLAGS "${CHAMELEON_LINKER_FLAGS}")
-    endif()
-    if(CHAMELEON_LIBRARY_DIRS)
-        # the RPATH to be used when installing
-        list(APPEND CMAKE_INSTALL_RPATH "${CHAMELEON_LIBRARY_DIRS}")
-    endif()
-    if (CHAMELEON_LIBRARIES)
-        if (CHAMELEON_LIBRARIES_DEP)
-            list(INSERT HICMA_DEP 0 ${CHAMELEON_LIBRARIES_DEP})
-        else()
-            list(INSERT HICMA_DEP 0 ${CHAMELEON_LIBRARIES})
-        endif()
-    endif()
-endif()
+#find_package( CHAMELEON REQUIRED )
+#if( CHAMELEON_FOUND )
+#    include_directories( BEFORE ${CHAMELEON_INCLUDE_DIRS_DEP} )
+#    if(CHAMELEON_LINKER_FLAGS)
+#        list(APPEND CMAKE_EXE_LINKER_FLAGS "${CHAMELEON_LINKER_FLAGS}")
+#    endif()
+#    if(CHAMELEON_LIBRARY_DIRS)
+#        # the RPATH to be used when installing
+#        list(APPEND CMAKE_INSTALL_RPATH "${CHAMELEON_LIBRARY_DIRS}")
+#    endif()
+#    if (CHAMELEON_LIBRARIES)
+#        if (CHAMELEON_LIBRARIES_DEP)
+#            list(INSERT HICMA_DEP 0 ${CHAMELEON_LIBRARIES_DEP})
+#        else()
+#            list(INSERT HICMA_DEP 0 ${CHAMELEON_LIBRARIES})
+#        endif()
+#    endif()
+#endif()
 
 # HICMA depends on HCORE
 # -------------------------------
-find_package( HCORE REQUIRED )
-if( HCORE_FOUND )
-    include_directories( BEFORE ${HCORE_INCLUDE_DIRS_DEP} )
-    if(HCORE_LINKER_FLAGS)
+find_package(HCORE REQUIRED)
+if (HCORE_FOUND)
+    include_directories(BEFORE ${HCORE_INCLUDE_DIRS_DEP})
+    if (HCORE_LINKER_FLAGS)
         list(APPEND CMAKE_EXE_LINKER_FLAGS "${HCORE_LINKER_FLAGS}")
-    endif()
-    if(HCORE_LIBRARY_DIRS)
+    endif ()
+    if (HCORE_LIBRARY_DIRS)
         # the RPATH to be used when installing
         list(APPEND CMAKE_INSTALL_RPATH "${HCORE_LIBRARY_DIRS}")
         link_directories(${HCORE_LIBRARY_DIRS})
-    endif()
+    endif ()
     if (HCORE_LIBRARIES)
         if (HCORE_LIBRARIES_DEP)
             list(INSERT HICMA_DEP 0 ${HCORE_LIBRARIES_DEP})
-        else()
+        else ()
             list(INSERT HICMA_DEP 0 ${HCORE_LIBRARIES})
-        endif()
-    endif()
-endif()
+        endif ()
+    endif ()
+endif ()
 
 
 list(REMOVE_DUPLICATES CMAKE_EXE_LINKER_FLAGS)
@@ -987,7 +989,7 @@ string(REPLACE ";" " " CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 # Fix a problem on Mac OS X when building shared libraries
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_SHARED_LINKER_FLAGS "-undefined dynamic_lookup")
-endif()
+endif ()
 
 # # Add define for Fortran Mangling (should be defined somewhere else)
 # # ------------------------------------------------------------------
@@ -996,13 +998,13 @@ endif()
 # set(ADD_ 1)
 
 #------------------------------------------------------------------------------
-if(HICMA_SCHED_STARPU)
+if (HICMA_SCHED_STARPU)
     link_directories(${STARPU_LIBRARY_DIRS_DEP})
-elseif(HICMA_SCHED_PARSEC)
+elseif (HICMA_SCHED_PARSEC)
     link_directories(${PARSEC_LIBRARY_DIRS_DEP})
-elseif(HICMA_SCHED_QUARK)
+elseif (HICMA_SCHED_QUARK)
     link_directories(${QUARK_LIBRARY_DIRS})
-endif()
+endif ()
 
 # Save extra dependencies (all required links)
 list(APPEND HICMA_DEP ${EXTRA_LIBRARIES})
@@ -1010,8 +1012,6 @@ list(REMOVE_DUPLICATES HICMA_DEP) # WARNING: is it safe, respect order?
 
 # Check for the subdirectories
 # ----------------------------
-
-
 
 
 ###############################################################################
@@ -1040,30 +1040,28 @@ include(CTest)
 #endif(HICMA_ENABLE_TESTING AND NOT HICMA_SIMULATION)
 
 # Enable MKL compilation flag
-if(BLAS_VENDOR_FOUND MATCHES "Intel*")
+if (BLAS_VENDOR_FOUND MATCHES "Intel*")
     add_definitions(-DMKL)
-endif()
-
+endif ()
 
 
 ##################################################################
 # temporary basic build
 ##################################################################
 ##################################################################
-find_package(OpenMP )
-if(OPENMP_FOUND)
+find_package(OpenMP)
+if (OPENMP_FOUND)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
-else()
+else ()
     ## In shaheen openmp is not detected, so i force it.
     #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
     #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fopenmp")
     ## It is not good to force on MAC.
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
-endif()
-
+endif ()
 
 
 ##### BUILD
@@ -1076,87 +1074,177 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/hcore/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/hcore/misc/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/control)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
-include_directories( ${CMAKE_SOURCE_DIR}/include )
+include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/hicma_ext)
+include_directories(${CMAKE_SOURCE_DIR}/misc/include )
 
-set( HICMA_CONTROL_SRC
-    ${CMAKE_SOURCE_DIR}/control/hicma_init.c
-    )
-set( HICMA_MISC_SRC
-    ${CMAKE_SOURCE_DIR}/misc/zproblem.c
-    ${CMAKE_SOURCE_DIR}/misc/zstat.c
-    ${CMAKE_SOURCE_DIR}/misc/descutil.c
-    )
-set( HICMA_COMPUTE_SRC
-    ${CMAKE_SOURCE_DIR}/compute/pzhagcm.c
-    ${CMAKE_SOURCE_DIR}/compute/zhagcm.c
-    ${CMAKE_SOURCE_DIR}/compute/pzhagdm.c
-    ${CMAKE_SOURCE_DIR}/compute/zhagdm.c
-    ${CMAKE_SOURCE_DIR}/compute/pzgytlr.c
-    ${CMAKE_SOURCE_DIR}/compute/zgytlr.c
-    ${CMAKE_SOURCE_DIR}/compute/pzpotrf.c
-    ${CMAKE_SOURCE_DIR}/compute/zpotrf.c
-    ${CMAKE_SOURCE_DIR}/compute/pzgemm.c
-    ${CMAKE_SOURCE_DIR}/compute/zgemm.c
-    ${CMAKE_SOURCE_DIR}/compute/pztrsm.c
-    ${CMAKE_SOURCE_DIR}/compute/ztrsm.c
-    ${CMAKE_SOURCE_DIR}/compute/zdiag.c
-    ${CMAKE_SOURCE_DIR}/compute/zuncompress.c
-    ${CMAKE_SOURCE_DIR}/compute/pzgenrhs.c
-    ${CMAKE_SOURCE_DIR}/compute/zgenrhs.c
-    ${CMAKE_SOURCE_DIR}/compute/pzgenmat.c
-    ${CMAKE_SOURCE_DIR}/compute/zgenmat.c
-  )
+set(HICMA_HDRS_PR
+        include/hicma_z.h
+        include/hicma_runtime_z.h
+        )
 
-#set( HICMA_TIMING_SRC
-    #${CMAKE_SOURCE_DIR}/timing/time_tzgemm_tile.c
-    #${CMAKE_SOURCE_DIR}/timing/timing.c
-  #)
-include_directories( ${CMAKE_SOURCE_DIR}/timing )
-include_directories( ${CMAKE_SOURCE_DIR}/testing)
+precisions_rules_py(HICMA_HDRS_PR_GENERATED "${HICMA_HDRS_PR}"
+        PRECISIONS "z c d s"
+        TARGETDIR "include")
 
-set( HICMA_RUNTIME_SRC
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zhagcm.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zhagdm.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zuncompress.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgemm.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgemm_bdcd.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgytlr.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zpotrf.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_ztrsm.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zsyrk.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgytlr_diag.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgenrhs.c
-    ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgenmat.c
-  )
+add_custom_target(HICMA_HDRS_PR_GEN ALL SOURCES ${HICMA_HDRS_PR_GENERATED})
+set(HICMA_HDRS_PR_GEN_TARGETS "${HICMA_HDRS_PR_GEN_TARGETS};HICMA_HDRS_PR_GEN" CACHE INTERNAL "List of targets of sources")
 
+set(HICMA_CONTROL_HDRS_PR
+        control/hicma_compute_z.h
+        )
+
+precisions_rules_py(HICMA_CONTROL_HDRS_PR_GENERATED "${HICMA_CONTROL_HDRS_PR}"
+        PRECISIONS "z s d c"
+        TARGETDIR "control")
+
+add_custom_target(HICMA_CONT_HDRS_PR_GEN ALL SOURCES ${HICMA_CONTROL_HDRS_PR_GENERATED})
+set(HICMA_CONT_HDRS_PR_GEN_TARGETS "${HICMA_CONT_HDRS_PR_GEN_TARGETS};HICMA_CONT_HDRS_PR_GEN" CACHE INTERNAL "List of targets of sources")
+
+set(HICMA_CONTROL_SRC
+        ${CMAKE_SOURCE_DIR}/control/hicma_init.c
+        ${CMAKE_SOURCE_DIR}/control/hicma_tile.c
+        )
+
+set(HICMA_MISC_SRC
+        ${CMAKE_SOURCE_DIR}/misc/dstat.c
+        ${CMAKE_SOURCE_DIR}/misc/zstat.c
+        ${CMAKE_SOURCE_DIR}/misc/descutil.c
+        ${CMAKE_SOURCE_DIR}/misc/compute/zproblem.c
+        )
+set(HICMA_COMPUTE_SRC
+        ${CMAKE_SOURCE_DIR}/compute/pdhagcm.c
+        ${CMAKE_SOURCE_DIR}/compute/dhagcm.c
+        ${CMAKE_SOURCE_DIR}/compute/pdhagdm.c
+        ${CMAKE_SOURCE_DIR}/compute/dhagdm.c
+        ${CMAKE_SOURCE_DIR}/compute/pdgytlr.c
+        ${CMAKE_SOURCE_DIR}/compute/dgytlr.c
+        ${CMAKE_SOURCE_DIR}/compute/pzgytlr.c
+        ${CMAKE_SOURCE_DIR}/compute/zgytlr.c
+        ${CMAKE_SOURCE_DIR}/compute/pdpotrf.c
+        ${CMAKE_SOURCE_DIR}/compute/dpotrf.c
+        ${CMAKE_SOURCE_DIR}/compute/pdgemm.c
+        ${CMAKE_SOURCE_DIR}/compute/dgemm.c
+        ${CMAKE_SOURCE_DIR}/compute/pdtrsm.c
+        ${CMAKE_SOURCE_DIR}/compute/dtrsm.c
+        ${CMAKE_SOURCE_DIR}/compute/ddiag.c
+        ${CMAKE_SOURCE_DIR}/compute/zdiag.c
+        ${CMAKE_SOURCE_DIR}/compute/duncompress.c
+        ${CMAKE_SOURCE_DIR}/compute/zuncompress.c
+        ${CMAKE_SOURCE_DIR}/compute/pdgenrhs.c
+        ${CMAKE_SOURCE_DIR}/compute/dgenrhs.c
+        ${CMAKE_SOURCE_DIR}/compute/pdgenmat.c
+        ${CMAKE_SOURCE_DIR}/compute/dgenmat.c
+        ${CMAKE_SOURCE_DIR}/compute/zgetrf.c
+        ${CMAKE_SOURCE_DIR}/compute/pzgetrf.c
+        )
+
+set(HICMA_COMPUTE_SRC_PRC
+        compute/zlacpy.c
+        compute/pzlacpy.c
+        compute/zlaset.c
+        compute/pzlaset.c
+        compute/zplrnt.c
+        compute/pzplrnt.c
+        compute/hicma_ztile.c
+        )
+precisions_rules_py(HICMA_COMPUTE_SRC_PRC_GENERATED "${HICMA_COMPUTE_SRC_PRC}"
+        PRECISIONS "z s d c"
+        TARGETDIR "compute")
+
+add_custom_target(HICMA_COMPUTE_SRC_PRC_GEN ALL SOURCES ${HICMA_COMPUTE_SRC_PRC_GENERATED})
+set(HICMA_COMPUTE_SRC_PRC_GEN_TARGETS "${HICMA_COMPUTE_SRC_PRC_GEN_TARGETS};HICMA_COMPUTE_SRC_PRC_GEN" CACHE INTERNAL "List of targets of sources")
+
+
+include_directories(${CMAKE_SOURCE_DIR}/timing)
+include_directories(${CMAKE_SOURCE_DIR}/testing)
+
+set(HICMA_RUNTIME_SRC
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dhagcm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dhagdm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_duncompress.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zuncompress.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_hcore_dgemm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dgemm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dgemm_bdcd.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_hcore_zgemm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgemm_cd.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dgytlr.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgytlr.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dpotrf.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgetrf.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_hcore_dtrsm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dtrsm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_hcore_ztrsm.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_ztrsmu.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dsyrk.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dgytlr_diag.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_zgytlr_diag.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dgenrhs.c
+        ${CMAKE_SOURCE_DIR}/runtime/starpu/codelets/codelet_dgenmat.c
+        )
+set(HICMA_RUNTIME_SRC_PRC
+        runtime/starpu/codelets/codelet_zlacpy.c
+        runtime/starpu/codelets/codelet_zlaset.c
+        runtime/starpu/codelets/codelet_zplrnt.c
+        )
+
+precisions_rules_py(HICMA_RUNTIME_SRC_PRC_GENERATED "${HICMA_RUNTIME_SRC_PRC}"
+        PRECISIONS "z s d c"
+        TARGETDIR "runtime/starpu/codelets")
+
+add_custom_target(HICMA_RUNTIME_SRC_PRC_GEN ALL SOURCES ${HICMA_RUNTIME_SRC_PRC_GENERATED})
+set(HICMA_RUNTIME_SRC_PRC_GEN_TARGETS "${HICMA_RUNTIME_SRC_PRC_GEN_TARGETS};HICMA_RUNTIME_SRC_PRC_GEN" CACHE INTERNAL "List of targets of sources")
+
+set(HICMA_CHAM_SRC
+        ${CMAKE_SOURCE_DIR}/hicma_ext/control/hicma_async.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/control/hicma_auxiliary.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/control/hicma_context.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/control/hicma_descriptor.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/runtime/starpu/control/hicma_runtime_descriptor.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/runtime/starpu/control/hicma_runtime_control.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/runtime/starpu/control/hicma_runtime_async.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/runtime/starpu/control/hicma_runtime_options.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/runtime/starpu/control/hicma_runtime_context.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/runtime/starpu/control/hicma_runtime_workspace.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/runtime/starpu/control/hicma_runtime_profiling.c
+        ${CMAKE_SOURCE_DIR}/hicma_ext/coreblas/compute/hicma_global.c
+        )
 
 link_directories(${STARPU_LIBRARY_DIRS})
-link_directories(${CHAMELEON_LIBRARY_DIRS})
 
-add_library( hicma ${HICMA_RUNTIME_SRC} ${HICMA_COMPUTE_SRC} ${HICMA_CONTROL_SRC} ${HICMA_MISC_SRC} )
+
+add_library(hicma ${HICMA_RUNTIME_SRC} ${HICMA_RUNTIME_SRC_PRC_GENERATED}
+        ${HICMA_COMPUTE_SRC} ${HICMA_COMPUTE_SRC_PRC_GENERATED} ${HICMA_CONTROL_SRC} ${HICMA_MISC_SRC} ${HICMA_CHAM_SRC}
+        ${HICMA_HDRS_PR_GENERATED} ${HICMA_CONTROL_HDRS_PR_GENERATED})
+
 target_link_libraries(hicma ${HICMA_DEP})
 target_link_libraries(hicma ${STARSH_LIBRARIES_DEP})
 
 # Timing executables
-if(HICMA_ENABLE_TIMING)
-  add_subdirectory(timing)
-endif(HICMA_ENABLE_TIMING)
+if (HICMA_ENABLE_TIMING)
+    add_subdirectory(timing)
+endif (HICMA_ENABLE_TIMING)
 # Testing executables
-if(HICMA_ENABLE_TESTING)
-  add_subdirectory(testing)
-endif(HICMA_ENABLE_TESTING)
+if (HICMA_ENABLE_TESTING)
+    add_subdirectory(testing)
+endif (HICMA_ENABLE_TESTING)
 #------------------------------------------------------------------------------
 
 # Installation step
-install( TARGETS hicma
-         DESTINATION lib )
-install( FILES include/hicma_constants.h
-         DESTINATION include )
-install( FILES include/hicma_struct.h
-         DESTINATION include )
-install( FILES include/hicma_z.h
-         DESTINATION include )
+install(TARGETS hicma
+        DESTINATION lib)
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/control
+        DESTINATION include)
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/
+        DESTINATION include)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+        DESTINATION include)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/misc/include/
+        DESTINATION include/hicma/misc)
 
 ###############################################################################
 # Documentation #
@@ -1187,7 +1275,7 @@ set(CPACK_SOURCE_GENERATOR "TGZ")
 set(CPACK_PACKAGE_NAME "hicma")
 set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/README.md)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "HiCMA is a C library providing parallel algorithms to perform BLAS/LAPACK "
-                                      " operations exploiting fully modern architectures.")
+        " operations exploiting fully modern architectures.")
 set(CPACK_PACKAGE_VERSION "${HICMA_VERSION_MAJOR}.${HICMA_VERSION_MINOR}.${HICMA_VERSION_PATCH}")
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
@@ -1201,18 +1289,18 @@ include(CPack)
 ###############################################################################
 # Print Options #
 #################
-get_directory_property( HICMA_DEFINITIONS_LIST DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS )
+get_directory_property(HICMA_DEFINITIONS_LIST DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS)
 include(PrintOpts)
 
 if (CMAKE_INSTALL_PREFIX STREQUAL "/usr/local" OR CMAKE_INSTALL_PREFIX STREQUAL "C:/Program Files")
     message("-- ${Yellow}Your CMAKE_INSTALL_PREFIX is ${CMAKE_INSTALL_PREFIX} which is a default system path."
-    " You may want to change it: set the CMAKE_INSTALL_PREFIX variable to do so${ColourReset}")
-else()
+            " You may want to change it: set the CMAKE_INSTALL_PREFIX variable to do so${ColourReset}")
+else ()
     message("-- ${Yellow}Your CMAKE_INSTALL_PREFIX is ${CMAKE_INSTALL_PREFIX}${ColourReset}")
-endif()
+endif ()
 message("VERY IMPORTANT")
-message("Current build system assumes that Chameleon is built at ${CHAMELEON_BUILD_DIR}")
-message("This cmake file can know install dir: ${CHAMELEON_DIR_FOUND}")
+#message("Current build system assumes that Chameleon is built at ${CHAMELEON_BUILD_DIR}")
+#message("This cmake file can know install dir: ${CHAMELEON_DIR_FOUND}")
 message("This cmake file can NOT know build dir!!!!!!!!!!")
 
 ###

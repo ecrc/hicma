@@ -1,5 +1,5 @@
 /**
- * @copyright (c) 2017 King Abdullah University of Science and Technology (KAUST).
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
  *                     All rights reserved.
  **/
 
@@ -24,10 +24,10 @@
 #include <string.h>
 #include <math.h>
 // #include "libhqr.h"
-#include <morse.h>
-#include <coreblas/cblas.h>
-#include <coreblas/lapacke.h>
-#include <coreblas/coreblas.h>
+#include <hicma.h>
+#include <coreblas/hicma_cblas.h>
+#include "coreblas/hicma_lapacke.h"
+#include <coreblas/hicma_coreblas.h>
 #include "timing_zauxiliary.h"
 
 
@@ -37,26 +37,26 @@
  * Check the gemm
  */
 double hicma_z_check_gemm(
-                   MORSE_enum transA, MORSE_enum transB, int M, int N, int K, //FIXME use z cblas calls for precision generation
+                   HICMA_enum transA, HICMA_enum transB, int M, int N, int K, //FIXME use z cblas calls for precision generation
                    double alpha, double *A, int LDA,
                    double *B, int LDB,
-                   double beta, double *Cmorse,
+                   double beta, double *Chicma,
                    double *Cref, int LDC,
-                   double *Cinitnorm, double *Cmorsenorm, double *Clapacknorm )
+                   double *Cinitnorm, double *Chicmanorm, double *Clapacknorm )
 {
     double beta_const = -1.0;
     double Rnorm;
-    double *work = (double *)malloc(chameleon_max(K,chameleon_max(M, N))* sizeof(double));
+    double *work = (double *)malloc(hicma_max(K,hicma_max(M, N))* sizeof(double));
 
     *Cinitnorm   = LAPACKE_dlange_work(LAPACK_COL_MAJOR, 'I', M, N, Cref,    LDC, work);
-    *Cmorsenorm = LAPACKE_dlange_work(LAPACK_COL_MAJOR, 'I', M, N, Cmorse, LDC, work);
+    *Chicmanorm = LAPACKE_dlange_work(LAPACK_COL_MAJOR, 'I', M, N, Chicma, LDC, work);
 
     cblas_dgemm(CblasColMajor, (CBLAS_TRANSPOSE)transA, (CBLAS_TRANSPOSE)transB, M, N, K, //TODO
                 CBLAS_SADDR(alpha), A, LDA, B, LDB, CBLAS_SADDR(beta), Cref, LDC);        //TODO
 
     *Clapacknorm = LAPACKE_dlange_work(LAPACK_COL_MAJOR, 'I', M, N, Cref, LDC, work);
 
-    cblas_daxpy(LDC * N, CBLAS_SADDR(beta_const), Cmorse, 1, Cref, 1);
+    cblas_daxpy(LDC * N, CBLAS_SADDR(beta_const), Chicma, 1, Cref, 1);
 
     Rnorm = LAPACKE_dlange_work(LAPACK_COL_MAJOR, 'I', M, N, Cref, LDC, work);
 

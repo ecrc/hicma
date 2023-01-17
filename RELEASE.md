@@ -1,3 +1,9 @@
+# Release 1.0.0
+
+## Features
+
+* Removed Chameleon dependency completely.
+
 # Release 0.1.4
 
 ## Features

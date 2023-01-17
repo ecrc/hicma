@@ -1,0 +1,1612 @@
+Number of nbs:137 Number of cases:274
+#Number of nodes: 1 =============================
+# 
+#Thu Mar 18 12:03:59 +03 2021 on 1 nodes. Hicma beta=0.01  - small -  - 02:00:00 -   - mkl - exp/cases/statistics.sh "137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274" 138 (0-137-1)
+#case ids:  137
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:137 nrows: mb:
+#case ids:  138
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:138 nrows:10296 mb:792
+N: 10400 NB:800 MB:792
+!BEGIN: M:10296 N:10400 MB:792 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:03:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	10296	0.255     	1428.118
+
+!END: M:10296 N:10400 MB:792 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:03:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:01 +03 2021
+
+#case ids:  139
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:139 nrows:10296 mb:858
+N: 9600 NB:800 MB:858
+!BEGIN: M:10296 N:9600 MB:858 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	10296	0.263     	1385.156
+
+!END: M:10296 N:9600 MB:858 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:02 +03 2021
+
+#case ids:  140
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:140 nrows:10296 mb:936
+N: 8800 NB:800 MB:936
+!BEGIN: M:10296 N:8800 MB:936 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	10296	0.251     	1451.353
+
+!END: M:10296 N:8800 MB:936 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:04 +03 2021
+
+#case ids:  141
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:141 nrows:10296 mb:1144
+N: 7200 NB:800 MB:1144
+!BEGIN: M:10296 N:7200 MB:1144 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:04 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	10296	0.258     	1408.707
+
+!END: M:10296 N:7200 MB:1144 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:04 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:06 +03 2021
+
+#case ids:  142
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:142 nrows:10296 mb:1287
+N: 6400 NB:800 MB:1287
+!BEGIN: M:10296 N:6400 MB:1287 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	10296	0.250     	1453.772
+
+!END: M:10296 N:6400 MB:1287 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 10296 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:07 +03 2021
+
+#case ids:  143
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:143 nrows:20384 mb:784
+N: 20800 NB:800 MB:784
+!BEGIN: M:20384 N:20800 MB:784 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:07 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	20384	1.799     	1569.488
+
+!END: M:20384 N:20800 MB:784 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:07 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:8 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:15 +03 2021
+
+#case ids:  144
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:144 nrows:20384 mb:1274
+N: 12800 NB:800 MB:1274
+!BEGIN: M:20384 N:12800 MB:1274 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	20384	1.793     	1574.919
+
+!END: M:20384 N:12800 MB:1274 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:8 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:23 +03 2021
+
+#case ids:  145
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:145 nrows:20384 mb:1456
+N: 11200 NB:800 MB:1456
+!BEGIN: M:20384 N:11200 MB:1456 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:23 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	20384	1.780     	1585.787
+
+!END: M:20384 N:11200 MB:1456 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:23 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:8 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:31 +03 2021
+
+#case ids:  146
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:146 nrows:20384 mb:1568
+N: 10400 NB:800 MB:1568
+!BEGIN: M:20384 N:10400 MB:1568 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	20384	1.780     	1585.719
+
+!END: M:20384 N:10400 MB:1568 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:8 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:39 +03 2021
+
+#case ids:  147
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:147 nrows:20384 mb:2548
+N: 6400 NB:800 MB:2548
+!BEGIN: M:20384 N:6400 MB:2548 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:39 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	20384	1.794     	1573.577
+
+!END: M:20384 N:6400 MB:2548 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:39 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 20384 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:7 MINUTE:0 HOUR:0
+Thu Mar 18 12:04:46 +03 2021
+
+#case ids:  148
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:148 nrows:30464 mb:896
+N: 27200 NB:800 MB:896
+!BEGIN: M:30464 N:27200 MB:896 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:47 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	30464	6.046     	1558.831
+
+!END: M:30464 N:27200 MB:896 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:04:47 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:28 MINUTE:0 HOUR:0
+Thu Mar 18 12:05:15 +03 2021
+
+#case ids:  149
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:149 nrows:30464 mb:952
+N: 25600 NB:800 MB:952
+!BEGIN: M:30464 N:25600 MB:952 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:05:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	30464	6.002     	1570.278
+
+!END: M:30464 N:25600 MB:952 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:05:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:29 MINUTE:0 HOUR:0
+Thu Mar 18 12:05:44 +03 2021
+
+#case ids:  150
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:150 nrows:30464 mb:1088
+N: 22400 NB:800 MB:1088
+!BEGIN: M:30464 N:22400 MB:1088 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:05:44 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	30464	6.105     	1543.793
+
+!END: M:30464 N:22400 MB:1088 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:05:44 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:29 MINUTE:0 HOUR:0
+Thu Mar 18 12:06:13 +03 2021
+
+#case ids:  151
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:151 nrows:30464 mb:1792
+N: 13600 NB:800 MB:1792
+!BEGIN: M:30464 N:13600 MB:1792 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:06:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	30464	5.987     	1573.999
+
+!END: M:30464 N:13600 MB:1792 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:06:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:29 MINUTE:0 HOUR:0
+Thu Mar 18 12:06:42 +03 2021
+
+#case ids:  152
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:152 nrows:30464 mb:1904
+N: 12800 NB:800 MB:1904
+!BEGIN: M:30464 N:12800 MB:1904 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:06:42 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	30464	6.002     	1570.094
+
+!END: M:30464 N:12800 MB:1904 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:06:42 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:29 MINUTE:0 HOUR:0
+Thu Mar 18 12:07:11 +03 2021
+
+#case ids:  153
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:153 nrows:30464 mb:2176
+N: 11200 NB:800 MB:2176
+!BEGIN: M:30464 N:11200 MB:2176 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:07:11 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	30464	6.010     	1567.942
+
+!END: M:30464 N:11200 MB:2176 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:07:11 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:29 MINUTE:0 HOUR:0
+Thu Mar 18 12:07:40 +03 2021
+
+#case ids:  154
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:154 nrows:30464 mb:3808
+N: 6400 NB:800 MB:3808
+!BEGIN: M:30464 N:6400 MB:3808 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:07:40 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	30464	5.960     	1581.162
+
+!END: M:30464 N:6400 MB:3808 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:07:40 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 30464 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:28 MINUTE:0 HOUR:0
+Thu Mar 18 12:08:08 +03 2021
+
+#case ids:  155
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:155 nrows:40500 mb:900
+N: 36000 NB:800 MB:900
+!BEGIN: M:40500 N:36000 MB:900 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:08:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.392    	1653.504
+
+!END: M:40500 N:36000 MB:900 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:08:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:08:58 +03 2021
+
+#case ids:  156
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:156 nrows:40500 mb:1125
+N: 28800 NB:800 MB:1125
+!BEGIN: M:40500 N:28800 MB:1125 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:08:58 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.324    	1661.899
+
+!END: M:40500 N:28800 MB:1125 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:08:58 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:49 MINUTE:0 HOUR:0
+Thu Mar 18 12:09:47 +03 2021
+
+#case ids:  157
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:157 nrows:40500 mb:1350
+N: 24000 NB:800 MB:1350
+!BEGIN: M:40500 N:24000 MB:1350 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:09:47 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.336    	1660.470
+
+!END: M:40500 N:24000 MB:1350 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:09:47 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:10:37 +03 2021
+
+#case ids:  158
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:158 nrows:40500 mb:1500
+N: 21600 NB:800 MB:1500
+!BEGIN: M:40500 N:21600 MB:1500 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:10:37 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.515    	1638.396
+
+!END: M:40500 N:21600 MB:1500 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:10:37 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:11:27 +03 2021
+
+#case ids:  159
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:159 nrows:40500 mb:1620
+N: 20000 NB:800 MB:1620
+!BEGIN: M:40500 N:20000 MB:1620 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:11:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.295    	1665.509
+
+!END: M:40500 N:20000 MB:1620 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:11:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:12:17 +03 2021
+
+#case ids:  160
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:160 nrows:40500 mb:2025
+N: 16000 NB:800 MB:2025
+!BEGIN: M:40500 N:16000 MB:2025 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:12:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.294    	1665.648
+
+!END: M:40500 N:16000 MB:2025 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:12:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:49 MINUTE:0 HOUR:0
+Thu Mar 18 12:13:06 +03 2021
+
+#case ids:  161
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:161 nrows:40500 mb:2250
+N: 14400 NB:800 MB:2250
+!BEGIN: M:40500 N:14400 MB:2250 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:13:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.272    	1668.455
+
+!END: M:40500 N:14400 MB:2250 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:13:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:13:56 +03 2021
+
+#case ids:  162
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:162 nrows:40500 mb:2700
+N: 12000 NB:800 MB:2700
+!BEGIN: M:40500 N:12000 MB:2700 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:13:56 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.268    	1668.988
+
+!END: M:40500 N:12000 MB:2700 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:13:56 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:49 MINUTE:0 HOUR:0
+Thu Mar 18 12:14:45 +03 2021
+
+#case ids:  163
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:163 nrows:40500 mb:3375
+N: 9600 NB:800 MB:3375
+!BEGIN: M:40500 N:9600 MB:3375 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:14:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.313    	1663.256
+
+!END: M:40500 N:9600 MB:3375 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:14:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:15:35 +03 2021
+
+#case ids:  164
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:164 nrows:40500 mb:4050
+N: 8000 NB:800 MB:4050
+!BEGIN: M:40500 N:8000 MB:4050 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:15:35 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.312    	1663.415
+
+!END: M:40500 N:8000 MB:4050 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:15:35 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:16:25 +03 2021
+
+#case ids:  165
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:165 nrows:40500 mb:4500
+N: 7200 NB:800 MB:4500
+!BEGIN: M:40500 N:7200 MB:4500 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:16:25 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	40500	13.298    	1665.133
+
+!END: M:40500 N:7200 MB:4500 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:16:25 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 40500 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:50 MINUTE:0 HOUR:0
+Thu Mar 18 12:17:15 +03 2021
+
+#case ids:  166
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:166 nrows:50544 mb:1296
+N: 31200 NB:800 MB:1296
+!BEGIN: M:50544 N:31200 MB:1296 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:17:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	24.906    	1728.128
+
+!END: M:50544 N:31200 MB:1296 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:17:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:89 MINUTE:1 HOUR:0
+Thu Mar 18 12:18:44 +03 2021
+
+#case ids:  167
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:167 nrows:50544 mb:1404
+N: 28800 NB:800 MB:1404
+!BEGIN: M:50544 N:28800 MB:1404 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:18:44 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	25.371    	1696.460
+
+!END: M:50544 N:28800 MB:1404 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:18:44 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:91 MINUTE:1 HOUR:0
+Thu Mar 18 12:20:15 +03 2021
+
+#case ids:  168
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:168 nrows:50544 mb:1872
+N: 21600 NB:800 MB:1872
+!BEGIN: M:50544 N:21600 MB:1872 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:20:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	25.042    	1718.791
+
+!END: M:50544 N:21600 MB:1872 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:20:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:90 MINUTE:1 HOUR:0
+Thu Mar 18 12:21:45 +03 2021
+
+#case ids:  169
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:169 nrows:50544 mb:1944
+N: 20800 NB:800 MB:1944
+!BEGIN: M:50544 N:20800 MB:1944 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:21:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	24.927    	1726.722
+
+!END: M:50544 N:20800 MB:1944 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:21:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:90 MINUTE:1 HOUR:0
+Thu Mar 18 12:23:15 +03 2021
+
+#case ids:  170
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:170 nrows:50544 mb:2106
+N: 19200 NB:800 MB:2106
+!BEGIN: M:50544 N:19200 MB:2106 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:23:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	24.864    	1731.091
+
+!END: M:50544 N:19200 MB:2106 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:23:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:90 MINUTE:1 HOUR:0
+Thu Mar 18 12:24:45 +03 2021
+
+#case ids:  171
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:171 nrows:50544 mb:2808
+N: 14400 NB:800 MB:2808
+!BEGIN: M:50544 N:14400 MB:2808 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:24:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	24.786    	1736.511
+
+!END: M:50544 N:14400 MB:2808 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:24:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:89 MINUTE:1 HOUR:0
+Thu Mar 18 12:26:14 +03 2021
+
+#case ids:  172
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:172 nrows:50544 mb:3159
+N: 12800 NB:800 MB:3159
+!BEGIN: M:50544 N:12800 MB:3159 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:26:14 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	25.203    	1707.797
+
+!END: M:50544 N:12800 MB:3159 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:26:14 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:90 MINUTE:1 HOUR:0
+Thu Mar 18 12:27:44 +03 2021
+
+#case ids:  173
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:173 nrows:50544 mb:3888
+N: 10400 NB:800 MB:3888
+!BEGIN: M:50544 N:10400 MB:3888 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:27:44 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	25.026    	1719.883
+
+!END: M:50544 N:10400 MB:3888 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:27:44 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:91 MINUTE:1 HOUR:0
+Thu Mar 18 12:29:15 +03 2021
+
+#case ids:  174
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:174 nrows:50544 mb:4212
+N: 9600 NB:800 MB:4212
+!BEGIN: M:50544 N:9600 MB:4212 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:29:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	24.881    	1729.916
+
+!END: M:50544 N:9600 MB:4212 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:29:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:90 MINUTE:1 HOUR:0
+Thu Mar 18 12:30:45 +03 2021
+
+#case ids:  175
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:175 nrows:50544 mb:5616
+N: 7200 NB:800 MB:5616
+!BEGIN: M:50544 N:7200 MB:5616 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:30:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	50544	25.012    	1720.841
+
+!END: M:50544 N:7200 MB:5616 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:30:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 50544 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:90 MINUTE:1 HOUR:0
+Thu Mar 18 12:32:15 +03 2021
+
+#case ids:  176
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:176 nrows:60588 mb:1377
+N: 35200 NB:800 MB:1377
+!BEGIN: M:60588 N:35200 MB:1377 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:32:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.432    	1668.554
+
+!END: M:60588 N:35200 MB:1377 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:32:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:156 MINUTE:2 HOUR:0
+Thu Mar 18 12:34:51 +03 2021
+
+#case ids:  177
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:177 nrows:60588 mb:1683
+N: 28800 NB:800 MB:1683
+!BEGIN: M:60588 N:28800 MB:1683 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:34:51 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.023    	1684.084
+
+!END: M:60588 N:28800 MB:1683 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:34:51 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:155 MINUTE:2 HOUR:0
+Thu Mar 18 12:37:26 +03 2021
+
+#case ids:  178
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:178 nrows:60588 mb:1782
+N: 27200 NB:800 MB:1782
+!BEGIN: M:60588 N:27200 MB:1782 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:37:26 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.184    	1677.938
+
+!END: M:60588 N:27200 MB:1782 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:37:26 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:154 MINUTE:2 HOUR:0
+Thu Mar 18 12:40:00 +03 2021
+
+#case ids:  179
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:179 nrows:60588 mb:1836
+N: 26400 NB:800 MB:1836
+!BEGIN: M:60588 N:26400 MB:1836 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:40:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	45.182    	1640.855
+
+!END: M:60588 N:26400 MB:1836 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:40:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:157 MINUTE:2 HOUR:0
+Thu Mar 18 12:42:38 +03 2021
+
+#case ids:  180
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:180 nrows:60588 mb:2244
+N: 21600 NB:800 MB:2244
+!BEGIN: M:60588 N:21600 MB:2244 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:42:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.117    	1680.488
+
+!END: M:60588 N:21600 MB:2244 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:42:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:155 MINUTE:2 HOUR:0
+Thu Mar 18 12:45:13 +03 2021
+
+#case ids:  181
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:181 nrows:60588 mb:2754
+N: 17600 NB:800 MB:2754
+!BEGIN: M:60588 N:17600 MB:2754 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:45:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.268    	1674.756
+
+!END: M:60588 N:17600 MB:2754 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:45:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:156 MINUTE:2 HOUR:0
+Thu Mar 18 12:47:49 +03 2021
+
+#case ids:  182
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:182 nrows:60588 mb:3366
+N: 14400 NB:800 MB:3366
+!BEGIN: M:60588 N:14400 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:47:49 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.659    	1660.086
+
+!END: M:60588 N:14400 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:47:49 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:157 MINUTE:2 HOUR:0
+Thu Mar 18 12:50:26 +03 2021
+
+#case ids:  183
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:183 nrows:60588 mb:3564
+N: 13600 NB:800 MB:3564
+!BEGIN: M:60588 N:13600 MB:3564 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:50:26 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.139    	1679.630
+
+!END: M:60588 N:13600 MB:3564 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:50:26 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:154 MINUTE:2 HOUR:0
+Thu Mar 18 12:53:00 +03 2021
+
+#case ids:  184
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:184 nrows:60588 mb:5049
+N: 9600 NB:800 MB:5049
+!BEGIN: M:60588 N:9600 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:53:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	45.074    	1644.813
+
+!END: M:60588 N:9600 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:53:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:157 MINUTE:2 HOUR:0
+Thu Mar 18 12:55:38 +03 2021
+
+#case ids:  185
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:185 nrows:60588 mb:5508
+N: 8800 NB:800 MB:5508
+!BEGIN: M:60588 N:8800 MB:5508 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:55:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	60588	44.026    	1683.956
+
+!END: M:60588 N:8800 MB:5508 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:55:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 60588 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:155 MINUTE:2 HOUR:0
+Thu Mar 18 12:58:13 +03 2021
+
+#case ids:  186
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:186 nrows:70686 mb:1683
+N: 33600 NB:800 MB:1683
+!BEGIN: M:70686 N:33600 MB:1683 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:58:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	70.592    	1667.719
+
+!END: M:70686 N:33600 MB:1683 NB:800 MAXRANK:800 DATE:Thu Mar 18 12:58:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:241 MINUTE:4 HOUR:0
+Thu Mar 18 13:02:14 +03 2021
+
+#case ids:  187
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:187 nrows:70686 mb:2079
+N: 27200 NB:800 MB:2079
+!BEGIN: M:70686 N:27200 MB:2079 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:02:14 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	70.833    	1662.046
+
+!END: M:70686 N:27200 MB:2079 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:02:14 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:242 MINUTE:4 HOUR:0
+Thu Mar 18 13:06:16 +03 2021
+
+#case ids:  188
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:188 nrows:70686 mb:2142
+N: 26400 NB:800 MB:2142
+!BEGIN: M:70686 N:26400 MB:2142 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:06:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	70.969    	1658.863
+
+!END: M:70686 N:26400 MB:2142 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:06:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:243 MINUTE:4 HOUR:0
+Thu Mar 18 13:10:19 +03 2021
+
+#case ids:  189
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:189 nrows:70686 mb:2618
+N: 21600 NB:800 MB:2618
+!BEGIN: M:70686 N:21600 MB:2618 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:10:19 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	71.385    	1649.184
+
+!END: M:70686 N:21600 MB:2618 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:10:19 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:243 MINUTE:4 HOUR:0
+Thu Mar 18 13:14:22 +03 2021
+
+#case ids:  190
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:190 nrows:70686 mb:3213
+N: 17600 NB:800 MB:3213
+!BEGIN: M:70686 N:17600 MB:3213 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:14:22 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	70.835    	1662.011
+
+!END: M:70686 N:17600 MB:3213 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:14:22 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:242 MINUTE:4 HOUR:0
+Thu Mar 18 13:18:24 +03 2021
+
+#case ids:  191
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:191 nrows:70686 mb:3366
+N: 16800 NB:800 MB:3366
+!BEGIN: M:70686 N:16800 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:18:24 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	71.247    	1652.386
+
+!END: M:70686 N:16800 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:18:24 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:243 MINUTE:4 HOUR:0
+Thu Mar 18 13:22:27 +03 2021
+
+#case ids:  192
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:192 nrows:70686 mb:3927
+N: 14400 NB:800 MB:3927
+!BEGIN: M:70686 N:14400 MB:3927 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:22:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	71.179    	1653.961
+
+!END: M:70686 N:14400 MB:3927 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:22:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:244 MINUTE:4 HOUR:0
+Thu Mar 18 13:26:31 +03 2021
+
+#case ids:  193
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:193 nrows:70686 mb:4158
+N: 13600 NB:800 MB:4158
+!BEGIN: M:70686 N:13600 MB:4158 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:26:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	71.577    	1644.765
+
+!END: M:70686 N:13600 MB:4158 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:26:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:244 MINUTE:4 HOUR:0
+Thu Mar 18 13:30:35 +03 2021
+
+#case ids:  194
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:194 nrows:70686 mb:5049
+N: 11200 NB:800 MB:5049
+!BEGIN: M:70686 N:11200 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:30:35 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	70686	70.260    	1675.604
+
+!END: M:70686 N:11200 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:30:35 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 70686 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:242 MINUTE:4 HOUR:0
+Thu Mar 18 13:34:37 +03 2021
+
+#case ids:  195
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:195 nrows:80784 mb:1836
+N: 35200 NB:800 MB:1836
+!BEGIN: M:80784 N:35200 MB:1836 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:34:37 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.584    	1898.098
+
+!END: M:80784 N:35200 MB:1836 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:34:37 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:319 MINUTE:5 HOUR:0
+Thu Mar 18 13:39:56 +03 2021
+
+#case ids:  196
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:196 nrows:80784 mb:2244
+N: 28800 NB:800 MB:2244
+!BEGIN: M:80784 N:28800 MB:2244 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:39:56 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	93.058    	1888.436
+
+!END: M:80784 N:28800 MB:2244 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:39:56 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:320 MINUTE:5 HOUR:0
+Thu Mar 18 13:45:16 +03 2021
+
+#case ids:  197
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:197 nrows:80784 mb:2376
+N: 27200 NB:800 MB:2376
+!BEGIN: M:80784 N:27200 MB:2376 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:45:16 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.291    	1904.122
+
+!END: M:80784 N:27200 MB:2376 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:45:16 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:314 MINUTE:5 HOUR:0
+Thu Mar 18 13:50:30 +03 2021
+
+#case ids:  198
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:198 nrows:80784 mb:2448
+N: 26400 NB:800 MB:2448
+!BEGIN: M:80784 N:26400 MB:2448 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:50:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.288    	1904.177
+
+!END: M:80784 N:26400 MB:2448 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:50:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:316 MINUTE:5 HOUR:0
+Thu Mar 18 13:55:47 +03 2021
+
+#case ids:  199
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:199 nrows:80784 mb:2992
+N: 21600 NB:800 MB:2992
+!BEGIN: M:80784 N:21600 MB:2992 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:55:47 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.591    	1897.961
+
+!END: M:80784 N:21600 MB:2992 NB:800 MAXRANK:800 DATE:Thu Mar 18 13:55:47 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:317 MINUTE:5 HOUR:0
+Thu Mar 18 14:01:04 +03 2021
+
+#case ids:  200
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:200 nrows:80784 mb:3366
+N: 19200 NB:800 MB:3366
+!BEGIN: M:80784 N:19200 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:01:04 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.507    	1899.689
+
+!END: M:80784 N:19200 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:01:04 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:317 MINUTE:5 HOUR:0
+Thu Mar 18 14:06:21 +03 2021
+
+#case ids:  201
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:201 nrows:80784 mb:3672
+N: 17600 NB:800 MB:3672
+!BEGIN: M:80784 N:17600 MB:3672 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:06:21 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	93.268    	1884.177
+
+!END: M:80784 N:17600 MB:3672 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:06:21 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:319 MINUTE:5 HOUR:0
+Thu Mar 18 14:11:40 +03 2021
+
+#case ids:  202
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:202 nrows:80784 mb:4488
+N: 14400 NB:800 MB:4488
+!BEGIN: M:80784 N:14400 MB:4488 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:11:40 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.583    	1898.116
+
+!END: M:80784 N:14400 MB:4488 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:11:40 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:316 MINUTE:5 HOUR:0
+Thu Mar 18 14:16:56 +03 2021
+
+#case ids:  203
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:203 nrows:80784 mb:4752
+N: 13600 NB:800 MB:4752
+!BEGIN: M:80784 N:13600 MB:4752 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:16:56 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.907    	1891.499
+
+!END: M:80784 N:13600 MB:4752 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:16:56 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:317 MINUTE:5 HOUR:0
+Thu Mar 18 14:22:13 +03 2021
+
+#case ids:  204
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:204 nrows:80784 mb:5049
+N: 12800 NB:800 MB:5049
+!BEGIN: M:80784 N:12800 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:22:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	80784	92.265    	1904.658
+
+!END: M:80784 N:12800 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:22:13 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 80784 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:317 MINUTE:5 HOUR:0
+Thu Mar 18 14:27:30 +03 2021
+
+#case ids:  205
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:205 nrows:90882 mb:2673
+N: 27200 NB:800 MB:2673
+!BEGIN: M:90882 N:27200 MB:2673 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:27:30 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	90882	138.567   	1805.733
+
+!END: M:90882 N:27200 MB:2673 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:27:30 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:470 MINUTE:7 HOUR:0
+Thu Mar 18 14:35:20 +03 2021
+
+#case ids:  206
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:206 nrows:90882 mb:2754
+N: 26400 NB:800 MB:2754
+!BEGIN: M:90882 N:26400 MB:2754 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:35:20 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	90882	136.684   	1830.610
+
+!END: M:90882 N:26400 MB:2754 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:35:20 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:463 MINUTE:7 HOUR:0
+Thu Mar 18 14:43:03 +03 2021
+
+#case ids:  207
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:207 nrows:90882 mb:3366
+N: 21600 NB:800 MB:3366
+!BEGIN: M:90882 N:21600 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:43:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	90882	137.633   	1817.987
+
+!END: M:90882 N:21600 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:43:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:465 MINUTE:7 HOUR:0
+Thu Mar 18 14:50:48 +03 2021
+
+#case ids:  208
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:208 nrows:90882 mb:4131
+N: 17600 NB:800 MB:4131
+!BEGIN: M:90882 N:17600 MB:4131 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:50:48 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	90882	137.573   	1818.777
+
+!END: M:90882 N:17600 MB:4131 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:50:48 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:466 MINUTE:7 HOUR:0
+Thu Mar 18 14:58:34 +03 2021
+
+#case ids:  209
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:209 nrows:90882 mb:5049
+N: 14400 NB:800 MB:5049
+!BEGIN: M:90882 N:14400 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:58:34 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	90882	137.474   	1820.080
+
+!END: M:90882 N:14400 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 14:58:34 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:464 MINUTE:7 HOUR:0
+Thu Mar 18 15:06:18 +03 2021
+
+#case ids:  210
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:210 nrows:90882 mb:5346
+N: 13600 NB:800 MB:5346
+!BEGIN: M:90882 N:13600 MB:5346 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:06:19 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	90882	137.151   	1824.376
+
+!END: M:90882 N:13600 MB:5346 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:06:19 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 90882 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:462 MINUTE:7 HOUR:0
+Thu Mar 18 15:14:01 +03 2021
+
+#case ids:  211
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:211 nrows:100980 mb:2244
+N: 36000 NB:800 MB:2244
+!BEGIN: M:100980 N:36000 MB:2244 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:14:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	182.836   	1877.250
+
+!END: M:100980 N:36000 MB:2244 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:14:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:610 MINUTE:10 HOUR:0
+Thu Mar 18 15:24:11 +03 2021
+
+#case ids:  212
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:212 nrows:100980 mb:2295
+N: 35200 NB:800 MB:2295
+!BEGIN: M:100980 N:35200 MB:2295 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:24:11 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	182.874   	1876.866
+
+!END: M:100980 N:35200 MB:2295 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:24:11 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:612 MINUTE:10 HOUR:0
+Thu Mar 18 15:34:23 +03 2021
+
+#case ids:  213
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:213 nrows:100980 mb:2805
+N: 28800 NB:800 MB:2805
+!BEGIN: M:100980 N:28800 MB:2805 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:34:23 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	183.093   	1874.624
+
+!END: M:100980 N:28800 MB:2805 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:34:23 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:610 MINUTE:10 HOUR:0
+Thu Mar 18 15:44:33 +03 2021
+
+#case ids:  214
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:214 nrows:100980 mb:2970
+N: 27200 NB:800 MB:2970
+!BEGIN: M:100980 N:27200 MB:2970 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:44:33 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	182.566   	1880.028
+
+!END: M:100980 N:27200 MB:2970 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:44:33 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:609 MINUTE:10 HOUR:0
+Thu Mar 18 15:54:42 +03 2021
+
+#case ids:  215
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:215 nrows:100980 mb:3060
+N: 26400 NB:800 MB:3060
+!BEGIN: M:100980 N:26400 MB:3060 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:54:42 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	183.550   	1869.948
+
+!END: M:100980 N:26400 MB:3060 NB:800 MAXRANK:800 DATE:Thu Mar 18 15:54:42 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:612 MINUTE:10 HOUR:0
+Thu Mar 18 16:04:54 +03 2021
+
+#case ids:  216
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:216 nrows:100980 mb:3366
+N: 24000 NB:800 MB:3366
+!BEGIN: M:100980 N:24000 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:04:54 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	183.106   	1874.489
+
+!END: M:100980 N:24000 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:04:54 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:612 MINUTE:10 HOUR:0
+Thu Mar 18 16:15:06 +03 2021
+
+#case ids:  217
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:217 nrows:100980 mb:3740
+N: 21600 NB:800 MB:3740
+!BEGIN: M:100980 N:21600 MB:3740 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:15:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	182.324   	1882.521
+
+!END: M:100980 N:21600 MB:3740 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:15:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:610 MINUTE:10 HOUR:0
+Thu Mar 18 16:25:16 +03 2021
+
+#case ids:  218
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:218 nrows:100980 mb:4590
+N: 17600 NB:800 MB:4590
+!BEGIN: M:100980 N:17600 MB:4590 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:25:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	183.419   	1871.292
+
+!END: M:100980 N:17600 MB:4590 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:25:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:614 MINUTE:10 HOUR:0
+Thu Mar 18 16:35:31 +03 2021
+
+#case ids:  219
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:219 nrows:100980 mb:5049
+N: 16000 NB:800 MB:5049
+!BEGIN: M:100980 N:16000 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:35:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	185.914   	1846.174
+
+!END: M:100980 N:16000 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:35:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:619 MINUTE:10 HOUR:0
+Thu Mar 18 16:45:50 +03 2021
+
+#case ids:  220
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:220 nrows:100980 mb:5610
+N: 14400 NB:800 MB:5610
+!BEGIN: M:100980 N:14400 MB:5610 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:45:50 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	182.815   	1877.475
+
+!END: M:100980 N:14400 MB:5610 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:45:50 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:611 MINUTE:10 HOUR:0
+Thu Mar 18 16:56:02 +03 2021
+
+#case ids:  221
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:221 nrows:100980 mb:5940
+N: 13600 NB:800 MB:5940
+!BEGIN: M:100980 N:13600 MB:5940 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:56:02 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	100980	184.326   	1862.076
+
+!END: M:100980 N:13600 MB:5940 NB:800 MAXRANK:800 DATE:Thu Mar 18 16:56:02 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 100980 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:616 MINUTE:10 HOUR:0
+Thu Mar 18 17:06:18 +03 2021
+
+#case ids:  222
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:222 nrows:111132 mb:2646
+N: 33600 NB:800 MB:2646
+!BEGIN: M:111132 N:33600 MB:2646 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:06:18 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	111132	250.634   	1825.390
+
+!END: M:111132 N:33600 MB:2646 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:06:18 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:825 MINUTE:13 HOUR:0
+Thu Mar 18 17:20:03 +03 2021
+
+#case ids:  223
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:223 nrows:111132 mb:3087
+N: 28800 NB:800 MB:3087
+!BEGIN: M:111132 N:28800 MB:3087 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:20:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	111132	254.222   	1799.630
+
+!END: M:111132 N:28800 MB:3087 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:20:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:836 MINUTE:13 HOUR:0
+Thu Mar 18 17:33:59 +03 2021
+
+#case ids:  224
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:224 nrows:111132 mb:3969
+N: 22400 NB:800 MB:3969
+!BEGIN: M:111132 N:22400 MB:3969 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:33:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	111132	246.192   	1858.327
+
+!END: M:111132 N:22400 MB:3969 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:33:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:820 MINUTE:13 HOUR:0
+Thu Mar 18 17:47:39 +03 2021
+
+#case ids:  225
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:225 nrows:111132 mb:4116
+N: 21600 NB:800 MB:4116
+!BEGIN: M:111132 N:21600 MB:4116 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:47:39 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	111132	246.054   	1859.371
+
+!END: M:111132 N:21600 MB:4116 NB:800 MAXRANK:800 DATE:Thu Mar 18 17:47:39 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:816 MINUTE:13 HOUR:0
+Thu Mar 18 18:01:15 +03 2021
+
+#case ids:  226
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:226 nrows:111132 mb:5292
+N: 16800 NB:800 MB:5292
+!BEGIN: M:111132 N:16800 MB:5292 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:01:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	111132	276.626   	1653.874
+
+!END: M:111132 N:16800 MB:5292 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:01:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 111132 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:875 MINUTE:14 HOUR:0
+Thu Mar 18 18:15:50 +03 2021
+
+#case ids:  227
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:227 nrows:121176 mb:2754
+N: 35200 NB:800 MB:2754
+!BEGIN: M:121176 N:35200 MB:2754 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:15:50 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	121176	330.993   	1791.881
+
+!END: M:121176 N:35200 MB:2754 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:15:50 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1100 MINUTE:18 HOUR:0
+Thu Mar 18 18:34:10 +03 2021
+
+#case ids:  228
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:228 nrows:121176 mb:3366
+N: 28800 NB:800 MB:3366
+!BEGIN: M:121176 N:28800 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:34:10 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	121176	316.488   	1874.010
+
+!END: M:121176 N:28800 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:34:10 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1039 MINUTE:17 HOUR:0
+Thu Mar 18 18:51:29 +03 2021
+
+#case ids:  229
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:229 nrows:121176 mb:3564
+N: 27200 NB:800 MB:3564
+!BEGIN: M:121176 N:27200 MB:3564 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:51:29 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	121176	372.979   	1590.173
+
+!END: M:121176 N:27200 MB:3564 NB:800 MAXRANK:800 DATE:Thu Mar 18 18:51:29 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1171 MINUTE:19 HOUR:0
+Thu Mar 18 19:11:00 +03 2021
+
+#case ids:  230
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:230 nrows:121176 mb:3672
+N: 26400 NB:800 MB:3672
+!BEGIN: M:121176 N:26400 MB:3672 NB:800 MAXRANK:800 DATE:Thu Mar 18 19:11:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	121176	379.008   	1564.878
+
+!END: M:121176 N:26400 MB:3672 NB:800 MAXRANK:800 DATE:Thu Mar 18 19:11:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1239 MINUTE:20 HOUR:0
+Thu Mar 18 19:31:40 +03 2021
+
+#case ids:  231
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:231 nrows:121176 mb:4488
+N: 21600 NB:800 MB:4488
+!BEGIN: M:121176 N:21600 MB:4488 NB:800 MAXRANK:800 DATE:Thu Mar 18 19:31:41 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	121176	368.617   	1608.991
+
+!END: M:121176 N:21600 MB:4488 NB:800 MAXRANK:800 DATE:Thu Mar 18 19:31:41 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1176 MINUTE:19 HOUR:0
+Thu Mar 18 19:51:17 +03 2021
+
+#case ids:  232
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:232 nrows:121176 mb:5049
+N: 19200 NB:800 MB:5049
+!BEGIN: M:121176 N:19200 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 19:51:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	121176	332.685   	1782.770
+
+!END: M:121176 N:19200 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 19:51:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1090 MINUTE:18 HOUR:0
+Thu Mar 18 20:09:27 +03 2021
+
+#case ids:  233
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:233 nrows:121176 mb:5508
+N: 17600 NB:800 MB:5508
+!BEGIN: M:121176 N:17600 MB:5508 NB:800 MAXRANK:800 DATE:Thu Mar 18 20:09:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	121176	331.383   	1789.774
+
+!END: M:121176 N:17600 MB:5508 NB:800 MAXRANK:800 DATE:Thu Mar 18 20:09:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 121176 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1085 MINUTE:18 HOUR:0
+Thu Mar 18 20:27:32 +03 2021
+
+#case ids:  234
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:234 nrows:131274 mb:3366
+N: 31200 NB:800 MB:3366
+!BEGIN: M:131274 N:31200 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 20:27:32 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	131274	434.729   	1734.589
+
+!END: M:131274 N:31200 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 20:27:32 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1414 MINUTE:23 HOUR:0
+Thu Mar 18 20:51:06 +03 2021
+
+#case ids:  235
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:235 nrows:131274 mb:3861
+N: 27200 NB:800 MB:3861
+!BEGIN: M:131274 N:27200 MB:3861 NB:800 MAXRANK:800 DATE:Thu Mar 18 20:51:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	131274	433.418   	1739.834
+
+!END: M:131274 N:27200 MB:3861 NB:800 MAXRANK:800 DATE:Thu Mar 18 20:51:06 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1405 MINUTE:23 HOUR:0
+Thu Mar 18 21:14:31 +03 2021
+
+#case ids:  236
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:236 nrows:131274 mb:3978
+N: 26400 NB:800 MB:3978
+!BEGIN: M:131274 N:26400 MB:3978 NB:800 MAXRANK:800 DATE:Thu Mar 18 21:14:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	131274	434.607   	1735.073
+
+!END: M:131274 N:26400 MB:3978 NB:800 MAXRANK:800 DATE:Thu Mar 18 21:14:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1407 MINUTE:23 HOUR:0
+Thu Mar 18 21:37:58 +03 2021
+
+#case ids:  237
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:237 nrows:131274 mb:4862
+N: 21600 NB:800 MB:4862
+!BEGIN: M:131274 N:21600 MB:4862 NB:800 MAXRANK:800 DATE:Thu Mar 18 21:37:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	131274	434.071   	1737.217
+
+!END: M:131274 N:21600 MB:4862 NB:800 MAXRANK:800 DATE:Thu Mar 18 21:37:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1412 MINUTE:23 HOUR:0
+Thu Mar 18 22:01:31 +03 2021
+
+#case ids:  238
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:238 nrows:131274 mb:5049
+N: 20800 NB:800 MB:5049
+!BEGIN: M:131274 N:20800 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 22:01:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	131274	435.517   	1731.450
+
+!END: M:131274 N:20800 MB:5049 NB:800 MAXRANK:800 DATE:Thu Mar 18 22:01:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1408 MINUTE:23 HOUR:0
+Thu Mar 18 22:24:59 +03 2021
+
+#case ids:  239
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:239 nrows:131274 mb:5967
+N: 17600 NB:800 MB:5967
+!BEGIN: M:131274 N:17600 MB:5967 NB:800 MAXRANK:800 DATE:Thu Mar 18 22:24:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	131274	437.215   	1724.726
+
+!END: M:131274 N:17600 MB:5967 NB:800 MAXRANK:800 DATE:Thu Mar 18 22:24:59 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 131274 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1420 MINUTE:23 HOUR:0
+Thu Mar 18 22:48:39 +03 2021
+
+#case ids:  240
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:240 nrows:141372 mb:3213
+N: 35200 NB:800 MB:3213
+!BEGIN: M:141372 N:35200 MB:3213 NB:800 MAXRANK:800 DATE:Thu Mar 18 22:48:39 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	141372	551.565   	1707.545
+
+!END: M:141372 N:35200 MB:3213 NB:800 MAXRANK:800 DATE:Thu Mar 18 22:48:39 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1777 MINUTE:29 HOUR:0
+Thu Mar 18 23:18:17 +03 2021
+
+#case ids:  241
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:241 nrows:141372 mb:3366
+N: 33600 NB:800 MB:3366
+!BEGIN: M:141372 N:33600 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 23:18:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	141372	554.283   	1699.171
+
+!END: M:141372 N:33600 MB:3366 NB:800 MAXRANK:800 DATE:Thu Mar 18 23:18:17 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1786 MINUTE:29 HOUR:0
+Thu Mar 18 23:48:03 +03 2021
+
+#case ids:  242
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:242 nrows:141372 mb:3927
+N: 28800 NB:800 MB:3927
+!BEGIN: M:141372 N:28800 MB:3927 NB:800 MAXRANK:800 DATE:Thu Mar 18 23:48:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	141372	553.369   	1701.979
+
+!END: M:141372 N:28800 MB:3927 NB:800 MAXRANK:800 DATE:Thu Mar 18 23:48:03 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1787 MINUTE:29 HOUR:0
+Fri Mar 19 00:17:50 +03 2021
+
+#case ids:  243
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:243 nrows:141372 mb:4158
+N: 27200 NB:800 MB:4158
+!BEGIN: M:141372 N:27200 MB:4158 NB:800 MAXRANK:800 DATE:Fri Mar 19 00:17:51 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	141372	552.796   	1703.742
+
+!END: M:141372 N:27200 MB:4158 NB:800 MAXRANK:800 DATE:Fri Mar 19 00:17:51 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1783 MINUTE:29 HOUR:0
+Fri Mar 19 00:47:34 +03 2021
+
+#case ids:  244
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:244 nrows:141372 mb:4284
+N: 26400 NB:800 MB:4284
+!BEGIN: M:141372 N:26400 MB:4284 NB:800 MAXRANK:800 DATE:Fri Mar 19 00:47:34 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	141372	552.404   	1704.951
+
+!END: M:141372 N:26400 MB:4284 NB:800 MAXRANK:800 DATE:Fri Mar 19 00:47:34 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1780 MINUTE:29 HOUR:0
+Fri Mar 19 01:17:14 +03 2021
+
+#case ids:  245
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:245 nrows:141372 mb:5049
+N: 22400 NB:800 MB:5049
+!BEGIN: M:141372 N:22400 MB:5049 NB:800 MAXRANK:800 DATE:Fri Mar 19 01:17:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	141372	557.429   	1689.581
+
+!END: M:141372 N:22400 MB:5049 NB:800 MAXRANK:800 DATE:Fri Mar 19 01:17:15 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1794 MINUTE:29 HOUR:0
+Fri Mar 19 01:47:09 +03 2021
+
+#case ids:  246
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:246 nrows:141372 mb:5236
+N: 21600 NB:800 MB:5236
+!BEGIN: M:141372 N:21600 MB:5236 NB:800 MAXRANK:800 DATE:Fri Mar 19 01:47:09 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	141372	559.054   	1684.672
+
+!END: M:141372 N:21600 MB:5236 NB:800 MAXRANK:800 DATE:Fri Mar 19 01:47:09 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 141372 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:1799 MINUTE:29 HOUR:0
+Fri Mar 19 02:17:08 +03 2021
+
+#case ids:  247
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:247 nrows:151470 mb:3366
+N: 36000 NB:800 MB:3366
+!BEGIN: M:151470 N:36000 MB:3366 NB:800 MAXRANK:800 DATE:Fri Mar 19 02:17:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	151470	643.362   	1800.542
+
+!END: M:151470 N:36000 MB:3366 NB:800 MAXRANK:800 DATE:Fri Mar 19 02:17:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2077 MINUTE:34 HOUR:0
+Fri Mar 19 02:51:45 +03 2021
+
+#case ids:  248
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:248 nrows:151470 mb:4455
+N: 27200 NB:800 MB:4455
+!BEGIN: M:151470 N:27200 MB:4455 NB:800 MAXRANK:800 DATE:Fri Mar 19 02:51:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	151470	650.139   	1781.772
+
+!END: M:151470 N:27200 MB:4455 NB:800 MAXRANK:800 DATE:Fri Mar 19 02:51:45 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2096 MINUTE:34 HOUR:0
+Fri Mar 19 03:26:41 +03 2021
+
+#case ids:  249
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:249 nrows:151470 mb:4590
+N: 26400 NB:800 MB:4590
+!BEGIN: M:151470 N:26400 MB:4590 NB:800 MAXRANK:800 DATE:Fri Mar 19 03:26:41 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	151470	667.182   	1736.258
+
+!END: M:151470 N:26400 MB:4590 NB:800 MAXRANK:800 DATE:Fri Mar 19 03:26:41 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2146 MINUTE:35 HOUR:0
+Fri Mar 19 04:02:27 +03 2021
+
+#case ids:  250
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:250 nrows:151470 mb:5049
+N: 24000 NB:800 MB:5049
+!BEGIN: M:151470 N:24000 MB:5049 NB:800 MAXRANK:800 DATE:Fri Mar 19 04:02:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	151470	647.399   	1789.315
+
+!END: M:151470 N:24000 MB:5049 NB:800 MAXRANK:800 DATE:Fri Mar 19 04:02:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2085 MINUTE:34 HOUR:0
+Fri Mar 19 04:37:12 +03 2021
+
+#case ids:  251
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:251 nrows:151470 mb:5610
+N: 21600 NB:800 MB:5610
+!BEGIN: M:151470 N:21600 MB:5610 NB:800 MAXRANK:800 DATE:Fri Mar 19 04:37:12 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	151470	645.852   	1793.600
+
+!END: M:151470 N:21600 MB:5610 NB:800 MAXRANK:800 DATE:Fri Mar 19 04:37:12 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 151470 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2080 MINUTE:34 HOUR:0
+Fri Mar 19 05:11:52 +03 2021
+
+#case ids:  252
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:252 nrows:161568 mb:3672
+N: 35200 NB:800 MB:3672
+!BEGIN: M:161568 N:35200 MB:3672 NB:800 MAXRANK:800 DATE:Fri Mar 19 05:11:52 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	161568	775.073   	1813.852
+
+!END: M:161568 N:35200 MB:3672 NB:800 MAXRANK:800 DATE:Fri Mar 19 05:11:52 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2499 MINUTE:41 HOUR:0
+Fri Mar 19 05:53:31 +03 2021
+
+#case ids:  253
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:253 nrows:161568 mb:4488
+N: 28800 NB:800 MB:4488
+!BEGIN: M:161568 N:28800 MB:4488 NB:800 MAXRANK:800 DATE:Fri Mar 19 05:53:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	161568	775.884   	1811.956
+
+!END: M:161568 N:28800 MB:4488 NB:800 MAXRANK:800 DATE:Fri Mar 19 05:53:31 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2486 MINUTE:41 HOUR:0
+Fri Mar 19 06:34:57 +03 2021
+
+#case ids:  254
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:254 nrows:161568 mb:4752
+N: 27200 NB:800 MB:4752
+!BEGIN: M:161568 N:27200 MB:4752 NB:800 MAXRANK:800 DATE:Fri Mar 19 06:34:57 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	161568	777.068   	1809.197
+
+!END: M:161568 N:27200 MB:4752 NB:800 MAXRANK:800 DATE:Fri Mar 19 06:34:57 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2490 MINUTE:41 HOUR:0
+Fri Mar 19 07:16:27 +03 2021
+
+#case ids:  255
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:255 nrows:161568 mb:4896
+N: 26400 NB:800 MB:4896
+!BEGIN: M:161568 N:26400 MB:4896 NB:800 MAXRANK:800 DATE:Fri Mar 19 07:16:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	161568	778.358   	1806.198
+
+!END: M:161568 N:26400 MB:4896 NB:800 MAXRANK:800 DATE:Fri Mar 19 07:16:27 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2500 MINUTE:41 HOUR:0
+Fri Mar 19 07:58:07 +03 2021
+
+#case ids:  256
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:256 nrows:161568 mb:5049
+N: 25600 NB:800 MB:5049
+!BEGIN: M:161568 N:25600 MB:5049 NB:800 MAXRANK:800 DATE:Fri Mar 19 07:58:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	161568	775.220   	1813.509
+
+!END: M:161568 N:25600 MB:5049 NB:800 MAXRANK:800 DATE:Fri Mar 19 07:58:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2490 MINUTE:41 HOUR:0
+Fri Mar 19 08:39:38 +03 2021
+
+#case ids:  257
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:257 nrows:161568 mb:5984
+N: 21600 NB:800 MB:5984
+!BEGIN: M:161568 N:21600 MB:5984 NB:800 MAXRANK:800 DATE:Fri Mar 19 08:39:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	161568	774.283   	1815.703
+
+!END: M:161568 N:21600 MB:5984 NB:800 MAXRANK:800 DATE:Fri Mar 19 08:39:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 161568 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:2483 MINUTE:41 HOUR:0
+Fri Mar 19 09:21:01 +03 2021
+
+#case ids:  258
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:258 nrows:171600 mb:3900
+N: 35200 NB:800 MB:3900
+!BEGIN: M:171600 N:35200 MB:3900 NB:800 MAXRANK:800 DATE:Fri Mar 19 09:21:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	171600	951.504   	1770.191
+
+!END: M:171600 N:35200 MB:3900 NB:800 MAXRANK:800 DATE:Fri Mar 19 09:21:01 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3038 MINUTE:50 HOUR:0
+Fri Mar 19 10:11:39 +03 2021
+
+#case ids:  259
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:259 nrows:171600 mb:4290
+N: 32000 NB:800 MB:4290
+!BEGIN: M:171600 N:32000 MB:4290 NB:800 MAXRANK:800 DATE:Fri Mar 19 10:11:40 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	171600	949.525   	1773.879
+
+!END: M:171600 N:32000 MB:4290 NB:800 MAXRANK:800 DATE:Fri Mar 19 10:11:40 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3028 MINUTE:50 HOUR:0
+Fri Mar 19 11:02:08 +03 2021
+
+#case ids:  260
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:260 nrows:171600 mb:4400
+N: 31200 NB:800 MB:4400
+!BEGIN: M:171600 N:31200 MB:4400 NB:800 MAXRANK:800 DATE:Fri Mar 19 11:02:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	171600	948.319   	1776.136
+
+!END: M:171600 N:31200 MB:4400 NB:800 MAXRANK:800 DATE:Fri Mar 19 11:02:08 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3024 MINUTE:50 HOUR:0
+Fri Mar 19 11:52:32 +03 2021
+
+#case ids:  261
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:261 nrows:171600 mb:5200
+N: 26400 NB:800 MB:5200
+!BEGIN: M:171600 N:26400 MB:5200 NB:800 MAXRANK:800 DATE:Fri Mar 19 11:52:32 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	171600	951.748   	1769.736
+
+!END: M:171600 N:26400 MB:5200 NB:800 MAXRANK:800 DATE:Fri Mar 19 11:52:32 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3044 MINUTE:50 HOUR:0
+Fri Mar 19 12:43:16 +03 2021
+
+#case ids:  262
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:262 nrows:171600 mb:5720
+N: 24000 NB:800 MB:5720
+!BEGIN: M:171600 N:24000 MB:5720 NB:800 MAXRANK:800 DATE:Fri Mar 19 12:43:16 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	171600	950.419   	1772.211
+
+!END: M:171600 N:24000 MB:5720 NB:800 MAXRANK:800 DATE:Fri Mar 19 12:43:16 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 171600 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3032 MINUTE:50 HOUR:0
+Fri Mar 19 13:33:48 +03 2021
+
+#case ids:  263
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:263 nrows:184800 mb:4200
+N: 35200 NB:800 MB:4200
+!BEGIN: M:184800 N:35200 MB:4200 NB:800 MAXRANK:800 DATE:Fri Mar 19 13:33:48 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	184800	1101.293  	1910.213
+
+!END: M:184800 N:35200 MB:4200 NB:800 MAXRANK:800 DATE:Fri Mar 19 13:33:48 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3517 MINUTE:58 HOUR:0
+Fri Mar 19 14:32:25 +03 2021
+
+#case ids:  264
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:264 nrows:184800 mb:4400
+N: 33600 NB:800 MB:4400
+!BEGIN: M:184800 N:33600 MB:4400 NB:800 MAXRANK:800 DATE:Fri Mar 19 14:32:26 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	184800	1052.940  	1997.934
+
+!END: M:184800 N:33600 MB:4400 NB:800 MAXRANK:800 DATE:Fri Mar 19 14:32:26 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3372 MINUTE:56 HOUR:0
+Fri Mar 19 15:28:38 +03 2021
+
+#case ids:  265
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:265 nrows:184800 mb:4620
+N: 32000 NB:800 MB:4620
+!BEGIN: M:184800 N:32000 MB:4620 NB:800 MAXRANK:800 DATE:Fri Mar 19 15:28:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	184800	1053.872  	1996.166
+
+!END: M:184800 N:32000 MB:4620 NB:800 MAXRANK:800 DATE:Fri Mar 19 15:28:38 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3372 MINUTE:56 HOUR:0
+Fri Mar 19 16:24:50 +03 2021
+
+#case ids:  266
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:266 nrows:184800 mb:5280
+N: 28000 NB:800 MB:5280
+!BEGIN: M:184800 N:28000 MB:5280 NB:800 MAXRANK:800 DATE:Fri Mar 19 16:24:50 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	184800	1070.540  	1965.086
+
+!END: M:184800 N:28000 MB:5280 NB:800 MAXRANK:800 DATE:Fri Mar 19 16:24:50 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3424 MINUTE:57 HOUR:0
+Fri Mar 19 17:21:54 +03 2021
+
+#case ids:  267
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:267 nrows:184800 mb:5600
+N: 26400 NB:800 MB:5600
+!BEGIN: M:184800 N:26400 MB:5600 NB:800 MAXRANK:800 DATE:Fri Mar 19 17:21:54 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	184800	1053.837  	1996.232
+
+!END: M:184800 N:26400 MB:5600 NB:800 MAXRANK:800 DATE:Fri Mar 19 17:21:54 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3382 MINUTE:56 HOUR:0
+Fri Mar 19 18:18:16 +03 2021
+
+#case ids:  268
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:268 nrows:184800 mb:5775
+N: 25600 NB:800 MB:5775
+!BEGIN: M:184800 N:25600 MB:5775 NB:800 MAXRANK:800 DATE:Fri Mar 19 18:18:16 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	184800	1054.044  	1995.840
+
+!END: M:184800 N:25600 MB:5775 NB:800 MAXRANK:800 DATE:Fri Mar 19 18:18:16 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 184800 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:3381 MINUTE:56 HOUR:0
+Fri Mar 19 19:14:37 +03 2021
+
+#case ids:  269
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:269 nrows:196560 mb:4368
+N: 36000 NB:800 MB:4368
+!BEGIN: M:196560 N:36000 MB:4368 NB:800 MAXRANK:800 DATE:Fri Mar 19 19:14:37 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 196560 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	196560	1273.325  	1988.039
+
+!END: M:196560 N:36000 MB:4368 NB:800 MAXRANK:800 DATE:Fri Mar 19 19:14:37 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 196560 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:4067 MINUTE:67 HOUR:1
+Fri Mar 19 20:22:24 +03 2021
+
+#case ids:  270
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:270 nrows:196560 mb:4680
+N: 33600 NB:800 MB:4680
+!BEGIN: M:196560 N:33600 MB:4680 NB:800 MAXRANK:800 DATE:Fri Mar 19 20:22:24 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 196560 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh
+R-MKL-DPOTRF	196560	1270.105  	1993.078
+
+!END: M:196560 N:33600 MB:4680 NB:800 MAXRANK:800 DATE:Fri Mar 19 20:22:24 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 196560 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh SECOND:4045 MINUTE:67 HOUR:1
+Fri Mar 19 21:29:49 +03 2021
+
+#case ids:  271
+vulture
+sruncmd: "numactl --interleave=all  "
+Number of nbs:137 Number of cases:274
+Experiment case:271 nrows:196560 mb:4914
+N: 32000 NB:800 MB:4914
+!BEGIN: M:196560 N:32000 MB:4914 NB:800 MAXRANK:800 DATE:Fri Mar 19 21:29:49 +03 2021 SCHED:prio CMD:/home/akbudak/hicma-potrf/src/mkl/bench_dpotrf 196560 2 MAXSUB:49 MINSUB:39 CASE:/home/akbudak/hicma-dev/exp/cases/statistics.sh

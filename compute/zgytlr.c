@@ -1,45 +1,49 @@
-/*
- * @copyright (c) 2017 King Abdullah University of Science and Technology (KAUST).
+/**
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
  *                     All rights reserved.
- */
+ **/
+
 /**
  * @file zgytlr.c
  *
- * This file contains tile low-rank (TLR) matrix generation functions.
- *
+ *  HiCMA auxiliary routines
  *  HiCMA is a software package provided by King Abdullah University of Science and Technology (KAUST)
  *
- * @version 0.1.1
+ * @version 1.0.0
  * @author Kadir Akbudak
  * @date 2018-11-08
  **/
-/*
+
+/**
  * @copyright (c) 2009-2014 The University of Tennessee and The University
  *                          of Tennessee Research Foundation.
  *                          All rights reserved.
- * @copyright (c) 2012-2014 Inria. All rights reserved.
+ * @copyright (c) 2012-2016 Inria. All rights reserved.
  * @copyright (c) 2012-2014 Bordeaux INP, CNRS (LaBRI UMR 5800), Inria, Univ. Bordeaux. All rights reserved.
  */
-/*
- * file zplrnt.c
+
+/**
  *
- * MORSE computational routines
+ * file zgytlr.c
+ *
+ * MORSE auxiliary routines
  * MORSE is a software package provided by Univ. of Tennessee,
  * Univ. of California Berkeley and Univ. of Colorado Denver
  *
- * version 2.5.0
- * comment This file has been automatically generated
+ * @version 2.5.0
+ * @comment This file has been automatically generated
  *         from Plasma 2.5.0 for MORSE 1.0.0
- * author Mathieu Faverge
- * author Emmanuel Agullo
- * author Cedric Castagnede
- * date 2010-11-15
- * precisions normal z -> s d c
+ * @author Jakub Kurzak
+ * @author Mathieu Faverge
+ * @author Emmanuel Agullo
+ * @author Cedric Castagnede
+ * @date 2010-11-15
  *
- */
-#include "morse.h"
-#include "control/common.h"
-#include "control/hicma_common.h"
+ **/
+
+#include <hicma.h>
+#include <control/common.h>
+#include <hicma_common.h>
 
 /**
  *  HICMA_zgytlr_Tile - Generate a random matrix by tiles.
@@ -84,35 +88,35 @@
  *******************************************************************************
  *
  * @return
- *          \retval MORSE_SUCCESS successful exit
+ *          \retval HICMA_SUCCESS successful exit
  *          \retval <0 if -i, the i-th argument had an illegal value
  *
  *
  ******************************************************************************/
 #include <stdio.h>
 int HICMA_zgytlr_Tile(
-        MORSE_enum   uplo,
-        MORSE_desc_t *AUV,
-        MORSE_desc_t *AD,
-        MORSE_desc_t *Ark,
+        HICMA_enum   uplo,
+        HICMA_desc_t *AUV,
+        HICMA_desc_t *AD,
+        HICMA_desc_t *Ark,
         unsigned long long int seed,
         int maxrank,
         double tol,
         int compress_diag,
-        MORSE_desc_t *Dense
+        HICMA_desc_t *Dense
         )
 {
-    MORSE_context_t *morse;
-    MORSE_sequence_t *sequence = NULL;
-    MORSE_request_t request = MORSE_REQUEST_INITIALIZER;
+    HICMA_context_t *hicma;
+    HICMA_sequence_t *sequence = NULL;
+    HICMA_request_t request = HICMA_REQUEST_INITIALIZER;
     int status;
 
-    morse = morse_context_self();
-    if (morse == NULL) {
-        morse_fatal_error("MORSE_zgytlr_Tile", "morse not initialized");
-        return MORSE_ERR_NOT_INITIALIZED;
+    hicma = hicma_context_self();
+    if (hicma == NULL) {
+        hicma_fatal_error("HiCMA_zgytlr_Tile", "hicma not initialized");
+        return HICMA_ERR_NOT_INITIALIZED;
     }
-    morse_sequence_create(morse, &sequence);
+    hicma_sequence_create(hicma, &sequence);
     HICMA_zgytlr_Tile_Async(
             uplo,
             AUV,
@@ -122,15 +126,15 @@ int HICMA_zgytlr_Tile(
             compress_diag,
             Dense,
             sequence, &request );
-    MORSE_Desc_Flush( AD, sequence );
-    MORSE_Desc_Flush( AUV, sequence ); //added due to stall when parsec is used
-    MORSE_Desc_Flush( Ark, sequence ); //added due to stall when parsec is used
-    MORSE_Desc_Flush( Dense, sequence ); //added due to stall when parsec is used
-    morse_sequence_wait(morse, sequence);
+    HICMA_Desc_Flush( AD, sequence );
+    HICMA_Desc_Flush( AUV, sequence ); //added due to stall when parsec is used
+    HICMA_Desc_Flush( Ark, sequence ); //added due to stall when parsec is used
+    HICMA_Desc_Flush( Dense, sequence ); //added due to stall when parsec is used
+    hicma_sequence_wait(hicma, sequence);
     //RUNTIME_desc_getoncpu(AD);
 
     status = sequence->status;
-    morse_sequence_destroy(morse, sequence);
+    hicma_sequence_destroy(hicma, sequence);
 
     return status;
 }
@@ -153,54 +157,54 @@ int HICMA_zgytlr_Tile(
  *
  ******************************************************************************/
 int HICMA_zgytlr_Tile_Async(
-        MORSE_enum       uplo,
-        MORSE_desc_t     *AUV,
-        MORSE_desc_t     *AD,
-        MORSE_desc_t     *Ark,
+        HICMA_enum       uplo,
+        HICMA_desc_t     *AUV,
+        HICMA_desc_t     *AD,
+        HICMA_desc_t     *Ark,
         unsigned long long int seed,
         int maxrank, double tol,
         int  compress_diag,
-        MORSE_desc_t *Dense,
-        MORSE_sequence_t *sequence,
-        MORSE_request_t  *request)
+        HICMA_desc_t *Dense,
+        HICMA_sequence_t *sequence,
+        HICMA_request_t  *request)
 {
-    MORSE_desc_t *A = AUV; // FIXME
+    HICMA_desc_t *A = AUV; // FIXME
 
-    MORSE_context_t *morse;
+    HICMA_context_t *hicma;
 
-    morse = morse_context_self();
-    if (morse == NULL) {
-        morse_fatal_error("MORSE_zgytlr_Tile", "morse not initialized");
-        return MORSE_ERR_NOT_INITIALIZED;
+    hicma = hicma_context_self();
+    if (hicma == NULL) {
+        hicma_fatal_error("HiCMA_zgytlr_Tile", "hicma not initialized");
+        return HICMA_ERR_NOT_INITIALIZED;
     }
     if (sequence == NULL) {
-        morse_fatal_error("MORSE_zgytlr_Tile", "NULL sequence");
-        return MORSE_ERR_UNALLOCATED;
+        hicma_fatal_error("HiCMA_zgytlr_Tile", "NULL sequence");
+        return HICMA_ERR_UNALLOCATED;
     }
     if (request == NULL) {
-        morse_fatal_error("MORSE_zgytlr_Tile", "NULL request");
-        return MORSE_ERR_UNALLOCATED;
+        hicma_fatal_error("HiCMA_zgytlr_Tile", "NULL request");
+        return HICMA_ERR_UNALLOCATED;
     }
     /* Check sequence status */
-    if (sequence->status == MORSE_SUCCESS)
-        request->status = MORSE_SUCCESS;
+    if (sequence->status == HICMA_SUCCESS)
+        request->status = HICMA_SUCCESS;
     else
-        return morse_request_fail(sequence, request, MORSE_ERR_SEQUENCE_FLUSHED);
+        return hicma_request_fail(sequence, request, HICMA_ERR_SEQUENCE_FLUSHED);
 
     /* Check descriptors for correctness */
-    if (morse_desc_check(A) != MORSE_SUCCESS) {
-        morse_error("MORSE_zgytlr_Tile", "invalid descriptor");
-        return morse_request_fail(sequence, request, MORSE_ERR_ILLEGAL_VALUE);
+    if (hicma_desc_check(A) != HICMA_SUCCESS) {
+        hicma_error("HiCMA_zgytlr_Tile", "invalid descriptor");
+        return hicma_request_fail(sequence, request, HICMA_ERR_ILLEGAL_VALUE);
     }
     /* Check input arguments */
     /*if (A->nb != A->mb) {
-        morse_error("MORSE_zgytlr_Tile", "only square tiles supported");
-        return morse_request_fail(sequence, request, MORSE_ERR_ILLEGAL_VALUE);
+        hicma_error("HiCMA_zgytlr_Tile", "only square tiles supported");
+        return hicma_request_fail(sequence, request, HICMA_ERR_ILLEGAL_VALUE);
     }*/
 
     /* Quick return */
-    if (chameleon_min( A->m, A->n ) == 0)
-        return MORSE_SUCCESS;
+    if (hicma_min( A->m, A->n ) == 0)
+        return HICMA_SUCCESS;
 
     hicma_pzgytlr(
             uplo,
@@ -210,8 +214,8 @@ int HICMA_zgytlr_Tile_Async(
             seed,
             maxrank, tol,
             compress_diag,
-            Dense,
+            Dense, 
             sequence, request);
 
-    return MORSE_SUCCESS;
+    return HICMA_SUCCESS;
 }

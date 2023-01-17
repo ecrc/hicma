@@ -84,6 +84,5 @@ across all tiles. This option can be used to measure the impact of additionally
 communicating rank descriptor during computations. If rank descriptor is not communicated, 
 the total number of messages becomes less.
 
-**HICMA_USE_MPI=[ON,OFF]**: Enables/Disables MPI in HiCMA. This parameter should be set consistently 
-according to CHAMELEON_USE_MPI.
+**HICMA_USE_MPI=[ON,OFF]**: Enables/Disables MPI in HiCMA.
 

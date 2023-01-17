@@ -1,5 +1,5 @@
 /**
- * @copyright (c) 2017 King Abdullah University of Science and Technology (KAUST).
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
  *                     All rights reserved.
  **/
 /**
@@ -25,12 +25,12 @@
 #ifndef TIMING_ZAUXILIARY_H
 #define TIMING_ZAUXILIARY_H
 
-double hicma_z_check_gemm(MORSE_enum transA, MORSE_enum transB, int M, int N, int K,
+double hicma_z_check_gemm(HICMA_enum transA, HICMA_enum transB, int M, int N, int K,
                    double alpha, double *A, int LDA,
                    double *B, int LDB,
-                   double beta, double *Cmorse,
+                   double beta, double *Chicma,
                    double *Cref, int LDC,
-                   double *Cinitnorm, double *Cmorsenorm, double *Clapacknorm );
+                   double *Cinitnorm, double *Chicmanorm, double *Clapacknorm );
 
 
 

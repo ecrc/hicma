@@ -1,5 +1,5 @@
 /**
- * @copyright (c) 2017 King Abdullah University of Science and Technology (KAUST).
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
  *                     All rights reserved.
  **/
 
@@ -10,7 +10,7 @@
  *
  * HiCMA is a software package provided by King Abdullah University of Science and Technology (KAUST)
  *
- * @version 0.1.1
+ * @version 1.0.0
  * @author Kadir Akbudak
  * @date 2018-11-08
  **/
@@ -26,7 +26,8 @@
 #ifndef TIMING_H
 #define TIMING_H
 
-#include "morse.h"
+#include <hicma.h>
+#include "hicma_common.h"
 
 #define _TYPE  double
 #define _PREC  double
@@ -34,21 +35,18 @@
 /* See Lawn 41 page 120 */
 #define _FMULS 0 //FMULS_GEMM(M, N, K) //FIXME
 #define _FADDS 0 //FADDS_GEMM(M, N, K) //FIXME
-#define _NAME  "HICMA_zgemm_Tile"
+#define _NAME  "HiCMA_zgemm_Tile"
 
 
 
 
-typedef double morse_time_t;
-char *meshfile; //path to the mesh file
-double rad; // RBF scaling factor
-double reg; // RBF regularization value
+typedef double hicma_time_t;
 
 #include <stdio.h>
 void print_array(int m, int n, int ld, double* arr, FILE* fp);
 void fwrite_array(int m, int n, int ld, double* arr, char* file);
-int RunTest(int *iparam, double *dparam, morse_time_t *t_, char* rankfile);
-void* morse_getaddr_null(const MORSE_desc_t *A, int m, int n);
+int RunTest(int *iparam, double *dparam, hicma_time_t *t_, char* rankfile);
+void* hicma_getaddr_null(const HICMA_desc_t *A, int m, int n);
 
 enum iparam_timing {
     IPARAM_THRDNBR,        /* Number of cores                            */
@@ -110,6 +108,12 @@ enum iparam_timing {
     IPARAM_RBFKERNEL, // RBF kernel_type
     IPARAM_NUMOBJ, // how many objects (e.g. total number of viruses)
     IPARAM_NUMSUBOBJ, // how many subobjects (e.g. number of subviruses within one batch)
+    IPARAM_HICMA_NTRIAN,  /* @noha Please add a short description */
+    IPARAM_HICMA_NIPP,  /* @noha Please add a short description */
+    IPARAM_HICMA_PERCENT1,  
+    IPARAM_HICMA_PERCENT2,  
+    IPARAM_HICMA_ISPERCENT,
+    IPARAM_HICMA_SOLVE,
     IPARAM_SOLVE,  /* Cholesky solver*/
     IPARAM_CSOLVE,  /* Check Cholesky solver*/
 
@@ -151,9 +155,9 @@ enum dparam_timing {
     int64_t N     = iparam[IPARAM_N];              \
     int64_t K     = iparam[IPARAM_K];              \
     int64_t NRHS  = K;                             \
-    int64_t LDA   = chameleon_max(M, iparam[IPARAM_LDA]);    \
-    int64_t LDB   = chameleon_max(N, iparam[IPARAM_LDB]);    \
-    int64_t LDC   = chameleon_max(K, iparam[IPARAM_LDC]);    \
+    int64_t LDA   = hicma_max(M, iparam[IPARAM_LDA]);    \
+    int64_t LDB   = hicma_max(N, iparam[IPARAM_LDB]);    \
+    int64_t LDC   = hicma_max(K, iparam[IPARAM_LDC]);    \
     int64_t IB    = iparam[IPARAM_IB];             \
     int64_t MB    = iparam[IPARAM_MB];             \
     int64_t NB    = iparam[IPARAM_NB];             \
@@ -163,9 +167,11 @@ enum dparam_timing {
     int64_t NT    = (N%NB==0) ? (N/NB) : (N/NB+1); \
     int bigmat     = iparam[IPARAM_BIGMAT];         \
     int check     = iparam[IPARAM_CHECK];          \
-    int solve     = iparam[IPARAM_SOLVE];          \
     int check_solve     = iparam[IPARAM_CSOLVE];          \
     int loud      = iparam[IPARAM_VERBOSE];        \
+    int nip      = iparam[IPARAM_HICMA_NIPP];     \
+    int ntrian      = iparam[IPARAM_HICMA_NTRIAN];    \
+    int solve	    =iparam[IPARAM_HICMA_SOLVE];   \
     (void)M;(void)N;(void)K;(void)NRHS;            \
     (void)LDA;(void)LDB;(void)LDC;                 \
     (void)IB;(void)MB;(void)NB;(void)P;(void)Q;    \
@@ -173,22 +179,22 @@ enum dparam_timing {
 
 /* Paste code to allocate a matrix in desc if cond_init is true */
 #define PASTE_CODE_ALLOCATE_MATRIX_TILE(_desc_, _cond_, _type_, _type2_, _lda_, _m_, _n_) \
-    MORSE_desc_t *_desc_ = NULL;                                        \
+    HICMA_desc_t *_desc_ = NULL;                                        \
     int status ## _desc_ ; \
     if( _cond_ ) {                                                      \
        if (!bigmat){ \
-           status ## _desc_ = MORSE_Desc_Create_User(&(_desc_), NULL, _type2_, MB, NB, MB*NB, _lda_, _n_, 0, 0, _m_, _n_, \
-                          P, Q, morse_getaddr_null, NULL, NULL);\
+           status ## _desc_ = HICMA_Desc_Create_User(&(_desc_), NULL, _type2_, MB, NB, MB*NB, _lda_, _n_, 0, 0, _m_, _n_, \
+                          P, Q, hicma_getaddr_null, NULL, NULL);\
        }\
         else {\
-           status ## _desc_ = MORSE_Desc_Create(&(_desc_), NULL, _type2_, MB, NB, MB*NB, _lda_, _n_, 0, 0, _m_, _n_, \
+           status ## _desc_ = HICMA_Desc_Create(&(_desc_), NULL, _type2_, MB, NB, MB*NB, _lda_, _n_, 0, 0, _m_, _n_, \
                     P, Q);\
         }\
-        if (status ## _desc_ != MORSE_SUCCESS) return (status ## _desc_);          \
+        if (status ## _desc_ != HICMA_SUCCESS) return (status ## _desc_);          \
     }
 
 #define PASTE_CODE_FREE_MATRIX(_desc_)                                  \
-    MORSE_Desc_Destroy( &_desc_ );
+    HICMA_Desc_Destroy( &_desc_ );
 
 #define PASTE_TILE_TO_LAPACK(_desc_, _name_, _cond_, _type_, _lda_, _n_) \
     _type_ *_name_ = NULL;                                               \
@@ -198,7 +204,7 @@ enum dparam_timing {
             fprintf(stderr, "Out of Memory for %s\n", #_name_);          \
             return -1;                                                   \
         }                                                                \
-        MORSE_Tile_to_Lapack(_desc_, (void*)_name_, _lda_);              \
+        HICMA_Tile_to_Lapack(_desc_, (void*)_name_, _lda_);              \
     }
 
 #define PASTE_CODE_ALLOCATE_MATRIX(_name_, _cond_, _type_, _lda_, _n_)  \
@@ -228,21 +234,21 @@ enum dparam_timing {
  *
  */
 #define START_TRACING()                        \
-    RUNTIME_start_stats();                     \
+    HICMA_RUNTIME_start_stats();                     \
     if(iparam[IPARAM_TRACE] == 2) {            \
-    	RUNTIME_start_profiling();             \
+    	HICMA_RUNTIME_start_profiling();             \
     }                                          \
     if(iparam[IPARAM_BOUND]) {                 \
-        MORSE_Enable(MORSE_BOUND);             \
+        HICMA_Enable(HICMA_BOUND);             \
     }
 
 #define STOP_TRACING()                         \
-    RUNTIME_stop_stats();                      \
+    HICMA_RUNTIME_stop_stats();                      \
     if(iparam[IPARAM_TRACE] == 2) {            \
-    	RUNTIME_stop_profiling();              \
+    	HICMA_RUNTIME_stop_profiling();              \
     }                                          \
     if(iparam[IPARAM_BOUND]) {                 \
-        MORSE_Disable(MORSE_BOUND);            \
+        HICMA_Disable(HICMA_BOUND);            \
     }
 
 /*********************
@@ -253,11 +259,11 @@ enum dparam_timing {
 #if 0
 #define START_DAG()                   \
     if ( iparam[IPARAM_DAG] == 2 )    \
-        MORSE_Enable(MORSE_DAG);
+        HICMA_Enable(HICMA_DAG);
 
 #define STOP_DAG()                    \
     if ( iparam[IPARAM_DAG] == 2 )    \
-        MORSE_Disable(MORSE_DAG);
+        HICMA_Disable(HICMA_DAG);
 #else
 #define START_DAG()  do {} while(0);
 #define STOP_DAG()   do {} while(0);
@@ -268,9 +274,9 @@ enum dparam_timing {
  * Synchro for distributed computations
  *
  */
-#if defined(CHAMELEON_USE_MPI)
-#define START_DISTRIBUTED()  MORSE_Distributed_start();
-#define STOP_DISTRIBUTED()   MORSE_Distributed_stop();
+#if defined(HICMA_USE_MPI)
+#define START_DISTRIBUTED()  HICMA_Distributed_start();
+#define STOP_DISTRIBUTED()   HICMA_Distributed_stop();
 #else
 #define START_DISTRIBUTED()  do {} while(0);
 #define STOP_DISTRIBUTED()   do {} while(0);
@@ -282,16 +288,16 @@ enum dparam_timing {
  *
  */
 #define START_TIMING()                \
-  t = -RUNTIME_get_time();            \
+  t = -HICMA_RUNTIME_get_time();            \
   START_DAG();                        \
   START_TRACING();                    \
   START_DISTRIBUTED();
 
 #define STOP_TIMING()                 \
-  t += RUNTIME_get_time();            \
+  t += HICMA_RUNTIME_get_time();            \
   if (iparam[IPARAM_PROFILE] == 2) {  \
-    RUNTIME_kernelprofile_display();  \
-    RUNTIME_schedprofile_display();   \
+    HICMA_RUNTIME_kernelprofile_display();  \
+    HICMA_RUNTIME_schedprofile_display();   \
   }                                   \
   *t_ = t;                            \
   STOP_DISTRIBUTED();                 \

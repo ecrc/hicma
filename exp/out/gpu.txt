@@ -1,0 +1,8 @@
+#vulture-gpu-2021-03-07-1.txt
+vulture-v100-2021-03-15-sqexp-exp-2d-1.txt
+#vulture-2v100-2021-03-16-sqexp-exp-2d-2gpus-1.txt
+#a100-2021-03-21-1.txt
+vulture-v100-2021-04-08-sqexp-exp-2d-gpu-resident-1.txt
+#ibexrome-2021-05-02-sqexp-exp-2d-1.txt
+ibexrome-2021-05-07-smallnb-sqexp-exp-2d-1-1.txt
+ibexrome-2021-05-08-smallnb-sqexp-exp-2d-1.txt

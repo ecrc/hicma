@@ -40,7 +40,7 @@ cd $HICMADEVDIR
 cd chameleon
 mkdir -p build/installdir
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DCHAMELEON_USE_MPI=ON  -DCMAKE_INSTALL_PREFIX=$PWD/installdir
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DHICMA_USE_MPI=ON  -DCMAKE_INSTALL_PREFIX=$PWD/installdir
 make -j
 make install
 export PKG_CONFIG_PATH=$PWD/installdir/lib/pkgconfig:$PKG_CONFIG_PATH

@@ -173,7 +173,7 @@ for nt in $nta;do
         fi
         export STARPU_SCHED=ws
         #export STARPU_SCHED=prio
-        export MORSE_TESTING_VERBOSE=1
+        export HICMA_TESTING_VERBOSE=1
         if [ "$prog" == "cham" ]; then
             $CMD $runcham
         elif [ "$prog" == "hic" ]; then

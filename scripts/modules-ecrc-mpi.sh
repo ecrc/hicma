@@ -1,1 +1,1 @@
-module load openmpi/3.0.0-gcc-5.5.0 
+module load openmpi/4.1.0-gcc-10.2.0

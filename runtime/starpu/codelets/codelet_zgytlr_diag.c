@@ -1,9 +1,9 @@
 /**
- * @copyright (c) 2017 King Abdullah University of Science and Technology (KAUST).
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
  *                     All rights reserved.
  **/
 /**
- * @file codelet_zgytlr.c
+ * @file codelet_zgytlr_diag.c
  *
  *  HiCMA codelets kernel
  *  HiCMA is a software package provided by King Abdullah University of Science and Technology (KAUST)
@@ -13,33 +13,22 @@
  * @date 2017-11-16
  * @precisions normal z -> c d s
  **/
-#include "morse.h"
-#include "runtime/starpu/chameleon_starpu.h"
-//#include "runtime/starpu/include/runtime_codelet_z.h"
 
-#include "runtime/starpu/runtime_codelets.h"
+#include <hcore_z.h>
+#include <runtime/starpu/hicma_starpu.h>
+#include <runtime/starpu/hicma_runtime_codelets.h>
+
 ZCODELETS_HEADER(gytlrdiag)
 
 
-extern void zgytlr( int m, int n, /*dimension of squareAD*/
-        double *AU,
-        double *AV,
-        double *AD,
-        double *Ark,
-        int lda,
-        int ldu,
-        int ldv,
-        int bigM, int ii, int jj, unsigned long long int seed,
-        int maxrank, double tol, int compress_diag,
-        double *Dense
-        );
-/*   MORSE_TASK_zgytlr - Generate a tile for random matrix. */
-
-void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
+//HICMA_CHAM_CL_CB(zgytlr,        starpu_matrix_get_nx(task->handles[0]), starpu_matrix_get_ny(task->handles[0]), 0,                                                M*N)
+/*   HICMA_TASK_zgytlr - Generate a tile for random matrix. */
+//#if defined(HICMA_COMPLEX)
+void HICMA_TASK_zgytlr_diag( const HICMA_option_t *options,
                         int m, int n,
-                        const MORSE_desc_t *AUV,
-                        const MORSE_desc_t *AD, int ADm, int ADn,
-                        const MORSE_desc_t *Ark,
+                        const HICMA_desc_t *AUV,
+                        const HICMA_desc_t *AD, int ADm, int ADn,
+                        const HICMA_desc_t *Ark,
                         int Am, int An, 
                         int lda,
                         int ldu,
@@ -47,7 +36,7 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
                         int bigM, int m0, int n0, unsigned long long int seed,
                         int maxrank, double tol,
                         int compress_diag,
-                        MORSE_desc_t *Dense
+                        const HICMA_desc_t *Dense
                         )
 {
     struct starpu_codelet *codelet = &cl_zgytlrdiag;
@@ -55,14 +44,14 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
     void (*callback)(void*) = NULL;
     int nAUV = AUV->nb;
 
-    MORSE_BEGIN_ACCESS_DECLARATION;
-    MORSE_ACCESS_W(AUV, Am, An);
-    MORSE_ACCESS_W(AD, ADm, ADn);
-    MORSE_ACCESS_W(Ark, Am, An);
-    MORSE_ACCESS_RW(Dense, Am, An);
-    MORSE_END_ACCESS_DECLARATION;
+    HICMA_BEGIN_ACCESS_DECLARATION;
+    HICMA_ACCESS_W(AUV, Am, An);
+    HICMA_ACCESS_W(AD, ADm, ADn);
+    HICMA_ACCESS_W(Dense, Am, An);
+    HICMA_ACCESS_W(Ark, Am, An);
+    HICMA_END_ACCESS_DECLARATION;
 
-    // printf("%s:%d: Am:%d An:%d lda:%d bigM:%d m0:%d n0:%d\n ", __FILE__, __LINE__, Am, An, lda, bigM, m0, n0);
+     //printf("%s:%d: Am:%d An:%d lda:%d bigM:%d m0:%d n0:%d\n ", __FILE__, __LINE__, Am, An, lda, bigM, m0, n0);
 
         //printf("%s %d: Am:%d An:%d ADm:%d ADn:%d ptr:%p\n", __func__, __LINE__, Am, An, ADm, ADn, ptr);
     starpu_insert_task(
@@ -70,10 +59,10 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
             STARPU_VALUE,    &m,                      sizeof(int),
             STARPU_VALUE,    &n,                      sizeof(int),
             STARPU_VALUE,    &nAUV,                      sizeof(int),
-            STARPU_W,         RTBLKADDR(AUV, double, Am, An),
-            STARPU_W,         RTBLKADDR(AD, double, ADm, ADn),
+            STARPU_W,         RTBLKADDR(AUV, HICMA_Complex64_t, Am, An),
+            STARPU_W,         RTBLKADDR(AD, HICMA_Complex64_t, ADm, ADn),
             STARPU_W,         RTBLKADDR(Ark, double, Am, An),
-            STARPU_RW,         RTBLKADDR(Dense, double, Am, An), // _R must be _W SERIOUSLY. BUT _W STALLS ON SHAHEEN. FIXME
+            STARPU_R,         RTBLKADDR(Dense, HICMA_Complex64_t, Am, An), // _R must be _W SERIOUSLY. BUT _W STALLS ON SHAHEEN. FIXME
             STARPU_VALUE,  &lda,                      sizeof(int),
             STARPU_VALUE,  &ldu,                      sizeof(int),
             STARPU_VALUE,  &ldv,                      sizeof(int),
@@ -87,7 +76,7 @@ void HICMA_TASK_zgytlr_diag( const MORSE_option_t *options,
             STARPU_PRIORITY,    options->priority,
             STARPU_CALLBACK,    callback,
 #if defined(CHAMELEON_CODELETS_HAVE_NAME)
-            STARPU_NAME, "zgytlr_diag",
+            STARPU_NAME, "hcore_zgytlr_diag",
 #endif
             0);
 }
@@ -100,10 +89,10 @@ static void cl_zgytlr_cpu_func(void *descr[], void *cl_arg)
     int m;
     int n;
     int nAUV;
-    double *AUV;
-    double *AD;
+    HICMA_Complex64_t *AUV;
+    HICMA_Complex64_t *AD;
     double *Ark;
-    double *Dense;
+    HICMA_Complex64_t *Dense;
     int lda;
     int ldu;
     int ldv;
@@ -115,10 +104,10 @@ static void cl_zgytlr_cpu_func(void *descr[], void *cl_arg)
     double tol;
     int compress_diag;
 
-    AUV = (double *)STARPU_MATRIX_GET_PTR(descr[0]);
-    AD = (double *)STARPU_MATRIX_GET_PTR(descr[1]);
+    AUV = (HICMA_Complex64_t *)STARPU_MATRIX_GET_PTR(descr[0]);
+    AD = (HICMA_Complex64_t *)STARPU_MATRIX_GET_PTR(descr[1]);
     Ark = (double *)STARPU_MATRIX_GET_PTR(descr[2]);
-    Dense = (double *)STARPU_MATRIX_GET_PTR(descr[3]);
+    Dense = (HICMA_Complex64_t *)STARPU_MATRIX_GET_PTR(descr[3]);
 
 
     starpu_codelet_unpack_args(cl_arg, &m, &n, &nAUV, &lda, &ldu, &ldv, &bigM, &m0, &n0, &seed, &maxrank, &tol, &compress_diag );
@@ -128,8 +117,8 @@ static void cl_zgytlr_cpu_func(void *descr[], void *cl_arg)
     size_t nelm_AU = (size_t)lda * (size_t)nAU;
     double *AV = &(AUV[nelm_AU]);
 
-    //printf("(%d,%d)%d %s %d %d\n", m0/m,n0/n,MORSE_My_Mpi_Rank(), __func__, __LINE__, AD == Dense);
-    zgytlr( m, n,
+    //printf("(%d,%d)%d %s %d %d\n", m0/m,n0/n,HICMA_My_Mpi_Rank(), __func__, __LINE__, AD == Dense);
+    HCORE_zgytlr( m, n,
             AU,
             AV,
             AD,
@@ -147,3 +136,4 @@ static void cl_zgytlr_cpu_func(void *descr[], void *cl_arg)
  * Codelet definition
  */
 CODELETS_CPU(zgytlrdiag, 4, cl_zgytlr_cpu_func)
+//#endif

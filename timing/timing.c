@@ -1,5 +1,5 @@
 /**
- * @copyright (c) 2017 King Abdullah University of Science and Technology (KAUST).
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
  *                     All rights reserved.
  **/
 /**
@@ -8,7 +8,7 @@
  * HiCMA auxiliary routines
  * HiCMA is a software package provided by King Abdullah University of Science and Technology (KAUST)
  *
- * @version 0.1.1
+ * @version 1.0.0
  * @author Kadir Akbudak
  * @date 2018-11-08
  **/
@@ -24,8 +24,8 @@
  *
  * file timing.c
  *
- * MORSE auxiliary routines
- * MORSE is a software package provided by Univ. of Tennessee,
+ * HICMA auxiliary routines
+ * HICMA is a software package provided by Univ. of Tennessee,
  * Univ. of California Berkeley and Univ. of Colorado Denver
  *
  * version 0.9.0
@@ -44,9 +44,10 @@
 #define _CRT_SECURE_NO_DEPRECATE
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "morse.h"
+#include <hicma.h>
 #include "starpu.h"
 #include "hicma_constants.h"
+#include "timing_auxiliary.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -60,14 +61,14 @@
 #include <sys/resource.h>
 #endif
 
-#include "coreblas/lapacke.h"
-#include "morse.h"
-#include "coreblas/coreblas.h"
+#include "coreblas/hicma_lapacke.h"
+//#include "hicma.h"
+#include "coreblas/hicma_coreblas.h"
 //#include "flops.h"
 #include "timing.h"
-#include "control/auxiliary.h"
+#include <control/hicma_auxiliary.h>
 
-#if defined(CHAMELEON_USE_MPI)
+#if defined(HICMA_USE_MPI)
 #include <mpi.h>
 #endif
 
@@ -75,11 +76,11 @@
 #include <starpu.h>
 #endif
 
-//static int RunTest(int *iparam, _PREC *dparam, double *t_);
-void* morse_getaddr_null(const MORSE_desc_t *A, int m, int n)
-{
-    return (void*)( NULL );
-}
+double rad; // RBF scaling factor
+double reg; // RBF regularization value
+double denst; //RBF density
+char *mesh_file, *interpl_file;
+
 
 int ISEED[4] = {0,0,0,1};   /* initial seed for zlarnv() */
 
@@ -150,7 +151,7 @@ Test(int64_t n, int *iparam,
     (void)M;(void)N;(void)K;(void)NRHS;
 
     if ( (n < 0) || (thrdnbr < 0 ) ) {
-        if (gnuplot && (MORSE_My_Mpi_Rank() == 0) ) {
+        if (gnuplot && (HICMA_My_Mpi_Rank() == 0) ) {
             printf( "set title '%d_NUM_THREADS: ", thrdnbr );
             for (i = 0; env[i][0]; ++i) {
                 s = getenv( env[i] );
@@ -176,7 +177,7 @@ Test(int64_t n, int *iparam,
         return 0;
     }
 
-    /*if ( MORSE_My_Mpi_Rank() == 0)*/
+    /*if ( HICMA_My_Mpi_Rank() == 0)*/
         /*printf( "%7d %7d %7d ", iparam[IPARAM_M], iparam[IPARAM_N], iparam[IPARAM_K] );*/
     /*fflush( stdout );*/
 
@@ -201,7 +202,7 @@ Test(int64_t n, int *iparam,
     dparam[IPARAM_HICMA_ACCURACY_THRESHOLD] = fixed_accuracy_threshold ;
     if ( iparam[IPARAM_WARMUP] ) {
         int status = RunTest( iparam, dparam, &(t[0]), rankfile);
-        if (status != MORSE_SUCCESS) return status;
+        if (status != HICMA_SUCCESS) return status;
     }
 
     sumgf  = 0.0;
@@ -220,7 +221,7 @@ Test(int64_t n, int *iparam,
                 iparam[IPARAM_PROFILE] = 2;
 
             int status = RunTest( iparam, dparam, &(t[iter]), rankfile);
-            if (status != MORSE_SUCCESS) return status;
+            if (status != HICMA_SUCCESS) return status;
 
             iparam[IPARAM_TRACE] = 0;
             iparam[IPARAM_DAG] = 0;
@@ -228,7 +229,7 @@ Test(int64_t n, int *iparam,
         }
         else {
             int status = RunTest( iparam, dparam, &(t[iter]), rankfile);
-            if (status != MORSE_SUCCESS) return status;
+            if (status != HICMA_SUCCESS) return status;
         }
         gflops = flops / t[iter];
 
@@ -263,14 +264,14 @@ Test(int64_t n, int *iparam,
             sumgf  += gflops;
             sumgf2 += gflops*gflops;
         }
-        if ( MORSE_My_Mpi_Rank() == 0)
+        if ( HICMA_My_Mpi_Rank() == 0)
             printf( "%7d %7d %7d ", iparam[IPARAM_M], iparam[IPARAM_N], iparam[IPARAM_K] );
         fflush( stdout );
 
         gflops = sumgf / niter;
         sd = sqrt((sumgf2 - (sumgf*sumgf)/niter)/niter);
 
-        if ( MORSE_My_Mpi_Rank() == 0) {
+        if ( HICMA_My_Mpi_Rank() == 0) {
             printf( "%9.3f %9.2f +-%7.2f  ", sumt/niter, gflops, sd);
 
             if (iparam[IPARAM_BOUND] && !iparam[IPARAM_BOUNDDEPS])
@@ -308,13 +309,13 @@ Test(int64_t n, int *iparam,
             printf("\n");
 
          if ( iparam[IPARAM_CSOLVE] ){
-                    printf( "||A||inf: %8.5e ||X||inf: %8.5e ||B||inf: %8.5e abs||AX-B||inf: %8.5e rel||AX-B||inf: %8.5e      SUCCESSFUL Solver",
+                    printf( "||A||inf: %8.5e ||X||inf: %8.5e ||B||inf: %8.5e abs||AX-B||inf: %8.5e rel||AX-B||inf: %8.5e      SUCCESSFULL Solver",
                             dparam[IPARAM_IANORM], dparam[IPARAM_IXNORM], dparam[IPARAM_IBNORM], dparam[IPARAM_IRNORM], dparam[IPARAM_IRES]);
             }
             printf("\n");
             fflush( stdout );
 /*
-            if ( MORSE_My_Mpi_Rank() == 0) {
+            if ( HICMA_My_Mpi_Rank() == 0) {
           printf("FinalResults: %d, %d, %d, %d, %d, %d, %9.2f, %8.5e, %8.5e, %8.5e\n", iparam[IPARAM_THRDNBR], iparam[IPARAM_M], iparam[IPARAM_N], iparam[IPARAM_K], iparam[IPARAM_MB], iparam[IPARAM_NB], sumt/niter, dparam[IPARAM_HICMA_ACCURACY_THRESHOLD], dparam[IPARAM_IRNORM], dparam[IPARAM_IRES]);
             }
             fflush( stdout );
@@ -452,15 +453,20 @@ Test(int64_t n, int *iparam,
                     " --reorderinnerproducts=[0,1]  Reorder inner products while performing HiCMA_GEMM()\n"
                     "\n"
                     " Use one of the flags for selecting problem type:\n"
-                    "                   --ss              Spatial statistics with square exp kernel\n"
+                    "                   --rnd             Random matrix\n"
+                    "                   --ss              Spatial statistics with 2D square exp kernel\n"
+                    "                   --st-2D-exp       Spatial statistics with 2D exp kernel\n"
                     "                   --st-3D-sqexp     Spatial statistics with 3D sqexp kernel\n"
                     "                   --st-3D-exp       Spatial statistics with 3D exp kernel\n"
                     "                   --geostat         Spatial statistics with Matern kernel\n"
                     "                   --edsin           Electro dynamics with Sinus\n"
                     "                   --rnd             Random matrix\n"
-                    "                   --m-3D-rbf        RBF Unstructured Mesh Deformation for 3D problems\n"
+                    "                   --m-3D-rbf-virus  RBF Unstructured Mesh Deformation for 3D problems (virus example), virus mesh file need to be passed\n"
+                    "                   --m-3D-rbf-cube   RBF Unstructured Mesh Deformation for 3D problems (cube example), it does not require mesh file\n"
+                    "                   --ac-3D           3D acoustic scattering application. Complex, nonsymmetric matrix is generated.\n"
                     " --reg             Regularization value\n"
                     " --rad             RBF scaling factor\n"
+                    " --denst           Density scaling factor\n"
                     " --order           0: no ordering, 1: Morton ordering, 2:Hibert ordering\n"
                     " --rbf_kernel      Type of RBF basis function (0:Gaussian, 1:Expon, 2:InvQUAD, 3:InvMQUAD, 4:Maternc1, 5:Maternc2, 6:TPS, 7:CTPS, 8:QUAD and 9:Wendland)\n"
                     " --mesh_file       Either path to mesh file including file name in case of one batch of viurses or path to mesh folder if you enable batch mode add  / at the end\n"
@@ -471,12 +477,12 @@ Test(int64_t n, int *iparam,
                     /*             "  --ifmt           Input format. (default: 0)\n" */
                     /*             "  --ofmt           Output format. (default: 1)\n" */
                     /*             "                   The possible values are:\n" */
-                    /*             "                     0 - morseCM, Column major\n" */
-                    /*             "                     1 - morseCCRB, Column-Colum rectangular block\n" */
-                    /*             "                     2 - morseCRRB, Column-Row rectangular block\n" */
-                    /*             "                     3 - morseRCRB, Row-Colum rectangular block\n" */
-                    /*             "                     4 - morseRRRB, Row-Row rectangular block\n" */
-                    /*             "                     5 - morseRM, Row Major\n" */
+                    /*             "                     0 - hicmaCM, Column major\n" */
+                    /*             "                     1 - hicmaCCRB, Column-Colum rectangular block\n" */
+                    /*             "                     2 - hicmaCRRB, Column-Row rectangular block\n" */
+                    /*             "                     3 - hicmaRCRB, Row-Colum rectangular block\n" */
+                    /*             "                     4 - hicmaRRRB, Row-Row rectangular block\n" */
+                    /*             "                     5 - hicmaRM, Row Major\n" */
                     /*             "  --thrdbypb       Number of threads per subproblem for inplace transformation (default: 1)\n" */
                     "\n");
         }
@@ -497,10 +503,10 @@ Test(int64_t n, int *iparam,
 #endif
 
             printf( "#\n"
-                    "# morse %s\n"
+                    "# hicma %s\n"
                     "# Nb threads:  %d\n"
                     "# Nb GPUs:     %d\n"
-#if defined(CHAMELEON_USE_MPI)
+#if defined(HICMA_USE_MPI)
                     "# Nb mpi:      %d\n"
                     "# PxQ:         %dx%d\n"
 #endif
@@ -520,7 +526,7 @@ Test(int64_t n, int *iparam,
                     prog_name,
                     iparam[IPARAM_THRDNBR],
                     iparam[IPARAM_NCUDAS],
-#if defined(CHAMELEON_USE_MPI)
+#if defined(HICMA_USE_MPI)
                     iparam[IPARAM_NMPI],
                     iparam[IPARAM_P], iparam[IPARAM_Q],
 #endif
@@ -570,9 +576,11 @@ Test(int64_t n, int *iparam,
             double fixed_accuracy_threshold = 0.0;
             double wave_k = 0.0;
             char* rankfile = calloc(2048, sizeof(char));
-            meshfile = calloc(2048, sizeof(char));
-            meshfile[0] = '\0';
             rankfile[0] = '\0';
+            mesh_file = calloc(2048, sizeof(char));
+            mesh_file[0] = '\0';
+            interpl_file = calloc(2048, sizeof(char));
+            interpl_file[0] = '\0';
             memset(iparam, 0, IPARAM_SIZEOF*sizeof(int));
 
         
@@ -591,7 +599,7 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_NITER         ] = 1;
             iparam[IPARAM_WARMUP        ] = 1;
             iparam[IPARAM_CHECK         ] = 0;
-            iparam[IPARAM_SOLVE         ] = 0;
+            iparam[IPARAM_HICMA_SOLVE   ] = 0;
             iparam[IPARAM_CSOLVE        ] = 0;
             iparam[IPARAM_BIGMAT        ] = 1;
             iparam[IPARAM_VERBOSE       ] = 0;
@@ -607,7 +615,7 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_MX            ] = -1;
             iparam[IPARAM_NX            ] = -1;
             iparam[IPARAM_RHBLK         ] = 0;
-            iparam[IPARAM_INPLACE       ] = MORSE_OUTOFPLACE;
+            iparam[IPARAM_INPLACE       ] = HICMA_OUTOFPLACE;
             iparam[IPARAM_MODE          ] = 0;
 
             iparam[IPARAM_INVERSE       ] = 0;
@@ -627,7 +635,7 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_BOUNDDEPSPRIO ] = 0;
             iparam[IPARAM_RK            ] = 0;
             iparam[IPARAM_HICMA_ALWAYS_FIXED_RANK] = 0;
-            iparam[IPARAM_HICMA_STARSH_PROB   ] = HICMA_STARSH_PROB_RND;
+            iparam[IPARAM_HICMA_STARSH_PROB   ] = PROBLEM_TYPE_RND;
             iparam[IPARAM_HICMA_STARSH_MAXRANK] = 10;
             iparam[IPARAM_HICMA_MAXRANK] = 10;
             iparam[IPARAM_HICMA_PRINTMAT] = 0;
@@ -641,6 +649,7 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_NUMSUBOBJ] = 1;
             rad=0.6;
             reg=1.1;
+            denst=0.14;
             for (i = 1; i < argc && argv[i]; ++i) {
                 if ( startswith( argv[i], "--help") || startswith( argv[i], "-help") ||
                         startswith( argv[i], "--h") || startswith( argv[i], "-h") ) {
@@ -653,26 +662,29 @@ Test(int64_t n, int *iparam,
                     //printf("%s fixed_accuracy_threshold: %e\n", argv[i], fixed_accuracy_threshold);exit(-1);
                 } else if (startswith( argv[i], "--alwaysfixedrank" )) {
                     iparam[IPARAM_HICMA_ALWAYS_FIXED_RANK] = 1;
-                } else if (startswith( argv[i], "--matfile=" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_FILE;
-                    sscanf( strchr( argv[i], '=' ) + 1, "%s", strmatfile );
                 } else if (startswith( argv[i], "--rndusr" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_RNDUSR;
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_RNDUSR;
                 } else if (startswith( argv[i], "--rnd" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_RND;
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_RND;
                 } else if (startswith( argv[i], "--ss" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_SS;
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_SS;
+                } else if (startswith( argv[i], "--st-2D-exp" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_ST_2D_EXP;
                 } else if (startswith( argv[i], "--st-3D-sqexp" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_ST_3D_SQEXP;
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_ST_3D_SQEXP;
                 } else if (startswith( argv[i], "--st-3D-exp" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_ST_3D_EXP;
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_ST_3D_EXP;
                 } else if (startswith( argv[i], "--geostat" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_GEOSTAT;
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_GEOSTAT;
                 } else if (startswith( argv[i], "--edsin" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_EDSIN;
-                } else if (startswith( argv[i], "--m-3D-rbf" )) {
-                    iparam[IPARAM_HICMA_STARSH_PROB] = HICMA_STARSH_PROB_3D_RBF;
-                }else if (startswith( argv[i], "--starshwavek=" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_EDSIN;
+                } else if (startswith( argv[i], "--m-3D-rbf-virus" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_3D_RBF_VIRUS;
+                } else if (startswith( argv[i], "--m-3D-rbf-cube" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_3D_RBF_CUBE;
+                }  else if (startswith( argv[i], "--ac-3D" )) {
+                    iparam[IPARAM_HICMA_STARSH_PROB] = PROBLEM_TYPE_AC_3D;
+                } else if (startswith( argv[i], "--starshwavek=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(wave_k) );
                 } else if (startswith( argv[i], "--starshdecay=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(fixed_rank_decay) );
@@ -680,14 +692,28 @@ Test(int64_t n, int *iparam,
                     sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_STARSH_MAXRANK]) );
                 } else if (startswith( argv[i], "--maxrank=" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_MAXRANK]) );
+                } else if (startswith( argv[i], "--nipp=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_NIPP]) );
+                }else if (startswith( argv[i], "--ntrian=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_NTRIAN]) );
+                }else if (startswith( argv[i], "--percent1=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_PERCENT1]) );
+                }else if (startswith( argv[i], "--percent2=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_PERCENT2]) );
+                }else if (startswith( argv[i], "--isPercent=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_HICMA_ISPERCENT]) );
+                }else if (startswith( argv[i], "--solve" )) {
+                    iparam[IPARAM_HICMA_SOLVE]=1;
                 } else if (startswith( argv[i], "--printmat" )) {
                     iparam[IPARAM_HICMA_PRINTMAT] = 1;
                 } else if (startswith( argv[i], "--printindexall" )) {
                     iparam[IPARAM_HICMA_PRINTINDEX] = 1;
                 } else if (startswith( argv[i], "--rankfile" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%s", rankfile );
-                 } else if (startswith( argv[i], "--mesh_file" )) {
-                    sscanf( strchr( argv[i], '=' ) + 1, "%s", meshfile );
+                } else if (startswith( argv[i], "--mesh_file=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%s", mesh_file );
+                 }else if (startswith( argv[i], "--interpl_file=" )) {
+                    sscanf( strchr( argv[i], '=' ) + 1, "%s", interpl_file );
                 } else if (startswith( argv[i], "--printindexend" )) {
                     iparam[IPARAM_HICMA_PRINTINDEXEND] = 1;
                 } else if (startswith( argv[i], "--reorderinnerproducts" )) {
@@ -700,8 +726,6 @@ Test(int64_t n, int *iparam,
                     iparam[IPARAM_CHECK] = 1;
                 } else if (startswith( argv[i], "--nocheck" )) {
                     iparam[IPARAM_CHECK] = 0;
-                }  else if (startswith( argv[i], "--solve" )) {
-                    iparam[IPARAM_SOLVE] = 1;
                 }  else if (startswith( argv[i], "--csolve" )) {
                     iparam[IPARAM_CSOLVE] = 1;
                 }else if (startswith( argv[i], "--bigmat" )) {
@@ -773,13 +797,15 @@ Test(int64_t n, int *iparam,
                 sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_NUMSUBOBJ]) );
             }else if (startswith( argv[i], "--rad" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(rad) );
+            }else if (startswith( argv[i], "--denst" )) { 
+                    sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(denst) );
             }else if (startswith( argv[i], "--reg" )) {
                     sscanf( strchr( argv[i], '=' ) + 1, "%lf", &(reg) );
                     
                 /*         } else if (startswith( argv[i], "--inplace" )) { */
-            /*             iparam[IPARAM_INPLACE] = morse_INPLACE; */
+            /*             iparam[IPARAM_INPLACE] = hicma_INPLACE; */
             /*         } else if (startswith( argv[i], "--outplace" )) { */
-            /*             iparam[IPARAM_INPLACE] = morse_OUTOFPLACE; */
+            /*             iparam[IPARAM_INPLACE] = hicma_OUTOFPLACE; */
             /*         } else if (startswith( argv[i], "--ifmt=" )) { */
             /*             sscanf( strchr( argv[i], '=' ) + 1, "%d", &(iparam[IPARAM_INPUTFMT]) ); */
             /*         } else if (startswith( argv[i], "--ofmt=" )) { */
@@ -823,7 +849,7 @@ Test(int64_t n, int *iparam,
             }
 #if !defined(CHAMELEON_USE_CUDA)
             if (iparam[IPARAM_NCUDAS] != 0){
-                fprintf(stderr, "ERROR: MORSE_USE_CUDA is not defined. "
+                fprintf(stderr, "ERROR: HICMA_USE_CUDA is not defined. "
                         "The number of CUDA devices must be set to 0 (--gpus=0).\n");
                 return EXIT_FAILURE;
             }
@@ -838,40 +864,40 @@ Test(int64_t n, int *iparam,
             mx = iparam[IPARAM_MX];
             nx = iparam[IPARAM_NX];
 
-            /* Initialize morse */
-            MORSE_Init( iparam[IPARAM_THRDNBR],
+            /* Initialize hicma */
+            HICMA_Init( iparam[IPARAM_THRDNBR],
                     iparam[IPARAM_NCUDAS] );
 
             /* Stops profiling here to avoid profiling uninteresting routines.
                It will be reactivated in the time_*.c routines with the macro START_TIMING() */
-            RUNTIME_stop_profiling();
+            HICMA_RUNTIME_stop_profiling();
 
-            MORSE_Disable(MORSE_AUTOTUNING);
-            MORSE_Set(MORSE_TILE_SIZE,        iparam[IPARAM_NB] );
-            MORSE_Set(MORSE_INNER_BLOCK_SIZE, iparam[IPARAM_IB] );
+            HICMA_Disable(HICMA_AUTOTUNING);
+            HICMA_Set(HICMA_TILE_SIZE,        iparam[IPARAM_NB] );
+            HICMA_Set(HICMA_INNER_BLOCK_SIZE, iparam[IPARAM_IB] );
 
             /* Householder mode */
             if (iparam[IPARAM_RHBLK] < 1) {
-                MORSE_Set(MORSE_HOUSEHOLDER_MODE, MORSE_FLAT_HOUSEHOLDER);
+                HICMA_Set(HICMA_HOUSEHOLDER_MODE, HICMA_FLAT_HOUSEHOLDER);
             } else {
-                MORSE_Set(MORSE_HOUSEHOLDER_MODE, MORSE_TREE_HOUSEHOLDER);
-                MORSE_Set(MORSE_HOUSEHOLDER_SIZE, iparam[IPARAM_RHBLK]);
+                HICMA_Set(HICMA_HOUSEHOLDER_MODE, HICMA_TREE_HOUSEHOLDER);
+                HICMA_Set(HICMA_HOUSEHOLDER_SIZE, iparam[IPARAM_RHBLK]);
             }
 
             if (iparam[IPARAM_PROFILE] == 1)
-                MORSE_Enable(MORSE_PROFILING_MODE);
+                HICMA_Enable(HICMA_PROFILING_MODE);
 
             if (iparam[IPARAM_PRINT_WARNINGS] == 1)
-                MORSE_Enable(MORSE_WARNINGS);
+                HICMA_Enable(HICMA_WARNINGS);
 
             if (iparam[IPARAM_PROGRESS] == 1)
-                MORSE_Enable(MORSE_PROGRESS);
+                HICMA_Enable(HICMA_PROGRESS);
 
             if (iparam[IPARAM_GEMM3M] == 1)
-                MORSE_Enable(MORSE_GEMM3M);
+                HICMA_Enable(HICMA_GEMM3M);
 
-#if defined(CHAMELEON_USE_MPI)
-            nbnode = MORSE_Comm_size( );
+#if defined(HICMA_USE_MPI)
+            nbnode = HICMA_Comm_size( );
             iparam[IPARAM_NMPI] = nbnode;
             /* Check P */
             if ( (iparam[IPARAM_P] > 1) &&
@@ -884,22 +910,22 @@ Test(int64_t n, int *iparam,
             iparam[IPARAM_Q] = nbnode / iparam[IPARAM_P];
 
             /* Layout conversion */
-            MORSE_Set(MORSE_TRANSLATION_MODE, iparam[IPARAM_INPLACE]);
+            HICMA_Set(HICMA_TRANSLATION_MODE, iparam[IPARAM_INPLACE]);
 
-            if ( MORSE_My_Mpi_Rank() == 0 )
+            if ( HICMA_My_Mpi_Rank() == 0 )
                 print_header( argv[0], iparam, fixed_rank_decay, wave_k, fixed_accuracy_threshold);
 
             if (step < 1) step = 1;
 
             int status = Test( -1, iparam, fixed_rank_decay, wave_k, rankfile, fixed_accuracy_threshold); /* print header */
-            if (status != MORSE_SUCCESS) return status;
+            if (status != HICMA_SUCCESS) return status;
             for (i = start; i <= stop; i += step)
             {
                 if ( nx > 0 ) {
                     iparam[IPARAM_M] = i;
-                    iparam[IPARAM_N] = chameleon_max(1, i/nx);
+                    iparam[IPARAM_N] = hicma_max(1, i/nx);
                 } else if ( mx > 0 ) {
-                    iparam[IPARAM_M] = chameleon_max(1, i/mx);
+                    iparam[IPARAM_M] = hicma_max(1, i/mx);
                     iparam[IPARAM_N] = i;
                 } else {
                     if ( m == -1 )
@@ -907,14 +933,14 @@ Test(int64_t n, int *iparam,
                     iparam[IPARAM_N] = i;
                 }
                 int status = Test( iparam[IPARAM_N], iparam, fixed_rank_decay, wave_k, rankfile, fixed_accuracy_threshold );
-                if (status != MORSE_SUCCESS) return status;
+                if (status != HICMA_SUCCESS) return status;
                 success += status;
             }
 
-            MORSE_Finalize();
+            HICMA_Finalize();
             starpu_data_display_memory_stats();
             free(rankfile);
-            free(meshfile);
+            free(mesh_file);
             return success;
         }
 

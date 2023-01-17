@@ -90,7 +90,7 @@ ntasks_per_node=$((nummpi/numnodes))
 
 
 hn=$HOSTNAME
-echo $HOSTNAME
+#echo $HOSTNAME
 HICMADIR=$HOME/hicma-torelease/hicma-dev
 BINDIR=$HICMADIR/build/timing
 CHAMDIR=$HICMADIR/chameleon/build
@@ -110,7 +110,7 @@ elif [[ "$hn" = jasmine ]]; then
 elif [[ "$hn" = kw60319 ]]; then
     sruncmd="numactl --interleave=all  "
 else
-    HICMADIR=/ibex/scratch/omairyrm/hicma-torelease/hicma-dev
+    HICMADIR=/ibex/scratch/omairyrm/hicma-cs/hicma-dev
     sruncmd="\
         srun \
         --job-name=hicma-$_m-$_mb-$SLURM_JOB_NUM_NODES --hint=nomultithread \
@@ -122,12 +122,12 @@ else
     BINDIR=$HICMADIR/build/timing
     CHAMDIR=$HICMADIR/chameleon/build
 fi
-echo $sruncmd
+#echo $sruncmd
 echo
 
 
 if [ "$op" == "potrf" ]; then
-    BINNAME=time_z${op}_tile
+    BINNAME=time_d${op}_tile
 elif [ "$op" == "posv" ]; then
     #BINDIR=/project/k1205/akbudak/hicma/build-only-prob/testing  #TODO
     BINNAME=testing_z${op}
@@ -201,7 +201,7 @@ for sched in $scheds;do
     export STARPU_SCHED=$sched
     #Loop over experimental cases
     for iexp in $exps;do 
-        echo Experiment case:$iexp nrows:${nrows[iexp]} mb:${nb[iexp]}
+        #echo Experiment case:$iexp nrows:${nrows[iexp]} mb:${nb[iexp]}
         _m=${nrows[iexp]} 
         _b=${nb[iexp]}
         _maxrank=${maxrank[iexp]}
@@ -258,14 +258,14 @@ if [ $(( _m % _mb )) -eq 0 ]; then
                _n=$(((_m/_mb)*_maxrank))
              _nb=$_maxrank
 else
-    printf '%s\n' "Number $n is Odd"
+    #printf '%s\n' "Number $n is Odd"
               _ts=$(((_m/_mb)+1))
                _n=$((_ts*_maxrank))
               _nb=$_maxrank
 fi
-            echo $_n
-            echo $_nb
-            echo $_mb
+         #   echo $_n
+         #   echo $_nb
+         #   echo $_mb
         if [ $sqrt_numnodes -eq $sqrt_numnodesQ ]; then
             pdims=$sqrt_numnodes 
         else
@@ -368,15 +368,15 @@ fi
                 #export STARPU_SILENT=1
 
                 msg="M:$_m N:$_n MB:$_mb NB:$_nb MAXRANK:$_maxrank DATE:`date` SCHED:$STARPU_SCHED CMD:$cmd $minmaxsubinfo CASE:$sizefile" 
-                echo "!BEGIN:" $msg 
+                #echo "!BEGIN:" $msg 
                 if [ "$trace" != "-" ]; then
                     traceprefix=`pwd`/exp/trace/$prog-$sched-$_m-$_mb-$_nb-$numnodes-$nummpi-$numthreads/$SLURM_JOBID
                     mkdir -p $traceprefix
                     export STARPU_FXT_PREFIX=$traceprefix
                 fi
                 if [ "$dry" == "dry" ]; then
-                    echo $cmd
-                    #echo $sruncmd $cmd
+                    #echo $cmd
+                    echo $sruncmd $cmd
                 else
                     echo "!BEGIN:" $msg 1>&2 
                     tstart=$SECONDS
@@ -399,7 +399,7 @@ fi
                         #echo "Dot ended"
                     fi
                 fi
-                date
+               # date
                 echo
             done
          done

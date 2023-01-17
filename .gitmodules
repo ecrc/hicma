@@ -4,9 +4,6 @@
 [submodule "stars-h"]
 	path = stars-h
 	url = https://github.com/ecrc/stars-h.git
-[submodule "chameleon"]
-	path = chameleon
-    url = https://gitlab.inria.fr/solverstack/chameleon.git
 [submodule "hcore"]
 	path = hcore
-	url = https://github.com/ecrc/hcore
+	url = https://github.com/ecrc/hcore.git

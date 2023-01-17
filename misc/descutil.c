@@ -1,9 +1,14 @@
-#include "hicma_common.h"
-#include "misc/auxdescutil.h"
+/**
+ * @copyright (c) 2017-2022 King Abdullah University of Science and Technology (KAUST).
+ *                     All rights reserved.
+ */
+
 #include <stdio.h>
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>
+#include <hicma_common.h>
+#include <misc/auxdescutil.h>
 
 int64_t hicma_nelm_limit = 100000;
 int64_t hicma_nrow_limit = 100;
@@ -15,7 +20,7 @@ int64_t hicma_2_nrows_limit = 37;
 int64_t hicma_2_ncols_limit = 33;
 int64_t hicma_2_ndim_limit = 37;
 
-void printdescrk(MORSE_desc_t *descZ, int64_t rank){
+void printdescrk(HICMA_desc_t *descZ, int64_t rank){
     double *MAT = descZ->mat;
     int64_t i, j, imt, jnt, nelm = 0;
     printf("\n");
@@ -29,7 +34,7 @@ void printdescrk(MORSE_desc_t *descZ, int64_t rank){
         }
     }
 }
-void printdesc(MORSE_desc_t *descZ){
+void printdesc(HICMA_desc_t *descZ){
     double *MAT = descZ->mat;
     int64_t i, j, imt, jnt, nelm = 0;
     printf("\n");
@@ -43,7 +48,7 @@ void printdesc(MORSE_desc_t *descZ){
         }
     }
 }
-void _printdescs(MORSE_desc_t *descD,MORSE_desc_t *descU, MORSE_desc_t *descV,  MORSE_desc_t *descRk){
+void _printdescs(HICMA_desc_t *descD,HICMA_desc_t *descU, HICMA_desc_t *descV,  HICMA_desc_t *descRk){
     int64_t i, j, imt, jnt;
     printf("\n");
     for(imt=0;imt<descD->mt;imt++){
@@ -58,7 +63,7 @@ void _printdescs(MORSE_desc_t *descD,MORSE_desc_t *descU, MORSE_desc_t *descV,  
             MAT = descRk->mat;
             double *Rk = &MAT[hicma_tsa(descRk, imt, jnt)];
             int rk = Rk[0];
-            printf("%d Tile %d,%d  rk:%d D:%p U:%p V:%p Rk:%p\n", MORSE_My_Mpi_Rank(), imt, jnt, rk, D, U, V, Rk);
+            printf("%d Tile %d,%d  rk:%d D:%p U:%p V:%p Rk:%p\n", HICMA_My_Mpi_Rank(), imt, jnt, rk, D, U, V, Rk);
             if(imt == jnt){
                 _printmat(D, descD->nb, descD->nb, hicma_tld(descD));
             }
@@ -69,7 +74,7 @@ void _printdescs(MORSE_desc_t *descD,MORSE_desc_t *descU, MORSE_desc_t *descV,  
         }
     }
 }
-void _printdescrk(MORSE_desc_t *descZ, int64_t rank){
+void _printdescrk(HICMA_desc_t *descZ, int64_t rank){
     double *MAT = descZ->mat;
     int64_t i, j, imt, jnt, nelm = 0;
     printf("\n");
@@ -78,7 +83,7 @@ void _printdescrk(MORSE_desc_t *descZ, int64_t rank){
             //double *A = &MAT[(jnt*descZ->mt+imt)*descZ->mb*descZ->nb];
             double *A = &MAT[hicma_tsa(descZ, imt, jnt)];
             //double *A =(double*) RTBLKADDR(descZ, double, imt, jnt); // does not work
-            printf("%d Tile %d,%d  %p\n", MORSE_My_Mpi_Rank(), imt, jnt, A);
+            printf("%d Tile %d,%d  %p\n", HICMA_My_Mpi_Rank(), imt, jnt, A);
             nelm=0;
             for(i=0;i<descZ->nb;i++){
                 for(j=0;j<rank;j++){
@@ -106,7 +111,7 @@ void _printdescrk(MORSE_desc_t *descZ, int64_t rank){
         }
     }
 }
-void check_same(MORSE_desc_t *descL, MORSE_desc_t *descR, char diag, char uplo){
+void check_same(HICMA_desc_t *descL, HICMA_desc_t *descR, char diag, char uplo){
     double *MATL = descL->mat;
     double *MATR = descR->mat;
     if(descL->mb != descR->mb){
